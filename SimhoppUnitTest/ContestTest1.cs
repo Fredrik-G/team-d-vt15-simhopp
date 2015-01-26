@@ -20,8 +20,8 @@ namespace SimhoppUnitTest
             Simhopp.Contest p1 = new Simhopp.Contest("Orebro", "Simhoppstavlingen", "050414");
             Simhopp.Contest p2 = new Simhopp.Contest("Hallsberg", "Tavling enofdoom", "050406");
 
-            NUnit.Framework.Assert.AreEqual(p1.place, "Orebro");
-            NUnit.Framework.Assert.AreNotEqual(p2.place, "Orebro");
+            NUnit.Framework.Assert.AreEqual(p1.Place, "Orebro");
+            NUnit.Framework.Assert.AreNotEqual(p2.Place, "Orebro");
             NUnit.Framework.Assert.AreNotEqual(p1, p2);
 
         }
