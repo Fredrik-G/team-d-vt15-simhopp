@@ -16,12 +16,6 @@ namespace Simhopp
             this.nationality = nationality;
             this.ssn = ssn;
         }
-        void AddDiver(string name, string nationality, string ssn)
-        {
-            this.name = name;
-            this.nationality = nationality;
-            this.ssn = ssn;
-        }
         public bool CheckCorrectName(string name)
         {
             Regex patternName = new Regex(@"^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*$");

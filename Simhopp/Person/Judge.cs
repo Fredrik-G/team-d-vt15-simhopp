@@ -14,12 +14,7 @@ namespace Simhopp
             this.nationality = nationality;
             this.ssn = ssn;
         }
-        void AddJudge(string name, string nationality, string ssn)
-        {
-            this.name = name;
-            this.nationality = nationality;
-            this.ssn = ssn;
-        }
+      
 
     }
 }
