@@ -11,29 +11,22 @@ using System.Text.RegularExpressions;
 namespace SimhoppUnitTest
 {
     [TestFixture]
-    public class SimhoppUnitTest
+    public class PersonTest
     {
         [Test]
-        public void IsInteger()
+        public void CorrectName()
         {
-            Regex patternInteger = new Regex(@"^[-+]?[0-9]+$");
-
-            string p1 = "123",
-                   p2 = "+123",
-                   p3 = "-123";
-            string n1 = "12e",
-                   n2 = "-a",
-                   n3 = "+123a";
+            Simhopp.Diver p1 = new Simhopp.Diver("Jimmy Makkonen", "Sweden", "20050101-1337");
+            Simhopp.Diver p2 = new Simhopp.Diver("Fredrik-Gummus", "USA", "123-20-5555");
 
             //Positiv test
-            NUnit.Framework.Assert.AreEqual(patternInteger.IsMatch(p1), true);
-            NUnit.Framework.Assert.That(patternInteger.IsMatch(p2), Is.True);
-            NUnit.Framework.Assert.IsTrue(patternInteger.IsMatch(p3));
+            NUnit.Framework.Assert.AreEqual(p1.CheckCorrectName(p1.Name), true);
+            NUnit.Framework.Assert.AreEqual(p1.CheckCorrectNationality(p1.Nationality), true);
+            NUnit.Framework.Assert.AreEqual(p1.CheckCorrectSSN(p1.SSN), true);
 
-            //Negativ test
-            NUnit.Framework.Assert.AreEqual(patternInteger.IsMatch(n1), false);
-            NUnit.Framework.Assert.That(patternInteger.IsMatch(n2), Is.False);
-            NUnit.Framework.Assert.IsFalse(patternInteger.IsMatch(n3));
+            NUnit.Framework.Assert.AreEqual(p2.CheckCorrectName(p2.Name), true);
+            NUnit.Framework.Assert.AreEqual(p2.CheckCorrectNationality(p2.Nationality), true);
+            NUnit.Framework.Assert.AreEqual(p2.CheckCorrectSSN(p2.SSN), true);
         }
         [Test]
         public void IsUnsignedInteger()
