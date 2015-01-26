@@ -35,7 +35,7 @@ namespace Simhopp
         {
             get 
             {
-                if(this.name == null)
+                if (this.name == null)
                 {
                     throw new Exception("Name is null");
                 }
