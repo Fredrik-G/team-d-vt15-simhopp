@@ -4,9 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Simhopp.Person
+namespace Simhopp
 {
-    class Judge : Person
+    public class Judge : Person
     {
+        public Judge(string name, string nationality, string ssn)
+        {
+            this.name = name;
+            this.nationality = nationality;
+            this.ssn = ssn;
+        }
+        void AddJudge(string name, string nationality, string ssn)
+        {
+            this.name = name;
+            this.nationality = nationality;
+            this.ssn = ssn;
+        }
+
     }
 }
