@@ -11,6 +11,7 @@ namespace Simhopp
         static void Main(string[] args)
         {
             //asd
+            // hej hej 
         }
     }
 }
