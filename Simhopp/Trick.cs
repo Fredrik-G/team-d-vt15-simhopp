@@ -28,6 +28,9 @@ namespace Simhopp
             this.name = name;
             this.difficulty = difficulty;
         }
+        /// <summary>
+        /// Getter/Setter for name value.
+        /// </summary>
         public string Name
         {
             get 
@@ -40,6 +43,9 @@ namespace Simhopp
             }
             set { this.name = value; }
         }
+        /// <summary>
+        /// Getter/Setter for difficulty value.
+        /// </summary>
         public double Difficulty
         {
             get 
