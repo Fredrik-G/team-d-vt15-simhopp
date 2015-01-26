@@ -13,13 +13,21 @@ namespace SimhoppUnitTest
     [TestFixture]
     class TrickDictionaryTest
     {
-        
+        /// <summary>
+        /// Test the TrickDictionarys IsEmpty function.
+        /// </summary>
         [Test]
-        public void CreateObjectWithoutParameters()
+        public void DictionaryIsEmpty()
         {
             TrickDictionary td = new TrickDictionary();
-            Assert.AreEqual(true, td.isEmpty());
+            bool tdBool = td.IsEmpty();
+            Assert.AreEqual(true, tdBool);
+            Assert.AreNotEqual(false, tdBool);
+            Trick t = new Trick("flip", 2.1);
+            td.AddTrick(20, t);
+            tdBool = td.IsEmpty();
+            Assert.AreEqual(false, tdBool);
+            Assert.AreNotEqual(true, tdBool);
         }
-
     }
 }
