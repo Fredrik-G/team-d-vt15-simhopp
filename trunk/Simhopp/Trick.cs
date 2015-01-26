@@ -30,12 +30,26 @@ namespace Simhopp
         }
         public string Name
         {
-            get { return this.name; }
+            get 
+            {
+                if(this.name == null)
+                {
+                    throw new Exception("Name is null");
+                }
+                return this.name; 
+            }
             set { this.name = value; }
         }
         public double Difficulty
         {
-            get { return this.difficulty; }
+            get 
+            {
+                if (this.difficulty == null)
+                {
+                    throw new Exception("Difficulty is null");
+                }
+                return this.difficulty; 
+            }
             set { this.difficulty = value; }
         }
     }
