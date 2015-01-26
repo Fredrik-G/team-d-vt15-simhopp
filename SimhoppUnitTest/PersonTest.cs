@@ -18,18 +18,21 @@ namespace SimhoppUnitTest
         {//Testar konstruktorn och att det skapas två olika objekt.
             Simhopp.Diver p1 = new Simhopp.Diver("Jimmy Makkonen", "Sweden", "20050101-1337");
             Simhopp.Diver p2 = new Simhopp.Diver("Fredrik-Gummus", "USA", "123-20-5555");
-
+            Simhopp.Judge p3 = new Simhopp.Judge("Judge Judy", "USA", "123-20-5555");
 
             NUnit.Framework.Assert.AreEqual(p1.Name, "Jimmy Makkonen");
             NUnit.Framework.Assert.AreNotEqual(p1.Name, "Fredrik-Gummus");
             NUnit.Framework.Assert.AreNotEqual(p1, p2);
+
             NUnit.Framework.Assert.That(p2.SSN, Is.EquivalentTo("123-20-5555"));
+            NUnit.Framework.Assert.AreEqual(p3.Name, "Judge Judy");
         }
         [Test]
         public void CorrectInputPerson()
         {//Testar att personer läggs till med korrrekt indata.
             Simhopp.Diver p1 = new Simhopp.Diver("Jimmy Makkonen", "Sweden", "20050101-1337");
             Simhopp.Diver p2 = new Simhopp.Diver("Fredrik-Gummus", "USA", "123-20-5555");
+            Simhopp.Judge p3 = new Simhopp.Judge("Judge Judy", "USA", "123-20-5555");
 
             Simhopp.Diver n1 = new Simhopp.Diver("J..Makkonen", "Swe.den", "20050101-137");
             Simhopp.Diver n2 = new Simhopp.Diver("-Gummus", "US--A", "123205555");
