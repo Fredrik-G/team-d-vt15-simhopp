@@ -13,7 +13,11 @@ namespace Simhopp
         /// <summary>
         /// Default Constructor
         /// </summary>
-        public Trick() { }
+        public Trick() 
+        {
+            this.name = "";
+            this.difficulty = 0.0;
+        }
         /// <summary>
         /// Creating an object with varibles 'name' and 'difficulty'
         /// </summary>
