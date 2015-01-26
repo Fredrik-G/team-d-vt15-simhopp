@@ -11,9 +11,9 @@ namespace Simhopp
 {
     public class Contest
     {
-        public string place;
-        public string name;
-        public string date;
+        private string place;
+        private string name;
+        private string date;
 
         Contest() { }
 
