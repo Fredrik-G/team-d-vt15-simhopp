@@ -8,5 +8,8 @@ namespace Simhopp.Person
 {
     class Person
     {
+        private string name;
+        private string nationality;
+
     }
 }
