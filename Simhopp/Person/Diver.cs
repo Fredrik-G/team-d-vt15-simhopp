@@ -10,6 +10,8 @@ namespace Simhopp
 {
     public class Diver : Person
     {
+        public Diver() { }
+
         public Diver(string name, string nationality, string ssn)
         {
             this.name = name;
