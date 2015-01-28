@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace Simhopp
 {
-    public abstract class Person 
+    public abstract class Person
     {
         protected string name;
         protected string nationality;
         protected string ssn;
 
-        public Person(){}
+        protected Person() { }
         public string Name
         {
             get
