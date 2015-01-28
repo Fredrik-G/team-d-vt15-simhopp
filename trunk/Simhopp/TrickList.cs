@@ -96,7 +96,7 @@ namespace Simhopp
         {
             foreach(DictionaryEntry de in trickList)
             {
-                Console.WriteLine(de.Key + " " + de.Value);
+                Console.WriteLine(de.Key + "\t" + de.Value);
             }
         }
 
