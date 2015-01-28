@@ -10,7 +10,7 @@ namespace Simhopp
     public class TrickList
     {
         /// <summary>
-        /// A dictionary that contains an id and a Trick object.
+        /// A Hashtable that contains an trickname as key and its difficulty as the value.
         /// </summary>
         private Hashtable trickList = new Hashtable();
 
@@ -47,33 +47,61 @@ namespace Simhopp
                 Console.WriteLine("Error: Trick already in hashtable tricksList.");
             }
         }
+
+        /// <summary>
+        /// Reads trick information from a file (filename).
+        /// For each trick in the file it creates a trick object and stores it in the trickList.
+        /// </summary>
+        /// <param name="filename"></param>
         public void ReadFromFile(string filename)
         {
             try
             {
+                trickList.Clear();
                 string[] allTricks = System.IO.File.ReadAllLines(filename);
                 foreach (string line in allTricks)
                 {
                     string[] trick = line.Split(';');
-                    foreach(string value in trick)
-                    {
-                        Trick t = new Trick(value[1].ToString(), Convert.ToDouble(value[2]));
-                        AddTrick(t);
-                    }
+                    Trick t = new Trick(trick[1], double.Parse(trick[2]));
+                    AddTrick(t);
                 }
             }
-            catch
+            catch(Exception e)
             {
                 Console.WriteLine("Error: File could not be opened.");
+            }
+        }
+        /// <summary>
+        /// Searches the trickList for a specific trick and then returns the tricks difficulty
+        /// </summary>
+        /// <param name="trickName"></param>
+        /// <returns></returns>
+        public double GetDifficultyByName(string trickName)
+        {
+            try
+            {
+                return (double)trickList[trickName];
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("Not found"); 
+                return 0.0;
+            }
+           
+        }
+        /// <summary>
+        /// Prints the entire hashtable in the Console window
+        /// </summary>
+        public void PrintHashTable()
+        {
+            foreach(DictionaryEntry de in trickList)
+            {
+                Console.WriteLine(de.Key + " " + de.Value);
             }
         }
 
         //TODO:
         /* print funtion
-         * read from file.
-         * get object by id
-         * get object by name
-         * 
          */
     }
 }
