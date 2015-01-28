@@ -12,6 +12,7 @@ namespace Simhopp
         {
             TrickList tl = new TrickList();
             tl.ReadFromFile("TrickList.txt");
+            tl.PrintHashTable();
             Console.ReadKey();
         }
     }

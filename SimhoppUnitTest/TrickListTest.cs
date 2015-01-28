@@ -58,5 +58,15 @@ namespace SimhoppUnitTest
             tlBool = tl.IsEmpty();
             Assert.AreEqual(false, tlBool);
         }
+
+        [Test]
+        public void GetDifficultyByName()
+        {
+            TrickList tl = new TrickList();
+            tl.ReadFromFile("TrickList.txt");
+            double tlDifficulty = tl.GetDifficultyByName("Forward 2.5 Somersault");
+            Assert.That(tlDifficulty, Is.EqualTo(2.2).Within(.0005));
+            Assert.That(tlDifficulty, Is.Not.EqualTo(2.5).Within(.0005));
+        }
     }
 }
