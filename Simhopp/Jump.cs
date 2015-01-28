@@ -22,6 +22,8 @@ namespace Simhopp
 
         public void ReadFromFile(string fileName)
         {
+            judgeList.Clear();
+            diverList.Clear();
             try
             {
                 using (StreamReader reader = new StreamReader(@"M:\Desktop\år2\SystemProgramvaruutveckling\Simhopp\Simhopp\" + fileName))
