@@ -46,12 +46,19 @@
     <Compile Include="ContestTest1.cs" />
     <Compile Include="PersonTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TrickListTest.cs" />
+    <Compile Include="TrickTest.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Simhopp\Simhopp.csproj">
       <Project>{c842984c-4b2b-4f20-9487-a24425036f5f}</Project>
       <Name>Simhopp</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TrickList.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

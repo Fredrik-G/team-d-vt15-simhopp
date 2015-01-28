@@ -10,11 +10,9 @@ namespace Simhopp
     {
         static void Main(string[] args)
         {
-            //asdasdasdadsdsa
-            // hej hej 
-
-
-
+            TrickList tl = new TrickList();
+            tl.ReadFromFile("TrickList.txt");
+            Console.ReadKey();
         }
     }
 }
