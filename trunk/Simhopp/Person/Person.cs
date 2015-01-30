@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System.Text.RegularExpressions;
 
 namespace Simhopp
 {
@@ -59,9 +60,28 @@ namespace Simhopp
                 this.ssn = value;
             }
         }
-        void CheckCorrectName(string name)
+        public static bool CheckCorrectName(string name)
         {
-            //Regex patternInteger = new Regex(@"^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*$");
+            Regex patternName = new Regex(@"^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*$");
+            return patternName.IsMatch(name);
+        }
+        public static bool CheckCorrectNationality(string nationality)
+        {
+            Regex patternNationality = new Regex(@"^[a-zA-Z]+(([\,\- ][a-zA-Z ])?)*$");
+            return patternNationality.IsMatch(nationality);
+        }
+        public static bool CheckCorrectSSN(string ssn, string nationality)
+        {
+            if (nationality == "Sweden")
+            {
+                Regex patternSwedishSSN = new Regex(@"^\d{8}-\d{4}$");
+                return patternSwedishSSN.IsMatch(ssn);
+            }
+            else
+            {
+                Regex patternSSN = new Regex(@"^\d{3}-\d{2}-\d{4}$");
+                return patternSSN.IsMatch(ssn);
+            }
         }
     }
 
