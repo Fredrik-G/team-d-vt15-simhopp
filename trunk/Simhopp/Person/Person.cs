@@ -10,11 +10,15 @@ namespace Simhopp
 {
     public abstract class Person
     {
+        #region Data
         protected string name;
         protected string nationality;
         protected string ssn;
+        #endregion
 
         protected Person() { }
+
+        #region Properties
         public string Name
         {
             get
@@ -60,6 +64,9 @@ namespace Simhopp
                 this.ssn = value;
             }
         }
+        #endregion
+
+        #region Methods
         public static bool CheckCorrectName(string name)
         {
             Regex patternName = new Regex(@"^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*$");
@@ -83,6 +90,7 @@ namespace Simhopp
                 return patternSSN.IsMatch(ssn);
             }
         }
+        #endregion
     }
 
 
