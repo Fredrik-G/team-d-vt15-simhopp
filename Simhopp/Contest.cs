@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 using System.Text.RegularExpressions;
 
 
@@ -11,11 +12,18 @@ namespace Simhopp
 {
     public class Contest
     {
+        #region Data
         private string place;
         private string name;
         private string date;
+        private TrickList trickList;
+        private Judge[] judgeList = new Judge[7];
+        private List<Participant> participantsList = new List<Participant>(); 
 
-        Contest() { }
+        #endregion
+
+        #region Constructor
+        public Contest() { }
 
         public Contest(string place, string name, string date)
         {
@@ -23,7 +31,9 @@ namespace Simhopp
             this.name = name;
             this.date = date;
         }
+        #endregion
 
+        #region Properties
         public string Name
         {
             get
@@ -69,25 +79,47 @@ namespace Simhopp
                 this.date = value;
             }
         }
+        #endregion
 
-        public bool CheckCorrectName(string name)
+        #region Methods
+
+        public void AddParticipant(Diver diver)
+        {
+            //participantsList.Add(diver);
+        }
+        public void AddJudge(Judge judge)
+        {
+           // judgeList.Add(judge);
+        }
+
+
+        public double GetTrickDifficultyFromTrickHashTable(string trickName)
+        {
+            //trickList.GetByName(trickName);
+            return 0.0;
+        }
+
+        #endregion
+
+        #region CheckCorrect
+        public static bool CheckCorrectName(string name)
         {
             Regex patternName = new Regex(@"^[a-zA-Z]+(([\'\.\- ][a-zA-Z ])?[a-zA-Z]*)*$");
             return patternName.IsMatch(name);
         }
 
-        public bool CheckCorrectPlace(string place)
+        public static bool CheckCorrectPlace(string place)
         {
             Regex patternName = new Regex(@"^[a-zA-Z]+(([\'\.\- ][a-zA-Z ])?[a-zA-Z]*)*$");
             return patternName.IsMatch(place);
         }
 
-        public bool CheckCorrectDate(string date)
+        public static bool CheckCorrectDate(string date)
         {
             Regex patternName = new Regex(@"^((((0[13578])|([13578])|(1[02]))[\/](([1-9])|([0-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\/](([1-9])|([0-2][0-9])|(30)))|((2|02)[\/](([1-9])|([0-2][0-9]))))[\/]\d{4}$|^\d{4}$");
             return patternName.IsMatch(date);
         }
-
+        #endregion
 
 
     }
