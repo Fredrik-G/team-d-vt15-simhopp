@@ -41,11 +41,11 @@ namespace Simhopp
         { 
             get 
             {
-                if (Double.IsNaN(result))
+                if (Double.IsNaN(this.result))
                 {
-                    throw new Exception("result is a NaN.");
+                    throw new Exception("result is NaN.");
                 }
-                return result;
+                return this.result;
             } 
             set 
             {
@@ -123,19 +123,8 @@ namespace Simhopp
         /// Calculates the result by adding all the doubles in the judgePoints array exept for the min and max points. 
         /// </summary>
         public void CalculateResult()
-        { 
-            double maxPoint = 0.0;
-            double minPoint = 10.0;
-            double total = 0.0;
-            for (int i = 0; i < judgePoints.Length; i++)
-            {
-                if (judgePoints[i] > maxPoint)
-                    maxPoint = judgePoints[i];
-                if (judgePoints[i] < minPoint)
-                    minPoint = judgePoints[i];
-                total += judgePoints[i];
-            }
-            this.result = total - minPoint - maxPoint;
+        {
+            this.result = judgePoints.Sum() - judgePoints.Max() - judgePoints.Min();
         }
         #endregion
     }
