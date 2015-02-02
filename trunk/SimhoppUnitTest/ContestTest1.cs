@@ -36,22 +36,22 @@ namespace SimhoppUnitTest
             Simhopp.Contest n2 = new Simhopp.Contest("Örebro", "Tavl1ngen", "Jan 7 2014");
 
             //Positiv test
-            NUnit.Framework.Assert.AreEqual(p1.CheckCorrectName(p1.Name), true);
-            NUnit.Framework.Assert.AreEqual(p1.CheckCorrectPlace(p1.Place), true);
-            NUnit.Framework.Assert.AreEqual(p1.CheckCorrectDate(p1.Date), true);
+            NUnit.Framework.Assert.AreEqual(Simhopp.Contest.CheckCorrectName(p1.Name), true);
+            NUnit.Framework.Assert.AreEqual(Simhopp.Contest.CheckCorrectPlace(p1.Place), true);
+            NUnit.Framework.Assert.AreEqual(Simhopp.Contest.CheckCorrectDate(p1.Date), true);
 
-            NUnit.Framework.Assert.AreEqual(p2.CheckCorrectName(p2.Name), true);
-            NUnit.Framework.Assert.AreEqual(p2.CheckCorrectPlace(p2.Place), true);
-            NUnit.Framework.Assert.AreEqual(p2.CheckCorrectDate(p2.Date), true);
+            NUnit.Framework.Assert.AreEqual(Simhopp.Contest.CheckCorrectName(p2.Name), true);
+            NUnit.Framework.Assert.AreEqual(Simhopp.Contest.CheckCorrectPlace(p2.Place), true);
+            NUnit.Framework.Assert.AreEqual(Simhopp.Contest.CheckCorrectDate(p2.Date), true);
 
             //Negativa test
-            NUnit.Framework.Assert.AreEqual(n1.CheckCorrectName(n1.Name), false);
-            NUnit.Framework.Assert.AreEqual(n1.CheckCorrectPlace(n1.Place), false);
-            NUnit.Framework.Assert.AreEqual(n1.CheckCorrectDate(n1.Date), false);
+            NUnit.Framework.Assert.AreEqual(Simhopp.Contest.CheckCorrectName(n1.Name), false);
+            NUnit.Framework.Assert.AreEqual(Simhopp.Contest.CheckCorrectPlace(n1.Place), false);
+            NUnit.Framework.Assert.AreEqual(Simhopp.Contest.CheckCorrectDate(n1.Date), false);
 
-            NUnit.Framework.Assert.AreEqual(n2.CheckCorrectName(n2.Name), false);
-            NUnit.Framework.Assert.AreEqual(n2.CheckCorrectPlace(n2.Place), false);
-            NUnit.Framework.Assert.AreEqual(n2.CheckCorrectDate(n2.Date), false);
+            NUnit.Framework.Assert.AreEqual(Simhopp.Contest.CheckCorrectName(n2.Name), false);
+            NUnit.Framework.Assert.AreEqual(Simhopp.Contest.CheckCorrectPlace(n2.Place), false);
+            NUnit.Framework.Assert.AreEqual(Simhopp.Contest.CheckCorrectDate(n2.Date), false);
         }
         
     }
