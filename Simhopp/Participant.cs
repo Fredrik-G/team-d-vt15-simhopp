@@ -6,19 +6,46 @@ using System.Threading.Tasks;
 
 namespace Simhopp
 {
-    class Participant
+    public class Participant
     {
         private double totalPoints = 0.0;
         Diver diver = new Diver();
-        //private JumpResultat[] jumpResultats = new JumpResultat[3];
+        private JumpResult[] jumpResults = new JumpResult[3];
 
+        public Participant(Diver diver)
+        {
+            for (var i = 0; i < 3; i++)
+            {
+                jumpResults[i] = new JumpResult();
+            }
+            
+            this.diver = diver;
+        }
+
+        public void SetJudgePoint(int jumpNo, int judgeNo, double point)
+        {
+            jumpResults[jumpNo].SetJudgePoint(judgeNo, point);
+        }
+
+        public void SetTrick(int jumpNo, string name)
+        {
+            jumpResults[jumpNo].TrickName = name;
+        }
+
+        public void CalculatePoints()
+        {
+            foreach (var jumpResult in jumpResults)
+            {
+                jumpResult.CalculateResult();
+            }
+        }
         public double TotalPoints
         {
             get
             {
-                if (this.totalPoints == null)
+                if (Double.IsNaN(this.totalPoints))
                 {
-                    throw new Exception("totalPoints is null");
+                    throw new Exception("totalPoints is NaN");
                 }
                 return this.totalPoints;
             }
@@ -28,15 +55,17 @@ namespace Simhopp
             }      
         }
 
-
-        private void AddDiver(Diver diver)
+        public void AddDiver(Diver diver)
         {
             this.diver = diver;
         }
 
-        private void UpdatePoints()
+        public void UpdatePoints()
         {
-            //jumpResultats.CalculateResult();
+            foreach (var jumpResult in jumpResults)
+            {
+                jumpResult.CalculateResult();
+            }        
         }
 
     }

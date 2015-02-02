@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,8 +18,9 @@ namespace Simhopp
         private string name;
         private string date;
         private TrickList trickList;
-        private Judge[] judgeList = new Judge[7];
-        private List<Participant> participantsList = new List<Participant>(); 
+        private List<Judge> judgeList = new List<Judge>();
+        private List<Participant> participantsList = new List<Participant>();
+
 
         #endregion
 
@@ -85,21 +87,63 @@ namespace Simhopp
 
         public void AddParticipant(Diver diver)
         {
-            //participantsList.Add(diver);
+            participantsList.Add(new Participant(diver));
         }
         public void AddJudge(Judge judge)
         {
-           // judgeList.Add(judge);
+            if (judgeList.Count <= 7)
+            {
+                judgeList.Add(judge);
+            }
         }
-
-
         public double GetTrickDifficultyFromTrickHashTable(string trickName)
         {
-            //trickList.GetByName(trickName);
-            return 0.0;
+            return trickList.GetDifficultyByName(trickName);
         }
 
+        public void MakeJump()
+        {
+            SortParticipants();
+            Random random = new Random();
+
+            double result;
+            for (var i = 0; i < 7; i++)
+            {
+                result = 0;
+                result = random.Next(0, 11);
+              //  result += random.NextDouble();
+
+                for (var j = 0; j < 3; j++)
+                {
+                    participantsList[0].SetJudgePoint(j, i, result);
+                    participantsList[0].SetTrick(j, "Forward Double Somersault");
+
+                    participantsList[0].CalculatePoints();
+                }
+            }  
+        //lägg till uträkning av poäng   
+
+        }
+
+        public void PrintResult()
+        {
+            
+        }
+
+        public void SortParticipants()
+        {
+            IComparer<Participant> comparer = new OrderingClass();
+            participantsList.Sort(comparer);
+        }
         #endregion
+
+        public class OrderingClass : IComparer<Participant>
+        {
+            public int Compare(Participant x, Participant y)
+            {
+                return x.TotalPoints > y.TotalPoints ? 1 : 0;
+            }
+        }
 
         #region CheckCorrect
         public static bool CheckCorrectName(string name)
@@ -124,3 +168,4 @@ namespace Simhopp
 
     }
 }
+
