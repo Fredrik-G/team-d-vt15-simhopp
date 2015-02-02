@@ -18,7 +18,7 @@ namespace Simhopp
         #region JumpResult Variables
         private string trickName;
         private double[] judgePoints;
-        private double result;
+        private double sumJudgePoints;
         #endregion
 
         #region JumpResult Properties
@@ -37,19 +37,19 @@ namespace Simhopp
                 this.trickName = value;
             }
         }
-        public double Result
+        public double SumJudgePoints
         { 
             get 
             {
-                if (Double.IsNaN(this.result))
+                if (Double.IsNaN(this.sumJudgePoints))
                 {
-                    throw new Exception("result is NaN.");
+                    throw new Exception("sumJudgePoints is NaN.");
                 }
-                return this.result;
+                return this.sumJudgePoints;
             } 
             set 
             {
-                this.result = value;
+                this.sumJudgePoints = value;
             }
         }
 
@@ -124,7 +124,7 @@ namespace Simhopp
         /// </summary>
         public void CalculateResult()
         {
-            this.result = judgePoints.Sum() - judgePoints.Max() - judgePoints.Min();
+            this.sumJudgePoints = judgePoints.Sum() - judgePoints.Max() - judgePoints.Min();
         }
         #endregion
     }
