@@ -22,7 +22,12 @@ namespace Simhopp
         #endregion
 
         #region Constructor
-        public Contest() { }
+        public Contest() 
+        {
+            this.place = "";
+            this.name = "";
+            this.date = "";
+        }
 
         public Contest(string place, string name, string date)
         {
@@ -90,13 +95,36 @@ namespace Simhopp
         {
             participantsList.Add(new Participant(diver));
         }
+
+
         public void AddJudge(Judge judge)
         {
-            if (judgeList.Count <= 7)
+            if (judge.Name.Equals(""))
+                throw new Exception("Judge name is not set.");
+            else if (judge.Nationality.Equals(""))
+                throw new Exception("Judge nationality is not set.");
+            else if (judge.SSN.Equals(""))
+                throw new Exception("Judge social security number is not set.");
+            else if (judgeList.Find(x => x.SSN == judge.SSN) != null)
+                throw new Exception("Judge is already in list.");
+            else if (judgeList.Count >= 7)
+                throw new Exception("All 7 judges are already set in the list.");
+            else
             {
                 judgeList.Add(judge);
             }
         }
+
+        public int GetNumberOfParticipants()
+        {
+            return participantsList.Count;
+        }
+        public int GetNumberOfJudges()
+        {
+            return judgeList.Count;
+        }
+
+
         public double GetTrickDifficultyFromTrickHashTable(string trickName)
         {
             return trickList.GetDifficultyByName(trickName);
@@ -159,6 +187,9 @@ namespace Simhopp
         #endregion
 
         #region Ordering Class
+        /// <summary>
+        /// Compare class to be able to sort the participantsList.
+        /// </summary>
         public class OrderingClass : IComparer<Participant>
         {
             public int Compare(Participant x, Participant y)
