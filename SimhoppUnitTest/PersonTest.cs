@@ -10,12 +10,18 @@ using System.Text.RegularExpressions;
 
 namespace SimhoppUnitTest
 {
+    /// <summary>
+    /// A class that validate tests for the class
+    /// </summary>
     [TestFixture]
     public class PersonTest
     {
+        /// <summary>
+        /// Tests the constructor and that it does create two different objects
+        /// </summary>
         [Test]
         public void WorkingPersonObject()
-        {//Testar konstruktorn och att det skapas två olika objekt.
+        {
             Simhopp.Diver p1 = new Simhopp.Diver("Jimmy Makkonen", "Sweden", "20050101-1337");
             Simhopp.Diver p2 = new Simhopp.Diver("Fredrik-Gummus", "USA", "123-20-5555");
             Simhopp.Judge p3 = new Simhopp.Judge("Judge Judy", "USA", "123-20-5555");
@@ -27,9 +33,12 @@ namespace SimhoppUnitTest
             NUnit.Framework.Assert.That(p2.SSN, Is.EquivalentTo("123-20-5555"));
             NUnit.Framework.Assert.AreEqual(p3.Name, "Judge Judy");
         }
+        /// <summary>
+        /// Tests that two persons is added with the correct input data
+        /// </summary>
         [Test]
         public void CorrectInputPerson()
-        {//Testar att personer läggs till med korrrekt indata.
+        {
             Simhopp.Diver p1 = new Simhopp.Diver("Jimmy Makkonen", "Sweden", "20050101-1337");
             Simhopp.Diver p2 = new Simhopp.Diver("Fredrik-Gummus", "USA", "123-20-5555");
             Simhopp.Judge p3 = new Simhopp.Judge("Judge Judy", "USA", "123-20-5555");

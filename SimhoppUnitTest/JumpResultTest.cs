@@ -36,7 +36,7 @@ namespace SimhoppUnitTest
             Assert.That(point, Is.EqualTo(0));
             point = jr.GetJudgePoint(6);
             Assert.That(point, Is.EqualTo(0));
-            double res = jr.Result;
+            double res = jr.SumJudgePoints;
             Assert.That(res, Is.EqualTo(0));
         }
 
@@ -63,7 +63,7 @@ namespace SimhoppUnitTest
             Assert.That(point, Is.EqualTo(6.0).Within(0.005));
             point = jr.GetJudgePoint(6);
             Assert.That(point, Is.EqualTo(7.0).Within(0.005));*/
-            double res = jr.Result;
+            double res = jr.SumJudgePoints;
             Assert.That(res, Is.EqualTo(20.0).Within(0.005));
         }
 
@@ -82,7 +82,7 @@ namespace SimhoppUnitTest
             jr.SetJudgePoint(5, 6.0);
             jr.SetJudgePoint(6, 7.0);
             jr.CalculateResult();
-            double p = jr.Result;
+            double p = jr.SumJudgePoints;
             Assert.That(p, Is.EqualTo(20).Within(0.05));
         }
 
