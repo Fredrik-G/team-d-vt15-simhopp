@@ -8,8 +8,12 @@ namespace Simhopp
 {
     public class Trick
     {
+        #region Data
         private string name;
         private double difficulty;
+        #endregion
+
+        #region Constructors
         /// <summary>
         /// Default Constructor
         /// </summary>
@@ -28,6 +32,9 @@ namespace Simhopp
             this.name = name;
             this.difficulty = difficulty;
         }
+        #endregion
+
+        #region Properties
         /// <summary>
         /// Getter/Setter for name value.
         /// </summary>
@@ -50,13 +57,14 @@ namespace Simhopp
         {
             get 
             {
-                if (this.difficulty == null)
+                if (Double.IsNaN(this.difficulty))
                 {
-                    throw new Exception("Difficulty is null");
+                    throw new Exception("Difficulty is NaN");
                 }
                 return this.difficulty; 
             }
             set { this.difficulty = value; }
         }
+        #endregion
     }
 }
