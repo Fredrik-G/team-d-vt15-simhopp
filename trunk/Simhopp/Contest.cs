@@ -82,6 +82,10 @@ namespace Simhopp
 
         #region Methods
 
+        public bool IsJudgeInContest(Judge judge)
+        {
+            return judgeList.Find(x => x.SSN == judge.SSN) != null;
+        }
         public void AddParticipant(Diver diver)
         {
             participantsList.Add(new Participant(diver));
