@@ -68,7 +68,7 @@ namespace Simhopp
             }
             catch(Exception e)
             {
-                Console.WriteLine("Error: File " + filename + " could not be opened.");
+                Console.WriteLine("Error: File " + filename + " could not be opened.\n" + e.Message);
             }
         }
         /// <summary>
@@ -84,7 +84,7 @@ namespace Simhopp
             }
             catch(Exception e)
             {
-                Console.WriteLine("Trick " + trickName + " not found"); 
+                Console.WriteLine("Trick " + trickName + " not found\n" + e.Message); 
                 return 0.0;
             }
            
