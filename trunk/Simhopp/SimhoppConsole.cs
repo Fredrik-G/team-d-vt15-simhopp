@@ -9,25 +9,35 @@ namespace Simhopp
 {
     class SimhoppConsole
     {
+        #region Data
         List<Judge> judgeList = new List<Judge>();
         List<Diver> diverList = new List<Diver>();
 
         private Contest contest = new Contest();
 
         private string input;
+        #endregion
 
+        #region Methods
         public void Meny()
         {
             while (true)
             {
+                Console.Title = "Simhopp";
+                Console.BackgroundColor = ConsoleColor.Blue;
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.Clear();
-                Console.WriteLine("Make your choice");
-                Console.WriteLine("1: Read divers from textfile");
-                Console.WriteLine("2: Read judges from textfile");
-                Console.WriteLine("3: Add judge to contest");
-                Console.WriteLine("4: Add diver to contest");
-                Console.WriteLine("5: Make jump in contest");
-                Console.WriteLine("99: Exit the program");
+
+                Console.WriteLine("#########################################");
+                Console.WriteLine("#\tMake your choice\t\t#");
+                Console.WriteLine("#\t1: Read divers from textfile\t#");
+                Console.WriteLine("#\t2: Read judges from textfile\t#");
+                Console.WriteLine("#\t3: Add judge to contest\t\t#");
+                Console.WriteLine("#\t4: Add diver to contest\t\t#");
+                Console.WriteLine("#\t5: Make jump in contest\t\t#");
+                Console.WriteLine("#\t99: Exit the program\t\t#");
+                Console.WriteLine("#########################################");
+                Console.Write(":");
                 input = Console.ReadLine();
 
                 switch (input)
@@ -114,11 +124,9 @@ namespace Simhopp
             }
             catch (IOException e)
             {
-                throw new Exception("Error when reading file" + fileName);
+                throw new Exception("Error when reading file" + fileName + e.Message);
             }
         }
-
+        #endregion
     }
-
-
 }

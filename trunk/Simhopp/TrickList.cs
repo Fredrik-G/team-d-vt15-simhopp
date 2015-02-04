@@ -21,7 +21,7 @@ namespace Simhopp
         {
             
         }
-
+        #region Methods
         /// <summary>
         /// Checks if the trickDictionary is empty and returns a boolean value.
         /// </summary>
@@ -99,6 +99,7 @@ namespace Simhopp
                 Console.WriteLine(de.Key + "\t" + de.Value);
             }
         }
+        #endregion
 
         //TODO:
         /* print funtion

@@ -66,7 +66,7 @@ namespace Simhopp
         }
         #endregion
 
-        #region Methods
+        #region Check correct input
         public static bool CheckCorrectName(string name)
         {
             Regex patternName = new Regex(@"^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*$");

@@ -5,9 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 using System.Text.RegularExpressions;
-
 
 namespace Simhopp
 {
@@ -20,7 +18,6 @@ namespace Simhopp
         private TrickList trickList;
         private List<Judge> judgeList = new List<Judge>();
         private List<Participant> participantsList = new List<Participant>();
-
 
         #endregion
 
@@ -137,15 +134,7 @@ namespace Simhopp
         }
         #endregion
 
-        public class OrderingClass : IComparer<Participant>
-        {
-            public int Compare(Participant x, Participant y)
-            {
-                return x.TotalPoints > y.TotalPoints ? 1 : 0;
-            }
-        }
-
-        #region CheckCorrect
+        #region Check correct input
         public static bool CheckCorrectName(string name)
         {
             Regex patternName = new Regex(@"^[a-zA-Z]+(([\'\.\- ][a-zA-Z ])?[a-zA-Z]*)*$");
@@ -165,7 +154,15 @@ namespace Simhopp
         }
         #endregion
 
-
+        #region Ordering Class
+        public class OrderingClass : IComparer<Participant>
+        {
+            public int Compare(Participant x, Participant y)
+            {
+                return x.TotalPoints > y.TotalPoints ? 1 : 0;
+            }
+        }
+        #endregion
     }
 }
 
