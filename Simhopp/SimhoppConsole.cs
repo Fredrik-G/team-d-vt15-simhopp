@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Reflection;
 
 namespace Simhopp
 {
@@ -119,12 +120,16 @@ namespace Simhopp
                             Diver diver = new Diver(temp[0], temp[1], temp[2]);
                             diverList.Add(diver);
                         }
+                        else
+                        {
+                            throw new IOException("File not found");
+                        }
                     }
                 }
             }
             catch (IOException e)
             {
-                throw new Exception("Error when reading file" + fileName + e.Message);
+               Console.WriteLine("Error when reading file " + fileName + "\n" + e.Message);
             }
         }
         #endregion

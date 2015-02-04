@@ -44,7 +44,7 @@ namespace Simhopp
             }
             catch
             {
-                Console.WriteLine("Error: Trick already in hashtable tricksList.");
+                Console.WriteLine("Error: Trick " + t.Name + " already in hashtable tricksList.");
             }
         }
 
@@ -68,7 +68,7 @@ namespace Simhopp
             }
             catch(Exception e)
             {
-                Console.WriteLine("Error: File could not be opened.");
+                Console.WriteLine("Error: File " + filename + " could not be opened.");
             }
         }
         /// <summary>
@@ -84,7 +84,7 @@ namespace Simhopp
             }
             catch(Exception e)
             {
-                Console.WriteLine("Not found"); 
+                Console.WriteLine("Trick " + trickName + " not found"); 
                 return 0.0;
             }
            
