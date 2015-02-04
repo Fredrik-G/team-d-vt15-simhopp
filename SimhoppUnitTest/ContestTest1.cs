@@ -76,6 +76,9 @@ namespace SimhoppUnitTest
             Assert.AreNotEqual(3, c1.GetNumberOfParticipants());
         }
 
+        /// <summary>
+        /// Test for the AddJudgeToList method. 
+        /// </summary>
         [Test]
         public void AddJudgeToList()
         {
@@ -88,19 +91,32 @@ namespace SimhoppUnitTest
             Judge j6 = new Judge("heppa", "Bor", "222926");
             Judge j7 = new Judge("heppa", "Bor", "222927");
             Judge j8 = new Judge("heppa", "Bor", "222928");
+            Judge j9 = new Judge("", "Bor", "222928");
+            Judge j10 = new Judge("heppa", "", "222928");
+            Judge j11 = new Judge("heppa", "Bor", "");
+            var exeptionTest1 = Assert.Throws<Exception>(() => c1.AddJudge(j9));
+            Assert.That(exeptionTest1.Message, Is.EqualTo("Judge name is not set."));
+            exeptionTest1 = Assert.Throws<Exception>(() => c1.AddJudge(j10));
+            Assert.That(exeptionTest1.Message, Is.EqualTo("Judge nationality is not set."));
+            exeptionTest1 = Assert.Throws<Exception>(() => c1.AddJudge(j11));
+            Assert.That(exeptionTest1.Message, Is.EqualTo("Judge social security number is not set."));
             c1.AddJudge(j1);
             Assert.AreEqual(1, c1.GetNumberOfJudges());
+            //Testing what expression is returned when a judge who is already in the list is beeing added again.
+            exeptionTest1 = Assert.Throws<Exception>(() => c1.AddJudge(j1));
+            Assert.That(exeptionTest1.Message, Is.EqualTo("Judge is already in list."));
             c1.AddJudge(j2);
             c1.AddJudge(j3);
             c1.AddJudge(j4);
             c1.AddJudge(j5);
             c1.AddJudge(j6);
             c1.AddJudge(j7);
-            //TestDelegate td = new TestDelegate(c1.AddJudge(j8));
             Assert.AreEqual(7, c1.GetNumberOfJudges());
+            //Negative test.
             Assert.AreNotEqual(10, c1.GetNumberOfJudges());
-            string s = "All 7 judges are already set in the list.";
-            //Assert.Throws(Exception, TestDelegate c1.AddJudge(j8), s);
+            //Test to see that the right expression is thrown when You try to add a judge and the judgeList is full.
+            exeptionTest1 = Assert.Throws<Exception>(() => c1.AddJudge(j8));
+            Assert.That(exeptionTest1.Message, Is.EqualTo("All 7 judges are already set in the list."));
         }
     }
 }
