@@ -8,6 +8,9 @@ using System.Text.RegularExpressions;
 
 namespace Simhopp
 {
+    /// <summary>
+    /// Abstract class that is used for inherit properties from a person
+    /// </summary>
     public abstract class Person
     {
         #region Data
@@ -15,10 +18,15 @@ namespace Simhopp
         protected string nationality;
         protected string ssn;
         #endregion
-
+        /// <summary>
+        /// Default constructor 
+        /// </summary>
         protected Person() { }
 
         #region Properties
+        /// <summary>
+        /// Property for person name
+        /// </summary>
         public string Name
         {
             get
@@ -34,6 +42,9 @@ namespace Simhopp
                 this.name = value;
             }
         }
+        /// <summary>
+        /// Property for person nationality
+        /// </summary>
         public string Nationality
         {
             get
@@ -49,6 +60,9 @@ namespace Simhopp
                 this.nationality = value;
             }
         }
+        /// <summary>
+        /// Property for person social security number
+        /// </summary>
         public string SSN
         {
             get
@@ -65,7 +79,11 @@ namespace Simhopp
             }
         }
         #endregion
-
+        /// <summary>
+        /// Regex patterns for testing input data
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         #region Check correct input
         public static bool CheckCorrectName(string name)
         {

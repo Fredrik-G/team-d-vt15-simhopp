@@ -8,10 +8,19 @@ using System.Reflection;
 
 namespace Simhopp
 {
-    class SimhoppConsole
+    /// <summary>
+    /// Class that creates and handles a contest-object
+    /// </summary>
+    public class SimhoppConsole
     {
         #region Data
+        /// <summary>
+        /// A list that holds every judge that is stored in the database
+        /// </summary>
         List<Judge> judgeList = new List<Judge>();
+        /// <summary>
+        /// A list that holds every Diver that is stored in the database
+        /// </summary>
         List<Diver> diverList = new List<Diver>();
 
         private Contest contest = new Contest();
@@ -20,6 +29,9 @@ namespace Simhopp
         #endregion
 
         #region Methods
+        /// <summary>
+        /// A menu that shows a list of choices that a user may choose from
+        /// </summary>
         public void Meny()
         {
             Console.Title = "Simhopp";
@@ -87,7 +99,9 @@ namespace Simhopp
                 }
             }
         }
-
+        /// <summary>
+        /// A function that print all judges in the judgelist on the screen
+        /// </summary>
         public void PrintJudges()
         {
             foreach (var judge in judgeList)
@@ -95,6 +109,9 @@ namespace Simhopp
                 Console.WriteLine(judge.Name + " " + judge.Nationality);
             }
         }
+        /// <summary>
+        /// A function that prints divers in the diverlist on the screen
+        /// </summary>
         public void PrintDivers()
         {
             foreach (var diver in diverList)
@@ -102,14 +119,28 @@ namespace Simhopp
                 Console.WriteLine(diver.Name + " " + diver.Nationality);
             }
         }
+        /// <summary>
+        /// A function that get a judge by its name
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns>returns a judge object</returns>
         public Judge GetJudgeByName(string name)
         {
             return judgeList.Find(x => x.Name == name);
         }
+        /// <summary>
+        /// A function that get a diver by its name
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns>returns a diver object</returns>
         public Diver GetDiverByName(string name)
         {
             return diverList.Find(x => x.Name == name);
         }
+        /// <summary>
+        /// A function that adds a judge to a contest-object
+        /// </summary>
+        /// <param name="name"></param>
         public void AddJudgeByName(string name)
         {
             var judge = GetJudgeByName(name);
@@ -125,14 +156,18 @@ namespace Simhopp
                 Console.WriteLine(name + " was not found");
             }
         }
+        /// <summary>
+        /// A function that adds a diver to a contest-object
+        /// </summary>
+        /// <param name="name"></param>
         public void AddDiverByName(string name)
         {
             var diver = GetJudgeByName(name);
             if (diver != null)
             {
                 //if(name not found in contest)
-                    contest.AddJudge(diver);
-                    Console.WriteLine("Successfully added " + name);
+
+                Console.WriteLine("Successfully added " + name);
                 //else lägg inte till
             }
             else
@@ -165,11 +200,15 @@ namespace Simhopp
         {
             contest.MakeJump();
         }
+        /// <summary>
+        /// A function that reads judges and divers from text files
+        /// </summary>
+        /// <param name="fileName"></param>
         public void ReadFromFile(string fileName)
         {
             try
             {
-                using (StreamReader reader = new StreamReader(@"M:\Desktop\år2\SystemProgramvaruutveckling\Simhopp\Simhopp\" + fileName))
+                using (StreamReader reader = new StreamReader(fileName))
                 {
                     List<string> text = new List<string>();
                     while (!reader.EndOfStream)
