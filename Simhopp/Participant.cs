@@ -8,10 +8,13 @@ namespace Simhopp
 {
     public class Participant
     {
+        #region Data
         private double totalPoints = 0.0;
         Diver diver = new Diver();
         private JumpResult[] jumpResults = new JumpResult[3];
+        #endregion
 
+        #region Constructor
         public Participant(Diver diver)
         {
             for (var i = 0; i < 3; i++)
@@ -21,7 +24,9 @@ namespace Simhopp
             
             this.diver = diver;
         }
+        #endregion
 
+        #region Setters
         public void SetJudgePoint(int jumpNo, int judgeNo, double point)
         {
             jumpResults[jumpNo].SetJudgePoint(judgeNo, point);
@@ -31,7 +36,9 @@ namespace Simhopp
         {
             jumpResults[jumpNo].TrickName = name;
         }
+        #endregion
 
+        #region Methods
         public void CalculatePoints()
         {
             foreach (var jumpResult in jumpResults)
@@ -65,8 +72,8 @@ namespace Simhopp
             foreach (var jumpResult in jumpResults)
             {
                 jumpResult.CalculateResult();
-            }        
+            }
         }
-
+        #endregion
     }
 }
