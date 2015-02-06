@@ -22,7 +22,7 @@ namespace Simhopp
         #endregion
 
         #region Constructor
-        public Contest() 
+        public Contest()
         {
             this.place = "";
             this.name = "";
@@ -96,19 +96,28 @@ namespace Simhopp
             participantsList.Add(new Participant(diver));
         }
 
-
         public void AddJudge(Judge judge)
         {
-            if (judge.Name.Equals(""))
-                throw new Exception("Judge name is not set.");
-            else if (judge.Nationality.Equals(""))
-                throw new Exception("Judge nationality is not set.");
-            else if (judge.SSN.Equals(""))
-                throw new Exception("Judge social security number is not set.");
+            if (!Person.CheckCorrectName(judge.Name))
+            {
+                throw new Exception("Judge name is not set or invalid.");
+            }
+            else if (!Person.CheckCorrectNationality(judge.Nationality))
+            {
+                throw new Exception("Judge nationality is not set or invalid.");
+            }
+            else if (!Person.CheckCorrectSSN(judge.SSN,judge.Nationality))
+            {
+                throw new Exception("Judge social security number is not set or invalid.");
+            }
             else if (judgeList.Find(x => x.SSN == judge.SSN) != null)
+            {
                 throw new Exception("Judge is already in list.");
+            }
             else if (judgeList.Count >= 7)
+            {
                 throw new Exception("All 7 judges are already set in the list.");
+            }
             else
             {
                 judgeList.Add(judge);
@@ -124,39 +133,36 @@ namespace Simhopp
             return judgeList.Count;
         }
 
-
         public double GetTrickDifficultyFromTrickHashTable(string trickName)
         {
             return trickList.GetDifficultyByName(trickName);
         }
 
+        public void SimulateContest()
+        {
+            //anropa makejump 3 ggr och sortera efter varje
+        }
+
         public void MakeJump()
         {
-            SortParticipants();
             Random random = new Random();
 
             double result;
-            for (var i = 0; i < 7; i++)
+            foreach (Participant diver in participantsList)
             {
-                result = 0;
-                result = random.Next(0, 11);
-              //  result += random.NextDouble();
-
-                for (var j = 0; j < 3; j++)
+                diver.SetTrick(0, "Forward Double Somersault");
+                for (var i = 0; i < judgeList.Count; i++)
                 {
-                    participantsList[0].SetJudgePoint(j, i, result);
-                    participantsList[0].SetTrick(j, "Forward Double Somersault");
-
-                    participantsList[0].CalculatePoints();
+                    diver.SetJudgePoint(0, i, random.Next(0, 11));
+                    diver.CalculatePoints();
                 }
-            }  
-        //lägg till uträkning av poäng   
 
+            }
         }
 
         public void PrintResult()
         {
-            
+
         }
 
         public void SortParticipants()
