@@ -83,23 +83,23 @@ namespace SimhoppUnitTest
         public void AddJudgeToList()
         {
             Contest c1 = new Contest("Jerusalem", "JVM", "29/02/2015");
-            Judge j1 = new Judge("heppa", "Bor", "222921");
-            Judge j2 = new Judge("heppa", "Bor", "222922");
-            Judge j3 = new Judge("heppa", "Bor", "222923");
-            Judge j4 = new Judge("heppa", "Bor", "222924");
-            Judge j5 = new Judge("heppa", "Bor", "222925");
-            Judge j6 = new Judge("heppa", "Bor", "222926");
-            Judge j7 = new Judge("heppa", "Bor", "222927");
-            Judge j8 = new Judge("heppa", "Bor", "222928");
-            Judge j9 = new Judge("", "Bor", "222928");
-            Judge j10 = new Judge("heppa", "", "222928");
+            Judge j1 = new Judge("heppa", "Bor", "123-20-5551");
+            Judge j2 = new Judge("heppa", "Bor", "123-20-5552");
+            Judge j3 = new Judge("heppa", "Bor", "123-20-5553");
+            Judge j4 = new Judge("heppa", "Bor", "123-20-5554");
+            Judge j5 = new Judge("heppa", "Bor", "123-20-5555");
+            Judge j6 = new Judge("heppa", "Bor", "123-20-5556");
+            Judge j7 = new Judge("heppa", "Bor", "123-20-5557");
+            Judge j8 = new Judge("heppa", "Bor", "123-20-5558");
+            Judge j9 = new Judge("", "Bor", "123-20-5559");
+            Judge j10 = new Judge("heppa", "", "123-20-5550");
             Judge j11 = new Judge("heppa", "Bor", "");
             var exeptionTest1 = Assert.Throws<Exception>(() => c1.AddJudge(j9));
-            Assert.That(exeptionTest1.Message, Is.EqualTo("Judge name is not set."));
+            Assert.That(exeptionTest1.Message, Is.EqualTo("Judge name is not set or invalid."));
             exeptionTest1 = Assert.Throws<Exception>(() => c1.AddJudge(j10));
-            Assert.That(exeptionTest1.Message, Is.EqualTo("Judge nationality is not set."));
+            Assert.That(exeptionTest1.Message, Is.EqualTo("Judge nationality is not set or invalid."));
             exeptionTest1 = Assert.Throws<Exception>(() => c1.AddJudge(j11));
-            Assert.That(exeptionTest1.Message, Is.EqualTo("Judge social security number is not set."));
+            Assert.That(exeptionTest1.Message, Is.EqualTo("Judge social security number is not set or invalid."));
             c1.AddJudge(j1);
             Assert.AreEqual(1, c1.GetNumberOfJudges());
             //Testing what expression is returned when a judge who is already in the list is beeing added again.

@@ -26,13 +26,13 @@ namespace SimhoppUnitTest
         {
             //Positivt test
             simhopp.ReadFromFile("diver.txt");
-            var diver = simhopp.GetDiverByName("Rogelio	Parks");
+            var diver = simhopp.GetDiverByName("Rogelio Parks");
             
             Assert.IsNotNull(diver);
-            Assert.AreEqual(diver.Name, "Rogelio	Parks");
+            Assert.AreEqual(diver.Name, "Rogelio Parks");
 
             //Negativt test
-            var judge = simhopp.GetJudgeByName("Rogelio	Parks");
+            var judge = simhopp.GetJudgeByName("Rogelio Parks");
             Assert.IsNull(judge);
         }
         /// <summary>
@@ -41,11 +41,11 @@ namespace SimhoppUnitTest
         [Test]
         public void GetPerson()
         {
-            Assert.IsNull(simhopp.GetDiverByName("Rogelio	Parks"));
+            Assert.IsNull(simhopp.GetDiverByName("Rogelio Parks"));
 
             simhopp.ReadFromFile("diver.txt");
 
-            Assert.IsNotNull(simhopp.GetDiverByName("Rogelio	Parks"));
+            Assert.IsNotNull(simhopp.GetDiverByName("Rogelio Parks"));
         }
     }
 }
