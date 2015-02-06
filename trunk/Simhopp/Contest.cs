@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
 using System.Linq;
+using System.Management.Instrumentation;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,10 +19,10 @@ namespace Simhopp
         private string place;
         private string name;
         private string date;
-        private TrickList trickList;
+        private TrickList trickList = new TrickList();
         private List<Judge> judgeList = new List<Judge>();
-        private List<Participant> participantsList = new List<Participant>();
-
+        public List<Participant> participantsList = new List<Participant>();
+        //!!!!!!!!!
         #endregion
 
         #region Constructor
@@ -27,6 +31,7 @@ namespace Simhopp
             this.place = "";
             this.name = "";
             this.date = "";
+            trickList.ReadFromFile("tricklist.txt");
         }
 
         public Contest(string place, string name, string date)
@@ -34,6 +39,7 @@ namespace Simhopp
             this.place = place;
             this.name = name;
             this.date = date;
+            trickList.ReadFromFile("tricklist.txt");
         }
         #endregion
 
@@ -100,23 +106,23 @@ namespace Simhopp
         {
             if (!Person.CheckCorrectName(judge.Name))
             {
-                throw new Exception("Judge name is not set or invalid.");
+                throw new InvalidDataException("Judge name is not set or invalid.");
             }
             else if (!Person.CheckCorrectNationality(judge.Nationality))
             {
-                throw new Exception("Judge nationality is not set or invalid.");
+                throw new InvalidDataException("Judge nationality is not set or invalid.");
             }
-            else if (!Person.CheckCorrectSSN(judge.SSN,judge.Nationality))
+            else if (!Person.CheckCorrectSSN(judge.SSN, judge.Nationality))
             {
-                throw new Exception("Judge social security number is not set or invalid.");
+                throw new InvalidDataException("Judge social security number is not set or invalid.");
             }
             else if (judgeList.Find(x => x.SSN == judge.SSN) != null)
             {
-                throw new Exception("Judge is already in list.");
+                throw new DuplicateNameException("Judge is already in list.");
             }
             else if (judgeList.Count >= 7)
             {
-                throw new Exception("All 7 judges are already set in the list.");
+                throw new IndexOutOfRangeException("All 7 judges are already set in the list.");
             }
             else
             {
@@ -138,37 +144,60 @@ namespace Simhopp
             return trickList.GetDifficultyByName(trickName);
         }
 
-        public void SimulateContest()
+        public double GetResultFromParticipant(string ssn)
         {
-            //anropa makejump 3 ggr och sortera efter varje
+            foreach (var participant in participantsList)
+            {
+                if (participant.GetDiverSSN().Equals(ssn))
+                {
+                    return participant.TotalPoints;
+                }
+            }
+            throw new InstanceNotFoundException("Person with " + ssn + " not found.");
         }
 
-        public void MakeJump()
+
+        public void SimulateContest()
+        {
+            for (int jumpNo = 0; jumpNo < 3; jumpNo++)
+            {
+                MakeJump(jumpNo);
+                SortParticipants();
+            }
+        }
+
+        public void MakeJump(int jumpNo)
         {
             Random random = new Random();
 
             double result;
-            foreach (Participant diver in participantsList)
+            foreach (Participant participant in participantsList)
             {
-                diver.SetTrick(0, "Forward Double Somersault");
+                participant.SetTrick(jumpNo, "Forward Double Somersault");
                 for (var i = 0; i < judgeList.Count; i++)
                 {
-                    diver.SetJudgePoint(0, i, random.Next(0, 11));
-                    diver.CalculatePoints();
+                    participant.SetJudgePoint(jumpNo, i, random.Next(0, 11));
+                    participant.CalculatePoints();
                 }
-
+                participant.UpdateTotalPoints(trickList.GetDifficultyByName("Forward Double Somersault"));
             }
         }
 
         public void PrintResult()
         {
-
+            for (var i = participantsList.Count -1; i >= 0; i--)
+            {
+                participantsList[i].PrintDiver();
+                Console.WriteLine("\t" + participantsList[i].TotalPoints);
+            }
         }
-
+        /// <summary>
+        /// Sort participantslist by highest totalpoints.
+        /// </summary>
         public void SortParticipants()
         {
-            IComparer<Participant> comparer = new OrderingClass();
-            participantsList.Sort(comparer);
+
+            participantsList.Sort((x, y) => x.TotalPoints.CompareTo(y.TotalPoints));
         }
         #endregion
 
@@ -190,20 +219,7 @@ namespace Simhopp
             Regex patternName = new Regex(@"^((((0[13578])|([13578])|(1[02]))[\/](([1-9])|([0-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\/](([1-9])|([0-2][0-9])|(30)))|((2|02)[\/](([1-9])|([0-2][0-9]))))[\/]\d{4}$|^\d{4}$");
             return patternName.IsMatch(date);
         }
-        #endregion
-
-        #region Ordering Class
-        /// <summary>
-        /// Compare class to be able to sort the participantsList.
-        /// </summary>
-        public class OrderingClass : IComparer<Participant>
-        {
-            public int Compare(Participant x, Participant y)
-            {
-                return x.TotalPoints > y.TotalPoints ? 1 : 0;
-            }
-        }
-        #endregion
+        #endregion     
     }
 }
 
