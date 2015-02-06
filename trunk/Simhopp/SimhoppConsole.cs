@@ -144,16 +144,19 @@ namespace Simhopp
         public void AddJudgeByName(string name)
         {
             var judge = GetJudgeByName(name);
-            if (judge != null)
-            {
-                //if(name not found in contest)
-                    contest.AddJudge(judge);
-                    Console.WriteLine("Successfully added " + name);
-                //else lägg inte till
-            }
-            else
+            if (judge == null)
             {
                 Console.WriteLine(name + " was not found");
+                return;
+            }
+            try
+            {
+                contest.AddJudge(judge);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.ReadKey();
             }
         }
         /// <summary>
@@ -162,17 +165,20 @@ namespace Simhopp
         /// <param name="name"></param>
         public void AddDiverByName(string name)
         {
-            var diver = GetJudgeByName(name);
-            if (diver != null)
-            {
-                //if(name not found in contest)
-
-                Console.WriteLine("Successfully added " + name);
-                //else lägg inte till
-            }
-            else
+            var diver = GetDiverByName(name);
+            if (diver == null)
             {
                 Console.WriteLine(name + " was not found");
+                return;
+            }
+            try
+            {
+                contest.AddParticipant(diver);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.ReadKey();
             }
         }
         public void AddJudge()
