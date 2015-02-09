@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Management.Instrumentation;
 using System.Reflection;
 using System.Text;
@@ -105,29 +106,40 @@ namespace Simhopp
 
         public void AddJudge(Judge judge)
         {
-            if (!Person.CheckCorrectName(judge.Name))
+            try
             {
-                throw new InvalidDataException("Judge name is not set or invalid.");
+                if (judge == null)
+                {
+                    throw new NullReferenceException("Judge is null");
+                }
+                else if (!Person.CheckCorrectName(judge.Name))
+                {
+                    throw new InvalidDataException("Judge name is not set or invalid.");
+                }
+                else if (!Person.CheckCorrectNationality(judge.Nationality))
+                {
+                    throw new InvalidDataException("Judge nationality is not set or invalid.");
+                }
+                else if (!Person.CheckCorrectSSN(judge.SSN, judge.Nationality))
+                {
+                    throw new InvalidDataException("Judge social security number is not set or invalid.");
+                }
+                else if (judgeList.Find(x => x.SSN == judge.SSN) != null)
+                {
+                    throw new DuplicateNameException("Judge is already in list.");
+                }
+                else if (judgeList.Count >= 7)
+                {
+                    throw new IndexOutOfRangeException("All 7 judges are already set in the list.");
+                }
+                else
+                {
+                    judgeList.Add(judge);
+                }
             }
-            else if (!Person.CheckCorrectNationality(judge.Nationality))
+            catch (Exception e)
             {
-                throw new InvalidDataException("Judge nationality is not set or invalid.");
-            }
-            else if (!Person.CheckCorrectSSN(judge.SSN, judge.Nationality))
-            {
-                throw new InvalidDataException("Judge social security number is not set or invalid.");
-            }
-            else if (judgeList.Find(x => x.SSN == judge.SSN) != null)
-            {
-                throw new DuplicateNameException("Judge is already in list.");
-            }
-            else if (judgeList.Count >= 7)
-            {
-                throw new IndexOutOfRangeException("All 7 judges are already set in the list.");
-            }
-            else
-            {
-                judgeList.Add(judge);
+                Console.WriteLine(e.Message);
             }
         }
 
@@ -171,7 +183,7 @@ namespace Simhopp
         {
             Random random = new Random();
 
-            foreach (Participant participant in participantsList)
+            foreach (var participant in participantsList)
             {
                 participant.SetTrick(jumpNo, "Forward Double Somersault");
                 for (var i = 0; i < judgeList.Count; i++)
@@ -196,13 +208,15 @@ namespace Simhopp
             }
         }
         /// <summary>
-        /// Sort participantslist by highest totalpoints.
+        /// Sort participantslist by lowest totalpoints.
         /// </summary>
         public void SortParticipants()
         {
             participantsList.Sort((x, y) => x.TotalPoints.CompareTo(y.TotalPoints));
         }
-
+        /// <summary>
+        /// Sort liveResultList by highest totalpoints.
+        /// </summary>
         public void SortLiveResultList()
         {
             liveResultList.Sort((x, y) => y.TotalPoints.CompareTo(x.TotalPoints));
@@ -213,32 +227,10 @@ namespace Simhopp
             int i = 1;
             liveResultList = new List<Participant>(participantsList);
             SortLiveResultList();
-            foreach (Participant participant in liveResultList)
+            foreach (var participant in liveResultList)
             {
-                Console.WriteLine(i + ". " + participant.GetDiverName() + "\t" + participant.TotalPoints);
-                i++;
+                Console.WriteLine(++i + ". " + participant.GetDiverName() + "\t" + participant.TotalPoints);
             }
-            /*int numberOfParticipants = 0;
-            double previousMaximumPoints = 1000.0;
-            string previousMaximumName = "";
-            double nextMaximumPoints = -1.0;
-            string nextMaximumName = "";
-            while (numberOfParticipants < participantsList.Count)
-            {
-                foreach(Participant participant in participantsList)
-                {
-                    if ((participant.TotalPoints > nextMaximumPoints) && (participant.TotalPoints < previousMaximumPoints))
-                    {
-                            nextMaximumPoints = participant.TotalPoints;
-                            nextMaximumName = participant.GetDiverName();
-                    }
-                }
-                previousMaximumPoints = nextMaximumPoints;
-                previousMaximumName = nextMaximumName;
-                Console.WriteLine((numberOfParticipants + 1) + "\t" + nextMaximumName + "\t" + nextMaximumPoints);
-                nextMaximumPoints = -1.0;
-                numberOfParticipants++;
-            }*/
         }
         #endregion
 

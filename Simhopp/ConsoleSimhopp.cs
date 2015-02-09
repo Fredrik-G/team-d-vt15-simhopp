@@ -81,18 +81,25 @@ namespace Simhopp
                         Console.ReadKey();
                         break;
                     case "5":
-                        contest.AddJudge(GetJudgeByName("Tami Bennett"));
-                        contest.AddJudge(GetJudgeByName("Curtis Cain"));
-                        contest.AddJudge(GetJudgeByName("Jessie Banks"));
-                        contest.AddJudge(GetJudgeByName("Gregg Goodwin"));
-                        contest.AddJudge(GetJudgeByName("Ricky Powell"));
+                        try
+                        {
+                            contest.AddJudge(GetJudgeByName("Tami Bennett"));
+                            contest.AddJudge(GetJudgeByName("Curtis Cain"));
+                            contest.AddJudge(GetJudgeByName("Jessie Banks"));
+                            contest.AddJudge(GetJudgeByName("Gregg Goodwin"));
+                            contest.AddJudge(GetJudgeByName("Ricky Powell"));
 
-                        contest.AddParticipant(GetDiverByName("Tami Bennett"));
-                        contest.AddParticipant(GetDiverByName("Curtis Cain"));
-                        contest.AddParticipant(GetDiverByName("Gregg Goodwin"));
-                        contest.AddParticipant(GetDiverByName("Ricky Powell"));
+                            contest.AddParticipant(GetDiverByName("Tami Bennett"));
+                            contest.AddParticipant(GetDiverByName("Curtis Cain"));
+                            contest.AddParticipant(GetDiverByName("Gregg Goodwin"));
+                            contest.AddParticipant(GetDiverByName("Ricky Powell"));
 
-                        contest.SimulateContest();
+                            contest.SimulateContest();
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
                         break;
                     case "6":
                         PrintJudges();
