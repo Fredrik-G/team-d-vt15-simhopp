@@ -101,6 +101,11 @@ namespace Simhopp
             return diver.SSN;
         }
 
+        public string GetDiverName()
+        {
+            return diver.Name;
+        }
+
         /// <summary>
         /// Function that adds a diver object
         /// </summary>
