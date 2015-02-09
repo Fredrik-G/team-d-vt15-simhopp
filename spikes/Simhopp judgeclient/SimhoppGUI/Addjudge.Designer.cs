@@ -37,7 +37,7 @@
             this.AddJudgeNationaltyTb = new System.Windows.Forms.TextBox();
             this.AddJudgeSSNTb = new System.Windows.Forms.TextBox();
             this.AddJudgeButton = new System.Windows.Forms.Button();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.listViewJudge = new System.Windows.Forms.ListView();
             this.SSN = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.NameJudge = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Nationality = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -56,7 +56,7 @@
             // 
             this.AddJudgeLabel.AutoSize = true;
             this.AddJudgeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AddJudgeLabel.Location = new System.Drawing.Point(117, 39);
+            this.AddJudgeLabel.Location = new System.Drawing.Point(82, 28);
             this.AddJudgeLabel.Name = "AddJudgeLabel";
             this.AddJudgeLabel.Size = new System.Drawing.Size(81, 20);
             this.AddJudgeLabel.TabIndex = 0;
@@ -66,7 +66,7 @@
             // 
             this.AddJudgeNameLabel.AutoSize = true;
             this.AddJudgeNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AddJudgeNameLabel.Location = new System.Drawing.Point(40, 99);
+            this.AddJudgeNameLabel.Location = new System.Drawing.Point(19, 82);
             this.AddJudgeNameLabel.Name = "AddJudgeNameLabel";
             this.AddJudgeNameLabel.Size = new System.Drawing.Size(39, 13);
             this.AddJudgeNameLabel.TabIndex = 2;
@@ -76,7 +76,7 @@
             // 
             this.AddJudgeSSNLabel.AutoSize = true;
             this.AddJudgeSSNLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AddJudgeSSNLabel.Location = new System.Drawing.Point(40, 169);
+            this.AddJudgeSSNLabel.Location = new System.Drawing.Point(19, 168);
             this.AddJudgeSSNLabel.Name = "AddJudgeSSNLabel";
             this.AddJudgeSSNLabel.Size = new System.Drawing.Size(32, 13);
             this.AddJudgeSSNLabel.TabIndex = 3;
@@ -86,7 +86,7 @@
             // 
             this.AddJudgeNationalityLabel.AutoSize = true;
             this.AddJudgeNationalityLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AddJudgeNationalityLabel.Location = new System.Drawing.Point(40, 134);
+            this.AddJudgeNationalityLabel.Location = new System.Drawing.Point(19, 125);
             this.AddJudgeNationalityLabel.Name = "AddJudgeNationalityLabel";
             this.AddJudgeNationalityLabel.Size = new System.Drawing.Size(67, 13);
             this.AddJudgeNationalityLabel.TabIndex = 4;
@@ -94,51 +94,51 @@
             // 
             // AddJudgeNameTb
             // 
-            this.AddJudgeNameTb.Location = new System.Drawing.Point(121, 99);
+            this.AddJudgeNameTb.Location = new System.Drawing.Point(111, 82);
             this.AddJudgeNameTb.Name = "AddJudgeNameTb";
             this.AddJudgeNameTb.Size = new System.Drawing.Size(148, 20);
             this.AddJudgeNameTb.TabIndex = 6;
             // 
             // AddJudgeNationaltyTb
             // 
-            this.AddJudgeNationaltyTb.Location = new System.Drawing.Point(121, 134);
+            this.AddJudgeNationaltyTb.Location = new System.Drawing.Point(111, 125);
             this.AddJudgeNationaltyTb.Name = "AddJudgeNationaltyTb";
             this.AddJudgeNationaltyTb.Size = new System.Drawing.Size(148, 20);
             this.AddJudgeNationaltyTb.TabIndex = 7;
             // 
             // AddJudgeSSNTb
             // 
-            this.AddJudgeSSNTb.Location = new System.Drawing.Point(121, 169);
+            this.AddJudgeSSNTb.Location = new System.Drawing.Point(111, 168);
             this.AddJudgeSSNTb.Name = "AddJudgeSSNTb";
             this.AddJudgeSSNTb.Size = new System.Drawing.Size(148, 20);
             this.AddJudgeSSNTb.TabIndex = 8;
             // 
             // AddJudgeButton
             // 
-            this.AddJudgeButton.Location = new System.Drawing.Point(194, 222);
+            this.AddJudgeButton.Location = new System.Drawing.Point(328, 208);
             this.AddJudgeButton.Name = "AddJudgeButton";
             this.AddJudgeButton.Size = new System.Drawing.Size(75, 23);
             this.AddJudgeButton.TabIndex = 9;
             this.AddJudgeButton.Text = "Add";
             this.AddJudgeButton.UseVisualStyleBackColor = true;
             // 
-            // listView1
+            // listViewJudge
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.listViewJudge.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.SSN,
             this.NameJudge,
             this.Nationality});
             listViewGroup1.Header = "ListViewGroup";
             listViewGroup1.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center;
             listViewGroup1.Name = "listViewGroup1";
-            this.listView1.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
+            this.listViewJudge.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
             listViewGroup1});
-            this.listView1.Location = new System.Drawing.Point(86, 315);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(615, 202);
-            this.listView1.TabIndex = 10;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.listViewJudge.Location = new System.Drawing.Point(86, 315);
+            this.listViewJudge.Name = "listViewJudge";
+            this.listViewJudge.Size = new System.Drawing.Size(615, 202);
+            this.listViewJudge.TabIndex = 10;
+            this.listViewJudge.UseCompatibleStateImageBehavior = false;
+            this.listViewJudge.View = System.Windows.Forms.View.Details;
             // 
             // SSN
             // 
@@ -238,25 +238,25 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(755, 609);
+            this.ClientSize = new System.Drawing.Size(773, 609);
+            this.Controls.Add(this.AddJudgeNameLabel);
+            this.Controls.Add(this.AddJudgeSSNLabel);
+            this.Controls.Add(this.AddJudgeLabel);
+            this.Controls.Add(this.AddJudgeNationalityLabel);
             this.Controls.Add(this.AddJudgeBtnOk);
+            this.Controls.Add(this.AddJudgeNameTb);
             this.Controls.Add(this.UpdateJudgeButton);
+            this.Controls.Add(this.AddJudgeNationaltyTb);
             this.Controls.Add(this.UpdateJudgeSSNTb);
+            this.Controls.Add(this.AddJudgeSSNTb);
+            this.Controls.Add(this.AddJudgeButton);
             this.Controls.Add(this.UpdateJudgeNationalityTb);
             this.Controls.Add(this.UpdateJudgeNameTb);
             this.Controls.Add(this.EditJudgeNationalityLabel);
             this.Controls.Add(this.EditJudgeSSNLabel);
             this.Controls.Add(this.EditJudgeNameLabel);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.listView1);
-            this.Controls.Add(this.AddJudgeButton);
-            this.Controls.Add(this.AddJudgeSSNTb);
-            this.Controls.Add(this.AddJudgeNationaltyTb);
-            this.Controls.Add(this.AddJudgeNameTb);
-            this.Controls.Add(this.AddJudgeNationalityLabel);
-            this.Controls.Add(this.AddJudgeSSNLabel);
-            this.Controls.Add(this.AddJudgeNameLabel);
-            this.Controls.Add(this.AddJudgeLabel);
+            this.Controls.Add(this.listViewJudge);
             this.Name = "Addjudge";
             this.Text = "Addjudge";
             this.ResumeLayout(false);
@@ -274,7 +274,7 @@
         private System.Windows.Forms.TextBox AddJudgeNationaltyTb;
         private System.Windows.Forms.TextBox AddJudgeSSNTb;
         private System.Windows.Forms.Button AddJudgeButton;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView listViewJudge;
         private System.Windows.Forms.ColumnHeader SSN;
         private System.Windows.Forms.ColumnHeader NameJudge;
         private System.Windows.Forms.ColumnHeader Nationality;
