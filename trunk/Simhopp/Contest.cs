@@ -22,6 +22,7 @@ namespace Simhopp
         private TrickList trickList = new TrickList();
         private List<Judge> judgeList = new List<Judge>();
         public List<Participant> participantsList = new List<Participant>();
+        private List<Participant> liveResultList;
         //!!!!!!!!!
         #endregion
 
@@ -202,9 +203,22 @@ namespace Simhopp
             participantsList.Sort((x, y) => x.TotalPoints.CompareTo(y.TotalPoints));
         }
 
+        public void SortLiveResultList()
+        {
+            liveResultList.Sort((x, y) => y.TotalPoints.CompareTo(x.TotalPoints));
+        }
+
         public void PrintLiveResults()
         {
-            int numberOfParticipants = 0;
+            int i = 1;
+            liveResultList = new List<Participant>(participantsList);
+            SortLiveResultList();
+            foreach (Participant participant in liveResultList)
+            {
+                Console.WriteLine(i + ". " + participant.GetDiverName() + "\t" + participant.TotalPoints);
+                i++;
+            }
+            /*int numberOfParticipants = 0;
             double previousMaximumPoints = 1000.0;
             string previousMaximumName = "";
             double nextMaximumPoints = -1.0;
@@ -213,7 +227,7 @@ namespace Simhopp
             {
                 foreach(Participant participant in participantsList)
                 {
-                    if (participant.TotalPoints > nextMaximumPoints && participant.TotalPoints < previousMaximumPoints)
+                    if ((participant.TotalPoints > nextMaximumPoints) && (participant.TotalPoints < previousMaximumPoints))
                     {
                             nextMaximumPoints = participant.TotalPoints;
                             nextMaximumName = participant.GetDiverName();
@@ -224,7 +238,7 @@ namespace Simhopp
                 Console.WriteLine((numberOfParticipants + 1) + "\t" + nextMaximumName + "\t" + nextMaximumPoints);
                 nextMaximumPoints = -1.0;
                 numberOfParticipants++;
-            }
+            }*/
         }
         #endregion
 
