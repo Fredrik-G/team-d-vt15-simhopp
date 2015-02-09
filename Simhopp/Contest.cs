@@ -177,8 +177,8 @@ namespace Simhopp
                 {
                     participant.SetJudgePoint(jumpNo, i, random.Next(0, 11));
                     participant.CalculatePoints();
-                    //PrintLiveResults();
-                    //Console.ReadKey();
+                    PrintLiveResults();
+                    Console.ReadKey();
                 }
                 participant.UpdateTotalPoints(trickList.GetDifficultyByName("Forward Double Somersault"));
             }
@@ -202,27 +202,7 @@ namespace Simhopp
 
         public void PrintLiveResults()
         {
-            int numberOfParticipants = participantsList.Count;
-            int numberOfPritedEntries = 0;
-            double previousMaximumPoints = 1000.0;
-            double nextMaximumPoints = -1.0;
-            string nextMaximumName = "";
-            string nextMaximumNationality = "";
-            while (numberOfPritedEntries < numberOfParticipants)
-            {
-                foreach (Participant participant in participantsList)
-                {
-                    if ((participant.TotalPoints >= nextMaximumPoints) && (participant.TotalPoints < previousMaximumPoints))
-                    {
-                        nextMaximumPoints = participant.TotalPoints;
-                        nextMaximumName = participant.GetDiverName();
-                        nextMaximumNationality = participant.GetDiverNationality();
-                        previousMaximumPoints = participant.TotalPoints;
-                    }
-                Console.WriteLine(nextMaximumNationality + "\t" + nextMaximumName + "\t" + nextMaximumPoints);
-                }
-                numberOfPritedEntries++;
-            }
+
         }
         #endregion
 
