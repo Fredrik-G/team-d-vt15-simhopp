@@ -37,6 +37,12 @@ namespace SimhoppGUI
 
         }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Addjudge add = new Addjudge();
+            add.Show();
+        }
+
   
     }
 }

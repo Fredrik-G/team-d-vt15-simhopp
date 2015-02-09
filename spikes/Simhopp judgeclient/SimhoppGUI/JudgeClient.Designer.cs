@@ -35,6 +35,7 @@
             this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
@@ -48,7 +49,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -105,6 +106,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.pictureBox2);
             this.panel1.Controls.Add(this.numericUpDown1);
@@ -124,6 +126,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(575, 558);
             this.panel1.TabIndex = 13;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(389, 163);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(130, 23);
+            this.button2.TabIndex = 30;
+            this.button2.Text = "View new contest";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
             // 
             // pictureBox2
             // 
@@ -243,15 +255,15 @@
             this.label1.TabIndex = 17;
             this.label1.Text = "Judge name";
             // 
-            // button2
+            // button3
             // 
-            this.button2.Location = new System.Drawing.Point(389, 163);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 30;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            this.button3.Location = new System.Drawing.Point(389, 217);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(130, 23);
+            this.button3.TabIndex = 31;
+            this.button3.Text = "View add judge";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // JudgeClient
             // 
@@ -298,6 +310,7 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }
 
