@@ -78,6 +78,8 @@ namespace Simhopp
             }
         }
 
+
+
         /// <summary>
         /// Property for TotalPoints
         /// </summary>
@@ -104,6 +106,11 @@ namespace Simhopp
         public string GetDiverName()
         {
             return diver.Name;
+        }
+
+        public string GetDiverNationality()
+        {
+            return diver.Nationality;
         }
 
         /// <summary>
