@@ -49,6 +49,7 @@
             this.EditJudgeSSNLabel = new System.Windows.Forms.Label();
             this.EditJudgeNameLabel = new System.Windows.Forms.Label();
             this.UpdateJudgeButton = new System.Windows.Forms.Button();
+            this.AddJudgeBtnOk = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // AddJudgeLabel
@@ -134,7 +135,7 @@
             listViewGroup1});
             this.listView1.Location = new System.Drawing.Point(86, 315);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(615, 241);
+            this.listView1.Size = new System.Drawing.Size(615, 202);
             this.listView1.TabIndex = 10;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -224,11 +225,21 @@
             this.UpdateJudgeButton.Text = "Update";
             this.UpdateJudgeButton.UseVisualStyleBackColor = true;
             // 
+            // AddJudgeBtnOk
+            // 
+            this.AddJudgeBtnOk.Location = new System.Drawing.Point(328, 541);
+            this.AddJudgeBtnOk.Name = "AddJudgeBtnOk";
+            this.AddJudgeBtnOk.Size = new System.Drawing.Size(125, 46);
+            this.AddJudgeBtnOk.TabIndex = 19;
+            this.AddJudgeBtnOk.Text = "Save";
+            this.AddJudgeBtnOk.UseVisualStyleBackColor = true;
+            // 
             // Addjudge
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(755, 609);
+            this.Controls.Add(this.AddJudgeBtnOk);
             this.Controls.Add(this.UpdateJudgeButton);
             this.Controls.Add(this.UpdateJudgeSSNTb);
             this.Controls.Add(this.UpdateJudgeNationalityTb);
@@ -275,5 +286,6 @@
         private System.Windows.Forms.Label EditJudgeSSNLabel;
         private System.Windows.Forms.Label EditJudgeNameLabel;
         private System.Windows.Forms.Button UpdateJudgeButton;
+        private System.Windows.Forms.Button AddJudgeBtnOk;
     }
 }
