@@ -16,5 +16,10 @@ namespace SimhoppGUI
         {
             InitializeComponent();
         }
+
+        private void LoginScreenCancelBtn_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

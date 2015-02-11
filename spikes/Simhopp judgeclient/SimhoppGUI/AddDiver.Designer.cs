@@ -50,13 +50,14 @@
             this.AddDiverSSNLabel = new System.Windows.Forms.Label();
             this.AddDiverNameLabel = new System.Windows.Forms.Label();
             this.AddJudgeLabel = new System.Windows.Forms.Label();
+            this.AddDiverCloseBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // AddDiverBtnOk
             // 
-            this.AddDiverBtnOk.Location = new System.Drawing.Point(383, 534);
+            this.AddDiverBtnOk.Location = new System.Drawing.Point(681, 545);
             this.AddDiverBtnOk.Name = "AddDiverBtnOk";
-            this.AddDiverBtnOk.Size = new System.Drawing.Size(125, 46);
+            this.AddDiverBtnOk.Size = new System.Drawing.Size(75, 23);
             this.AddDiverBtnOk.TabIndex = 37;
             this.AddDiverBtnOk.Text = "Save";
             this.AddDiverBtnOk.UseVisualStyleBackColor = true;
@@ -234,11 +235,22 @@
             this.AddJudgeLabel.TabIndex = 20;
             this.AddJudgeLabel.Text = "Add diver";
             // 
+            // AddDiverCloseBtn
+            // 
+            this.AddDiverCloseBtn.Location = new System.Drawing.Point(570, 545);
+            this.AddDiverCloseBtn.Name = "AddDiverCloseBtn";
+            this.AddDiverCloseBtn.Size = new System.Drawing.Size(75, 23);
+            this.AddDiverCloseBtn.TabIndex = 38;
+            this.AddDiverCloseBtn.Text = "Close";
+            this.AddDiverCloseBtn.UseVisualStyleBackColor = true;
+            this.AddDiverCloseBtn.Click += new System.EventHandler(this.AddDiverCloseBtn_Click);
+            // 
             // AddDiver
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(850, 613);
+            this.Controls.Add(this.AddDiverCloseBtn);
             this.Controls.Add(this.AddDiverBtnOk);
             this.Controls.Add(this.UpdateDiverButton);
             this.Controls.Add(this.UpdateDiverSSNTb);
@@ -287,5 +299,6 @@
         private System.Windows.Forms.Label AddDiverSSNLabel;
         private System.Windows.Forms.Label AddDiverNameLabel;
         private System.Windows.Forms.Label AddJudgeLabel;
+        private System.Windows.Forms.Button AddDiverCloseBtn;
     }
 }

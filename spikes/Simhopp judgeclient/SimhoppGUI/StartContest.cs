@@ -10,14 +10,14 @@ using System.Windows.Forms;
 
 namespace SimhoppGUI
 {
-    public partial class AddDiver : Form
+    public partial class StartContest : Form
     {
-        public AddDiver()
+        public StartContest()
         {
             InitializeComponent();
         }
 
-        private void AddDiverCloseBtn_Click(object sender, EventArgs e)
+        private void StartContestCloseBtn_Click(object sender, EventArgs e)
         {
             Close();
         }

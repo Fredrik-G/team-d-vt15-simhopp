@@ -16,7 +16,7 @@ namespace SimhoppGUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new JudgeClient());
+            Application.Run(new StartScreen());
         }
     }
 }

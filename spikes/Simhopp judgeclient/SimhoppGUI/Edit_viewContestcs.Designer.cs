@@ -49,6 +49,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.EditViewContestCloseBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listViewEditViewContest
@@ -147,7 +148,7 @@
             // 
             // EditViewContestEditChangesBtn
             // 
-            this.EditViewContestEditChangesBtn.Location = new System.Drawing.Point(636, 511);
+            this.EditViewContestEditChangesBtn.Location = new System.Drawing.Point(636, 510);
             this.EditViewContestEditChangesBtn.Name = "EditViewContestEditChangesBtn";
             this.EditViewContestEditChangesBtn.Size = new System.Drawing.Size(113, 27);
             this.EditViewContestEditChangesBtn.TabIndex = 9;
@@ -218,11 +219,22 @@
             this.label4.TabIndex = 10;
             this.label4.Text = "Edit Contest Name";
             // 
+            // EditViewContestCloseBtn
+            // 
+            this.EditViewContestCloseBtn.Location = new System.Drawing.Point(225, 510);
+            this.EditViewContestCloseBtn.Name = "EditViewContestCloseBtn";
+            this.EditViewContestCloseBtn.Size = new System.Drawing.Size(113, 27);
+            this.EditViewContestCloseBtn.TabIndex = 18;
+            this.EditViewContestCloseBtn.Text = "Close";
+            this.EditViewContestCloseBtn.UseVisualStyleBackColor = true;
+            this.EditViewContestCloseBtn.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Edit_viewContestcs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(829, 589);
+            this.Controls.Add(this.EditViewContestCloseBtn);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.dateTimePicker2);
             this.Controls.Add(this.label1);
@@ -241,7 +253,7 @@
             this.Controls.Add(this.PlaceContestLabel);
             this.Controls.Add(this.NameContestLabel);
             this.Controls.Add(this.listViewEditViewContest);
-            this.Name = "Edit_viewContestcs";
+            //this.Name = "Edit_viewContestcs";
             this.Text = "Edit_viewContestcs";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -271,5 +283,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button EditViewContestCloseBtn;
     }
 }

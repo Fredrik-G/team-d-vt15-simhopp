@@ -17,6 +17,11 @@ namespace SimhoppGUI
             InitializeComponent();
         }
 
+        private void NewContestPreviousBtn_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
    
     }
 }

@@ -50,6 +50,7 @@
             this.EditJudgeNameLabel = new System.Windows.Forms.Label();
             this.UpdateJudgeButton = new System.Windows.Forms.Button();
             this.AddJudgeBtnOk = new System.Windows.Forms.Button();
+            this.AddJudgeCloseBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // AddJudgeLabel
@@ -227,18 +228,29 @@
             // 
             // AddJudgeBtnOk
             // 
-            this.AddJudgeBtnOk.Location = new System.Drawing.Point(328, 541);
+            this.AddJudgeBtnOk.Location = new System.Drawing.Point(626, 552);
             this.AddJudgeBtnOk.Name = "AddJudgeBtnOk";
-            this.AddJudgeBtnOk.Size = new System.Drawing.Size(125, 46);
+            this.AddJudgeBtnOk.Size = new System.Drawing.Size(75, 23);
             this.AddJudgeBtnOk.TabIndex = 19;
             this.AddJudgeBtnOk.Text = "Save";
             this.AddJudgeBtnOk.UseVisualStyleBackColor = true;
+            // 
+            // AddJudgeCloseBtn
+            // 
+            this.AddJudgeCloseBtn.Location = new System.Drawing.Point(521, 552);
+            this.AddJudgeCloseBtn.Name = "AddJudgeCloseBtn";
+            this.AddJudgeCloseBtn.Size = new System.Drawing.Size(75, 23);
+            this.AddJudgeCloseBtn.TabIndex = 20;
+            this.AddJudgeCloseBtn.Text = "Close";
+            this.AddJudgeCloseBtn.UseVisualStyleBackColor = true;
+            this.AddJudgeCloseBtn.Click += new System.EventHandler(this.AddJudgePreviousBtn_Click);
             // 
             // Addjudge
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(773, 609);
+            this.Controls.Add(this.AddJudgeCloseBtn);
             this.Controls.Add(this.AddJudgeNameLabel);
             this.Controls.Add(this.AddJudgeSSNLabel);
             this.Controls.Add(this.AddJudgeLabel);
@@ -287,5 +299,6 @@
         private System.Windows.Forms.Label EditJudgeNameLabel;
         private System.Windows.Forms.Button UpdateJudgeButton;
         private System.Windows.Forms.Button AddJudgeBtnOk;
+        private System.Windows.Forms.Button AddJudgeCloseBtn;
     }
 }
