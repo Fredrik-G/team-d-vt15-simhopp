@@ -60,16 +60,12 @@ namespace Simhopp
 
         #region Methods
         /// <summary>
-        /// Print a divers name and nationality in the console.
+        /// Gets divers information.
         /// </summary>
-        public void PrintDiver()
+        /// <returns>Returns diver name, nationality and totalpoints as string.</returns>
+        public string GetDiverInfo()
         {
-            Console.Write(diver.Name + "\t" + diver.Nationality);
-        }
-
-        public string PrintHtml()
-        {
-            return diver.Name + "\t" + diver.Nationality;
+            return diver.Name + "\t" + diver.Nationality +  "\t" + TotalPoints;
         }
         public void CalculatePoints()
         {
