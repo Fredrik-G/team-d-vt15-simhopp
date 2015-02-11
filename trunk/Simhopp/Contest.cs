@@ -99,6 +99,11 @@ namespace Simhopp
         {
             return judgeList.Find(x => x.SSN == judge.SSN) != null;
         }
+
+        /// <summary>
+        /// Adds a participant to the participantsList. Catches exeptions if there should be something wrong with the participant that should be added. 
+        /// </summary>
+        /// <param name="diver"></param>
         public void AddParticipant(Diver diver)
         {
             try
