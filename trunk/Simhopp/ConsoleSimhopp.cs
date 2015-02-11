@@ -113,12 +113,12 @@ namespace Simhopp
                         Console.ReadKey();
                         break;
                     case "8":
-                        contest.SortParticipants(contest.participantsList, true);
+                        contest.SortParticipants(ref contest.participantsList, true);
                         contest.PrintResult();
                         Console.ReadKey();
                         break;
                     case "9":
-                        contest.CreateHtml();
+                        contest.CreateHtmlResultFile();
                         Console.ReadKey();
                         break;
                     case "99":

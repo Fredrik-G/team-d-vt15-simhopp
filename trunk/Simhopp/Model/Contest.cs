@@ -23,8 +23,9 @@ namespace Simhopp
         private TrickList trickList = new TrickList();
         private List<Judge> judgeList = new List<Judge>();
         public List<Participant> participantsList = new List<Participant>();
-        private List<Participant> liveResultList;
         //!!!!!!!!!
+        private List<Participant> liveResultList;
+
         #endregion
 
         #region Constructor
@@ -206,7 +207,7 @@ namespace Simhopp
             for (int jumpNo = 0; jumpNo < 3; jumpNo++)
             {
                 MakeJump(jumpNo);
-                SortParticipants(participantsList, true);
+                SortParticipants(ref participantsList, true);
             }
         }
 
@@ -237,50 +238,53 @@ namespace Simhopp
         /// </summary>
         public void PrintResult()
         {
-            for (var i = participantsList.Count -1; i >= 0; i--)
+            foreach (var participant in participantsList)
             {
-                participantsList[i].PrintDiver();
-                Console.WriteLine("\t" + participantsList[i].TotalPoints);
+                Console.WriteLine(participant.GetDiverInfo());
             }
         }
-        public List<string> PrintHtml()
+
+        /// <summary>
+        /// Creates a list with the current result (including name,nationality and points).
+        /// </summary>
+        /// <returns>Returns list of current result</returns>
+        public List<string> CreateResultList()
         {
             var resultList = new List<string>();
             for (var i = participantsList.Count - 1; i >= 0; i--)
-            {
-                var s = "";
-                s += participantsList[i].PrintHtml();
-                s += "\t" + participantsList[i].TotalPoints;
-                resultList.Add(s);
+            {               
+                resultList.Add(participantsList[i].GetDiverInfo());
             }
             return resultList;
         }
-
-        public void CreateHtml()
+        /// <summary>
+        /// Creates a HTML file with the contests result.
+        /// </summary>
+        public void CreateHtmlResultFile()
         {
-            using (FileStream fs = new FileStream("test.htm", FileMode.Create))
+            using (var fs = new FileStream("result.htm", FileMode.Create))
             {
-                using (StreamWriter w = new StreamWriter(fs, Encoding.UTF8))
+                using (var writer = new StreamWriter(fs, Encoding.UTF8))
                 {
-                    w.WriteLine("<H2>" + this.Name + "\t" + this.Place + "</H2>");
-                    w.WriteLine("<ol>");                
-                    var resultList = PrintHtml();
+                    writer.WriteLine("<H2>" + this.Name + "\t" + this.Place + "</H2>");
+                    writer.WriteLine("<ol>");
+                    var resultList = CreateResultList();
                     foreach (var line in resultList)
                     {
-                        w.WriteLine("<li>" + line + "</li>");
+                        writer.WriteLine("<li>" + line + "</li>");
                     }
-                    w.WriteLine("</ol>");
+                    writer.WriteLine("</ol>");
                 }
             }
         }
         /// <summary>
-        /// Sort participantslist by lowest totalpoints.
-        /// <param name="list"></param>
-        /// <param name="ascendingOrder">High to low</param>
+        /// Sort participantslist by totalpoints in ascending/descending order.
+        /// <param name="list">List to sort</param>
+        /// <param name="highestToLowest">Sort totalpoints highest to lowest</param>
         /// </summary>
-        public void SortParticipants(List<Participant> list, bool ascendingOrder)
-        {
-            if (ascendingOrder)
+        public void SortParticipants(ref List<Participant> list, bool highestToLowest)
+        {                           //referens?
+            if (!highestToLowest)
             {
                 list.Sort((x, y) => x.TotalPoints.CompareTo(y.TotalPoints));
             }
@@ -300,7 +304,7 @@ namespace Simhopp
             Console.WriteLine("Round: " + (jumpNo + 1));
             int i = 1;
             liveResultList = new List<Participant>(participantsList);
-            SortParticipants(liveResultList, false);
+            SortParticipants(ref liveResultList, true);
             foreach (var participant in liveResultList)
             {
                 Console.WriteLine("{0,-3}{1,-15}{2,-10}", (i++ + "."), participant.GetDiverName(), participant.TotalPoints);
