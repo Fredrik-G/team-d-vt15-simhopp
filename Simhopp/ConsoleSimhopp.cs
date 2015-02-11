@@ -83,6 +83,9 @@ namespace Simhopp
                     case "5":
                         try
                         {
+                            contest.Name = "Simhoppstävlingen of doom";
+                            contest.Place = "Örebro";
+                           
                             contest.AddJudge(GetJudgeByName("Tami Bennett"));
                             contest.AddJudge(GetJudgeByName("Curtis Cain"));
                             contest.AddJudge(GetJudgeByName("Jessie Banks"));
@@ -110,9 +113,12 @@ namespace Simhopp
                         Console.ReadKey();
                         break;
                     case "8":
-
-                        contest.SortParticipants();
+                        contest.SortParticipants(contest.participantsList, true);
                         contest.PrintResult();
+                        Console.ReadKey();
+                        break;
+                    case "9":
+                        contest.CreateHtml();
                         Console.ReadKey();
                         break;
                     case "99":

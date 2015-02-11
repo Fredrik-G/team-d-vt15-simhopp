@@ -66,6 +66,11 @@ namespace Simhopp
         {
             Console.Write(diver.Name + "\t" + diver.Nationality);
         }
+
+        public string PrintHtml()
+        {
+            return diver.Name + "\t" + diver.Nationality;
+        }
         public void CalculatePoints()
         {
             foreach (var jumpResult in jumpResults)
