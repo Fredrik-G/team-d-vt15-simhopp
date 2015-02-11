@@ -56,6 +56,12 @@
     <Compile Include="Addjudge.Designer.cs">
       <DependentUpon>Addjudge.cs</DependentUpon>
     </Compile>
+    <Compile Include="Edit_viewContestcs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Edit_viewContestcs.Designer.cs">
+      <DependentUpon>Edit_viewContestcs.cs</DependentUpon>
+    </Compile>
     <Compile Include="JudgeClient.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,6 +93,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Addjudge.resx">
       <DependentUpon>Addjudge.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Edit_viewContestcs.resx">
+      <DependentUpon>Edit_viewContestcs.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="JudgeClient.resx">
       <DependentUpon>JudgeClient.cs</DependentUpon>
