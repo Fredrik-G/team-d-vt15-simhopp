@@ -206,7 +206,7 @@ namespace Simhopp
             for (int jumpNo = 0; jumpNo < 3; jumpNo++)
             {
                 MakeJump(jumpNo);
-                SortParticipants();
+                SortParticipants(participantsList, true);
             }
         }
 
@@ -243,19 +243,51 @@ namespace Simhopp
                 Console.WriteLine("\t" + participantsList[i].TotalPoints);
             }
         }
-        /// <summary>
-        /// Sort participantslist by lowest totalpoints.
-        /// </summary>
-        public void SortParticipants()
+        public List<string> PrintHtml()
         {
-            participantsList.Sort((x, y) => x.TotalPoints.CompareTo(y.TotalPoints));
+            var resultList = new List<string>();
+            for (var i = participantsList.Count - 1; i >= 0; i--)
+            {
+                var s = "";
+                s += participantsList[i].PrintHtml();
+                s += "\t" + participantsList[i].TotalPoints;
+                resultList.Add(s);
+            }
+            return resultList;
+        }
+
+        public void CreateHtml()
+        {
+            using (FileStream fs = new FileStream("test.htm", FileMode.Create))
+            {
+                using (StreamWriter w = new StreamWriter(fs, Encoding.UTF8))
+                {
+                    w.WriteLine("<H2>" + this.Name + "\t" + this.Place + "</H2>");
+                    w.WriteLine("<ol>");                
+                    var resultList = PrintHtml();
+                    foreach (var line in resultList)
+                    {
+                        w.WriteLine("<li>" + line + "</li>");
+                    }
+                    w.WriteLine("</ol>");
+                }
+            }
         }
         /// <summary>
-        /// Sort liveResultList by highest totalpoints.
+        /// Sort participantslist by lowest totalpoints.
+        /// <param name="list"></param>
+        /// <param name="ascendingOrder">High to low</param>
         /// </summary>
-        public void SortLiveResultList()
+        public void SortParticipants(List<Participant> list, bool ascendingOrder)
         {
-            liveResultList.Sort((x, y) => y.TotalPoints.CompareTo(x.TotalPoints));
+            if (ascendingOrder)
+            {
+                list.Sort((x, y) => x.TotalPoints.CompareTo(y.TotalPoints));
+            }
+            else
+            {
+                list.Sort((x, y) => y.TotalPoints.CompareTo(x.TotalPoints));
+            }
         }
 
         /// <summary>
@@ -268,7 +300,7 @@ namespace Simhopp
             Console.WriteLine("Round: " + (jumpNo + 1));
             int i = 1;
             liveResultList = new List<Participant>(participantsList);
-            SortLiveResultList();
+            SortParticipants(liveResultList, false);
             foreach (var participant in liveResultList)
             {
                 Console.WriteLine("{0,-3}{1,-15}{2,-10}", (i++ + "."), participant.GetDiverName(), participant.TotalPoints);
