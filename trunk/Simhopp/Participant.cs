@@ -59,6 +59,9 @@ namespace Simhopp
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Print a divers name and nationality in the console.
+        /// </summary>
         public void PrintDiver()
         {
             Console.Write(diver.Name + "\t" + diver.Nationality);
