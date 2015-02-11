@@ -41,11 +41,11 @@
             this.EditViewContestStartDateTp = new System.Windows.Forms.DateTimePicker();
             this.EditViewContestEndDateTp = new System.Windows.Forms.DateTimePicker();
             this.EditViewContestEditChangesBtn = new System.Windows.Forms.Button();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.EditViewContestEditEndtDateTp = new System.Windows.Forms.DateTimePicker();
+            this.EditViewContestEditStartDateTp = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.EditViewContestEditContestPlaceTb = new System.Windows.Forms.TextBox();
+            this.EditViewContestEditContestNameTb = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -165,21 +165,21 @@
             this.EditViewContestEditChangesBtn.UseVisualStyleBackColor = true;
             this.EditViewContestEditChangesBtn.Click += new System.EventHandler(this.EditViewContestEditChangesBtn_Click);
             // 
-            // dateTimePicker1
+            // EditViewContestEditEndtDateTp
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(549, 436);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker1.TabIndex = 17;
-            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
+            this.EditViewContestEditEndtDateTp.Location = new System.Drawing.Point(549, 436);
+            this.EditViewContestEditEndtDateTp.Name = "EditViewContestEditEndtDateTp";
+            this.EditViewContestEditEndtDateTp.Size = new System.Drawing.Size(200, 20);
+            this.EditViewContestEditEndtDateTp.TabIndex = 17;
+            this.EditViewContestEditEndtDateTp.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
-            // dateTimePicker2
+            // EditViewContestEditStartDateTp
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(549, 378);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker2.TabIndex = 16;
-            this.dateTimePicker2.ValueChanged += new System.EventHandler(this.dateTimePicker2_ValueChanged);
+            this.EditViewContestEditStartDateTp.Location = new System.Drawing.Point(549, 378);
+            this.EditViewContestEditStartDateTp.Name = "EditViewContestEditStartDateTp";
+            this.EditViewContestEditStartDateTp.Size = new System.Drawing.Size(200, 20);
+            this.EditViewContestEditStartDateTp.TabIndex = 16;
+            this.EditViewContestEditStartDateTp.ValueChanged += new System.EventHandler(this.dateTimePicker2_ValueChanged);
             // 
             // label1
             // 
@@ -191,21 +191,21 @@
             this.label1.Text = "Edi End Date";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // textBox1
+            // EditViewContestEditContestPlaceTb
             // 
-            this.textBox1.Location = new System.Drawing.Point(549, 323);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(200, 20);
-            this.textBox1.TabIndex = 14;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.EditViewContestEditContestPlaceTb.Location = new System.Drawing.Point(549, 323);
+            this.EditViewContestEditContestPlaceTb.Name = "EditViewContestEditContestPlaceTb";
+            this.EditViewContestEditContestPlaceTb.Size = new System.Drawing.Size(200, 20);
+            this.EditViewContestEditContestPlaceTb.TabIndex = 14;
+            this.EditViewContestEditContestPlaceTb.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
-            // textBox2
+            // EditViewContestEditContestNameTb
             // 
-            this.textBox2.Location = new System.Drawing.Point(549, 265);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(200, 20);
-            this.textBox2.TabIndex = 13;
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.EditViewContestEditContestNameTb.Location = new System.Drawing.Point(549, 265);
+            this.EditViewContestEditContestNameTb.Name = "EditViewContestEditContestNameTb";
+            this.EditViewContestEditContestNameTb.Size = new System.Drawing.Size(200, 20);
+            this.EditViewContestEditContestNameTb.TabIndex = 13;
+            this.EditViewContestEditContestNameTb.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // label2
             // 
@@ -253,11 +253,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(829, 589);
             this.Controls.Add(this.EditViewContestCloseBtn);
-            this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.dateTimePicker2);
+            this.Controls.Add(this.EditViewContestEditEndtDateTp);
+            this.Controls.Add(this.EditViewContestEditStartDateTp);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.EditViewContestEditContestPlaceTb);
+            this.Controls.Add(this.EditViewContestEditContestNameTb);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label4);
@@ -271,7 +271,7 @@
             this.Controls.Add(this.PlaceContestLabel);
             this.Controls.Add(this.NameContestLabel);
             this.Controls.Add(this.listViewEditViewContest);
-            //this.Name = "Edit_viewContestcs";
+           // this.Name = "Edit_viewContestcs";
             this.Text = "Edit_viewContestcs";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -293,11 +293,11 @@
         private System.Windows.Forms.DateTimePicker EditViewContestStartDateTp;
         private System.Windows.Forms.DateTimePicker EditViewContestEndDateTp;
         private System.Windows.Forms.Button EditViewContestEditChangesBtn;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker EditViewContestEditEndtDateTp;
+        private System.Windows.Forms.DateTimePicker EditViewContestEditStartDateTp;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox EditViewContestEditContestPlaceTb;
+        private System.Windows.Forms.TextBox EditViewContestEditContestNameTb;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
