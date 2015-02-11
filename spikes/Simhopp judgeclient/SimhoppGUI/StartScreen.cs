@@ -65,8 +65,7 @@ namespace SimhoppGUI
             }
 
 
-            Edit_viewContestcs editviewcontest = new Edit_viewContestcs();
-            editviewcontest.Show();
+          
         }
 
         private void StartScreenAddDiverContestBtn_Click(object sender, EventArgs e)
@@ -83,9 +82,6 @@ namespace SimhoppGUI
 
             }
 
-
-            AddDiver addDiver = new AddDiver();
-            addDiver.Show();
         }
 
         private void StartScreenAddJudgeBtn_Click(object sender, EventArgs e)
@@ -103,8 +99,7 @@ namespace SimhoppGUI
             }
 
 
-            Addjudge addJudge = new Addjudge();
-            addJudge.Show();
+        
         }
 
         private void StartScreenViewJudgeClient_Click(object sender, EventArgs e)

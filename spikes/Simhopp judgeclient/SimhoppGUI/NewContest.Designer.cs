@@ -32,10 +32,12 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.NewContestStartDateLabel = new System.Windows.Forms.Label();
+            this.NewContestStartDateDTP = new System.Windows.Forms.DateTimePicker();
             this.button1 = new System.Windows.Forms.Button();
             this.NewContestCloseBtn = new System.Windows.Forms.Button();
+            this.NewContestEndDateDTP = new System.Windows.Forms.DateTimePicker();
+            this.NewContestEndDateLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -70,28 +72,28 @@
             this.textBox2.Size = new System.Drawing.Size(100, 20);
             this.textBox2.TabIndex = 3;
             // 
-            // label3
+            // NewContestStartDateLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(31, 159);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(30, 13);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Date";
+            this.NewContestStartDateLabel.AutoSize = true;
+            this.NewContestStartDateLabel.Location = new System.Drawing.Point(31, 159);
+            this.NewContestStartDateLabel.Name = "NewContestStartDateLabel";
+            this.NewContestStartDateLabel.Size = new System.Drawing.Size(53, 13);
+            this.NewContestStartDateLabel.TabIndex = 4;
+            this.NewContestStartDateLabel.Text = "Start date";
             // 
-            // dateTimePicker1
+            // NewContestStartDateDTP
             // 
-            this.dateTimePicker1.CustomFormat = "";
-            this.dateTimePicker1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dateTimePicker1.Location = new System.Drawing.Point(112, 153);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(151, 20);
-            this.dateTimePicker1.TabIndex = 5;
-            this.dateTimePicker1.Value = new System.DateTime(2015, 2, 6, 0, 0, 0, 0);
+            this.NewContestStartDateDTP.CustomFormat = "";
+            this.NewContestStartDateDTP.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.NewContestStartDateDTP.Location = new System.Drawing.Point(112, 153);
+            this.NewContestStartDateDTP.Name = "NewContestStartDateDTP";
+            this.NewContestStartDateDTP.Size = new System.Drawing.Size(151, 20);
+            this.NewContestStartDateDTP.TabIndex = 5;
+            this.NewContestStartDateDTP.Value = new System.DateTime(2015, 2, 6, 0, 0, 0, 0);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(95, 223);
+            this.button1.Location = new System.Drawing.Point(91, 276);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(74, 23);
             this.button1.TabIndex = 6;
@@ -100,7 +102,7 @@
             // 
             // NewContestCloseBtn
             // 
-            this.NewContestCloseBtn.Location = new System.Drawing.Point(188, 223);
+            this.NewContestCloseBtn.Location = new System.Drawing.Point(188, 276);
             this.NewContestCloseBtn.Name = "NewContestCloseBtn";
             this.NewContestCloseBtn.Size = new System.Drawing.Size(75, 23);
             this.NewContestCloseBtn.TabIndex = 7;
@@ -108,15 +110,36 @@
             this.NewContestCloseBtn.UseVisualStyleBackColor = true;
             this.NewContestCloseBtn.Click += new System.EventHandler(this.NewContestPreviousBtn_Click);
             // 
+            // NewContestEndDateDTP
+            // 
+            this.NewContestEndDateDTP.CustomFormat = "";
+            this.NewContestEndDateDTP.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.NewContestEndDateDTP.Location = new System.Drawing.Point(112, 205);
+            this.NewContestEndDateDTP.Name = "NewContestEndDateDTP";
+            this.NewContestEndDateDTP.Size = new System.Drawing.Size(151, 20);
+            this.NewContestEndDateDTP.TabIndex = 9;
+            this.NewContestEndDateDTP.Value = new System.DateTime(2015, 2, 6, 0, 0, 0, 0);
+            // 
+            // NewContestEndDateLabel
+            // 
+            this.NewContestEndDateLabel.AutoSize = true;
+            this.NewContestEndDateLabel.Location = new System.Drawing.Point(31, 211);
+            this.NewContestEndDateLabel.Name = "NewContestEndDateLabel";
+            this.NewContestEndDateLabel.Size = new System.Drawing.Size(50, 13);
+            this.NewContestEndDateLabel.TabIndex = 8;
+            this.NewContestEndDateLabel.Text = "End date";
+            // 
             // NewContest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(297, 335);
+            this.ClientSize = new System.Drawing.Size(305, 397);
+            this.Controls.Add(this.NewContestEndDateDTP);
+            this.Controls.Add(this.NewContestEndDateLabel);
             this.Controls.Add(this.NewContestCloseBtn);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.NewContestStartDateDTP);
+            this.Controls.Add(this.NewContestStartDateLabel);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBox1);
@@ -134,9 +157,11 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label NewContestStartDateLabel;
         private System.Windows.Forms.Button button1;
-        public System.Windows.Forms.DateTimePicker dateTimePicker1;
+        public System.Windows.Forms.DateTimePicker NewContestStartDateDTP;
         private System.Windows.Forms.Button NewContestCloseBtn;
+        public System.Windows.Forms.DateTimePicker NewContestEndDateDTP;
+        private System.Windows.Forms.Label NewContestEndDateLabel;
     }
 }
