@@ -58,7 +58,7 @@ namespace Simhopp
             try
             {
                 trickList.Clear();
-                string[] allTricks = System.IO.File.ReadAllLines(filename);
+                string[] allTricks = System.IO.File.ReadAllLines(@"Model\Files\" + filename);
                 foreach (string line in allTricks)
                 {
                     string[] trick = line.Split(';');

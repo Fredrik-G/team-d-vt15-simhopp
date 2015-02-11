@@ -234,7 +234,7 @@ namespace Simhopp
         {
             try
             {
-                using (StreamReader reader = new StreamReader(fileName))
+                using (StreamReader reader = new StreamReader(@"Model\Files\" + fileName))
                 {
                     List<string> text = new List<string>();
                     while (!reader.EndOfStream)
