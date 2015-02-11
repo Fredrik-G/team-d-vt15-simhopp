@@ -115,7 +115,7 @@
             // 
             // AddJudgeButton
             // 
-            this.AddJudgeButton.Location = new System.Drawing.Point(328, 208);
+            this.AddJudgeButton.Location = new System.Drawing.Point(184, 222);
             this.AddJudgeButton.Name = "AddJudgeButton";
             this.AddJudgeButton.Size = new System.Drawing.Size(75, 23);
             this.AddJudgeButton.TabIndex = 9;
