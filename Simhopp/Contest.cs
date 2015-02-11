@@ -229,7 +229,7 @@ namespace Simhopp
             SortLiveResultList();
             foreach (var participant in liveResultList)
             {
-                Console.WriteLine(++i + ". " + participant.GetDiverName() + "\t" + participant.TotalPoints);
+                Console.WriteLine("{0,0}{1,-15}{2,-10}", i++ + ".", participant.GetDiverName(), participant.TotalPoints);
             }
         }
         #endregion
