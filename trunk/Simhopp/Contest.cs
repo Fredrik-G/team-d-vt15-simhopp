@@ -101,9 +101,35 @@ namespace Simhopp
         }
         public void AddParticipant(Diver diver)
         {
-            participantsList.Add(new Participant(diver));
-        }
+            try
+            {
+                if (diver == null)
+                {
+                    throw new NullReferenceException("diver is null");
+                }
+                else if (!Person.CheckCorrectName(diver.Name))
+                {
+                    throw new InvalidDataException("diver name is not set or invalid.");
+                }
+                else if (!Person.CheckCorrectNationality(diver.Nationality))
+                {
+                    throw new InvalidDataException("diver nationality is not set or invalid.");
+                }
+                else if (!Person.CheckCorrectSSN(diver.SSN, diver.Nationality))
+                {
+                    throw new InvalidDataException("diver social security number is not set or invalid.");
+                }
 
+                else
+                {
+                    participantsList.Add(new Participant(diver));
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
         public void AddJudge(Judge judge)
         {
             try
@@ -124,10 +150,10 @@ namespace Simhopp
                 {
                     throw new InvalidDataException("Judge social security number is not set or invalid.");
                 }
-                else if (judgeList.Find(x => x.SSN == judge.SSN) != null)
+                else if (IsJudgeInContest(judge))
                 {
                     throw new DuplicateNameException("Judge is already in list.");
-                }
+                }               
                 else if (judgeList.Count >= 7)
                 {
                     throw new IndexOutOfRangeException("All 7 judges are already set in the list.");
