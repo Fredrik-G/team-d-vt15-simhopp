@@ -13,7 +13,9 @@ namespace SimhoppGUI
     public partial class AddDiver : Form
     {
         public AddDiver()
+
         {
+            this.FormBorderStyle = FormBorderStyle.FixedSingle; 
             InitializeComponent();
         }
 

@@ -14,6 +14,7 @@ namespace SimhoppGUI
     {
         public Addjudge()
         {
+            this.FormBorderStyle = FormBorderStyle.FixedSingle; 
             InitializeComponent();
         }
 

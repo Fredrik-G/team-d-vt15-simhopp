@@ -14,6 +14,7 @@ namespace SimhoppGUI
     {
         public Login()
         {
+            this.FormBorderStyle = FormBorderStyle.FixedSingle; 
             InitializeComponent();
         }
 

@@ -14,6 +14,7 @@ namespace SimhoppGUI
     {
         public NewContest()
         {
+            this.FormBorderStyle = FormBorderStyle.FixedSingle; 
             InitializeComponent();
         }
 

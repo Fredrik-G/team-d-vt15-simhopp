@@ -75,7 +75,7 @@
             // connectToolStripMenuItem1
             // 
             this.connectToolStripMenuItem1.Name = "connectToolStripMenuItem1";
-            this.connectToolStripMenuItem1.Size = new System.Drawing.Size(119, 22);
+            this.connectToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.connectToolStripMenuItem1.Text = "Connect";
             this.connectToolStripMenuItem1.Click += new System.EventHandler(this.connectToolStripMenuItem1_Click);
             // 
