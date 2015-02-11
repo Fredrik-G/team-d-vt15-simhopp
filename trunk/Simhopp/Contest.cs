@@ -192,10 +192,7 @@ namespace Simhopp
                     participant.CalculatePoints();
                 }
                 participant.UpdateTotalPoints(trickList.GetDifficultyByName("Forward Double Somersault"));
-                Console.Clear();
-                Console.WriteLine("Round: " + (jumpNo + 1));
-                PrintLiveResults();
-                Console.ReadKey();
+                PrintLiveResults(jumpNo);
             }
         }
 
@@ -222,15 +219,18 @@ namespace Simhopp
             liveResultList.Sort((x, y) => y.TotalPoints.CompareTo(x.TotalPoints));
         }
 
-        public void PrintLiveResults()
+        public void PrintLiveResults(int jumpNo)
         {
+            Console.Clear();
+            Console.WriteLine("Round: " + (jumpNo + 1));
             int i = 1;
             liveResultList = new List<Participant>(participantsList);
             SortLiveResultList();
             foreach (var participant in liveResultList)
             {
-                Console.WriteLine("{0,0}{1,-15}{2,-10}", i++ + ".", participant.GetDiverName(), participant.TotalPoints);
+                Console.WriteLine("{0,-3}{1,-15}{2,-10}", (i++ + "."), participant.GetDiverName(), participant.TotalPoints);
             }
+            Console.ReadKey();
         }
         #endregion
 
