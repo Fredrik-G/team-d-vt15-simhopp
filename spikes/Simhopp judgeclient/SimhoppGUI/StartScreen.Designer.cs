@@ -33,6 +33,7 @@
             this.StartScreenEditViewContestBtn = new System.Windows.Forms.Button();
             this.StartScreenAddDiverContestBtn = new System.Windows.Forms.Button();
             this.StartScreenAddJudgeBtn = new System.Windows.Forms.Button();
+            this.StartScreenViewJudgeClient = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // StartScreenNewContesttBtn
@@ -85,11 +86,22 @@
             this.StartScreenAddJudgeBtn.UseVisualStyleBackColor = true;
             this.StartScreenAddJudgeBtn.Click += new System.EventHandler(this.StartScreenAddJudgeBtn_Click);
             // 
+            // StartScreenViewJudgeClient
+            // 
+            this.StartScreenViewJudgeClient.Location = new System.Drawing.Point(257, 191);
+            this.StartScreenViewJudgeClient.Name = "StartScreenViewJudgeClient";
+            this.StartScreenViewJudgeClient.Size = new System.Drawing.Size(130, 23);
+            this.StartScreenViewJudgeClient.TabIndex = 5;
+            this.StartScreenViewJudgeClient.Text = "View Judge Client";
+            this.StartScreenViewJudgeClient.UseVisualStyleBackColor = true;
+            this.StartScreenViewJudgeClient.Click += new System.EventHandler(this.StartScreenViewJudgeClient_Click);
+            // 
             // StartScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(608, 250);
+            this.Controls.Add(this.StartScreenViewJudgeClient);
             this.Controls.Add(this.StartScreenAddJudgeBtn);
             this.Controls.Add(this.StartScreenAddDiverContestBtn);
             this.Controls.Add(this.StartScreenEditViewContestBtn);
@@ -108,5 +120,6 @@
         private System.Windows.Forms.Button StartScreenEditViewContestBtn;
         private System.Windows.Forms.Button StartScreenAddDiverContestBtn;
         private System.Windows.Forms.Button StartScreenAddJudgeBtn;
+        private System.Windows.Forms.Button StartScreenViewJudgeClient;
     }
 }

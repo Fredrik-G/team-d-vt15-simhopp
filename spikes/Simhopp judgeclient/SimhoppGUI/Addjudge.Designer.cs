@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Center);
+            System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Center);
             this.AddJudgeLabel = new System.Windows.Forms.Label();
             this.AddJudgeNameLabel = new System.Windows.Forms.Label();
             this.AddJudgeSSNLabel = new System.Windows.Forms.Label();
@@ -129,11 +129,11 @@
             this.SSN,
             this.NameJudge,
             this.Nationality});
-            listViewGroup1.Header = "ListViewGroup";
-            listViewGroup1.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center;
-            listViewGroup1.Name = "listViewGroup1";
+            listViewGroup2.Header = "ListViewGroup";
+            listViewGroup2.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center;
+            listViewGroup2.Name = "listViewGroup1";
             this.listViewJudge.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup1});
+            listViewGroup2});
             this.listViewJudge.Location = new System.Drawing.Point(86, 315);
             this.listViewJudge.Name = "listViewJudge";
             this.listViewJudge.Size = new System.Drawing.Size(615, 202);
@@ -228,7 +228,7 @@
             // 
             // AddJudgeBtnOk
             // 
-            this.AddJudgeBtnOk.Location = new System.Drawing.Point(626, 552);
+            this.AddJudgeBtnOk.Location = new System.Drawing.Point(521, 552);
             this.AddJudgeBtnOk.Name = "AddJudgeBtnOk";
             this.AddJudgeBtnOk.Size = new System.Drawing.Size(75, 23);
             this.AddJudgeBtnOk.TabIndex = 19;
@@ -237,7 +237,7 @@
             // 
             // AddJudgeCloseBtn
             // 
-            this.AddJudgeCloseBtn.Location = new System.Drawing.Point(521, 552);
+            this.AddJudgeCloseBtn.Location = new System.Drawing.Point(626, 552);
             this.AddJudgeCloseBtn.Name = "AddJudgeCloseBtn";
             this.AddJudgeCloseBtn.Size = new System.Drawing.Size(75, 23);
             this.AddJudgeCloseBtn.TabIndex = 20;

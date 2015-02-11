@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace SimhoppGUI
 {
     public partial class StartScreen : Form
@@ -19,33 +20,107 @@ namespace SimhoppGUI
 
         private void StartScreenNewContesttBtn_Click(object sender, EventArgs e)
         {
-            NewContest newContest = new NewContest();
-            newContest.Show();
+
+            using (new DialogOverlay())
+            using (NewContest newContest = new NewContest())
+            {
+                if (newContest.ShowDialog(this) == DialogResult.OK)
+                {
+
+                    newContest.Show();
+                }
+              
+            }
+         
         }
 
         private void button2StartScreenStartContestBtn_Click(object sender, EventArgs e)
         {
-            StartContest start = new StartContest();
-            start.Show();
+
+            using (new DialogOverlay())
+            using (StartContest StartContest = new StartContest())
+            {
+                if (StartContest.ShowDialog(this) == DialogResult.OK)
+                {
+
+                    StartContest.Show();
+                }
+
+            }
+
         }
 
         private void StartScreenEditViewContestBtn_Click(object sender, EventArgs e)
         {
+
+            using (new DialogOverlay())
+            using (Edit_viewContestcs Edit_viewContest = new Edit_viewContestcs())
+            {
+                if (Edit_viewContest.ShowDialog(this) == DialogResult.OK)
+                {
+
+                    Edit_viewContest.Show();
+                }
+
+            }
+
+
             Edit_viewContestcs editviewcontest = new Edit_viewContestcs();
             editviewcontest.Show();
         }
 
         private void StartScreenAddDiverContestBtn_Click(object sender, EventArgs e)
         {
+
+            using (new DialogOverlay())
+            using (AddDiver AddDiver = new AddDiver())
+            {
+                if (AddDiver.ShowDialog(this) == DialogResult.OK)
+                {
+
+                    AddDiver.Show();
+                }
+
+            }
+
+
             AddDiver addDiver = new AddDiver();
             addDiver.Show();
         }
 
         private void StartScreenAddJudgeBtn_Click(object sender, EventArgs e)
         {
+
+            using (new DialogOverlay())
+            using (Addjudge Addjudge = new Addjudge())
+            {
+                if (Addjudge.ShowDialog(this) == DialogResult.OK)
+                {
+
+                    Addjudge.Show();
+                }
+
+            }
+
+
             Addjudge addJudge = new Addjudge();
             addJudge.Show();
         }
+
+        private void StartScreenViewJudgeClient_Click(object sender, EventArgs e)
+        {
+            using (new DialogOverlay())
+            using (JudgeClient JudgeClient = new JudgeClient())
+            {
+                if (JudgeClient.ShowDialog(this) == DialogResult.OK)
+                {
+
+                    JudgeClient.Show();
+                }
+
+            }
+        }
+
 
    
 

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Center);
+            System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Center);
             this.AddDiverBtnOk = new System.Windows.Forms.Button();
             this.UpdateDiverButton = new System.Windows.Forms.Button();
             this.UpdateDiverSSNTb = new System.Windows.Forms.TextBox();
@@ -55,7 +55,7 @@
             // 
             // AddDiverBtnOk
             // 
-            this.AddDiverBtnOk.Location = new System.Drawing.Point(681, 545);
+            this.AddDiverBtnOk.Location = new System.Drawing.Point(575, 545);
             this.AddDiverBtnOk.Name = "AddDiverBtnOk";
             this.AddDiverBtnOk.Size = new System.Drawing.Size(75, 23);
             this.AddDiverBtnOk.TabIndex = 37;
@@ -138,11 +138,11 @@
             this.SSN,
             this.NameJudge,
             this.Nationality});
-            listViewGroup1.Header = "ListViewGroup";
-            listViewGroup1.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center;
-            listViewGroup1.Name = "listViewGroup1";
+            listViewGroup2.Header = "ListViewGroup";
+            listViewGroup2.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center;
+            listViewGroup2.Name = "listViewGroup1";
             this.listViewDivers.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup1});
+            listViewGroup2});
             this.listViewDivers.Location = new System.Drawing.Point(141, 308);
             this.listViewDivers.Name = "listViewDivers";
             this.listViewDivers.Size = new System.Drawing.Size(615, 202);
@@ -237,7 +237,7 @@
             // 
             // AddDiverCloseBtn
             // 
-            this.AddDiverCloseBtn.Location = new System.Drawing.Point(570, 545);
+            this.AddDiverCloseBtn.Location = new System.Drawing.Point(681, 545);
             this.AddDiverCloseBtn.Name = "AddDiverCloseBtn";
             this.AddDiverCloseBtn.Size = new System.Drawing.Size(75, 23);
             this.AddDiverCloseBtn.TabIndex = 38;

@@ -24,8 +24,19 @@ namespace SimhoppGUI
 
         private void connectToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            Login LoginScreen = new Login();
-            LoginScreen.Show();
+
+            using (new DialogOverlay())
+            using (Login LoginScreen  = new Login())
+            {
+                if (LoginScreen.ShowDialog(this) == DialogResult.OK)
+                {
+
+                    LoginScreen.Show();
+                }
+
+            }
+
+         
         }
 
     

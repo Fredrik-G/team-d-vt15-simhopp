@@ -48,7 +48,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(182, 22);
+            this.label2.Location = new System.Drawing.Point(226, 22);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 13);
             this.label2.TabIndex = 1;
@@ -63,7 +63,7 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(185, 37);
+            this.textBox2.Location = new System.Drawing.Point(229, 37);
             this.textBox2.Name = "textBox2";
             this.textBox2.PasswordChar = '*';
             this.textBox2.Size = new System.Drawing.Size(119, 20);
@@ -71,7 +71,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(229, 81);
+            this.button1.Location = new System.Drawing.Point(81, 81);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 4;
@@ -80,7 +80,7 @@
             // 
             // LoginScreenCancelBtn
             // 
-            this.LoginScreenCancelBtn.Location = new System.Drawing.Point(139, 81);
+            this.LoginScreenCancelBtn.Location = new System.Drawing.Point(273, 81);
             this.LoginScreenCancelBtn.Name = "LoginScreenCancelBtn";
             this.LoginScreenCancelBtn.Size = new System.Drawing.Size(75, 23);
             this.LoginScreenCancelBtn.TabIndex = 5;
@@ -92,7 +92,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(362, 140);
+            this.ClientSize = new System.Drawing.Size(404, 140);
             this.Controls.Add(this.LoginScreenCancelBtn);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox2);

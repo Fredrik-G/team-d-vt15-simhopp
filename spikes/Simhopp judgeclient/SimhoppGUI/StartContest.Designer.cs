@@ -46,7 +46,7 @@
             // 
             // StartContestStartBtn
             // 
-            this.StartContestStartBtn.Location = new System.Drawing.Point(468, 446);
+            this.StartContestStartBtn.Location = new System.Drawing.Point(361, 446);
             this.StartContestStartBtn.Name = "StartContestStartBtn";
             this.StartContestStartBtn.Size = new System.Drawing.Size(93, 27);
             this.StartContestStartBtn.TabIndex = 37;
@@ -149,7 +149,7 @@
             // 
             // StartContestCloseBtn
             // 
-            this.StartContestCloseBtn.Location = new System.Drawing.Point(369, 446);
+            this.StartContestCloseBtn.Location = new System.Drawing.Point(480, 446);
             this.StartContestCloseBtn.Name = "StartContestCloseBtn";
             this.StartContestCloseBtn.Size = new System.Drawing.Size(93, 27);
             this.StartContestCloseBtn.TabIndex = 38;
@@ -173,7 +173,7 @@
             this.Controls.Add(this.PlaceContestLabel);
             this.Controls.Add(this.NameContestLabel);
             this.Controls.Add(this.listViewEditViewContest);
-           // this.Name = "StartContest";
+            //this.Name = "StartContest";
             this.Text = "StartContest";
             this.ResumeLayout(false);
             this.PerformLayout();
