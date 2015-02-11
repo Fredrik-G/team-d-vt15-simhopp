@@ -179,6 +179,11 @@ namespace Simhopp
             }
         }
 
+        /// <summary>
+        /// Simulates all the jumps of a competition. Sets a specific jump for all divers and randomizes all judges scores
+        /// ans sets them. Calls for the live result list to be printed. 
+        /// </summary>
+        /// <param name="jumpNo"></param>
         public void MakeJump(int jumpNo)
         {
             Random random = new Random();
@@ -196,6 +201,9 @@ namespace Simhopp
             }
         }
 
+        /// <summary>
+        /// Prints the results list.
+        /// </summary>
         public void PrintResult()
         {
             for (var i = participantsList.Count -1; i >= 0; i--)
@@ -219,6 +227,10 @@ namespace Simhopp
             liveResultList.Sort((x, y) => y.TotalPoints.CompareTo(x.TotalPoints));
         }
 
+        /// <summary>
+        /// Creates a copy of the participantsList and sorts it and prints it between every single jump.
+        /// </summary>
+        /// <param name="jumpNo"></param>
         public void PrintLiveResults(int jumpNo)
         {
             Console.Clear();
