@@ -8,7 +8,9 @@ using System.Threading.Tasks;
 
 using NUnit.Framework;
 using System.Text.RegularExpressions;
-using Simhopp;
+using SimhoppGUI;
+using SimhoppGUI.Model;
+
 namespace SimhoppUnitTest
 {
     [TestFixture]

@@ -1,18 +1,12 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
-using System.Linq;
-using System.Linq.Expressions;
 using System.Management.Instrumentation;
-using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
-
 using System.Text.RegularExpressions;
 
-namespace Simhopp
+namespace SimhoppGUI.Model
 {
     public class Contest
     {
@@ -248,7 +242,7 @@ namespace Simhopp
         /// Creates a list with the current result (including name,nationality and points).
         /// </summary>
         /// <returns>Returns list of current result</returns>
-        public List<string> CreateResultList()
+        private List<string> CreateResultList()
         {
             var resultList = new List<string>();
             for (var i = participantsList.Count - 1; i >= 0; i--)
@@ -314,18 +308,31 @@ namespace Simhopp
         #endregion
 
         #region Check correct input
+        /// <summary>
+        /// "Jerusalem-VM, He'Man, Asp.Net"
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public static bool CheckCorrectName(string name)
         {
             Regex patternName = new Regex(@"^[a-zA-Z]+(([\'\.\- ][a-zA-Z ])?[a-zA-Z]*)*$");
             return patternName.IsMatch(name);
         }
-
+        /// <summary>
+        /// "Jerusalem-VM, He'Man, Asp.Net"
+        /// </summary>
+        /// <param name="place"></param>
+        /// <returns></returns>
         public static bool CheckCorrectPlace(string place)
         {
             Regex patternName = new Regex(@"^[a-zA-Z]+(([\'\.\- ][a-zA-Z ])?[a-zA-Z]*)*$");
             return patternName.IsMatch(place);
         }
-
+        /// <summary>
+        /// "29/01/2015","29\01\2015"
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
         public static bool CheckCorrectDate(string date)
         {
             Regex patternName = new Regex(@"^((((0[13578])|([13578])|(1[02]))[\/](([1-9])|([0-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\/](([1-9])|([0-2][0-9])|(30)))|((2|02)[\/](([1-9])|([0-2][0-9]))))[\/]\d{4}$|^\d{4}$");
