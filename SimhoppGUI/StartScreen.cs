@@ -57,7 +57,7 @@ namespace SimhoppGUI.View
         private void StartScreenEditViewContestBtn_Click(object sender, EventArgs e)
         {
             using (new DialogOverlay())
-            using (EditViewContest Edit_viewContest = new EditViewContest())
+            using (EditViewContest Edit_viewContest = new EditViewContest(EventGetContestsList))
             {
                 if (Edit_viewContest.ShowDialog(this) == DialogResult.OK)
                 {
@@ -100,7 +100,7 @@ namespace SimhoppGUI.View
         }
 
         public event DelegateCreateContest EventCreateContest = null;
-
+        public event DelegateGetContestsList EventGetContestsList = null;
         //public event DelegateAddParticipant EventAddParticipant = null;
         //public event DelegateAddJudge EventAddJudge = null;
         //public event DelegateGetTrickDifficultyFromTrickHashTable EventGetTrickDifficultyFromTrickHashTable = null;
