@@ -28,20 +28,16 @@ namespace SimhoppGUI
         BindingList<Contest> contestList = new BindingList<Contest>();
 
         #endregion
-        #region Properties
-        public BindingList<Contest> ContestList
-        {
-            get
-            {
-                if (contestList == null)
-                {
-                    throw new NullReferenceException("Contest List is null");
-                }
-                return contestList;             
-            }
-        }
-        #endregion
+     
         #region Methods
+        /// <summary>
+        /// Returns contests list.
+        /// </summary>
+        /// <returns></returns>
+        public BindingList<Contest> GetContestsList()
+        {
+            return contestList;
+        }
         /// <summary>
         /// 
         /// </summary>

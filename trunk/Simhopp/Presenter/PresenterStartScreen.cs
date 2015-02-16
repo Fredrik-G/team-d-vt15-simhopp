@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using SimhoppGUI.Model;
@@ -7,13 +8,10 @@ using SimhoppGUI.View;
 
 namespace SimhoppGUI.Presenter
 {
-    /// <summary>
-    /// Denna lösning blir en form av både MVC/MVP.
-    /// </summary>
     public class PresenterStartScreen
     {
         #region Properties
-        public IStartScreen View{ get; set; }
+        public IStartScreen View { get; set; }
         public ISimhopp Model { get; set; }
 
         #endregion
@@ -23,7 +21,7 @@ namespace SimhoppGUI.Presenter
             this.Model = simhopp;
             this.View = view;
             this.View.EventCreateContest += CreateContest;
-
+            this.View.EventGetContestsList += GetContestsList;
             //this.View.EventAddParticipant += AddParticipant;
             //this.View.EventAddJudge += AddJudge;
             //this.View.EventGetTrickDifficultyFromTrickHashTable += GetTrickDifficultyFromTrickHashTable;
@@ -36,7 +34,10 @@ namespace SimhoppGUI.Presenter
         {
             this.Model.CreateContest(place, name, startDate);
         }
-
+        public BindingList<Contest> GetContestsList()
+        {
+            return this.Model.GetContestsList();
+        }
         //public void AddParticipant(Diver diver)
         //{
         //    this.Model.AddParticipant(diver);
