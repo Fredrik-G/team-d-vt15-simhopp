@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,5 +18,6 @@ namespace SimhoppGUI.Model
         //double GetResultFromParticipant(string ssn);
         //void CreateHtmlResultFile();
         void CreateContest(string place, string name, string startDate);
+        BindingList<Contest> GetContestsList();
     }
 }
