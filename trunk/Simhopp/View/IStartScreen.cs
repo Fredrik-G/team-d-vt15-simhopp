@@ -4,11 +4,11 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SimhoppGUI.Model;
+using Simhopp.Model;
 
-namespace SimhoppGUI.View
+namespace Simhopp.View
 {
-    public delegate void DelegateCreateContest(string place, string name, string startDate);
+    public delegate void DelegateCreateContest(string place, string name, string startDate, string endDate);
 
     public delegate BindingList<Contest> DelegateGetContestsList();
     //public delegate void DelegateAddParticipant(Diver diver);

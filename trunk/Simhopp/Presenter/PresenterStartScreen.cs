@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
-using SimhoppGUI.Model;
-using SimhoppGUI.View;
+using Simhopp.Model;
+using Simhopp;
+using Simhopp.View;
 
-namespace SimhoppGUI.Presenter
+namespace Simhopp.Presenter
 {
     public class PresenterStartScreen
     {
@@ -30,9 +31,9 @@ namespace SimhoppGUI.Presenter
 
         #region Methods
 
-        public void CreateContest(string place, string name, string startDate)
+        public void CreateContest(string place, string name, string startDate, string endDate)
         {
-            this.Model.CreateContest(place, name, startDate);
+            this.Model.CreateContest(place, name, startDate, endDate);
         }
         public BindingList<Contest> GetContestsList()
         {

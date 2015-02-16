@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using System.Text.RegularExpressions;
 
-namespace SimhoppGUI
+namespace Simhopp.Model
 {
     /// <summary>
     /// Abstract class that is used for inherit properties from a person

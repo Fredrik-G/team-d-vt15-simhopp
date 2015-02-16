@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SimhoppGUI
+namespace Simhopp.Model
 {
     /// <summary>
     /// Class the hold a diver object, three jumpResult objects and one result
