@@ -6,14 +6,15 @@ using System.Management.Instrumentation;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace SimhoppGUI.Model
+namespace SimhoppGUI
 {
     public class Contest
     {
         #region Data
         private string place;
         private string name;
-        private string date;
+        private string startDate;
+        private string endDate;
         private TrickList trickList = new TrickList();
         private List<Judge> judgeList = new List<Judge>();
         public List<Participant> participantsList = new List<Participant>();
@@ -27,15 +28,17 @@ namespace SimhoppGUI.Model
         {
             this.place = "";
             this.name = "";
-            this.date = "";
+            this.startDate = "";
+            this.EndDate = "";
             trickList.ReadFromFile("tricklist.txt");
         }
 
-        public Contest(string place, string name, string date)
+        public Contest(string place, string name, string startDate, string endDate)
         {
             this.place = place;
             this.name = name;
-            this.date = date;
+            this.startDate = startDate;
+            this.endDate = endDate;
             trickList.ReadFromFile("tricklist.txt");
         }
         #endregion
@@ -71,19 +74,35 @@ namespace SimhoppGUI.Model
                 this.place = value;
             }
         }
-        public string Date
+        public string StartDate
         {
             get
             {
-                if (this.date == null)
+                if (this.startDate == null)
                 {
                     throw new Exception("Date is null");
                 }
-                return this.date;
+                return this.startDate;
             }
             set
             {
-                this.date = value;
+                this.startDate = value;
+            }
+        }
+
+        public string EndDate
+        {
+            get
+            {
+                if (this.endDate == null)
+                {
+                    throw new Exception("Date is null");
+                }
+                return this.endDate;
+            }
+            set
+            {
+                this.endDate = value;
             }
         }
         #endregion
@@ -329,13 +348,13 @@ namespace SimhoppGUI.Model
             return patternName.IsMatch(place);
         }
         /// <summary>
-        /// "dd/mm/yyyy", "dd.mm.yyyy" , "dd-mm-yyyy" 
+        /// "29/01/2015","29\01\2015"
         /// </summary>
         /// <param name="date"></param>
         /// <returns></returns>
         public static bool CheckCorrectDate(string date)
         {
-            Regex patternName = new Regex(@"^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$");
+            Regex patternName = new Regex(@"^((((0[13578])|([13578])|(1[02]))[\/](([1-9])|([0-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\/](([1-9])|([0-2][0-9])|(30)))|((2|02)[\/](([1-9])|([0-2][0-9]))))[\/]\d{4}$|^\d{4}$");
             return patternName.IsMatch(date);
         }
         #endregion     
