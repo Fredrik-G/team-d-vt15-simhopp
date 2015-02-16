@@ -8,8 +8,9 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
-namespace SimhoppGUI.View
+using Simhopp.View;
+using SimhoppGUI;
+namespace SimhoppGUI
 {
     public partial class StartScreen : Form, IStartScreen
     {
@@ -29,12 +30,15 @@ namespace SimhoppGUI.View
                 }
                 if (EventCreateContest != null)
                 {
-                    string date = newContest.NewContestStartDateDTP.Value.Day.ToString() +
+                    string startDate = newContest.NewContestStartDateDTP.Value.Day.ToString() +
                                   "/" + newContest.NewContestStartDateDTP.Value.Month.ToString() +
                                   "/" + newContest.NewContestStartDateDTP.Value.Year.ToString();
+                    string endDate = newContest.NewContestEndDateDTP.Value.Day.ToString() +
+                                  "/" + newContest.NewContestEndDateDTP.Value.Month.ToString() +
+                                  "/" + newContest.NewContestEndDateDTP.Value.Year.ToString();
                     try
                     {
-                        this.EventCreateContest(newContest.newContestCityTB.Text, newContest.newContestNameTB.Text, date);
+                        this.EventCreateContest(newContest.newContestCityTB.Text, newContest.newContestNameTB.Text, startDate, endDate);
                     }
                     catch (Exception exception)
                     {
