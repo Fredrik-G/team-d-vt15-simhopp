@@ -1,4 +1,4 @@
-﻿namespace SimhoppGUI
+﻿namespace SimhoppGUI.View
 {
     partial class StartScreen
     {
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.StartScreenNewContesttBtn = new System.Windows.Forms.Button();
-            this.button2StartScreenStartContestBtn = new System.Windows.Forms.Button();
+            this.StartScreenStartContestBtn = new System.Windows.Forms.Button();
             this.StartScreenEditViewContestBtn = new System.Windows.Forms.Button();
             this.StartScreenAddDiverContestBtn = new System.Windows.Forms.Button();
             this.StartScreenAddJudgeBtn = new System.Windows.Forms.Button();
@@ -46,15 +46,15 @@
             this.StartScreenNewContesttBtn.UseVisualStyleBackColor = true;
             this.StartScreenNewContesttBtn.Click += new System.EventHandler(this.StartScreenNewContesttBtn_Click);
             // 
-            // button2StartScreenStartContestBtn
+            // StartScreenStartContestBtn
             // 
-            this.button2StartScreenStartContestBtn.Location = new System.Drawing.Point(129, 84);
-            this.button2StartScreenStartContestBtn.Name = "button2StartScreenStartContestBtn";
-            this.button2StartScreenStartContestBtn.Size = new System.Drawing.Size(72, 66);
-            this.button2StartScreenStartContestBtn.TabIndex = 1;
-            this.button2StartScreenStartContestBtn.Text = "Start Contest";
-            this.button2StartScreenStartContestBtn.UseVisualStyleBackColor = true;
-            this.button2StartScreenStartContestBtn.Click += new System.EventHandler(this.button2StartScreenStartContestBtn_Click);
+            this.StartScreenStartContestBtn.Location = new System.Drawing.Point(129, 84);
+            this.StartScreenStartContestBtn.Name = "StartScreenStartContestBtn";
+            this.StartScreenStartContestBtn.Size = new System.Drawing.Size(72, 66);
+            this.StartScreenStartContestBtn.TabIndex = 1;
+            this.StartScreenStartContestBtn.Text = "Start Contest";
+            this.StartScreenStartContestBtn.UseVisualStyleBackColor = true;
+            this.StartScreenStartContestBtn.Click += new System.EventHandler(this.StartScreenStartContestBtn_Click);
             // 
             // StartScreenEditViewContestBtn
             // 
@@ -105,7 +105,7 @@
             this.Controls.Add(this.StartScreenAddJudgeBtn);
             this.Controls.Add(this.StartScreenAddDiverContestBtn);
             this.Controls.Add(this.StartScreenEditViewContestBtn);
-            this.Controls.Add(this.button2StartScreenStartContestBtn);
+            this.Controls.Add(this.StartScreenStartContestBtn);
             this.Controls.Add(this.StartScreenNewContesttBtn);
             this.Name = "StartScreen";
             this.Text = "StartScreen";
@@ -116,7 +116,7 @@
         #endregion
 
         private System.Windows.Forms.Button StartScreenNewContesttBtn;
-        private System.Windows.Forms.Button button2StartScreenStartContestBtn;
+        private System.Windows.Forms.Button StartScreenStartContestBtn;
         private System.Windows.Forms.Button StartScreenEditViewContestBtn;
         private System.Windows.Forms.Button StartScreenAddDiverContestBtn;
         private System.Windows.Forms.Button StartScreenAddJudgeBtn;

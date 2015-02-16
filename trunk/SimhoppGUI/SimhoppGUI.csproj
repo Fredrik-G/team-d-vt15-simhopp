@@ -60,11 +60,11 @@
       <DependentUpon>Addjudge.cs</DependentUpon>
     </Compile>
     <Compile Include="DimIt.cs" />
-    <Compile Include="Edit_viewContestcs.cs">
+    <Compile Include="EditViewContest.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Edit_viewContestcs.Designer.cs">
-      <DependentUpon>Edit_viewContestcs.cs</DependentUpon>
+    <Compile Include="EditViewContest.Designer.cs">
+      <DependentUpon>EditViewContest.cs</DependentUpon>
     </Compile>
     <Compile Include="JudgeClient.cs">
       <SubType>Form</SubType>
@@ -104,8 +104,8 @@
     <EmbeddedResource Include="Addjudge.resx">
       <DependentUpon>Addjudge.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Edit_viewContestcs.resx">
-      <DependentUpon>Edit_viewContestcs.cs</DependentUpon>
+    <EmbeddedResource Include="EditViewContest.resx">
+      <DependentUpon>EditViewContest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="JudgeClient.resx">
       <DependentUpon>JudgeClient.cs</DependentUpon>
@@ -143,6 +143,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Simhopp\Simhopp.csproj">
+      <Project>{c842984c-4b2b-4f20-9487-a24425036f5f}</Project>
+      <Name>Simhopp</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
