@@ -6,7 +6,7 @@ using System.Management.Instrumentation;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace SimhoppGUI
+namespace Simhopp.Model
 {
     public class Contest
     {

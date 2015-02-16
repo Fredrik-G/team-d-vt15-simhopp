@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SimhoppGUI
+namespace Simhopp.Model
 {
     /// <summary>
     /// JumpResult class. Contains information about a specific jump in for a diver.

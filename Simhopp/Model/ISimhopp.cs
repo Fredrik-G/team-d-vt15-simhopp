@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SimhoppGUI.Model
+namespace Simhopp.Model
 {
     /// <summary>
     /// Interface-class for simhopp
@@ -17,7 +17,7 @@ namespace SimhoppGUI.Model
         //double GetTrickDifficultyFromTrickHashTable(string trickName);
         //double GetResultFromParticipant(string ssn);
         //void CreateHtmlResultFile();
-        void CreateContest(string place, string name, string startDate);
+        void CreateContest(string place, string name, string startDate, string endDate);
         BindingList<Contest> GetContestsList();
     }
 }
