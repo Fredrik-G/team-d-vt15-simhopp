@@ -4,18 +4,18 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-
-namespace SimhoppGUI
+namespace SimhoppGUI.View
 {
-    public partial class StartScreen : Form
+    public partial class StartScreen : Form, IStartScreen
     {
         public StartScreen()
         {
-            this.FormBorderStyle = FormBorderStyle.FixedSingle; 
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
             InitializeComponent();
         }
         private void StartScreenNewContesttBtn_Click(object sender, EventArgs e)
@@ -25,12 +25,25 @@ namespace SimhoppGUI
             {
                 if (newContest.ShowDialog(this) == DialogResult.OK)
                 {
-
                     newContest.Show();
                 }
-            } 
+                if (EventCreateContest != null)
+                {
+                    string date = newContest.NewContestStartDateDTP.Value.Day.ToString() +
+                                  "/" + newContest.NewContestStartDateDTP.Value.Month.ToString() +
+                                  "/" + newContest.NewContestStartDateDTP.Value.Year.ToString();
+                    try
+                    {
+                        this.EventCreateContest(newContest.newContestCityTB.Text, newContest.newContestNameTB.Text, date);
+                    }
+                    catch (Exception exception)
+                    {
+
+                    }
+                }
+            }
         }
-        private void button2StartScreenStartContestBtn_Click(object sender, EventArgs e)
+        private void StartScreenStartContestBtn_Click(object sender, EventArgs e)
         {
             using (new DialogOverlay())
             using (StartContest StartContest = new StartContest())
@@ -44,13 +57,13 @@ namespace SimhoppGUI
         private void StartScreenEditViewContestBtn_Click(object sender, EventArgs e)
         {
             using (new DialogOverlay())
-            using (Edit_viewContestcs Edit_viewContest = new Edit_viewContestcs())
+            using (EditViewContest Edit_viewContest = new EditViewContest())
             {
                 if (Edit_viewContest.ShowDialog(this) == DialogResult.OK)
                 {
                     Edit_viewContest.Show();
                 }
-            }      
+            }
         }
         private void StartScreenAddDiverContestBtn_Click(object sender, EventArgs e)
         {
@@ -86,5 +99,11 @@ namespace SimhoppGUI
             }
         }
 
+        public event DelegateCreateContest EventCreateContest = null;
+
+        //public event DelegateAddParticipant EventAddParticipant = null;
+        //public event DelegateAddJudge EventAddJudge = null;
+        //public event DelegateGetTrickDifficultyFromTrickHashTable EventGetTrickDifficultyFromTrickHashTable = null;
+        //public event DelegateGetResultFromParticipant EventGetResultFromParticipant = null;
     }
 }

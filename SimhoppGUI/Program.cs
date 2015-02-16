@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using SimhoppGUI.Model;
+using SimhoppGUI.Presenter;
+using SimhoppGUI.View;
 
 namespace SimhoppGUI
 {
@@ -14,10 +14,14 @@ namespace SimhoppGUI
         [STAThread]
         static void Main()
         {
-         
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new StartScreen());
+
+            StartScreen start = new StartScreen();
+            Simhopp simhopp = new Simhopp();
+            PresenterStartScreen presenter = new PresenterStartScreen(start, simhopp);
+            Application.Run(start);
+
         }
     }
 }

@@ -20,9 +20,7 @@ namespace SimhoppGUI
         }
 
         private void AddDiverCloseBtn_Click(object sender, EventArgs e)
-        {
-            //test
-           
+        {           
             Close();
         }
     }
