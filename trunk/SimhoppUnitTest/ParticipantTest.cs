@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using System.Text.RegularExpressions;
-using Simhopp;
+using Simhopp.Model;
 
 
 namespace SimhoppUnitTest

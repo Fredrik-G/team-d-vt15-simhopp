@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 
 using NUnit.Framework;
 using System.Text.RegularExpressions;
-using SimhoppGUI;
-using SimhoppGUI.Model;
-
+using Simhopp.Model;
+using Simhopp;
 namespace SimhoppUnitTest
 {
     [TestFixture]
@@ -23,8 +22,8 @@ namespace SimhoppUnitTest
         [Test]
         public void WorkingContestObject()
         {
-            Contest p1 = new Contest("Orebro", "Simhoppstavlingen", "050414");
-            Contest p2 = new Contest("Hallsberg", "Tavling enofdoom", "050406");
+            Contest p1 = new Contest("Orebro", "Simhoppstavlingen", "05/04/2015", "05/04/2015");
+            Contest p2 = new Contest("Hallsberg", "Tavling enofdoom", "050406", "05/04/2015");
 
             Assert.AreEqual(p1.Place, "Orebro");
             Assert.AreNotEqual(p2.Place, "Orebro");
@@ -37,29 +36,29 @@ namespace SimhoppUnitTest
         [Test]
         public void CorrectInputContestName()
         {
-            Contest p1 = new Contest("Orebro", "Simhoppstavlingen", "05/04/2015");
-            Contest p2 = new Contest("Hallsberg", "Tavl in genofdo om", "1/02/2008");
+            Contest p1 = new Contest("Orebro", "Simhoppstavlingen", "05/04/2015", "05/04/2015");
+            Contest p2 = new Contest("Hallsberg", "Tavl in genofdo om", "1/02/2008", "05/04/2015");
 
-            Contest n1 = new Contest("Ore,Bro", "Tävli ngen", "88-04-55");
-            Contest n2 = new Contest("Örebro", "Tavl1ngen", "Jan 7 2014");
+            Contest n1 = new Contest("Ore,Bro", "Tävli ngen", "88-04-55", "05/04/2015");
+            Contest n2 = new Contest("Örebro", "Tavl1ngen", "Jan 7 2014", "05/04/2015");
 
             //Positiv test
             Assert.AreEqual(Contest.CheckCorrectName(p1.Name), true);
             Assert.AreEqual(Contest.CheckCorrectPlace(p1.Place), true);
-            Assert.AreEqual(Contest.CheckCorrectDate(p1.Date), true);
+            Assert.AreEqual(Contest.CheckCorrectDate(p1.StartDate), true);
 
             Assert.AreEqual(Contest.CheckCorrectName(p2.Name), true);
             Assert.AreEqual(Contest.CheckCorrectPlace(p2.Place), true);
-            Assert.AreEqual(Contest.CheckCorrectDate(p2.Date), true);
+            Assert.AreEqual(Contest.CheckCorrectDate(p2.StartDate), true);
 
             //Negativ test
             Assert.AreEqual(Contest.CheckCorrectName(n1.Name), false);
             Assert.AreEqual(Contest.CheckCorrectPlace(n1.Place), false);
-            Assert.AreEqual(Contest.CheckCorrectDate(n1.Date), false);
+            Assert.AreEqual(Contest.CheckCorrectDate(n1.StartDate), false);
 
             Assert.AreEqual(Contest.CheckCorrectName(n2.Name), false);
             Assert.AreEqual(Contest.CheckCorrectPlace(n2.Place), false);
-            Assert.AreEqual(Contest.CheckCorrectDate(n2.Date), false);
+            Assert.AreEqual(Contest.CheckCorrectDate(n2.StartDate), false);
         }
 
         /// <summary>
@@ -68,7 +67,7 @@ namespace SimhoppUnitTest
         [Test]
         public void AddParticipantsToList()
         {
-            Contest c1 = new Contest("Jerusalem", "JVM", "29/02/2015");
+            Contest c1 = new Contest("Jerusalem", "JVM", "05/04/2015", "05/04/2015");
             Diver d1 = new Diver("Sven", "USA", "123-20-5555");
             c1.AddParticipant(d1);
             Assert.AreEqual(1, c1.GetNumberOfParticipants());
@@ -86,7 +85,7 @@ namespace SimhoppUnitTest
         [Test]
         public void AddJudgeToList()
         {
-            Contest c1 = new Contest("Jerusalem", "JVM", "29/02/2015");
+            Contest c1 = new Contest("Jerusalem", "JVM", "05/04/2015", "05/04/2015");
             Judge j1 = new Judge("heppa", "Bor", "123-20-5551");
             Judge j2 = new Judge("heppa", "Bor", "123-20-5552");
             Judge j3 = new Judge("heppa", "Bor", "123-20-5553");
@@ -138,8 +137,8 @@ namespace SimhoppUnitTest
         [Test]
         public void SortParticipants()
         {
-            Contest c1 = new Contest("Jerusalem", "JVM", "29/02/2015");
-            Contest c2 = new Contest("Jerusalem", "JVM", "29/02/2015");
+            Contest c1 = new Contest("Jerusalem", "JVM", "29/02/2015", "05/04/2015");
+            Contest c2 = new Contest("Jerusalem", "JVM", "29/02/2015", "05/04/2015");
             for (var i = 0; i < 7; i++)
             {
                 string asd = Convert.ToString("123-20-555" + i);
@@ -179,7 +178,7 @@ namespace SimhoppUnitTest
         [Test]
         public void MakeJump()
         {
-            Contest c1 = new Contest("Jerusalem", "JVM", "29/02/2015");
+            Contest c1 = new Contest("Jerusalem", "JVM", "29/02/2015", "05/04/2015");
             for (var i = 0; i < 7; i++)
             {
                 string asd = Convert.ToString("123-20-555" + i);
