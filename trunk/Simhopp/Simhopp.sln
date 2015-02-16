@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simhopp", "Simhopp.csproj",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimhoppUnitTest", "..\SimhoppUnitTest\SimhoppUnitTest.csproj", "{6439D92E-AADA-4D77-9E8D-E3C9122ED2B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimhoppGUI", "..\..\SimhoppGUI\SimhoppGUI.csproj", "{4FD77E6A-A328-413F-A00C-6182555CB136}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimhoppGUI", "..\SimhoppGUI\SimhoppGUI\SimhoppGUI.csproj", "{4FD77E6A-A328-413F-A00C-6182555CB136}"
 EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
