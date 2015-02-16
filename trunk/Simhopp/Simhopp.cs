@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,11 +25,22 @@ namespace SimhoppGUI
         /// </summary>
         List<Diver> diverList = new List<Diver>();
 
-        List<Contest> contestList = new List<Contest>();
-
+        BindingList<Contest> contestList = new BindingList<Contest>();
 
         #endregion
-
+        #region Properties
+        public BindingList<Contest> ContestList
+        {
+            get
+            {
+                if (contestList == null)
+                {
+                    throw new NullReferenceException("Contest List is null");
+                }
+                return contestList;             
+            }
+        }
+        #endregion
         #region Methods
         /// <summary>
         /// 
@@ -51,7 +63,6 @@ namespace SimhoppGUI
             {
                 contestList.Add(new Contest(place, name, startDate));
             }
-
         }
         /// <summary>
         /// A function that get a judge by its name
