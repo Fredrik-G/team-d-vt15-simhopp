@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Reflection;
-using SimhoppGUI.Model;
+using Simhopp.Model;
 
-namespace SimhoppGUI
+namespace Simhopp
 {
     /// <summary>
     /// Class that creates and handles a contest-object
