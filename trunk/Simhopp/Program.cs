@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SimhoppGUI.Model;
+using Simhopp.Model;
 
-namespace SimhoppGUI
+namespace Simhopp
 {
     class Program
     {

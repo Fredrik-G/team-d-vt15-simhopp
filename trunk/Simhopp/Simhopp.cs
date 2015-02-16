@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Reflection;
-using SimhoppGUI.Model;
+using Simhopp.Model;
 
-namespace SimhoppGUI
+namespace Simhopp
 {
     /// <summary>
     /// Class that creates and handles a contest-object
@@ -41,7 +41,7 @@ namespace SimhoppGUI
         /// <summary>
         /// 
         /// </summary>
-        public void CreateContest(string place, string name, string startDate)//, string endDate)
+        public void CreateContest(string place, string name, string startDate, string endDate)//, string endDate)
         {
             if (!Contest.CheckCorrectName(name))
             {
@@ -55,9 +55,13 @@ namespace SimhoppGUI
             {
                 throw new InvalidDataException("contest date is not set or invalid.");
             }
+            else if (!Contest.CheckCorrectDate(endDate))
+            {
+                throw new InvalidDataException("contest date is not set or invalid.");
+            }
             else
             {
-                contestList.Add(new Contest(place, name, startDate));
+                contestList.Add(new Contest(place, name, startDate, endDate));
             }
         }
         /// <summary>
