@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using System.Text.RegularExpressions;
 
-namespace Simhopp
+namespace SimhoppGUI
 {
     public class Diver : Person
     {
