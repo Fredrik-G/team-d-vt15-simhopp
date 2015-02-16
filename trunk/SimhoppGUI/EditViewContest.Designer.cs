@@ -76,7 +76,7 @@
             // 
             // EditViewContestEditChangesBtn
             // 
-            this.EditViewContestEditChangesBtn.Location = new System.Drawing.Point(68, 415);
+            this.EditViewContestEditChangesBtn.Location = new System.Drawing.Point(66, 420);
             this.EditViewContestEditChangesBtn.Name = "EditViewContestEditChangesBtn";
             this.EditViewContestEditChangesBtn.Size = new System.Drawing.Size(113, 27);
             this.EditViewContestEditChangesBtn.TabIndex = 18;
@@ -86,14 +86,14 @@
             // 
             // EditViewContestEditEndtDateTp
             // 
-            this.EditViewContestEditEndtDateTp.Location = new System.Drawing.Point(155, 374);
+            this.EditViewContestEditEndtDateTp.Location = new System.Drawing.Point(153, 379);
             this.EditViewContestEditEndtDateTp.Name = "EditViewContestEditEndtDateTp";
             this.EditViewContestEditEndtDateTp.Size = new System.Drawing.Size(200, 20);
             this.EditViewContestEditEndtDateTp.TabIndex = 17;
             // 
             // EditViewContestEditStartDateTp
             // 
-            this.EditViewContestEditStartDateTp.Location = new System.Drawing.Point(155, 316);
+            this.EditViewContestEditStartDateTp.Location = new System.Drawing.Point(153, 321);
             this.EditViewContestEditStartDateTp.Name = "EditViewContestEditStartDateTp";
             this.EditViewContestEditStartDateTp.Size = new System.Drawing.Size(200, 20);
             this.EditViewContestEditStartDateTp.TabIndex = 16;
@@ -101,7 +101,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(33, 380);
+            this.label1.Location = new System.Drawing.Point(31, 385);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(73, 13);
             this.label1.TabIndex = 15;
@@ -109,14 +109,14 @@
             // 
             // EditViewContestEditContestPlaceTb
             // 
-            this.EditViewContestEditContestPlaceTb.Location = new System.Drawing.Point(155, 261);
+            this.EditViewContestEditContestPlaceTb.Location = new System.Drawing.Point(153, 266);
             this.EditViewContestEditContestPlaceTb.Name = "EditViewContestEditContestPlaceTb";
             this.EditViewContestEditContestPlaceTb.Size = new System.Drawing.Size(200, 20);
             this.EditViewContestEditContestPlaceTb.TabIndex = 14;
             // 
             // EditViewContestEditContestNameTb
             // 
-            this.EditViewContestEditContestNameTb.Location = new System.Drawing.Point(155, 203);
+            this.EditViewContestEditContestNameTb.Location = new System.Drawing.Point(153, 208);
             this.EditViewContestEditContestNameTb.Name = "EditViewContestEditContestNameTb";
             this.EditViewContestEditContestNameTb.Size = new System.Drawing.Size(200, 20);
             this.EditViewContestEditContestNameTb.TabIndex = 13;
@@ -124,7 +124,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(33, 322);
+            this.label2.Location = new System.Drawing.Point(31, 327);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(76, 13);
             this.label2.TabIndex = 12;
@@ -133,7 +133,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(33, 264);
+            this.label3.Location = new System.Drawing.Point(31, 269);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(55, 13);
             this.label3.TabIndex = 11;
@@ -142,7 +142,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(33, 206);
+            this.label4.Location = new System.Drawing.Point(31, 211);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(95, 13);
             this.label4.TabIndex = 10;
@@ -150,7 +150,7 @@
             // 
             // EditViewContestCloseBtn
             // 
-            this.EditViewContestCloseBtn.Location = new System.Drawing.Point(205, 415);
+            this.EditViewContestCloseBtn.Location = new System.Drawing.Point(203, 420);
             this.EditViewContestCloseBtn.Name = "EditViewContestCloseBtn";
             this.EditViewContestCloseBtn.Size = new System.Drawing.Size(113, 27);
             this.EditViewContestCloseBtn.TabIndex = 20;

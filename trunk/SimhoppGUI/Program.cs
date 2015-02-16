@@ -18,8 +18,11 @@ namespace SimhoppGUI
             Application.SetCompatibleTextRenderingDefault(false);
 
             StartScreen start = new StartScreen();
+           // EditViewContest editView = new EditViewContest();
             Simhopp simhopp = new Simhopp();
-            PresenterStartScreen presenter = new PresenterStartScreen(start, simhopp);
+
+            PresenterStartScreen presenterStartScreen = new PresenterStartScreen(start, simhopp);
+           // PresenterEditViewContest presenterEditView = new PresenterEditViewContest(editView, presenterStartScreen);
             Application.Run(start);
 
         }

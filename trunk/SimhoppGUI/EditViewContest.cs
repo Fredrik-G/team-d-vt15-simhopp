@@ -1,23 +1,20 @@
 ﻿using System;
 using System.Windows.Forms;
+using SimhoppGUI.View;
 
 namespace SimhoppGUI
 {
     public partial class EditViewContest : Form
     {
-        public EditViewContest()
+        public EditViewContest(DelegateGetContestsList eventGetContestsList)
         {
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             InitializeComponent();
 
-            Simhopp simhopp = new Simhopp();
-
-            simhopp.CreateContest("Simhoppstavling", "One", "10/10/2010");
-            simhopp.CreateContest("sfdsad", "Two", "12/10/2010");
-            simhopp.CreateContest("dgfgfd", "Three", "8/10/2010");
-            simhopp.CreateContest("asdasd", "Four", "9/10/2010");
-            ContestsDataGridView.DataSource = simhopp.ContestList;
-            ContestsDataGridView.ReadOnly = true;
+            if (eventGetContestsList != null)
+            {
+                ContestsDataGridView.DataSource = eventGetContestsList();
+            }
         }
 
         private void EditViewContestCloseBtn_Click(object sender, EventArgs e)
@@ -38,7 +35,14 @@ namespace SimhoppGUI
                 DataGridViewRow row = cell.OwningRow;
                 EditViewContestEditContestNameTb.Text = row.Cells["Name"].Value.ToString();
                 EditViewContestEditContestPlaceTb.Text = row.Cells["Place"].Value.ToString();
-                EditViewContestEditStartDateTp.Text = row.Cells["Date"].Value.ToString();
+
+                var date = row.Cells["Date"].Value.ToString().Split('/');
+                var temp = row.Cells["Date"].Value.ToString().Split('/');
+
+                date[0] = temp[1];
+                date[1] = temp[0];
+                var s = date[0] + "/" + date[1] + "/" + date[2];
+                EditViewContestEditStartDateTp.Text = s;
             }
         }
 
@@ -63,5 +67,6 @@ namespace SimhoppGUI
                 row.Cells["Date"].Value = date;
             }
         }
+        //public event DelegateGetContestsList EventGetContestsList = null;
     }
 }
