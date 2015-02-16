@@ -1,4 +1,4 @@
-﻿namespace SimhoppGUI.View
+﻿namespace SimhoppGUI
 {
     partial class StartScreen
     {

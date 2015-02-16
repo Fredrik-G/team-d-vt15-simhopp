@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
-using SimhoppGUI.View;
 
+using Simhopp.View;
 namespace SimhoppGUI
 {
     public partial class EditViewContest : Form

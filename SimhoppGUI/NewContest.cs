@@ -8,8 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using SimhoppGUI.Model;
-namespace SimhoppGUI.View
+using Simhopp.Model;
+namespace SimhoppGUI
 {
     public partial class NewContest : Form
     {

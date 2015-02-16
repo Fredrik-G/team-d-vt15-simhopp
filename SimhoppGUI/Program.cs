@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
-using SimhoppGUI.Model;
-using SimhoppGUI.Presenter;
-using SimhoppGUI.View;
+
+using Simhopp.Presenter;
+using Simhopp.Model;
+
 
 namespace SimhoppGUI
 {
@@ -19,7 +20,7 @@ namespace SimhoppGUI
 
             StartScreen start = new StartScreen();
            // EditViewContest editView = new EditViewContest();
-            Simhopp simhopp = new Simhopp();
+            Simhopp.Simhopp simhopp = new Simhopp.Simhopp();
 
             PresenterStartScreen presenterStartScreen = new PresenterStartScreen(start, simhopp);
            // PresenterEditViewContest presenterEditView = new PresenterEditViewContest(editView, presenterStartScreen);

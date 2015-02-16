@@ -28,10 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listViewEditViewContest = new System.Windows.Forms.ListView();
-            this.ContestName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ContestPlace = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ContestDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.EditViewContestEditChangesBtn = new System.Windows.Forms.Button();
             this.EditViewContestEditEndtDateTp = new System.Windows.Forms.DateTimePicker();
             this.EditViewContestEditStartDateTp = new System.Windows.Forms.DateTimePicker();
@@ -45,34 +41,6 @@
             this.ContestsDataGridView = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.ContestsDataGridView)).BeginInit();
             this.SuspendLayout();
-            // 
-            // listViewEditViewContest
-            // 
-            this.listViewEditViewContest.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.ContestName,
-            this.ContestPlace,
-            this.ContestDate});
-            this.listViewEditViewContest.Location = new System.Drawing.Point(472, 322);
-            this.listViewEditViewContest.Name = "listViewEditViewContest";
-            this.listViewEditViewContest.Size = new System.Drawing.Size(343, 100);
-            this.listViewEditViewContest.TabIndex = 0;
-            this.listViewEditViewContest.UseCompatibleStateImageBehavior = false;
-            this.listViewEditViewContest.View = System.Windows.Forms.View.Details;
-            // 
-            // ContestName
-            // 
-            this.ContestName.Text = "Contest Name";
-            this.ContestName.Width = 178;
-            // 
-            // ContestPlace
-            // 
-            this.ContestPlace.Text = "Place";
-            this.ContestPlace.Width = 201;
-            // 
-            // ContestDate
-            // 
-            this.ContestDate.Text = "Date";
-            this.ContestDate.Width = 75;
             // 
             // EditViewContestEditChangesBtn
             // 
@@ -169,7 +137,7 @@
             this.ContestsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ContestsDataGridView.Location = new System.Drawing.Point(12, 12);
             this.ContestsDataGridView.Name = "ContestsDataGridView";
-            this.ContestsDataGridView.Size = new System.Drawing.Size(343, 185);
+            this.ContestsDataGridView.Size = new System.Drawing.Size(445, 185);
             this.ContestsDataGridView.TabIndex = 0;
             this.ContestsDataGridView.TabStop = false;
             this.ContestsDataGridView.SelectionChanged += new System.EventHandler(this.ContestsDataGridView_SelectionChanged);
@@ -178,7 +146,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(368, 466);
+            this.ClientSize = new System.Drawing.Size(470, 466);
             this.Controls.Add(this.EditViewContestEditContestNameTb);
             this.Controls.Add(this.EditViewContestEditEndtDateTp);
             this.Controls.Add(this.ContestsDataGridView);
@@ -187,7 +155,6 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.EditViewContestCloseBtn);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.listViewEditViewContest);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.EditViewContestEditContestPlaceTb);
@@ -203,10 +170,6 @@
 
         #endregion
 
-        private System.Windows.Forms.ListView listViewEditViewContest;
-        private System.Windows.Forms.ColumnHeader ContestName;
-        private System.Windows.Forms.ColumnHeader ContestPlace;
-        private System.Windows.Forms.ColumnHeader ContestDate;
         private System.Windows.Forms.Button EditViewContestEditChangesBtn;
         private System.Windows.Forms.DateTimePicker EditViewContestEditEndtDateTp;
         private System.Windows.Forms.DateTimePicker EditViewContestEditStartDateTp;
