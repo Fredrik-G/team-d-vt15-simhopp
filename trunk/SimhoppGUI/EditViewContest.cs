@@ -1,6 +1,7 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
-
+using Simhopp.Model;
 using Simhopp.View;
 namespace SimhoppGUI
 {
@@ -54,19 +55,52 @@ namespace SimhoppGUI
                 cell = selectedCell;
                 break;
             }
-            if (cell != null)
+            if (cell == null)
             {
-                DataGridViewRow row = cell.OwningRow;
+                return;
+            }
+            var row = cell.OwningRow;
+               
+            var startDate = EditViewContestEditStartDateTp.Value.Day.ToString() +
+                            "/" + EditViewContestEditStartDateTp.Value.Month.ToString() +
+                            "/" + EditViewContestEditStartDateTp.Value.Year.ToString();
+            var correctStartDate = Contest.CheckCorrectDate(startDate);
+
+            var endDate = EditViewContestEditStartDateTp.Value.Day.ToString() +
+                          "/" + EditViewContestEditStartDateTp.Value.Month.ToString() +
+                          "/" + EditViewContestEditStartDateTp.Value.Year.ToString();
+            var correctEndDate = Contest.CheckCorrectDate(endDate);
+
+            //Kan datum ens bli fel med DateTimePicker?
+            if (!correctStartDate)
+            {
+                EditViewContestEditStartDateTp.BackColor = Color.Red;                  
+            }
+            if (!correctEndDate)
+            {
+                EditViewContestEditEndtDateTp.BackColor = Color.Red;
+            }
+
+            if (CheckInput.CheckCorrectInput(EditViewContestEditContestNameTb,
+                EditViewContestEditContestPlaceTb) && correctStartDate && correctEndDate)
+            {
                 row.Cells["Name"].Value = EditViewContestEditContestNameTb.Text;
                 row.Cells["Place"].Value = EditViewContestEditContestPlaceTb.Text;
-
-                string date = EditViewContestEditStartDateTp.Value.Day.ToString() +
-                "/" + EditViewContestEditStartDateTp.Value.Month.ToString() +
-                "/" + EditViewContestEditStartDateTp.Value.Year.ToString();
-
-                row.Cells["Date"].Value = date;
+                row.Cells["StartDate"].Value = startDate;
+                row.Cells["EndDate"].Value = endDate;
             }
         }
-        //public event DelegateGetContestsList EventGetContestsList = null;
+
+        private void EditViewContestEditContestNameTb_Click(object sender, EventArgs e)
+        {
+            EditViewContestEditContestNameTb.BackColor = SystemColors.Window;
+            EditViewContestEditContestNameTb.Text = "";
+        }
+
+        private void EditViewContestEditContestPlaceTb_Click(object sender, EventArgs e)
+        {
+            EditViewContestEditContestPlaceTb.BackColor = SystemColors.Window;
+            EditViewContestEditContestPlaceTb.Text = "";
+        }
     }
 }
