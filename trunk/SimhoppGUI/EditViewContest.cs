@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using Simhopp.Model;
 using Simhopp.View;
@@ -22,59 +23,60 @@ namespace SimhoppGUI
         {
             Close();
         }
-
+        /// <summary>
+        /// Shows the selected contest in the textboxes below.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ContestsDataGridView_SelectionChanged(object sender, EventArgs e)
         {
-            DataGridViewCell cell = null;
-            foreach (DataGridViewCell selectedCell in ContestsDataGridView.SelectedCells)
-            {
-                cell = selectedCell;
-                break;
-            }
-            if (cell != null)
-            {
-                DataGridViewRow row = cell.OwningRow;
-                EditViewContestEditContestNameTb.Text = row.Cells["Name"].Value.ToString();
-                EditViewContestEditContestPlaceTb.Text = row.Cells["Place"].Value.ToString();
+            var cell = ContestsDataGridView.SelectedCells.Cast<DataGridViewCell>().FirstOrDefault();
 
-                var date = row.Cells["Date"].Value.ToString().Split('/');
-                var temp = row.Cells["Date"].Value.ToString().Split('/');
-
-                date[0] = temp[1];
-                date[1] = temp[0];
-                var s = date[0] + "/" + date[1] + "/" + date[2];
-                EditViewContestEditStartDateTp.Text = s;
-            }
-        }
-
-        private void EditViewContestEditChangesBtn_Click(object sender, EventArgs e)
-        {
-            DataGridViewCell cell = null;
-            foreach (DataGridViewCell selectedCell in ContestsDataGridView.SelectedCells)
-            {
-                cell = selectedCell;
-                break;
-            }
             if (cell == null)
             {
                 return;
             }
+
             var row = cell.OwningRow;
-               
-            var startDate = EditViewContestEditStartDateTp.Value.Day.ToString() +
-                            "/" + EditViewContestEditStartDateTp.Value.Month.ToString() +
-                            "/" + EditViewContestEditStartDateTp.Value.Year.ToString();
+            EditViewContestEditContestNameTb.Text = row.Cells["Name"].Value.ToString();
+            EditViewContestEditContestPlaceTb.Text = row.Cells["Place"].Value.ToString();
+
+            var date = row.Cells["Date"].Value.ToString().Split('/');
+            var temp = row.Cells["Date"].Value.ToString().Split('/');
+
+            date[0] = temp[1];
+            date[1] = temp[0];
+            var s = date[0] + "/" + date[1] + "/" + date[2];
+            EditViewContestEditStartDateTp.Text = s;
+
+        }
+        /// <summary>
+        /// Updates the selected contest with the input from the textboxes. 
+        /// Also checks if the input is correct.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void EditViewContestEditChangesBtn_Click(object sender, EventArgs e)
+        {
+            var cell = ContestsDataGridView.SelectedCells.Cast<DataGridViewCell>().FirstOrDefault();
+
+            if (cell == null)
+            {
+                return;
+            }
+
+            var row = cell.OwningRow;
+
+            var startDate = StartScreen.CreateDateString(EditViewContestEditStartDateTp);
             var correctStartDate = Contest.CheckCorrectDate(startDate);
 
-            var endDate = EditViewContestEditStartDateTp.Value.Day.ToString() +
-                          "/" + EditViewContestEditStartDateTp.Value.Month.ToString() +
-                          "/" + EditViewContestEditStartDateTp.Value.Year.ToString();
+            var endDate = StartScreen.CreateDateString(EditViewContestEditEndtDateTp);
             var correctEndDate = Contest.CheckCorrectDate(endDate);
 
             //Kan datum ens bli fel med DateTimePicker?
             if (!correctStartDate)
             {
-                EditViewContestEditStartDateTp.BackColor = Color.Red;                  
+                EditViewContestEditStartDateTp.BackColor = Color.Red;
             }
             if (!correctEndDate)
             {

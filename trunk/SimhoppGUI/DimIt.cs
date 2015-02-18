@@ -5,9 +5,9 @@ using System.Windows.Forms;
 
 namespace SimhoppGUI
 {
-    public class DialogOverlay : IDisposable
+    public class DimIt : IDisposable
     {
-        public DialogOverlay()
+        public DimIt()
         {
             var openForms = Application.OpenForms.Count;
             for (var i = 0; i < openForms; ++i)
