@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Simhopp.Model
 {
+    /// <summary>
+    /// Class that holds information about a trick (name and difficulty).
+    /// </summary>
     public class Trick
     {
         #region Data

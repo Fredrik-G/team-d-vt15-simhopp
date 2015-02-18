@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Simhopp.Model
 {
     /// <summary>
-    /// Class the hold a diver object, three jumpResult objects and one result
+    /// Class the hold a diver object, three jumpResult objects and one result.
     /// </summary>
     public class Participant
     {

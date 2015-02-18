@@ -149,6 +149,11 @@ namespace Simhopp.Model
                 Console.WriteLine(e.Message);
             }
         }
+
+        /// <summary>
+        /// Adds a judge to the judgelist. Catches exeptions if there should be something wrong with the judge that should be added. 
+        /// </summary>
+        /// <param name="judge"></param>
         public void AddJudge(Judge judge)
         {
             try
@@ -188,20 +193,37 @@ namespace Simhopp.Model
             }
         }
 
+        /// <summary>
+        /// Gets the number of participants in participants list.
+        /// </summary>
+        /// <returns></returns>
         public int GetNumberOfParticipants()
         {
             return participantsList.Count;
         }
+        /// <summary>
+        /// Gets the number of participants in participants list.
+        /// </summary>
+        /// <returns></returns>
         public int GetNumberOfJudges()
         {
             return judgeList.Count;
         }
-
+        /// <summary>
+        /// Returns the difficulty of a given trick name.
+        /// </summary>
+        /// <param name="trickName"></param>
+        /// <returns></returns>
         public double GetTrickDifficultyFromTrickHashTable(string trickName)
         {
             return trickList.GetDifficultyByName(trickName);
         }
 
+        /// <summary>
+        /// Gets the result for a given participant.
+        /// </summary>
+        /// <param name="ssn">ssn for the participant.</param>
+        /// <returns></returns>
         public double GetResultFromParticipant(string ssn)
         {
             foreach (var participant in participantsList)
@@ -214,6 +236,9 @@ namespace Simhopp.Model
             throw new InstanceNotFoundException("Person with " + ssn + " not found.");
         }
 
+        /// <summary>
+        /// Simulates a contest with three jump sets.
+        /// </summary>
         public void SimulateContest()
         {
             for (int jumpNo = 0; jumpNo < 3; jumpNo++)
@@ -269,6 +294,7 @@ namespace Simhopp.Model
             }
             return resultList;
         }
+
         /// <summary>
         /// Creates a HTML file with the contests result.
         /// </summary>
@@ -289,6 +315,7 @@ namespace Simhopp.Model
                 }
             }
         }
+
         /// <summary>
         /// Sort participantslist by totalpoints in ascending/descending order.
         /// <param name="list">List to sort</param>
