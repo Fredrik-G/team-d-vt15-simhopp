@@ -114,7 +114,8 @@ namespace Simhopp
                         Console.ReadKey();
                         break;
                     case "8":
-                        contest.SortParticipants(ref contest.participantsList, true);
+                        var participants = contest.GetParticipants();
+                        contest.SortParticipants(ref participants, true);
                         contest.PrintResult();
                         Console.ReadKey();
                         break;

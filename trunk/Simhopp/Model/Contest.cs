@@ -8,6 +8,9 @@ using System.Text.RegularExpressions;
 
 namespace Simhopp.Model
 {
+    /// <summary>
+    /// Contains information about a contest and controlls it.
+    /// </summary>
     public class Contest
     {
         #region Data
@@ -17,8 +20,7 @@ namespace Simhopp.Model
         private string endDate;
         private TrickList trickList = new TrickList();
         private List<Judge> judgeList = new List<Judge>();
-        public List<Participant> participantsList = new List<Participant>();
-        //!!!!!!!!!
+        private List<Participant> participantsList = new List<Participant>();
         private List<Participant> liveResultList;
 
         #endregion
@@ -108,6 +110,11 @@ namespace Simhopp.Model
         #endregion
 
         #region Methods
+
+        public List<Participant> GetParticipants()
+        {
+            return participantsList;
+        }
 
         public bool IsJudgeInContest(Judge judge)
         {
