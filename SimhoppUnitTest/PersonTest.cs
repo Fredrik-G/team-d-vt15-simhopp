@@ -47,22 +47,22 @@ namespace SimhoppUnitTest
             Diver n2 = new Diver("-Gummus", "US--A", "123205555");
 
             //Positiv test
-            NUnit.Framework.Assert.AreEqual(Person.CheckCorrectName(p1.Name), true);
-            NUnit.Framework.Assert.AreEqual(Person.CheckCorrectNationality(p1.Nationality), true);
-            NUnit.Framework.Assert.AreEqual(Person.CheckCorrectSSN(p1.SSN, p1.Nationality), true);
+            Assert.AreEqual(Person.CheckCorrectName(p1.Name), true);
+            Assert.AreEqual(Person.CheckCorrectNationality(p1.Nationality), true);
+            Assert.AreEqual(Person.CheckCorrectSSN(p1.SSN, p1.Nationality), true);
 
-            NUnit.Framework.Assert.AreEqual(Person.CheckCorrectName(p2.Name), true);
-            NUnit.Framework.Assert.AreEqual(Person.CheckCorrectNationality(p2.Nationality), true);
-            NUnit.Framework.Assert.AreEqual(Person.CheckCorrectSSN(p2.SSN, p2.Nationality), true);
+            Assert.AreEqual(Person.CheckCorrectName(p2.Name), true);
+            Assert.AreEqual(Person.CheckCorrectNationality(p2.Nationality), true);
+            Assert.AreEqual(Person.CheckCorrectSSN(p2.SSN, p2.Nationality), true);
 
             //Negativa test
-            NUnit.Framework.Assert.AreEqual(Person.CheckCorrectName(n1.Name), false);
-            NUnit.Framework.Assert.AreEqual(Person.CheckCorrectNationality(n1.Nationality), false);
-            NUnit.Framework.Assert.AreEqual(Person.CheckCorrectSSN(n1.SSN, n1.Nationality), false);
+            Assert.AreEqual(Person.CheckCorrectName(n1.Name), false);       
+            Assert.AreEqual(Person.CheckCorrectNationality(n1.Nationality), false);
+            Assert.AreEqual(Person.CheckCorrectSSN(n1.SSN, n1.Nationality), false);
 
-            NUnit.Framework.Assert.AreEqual(Person.CheckCorrectName(n2.Name), false);
-            NUnit.Framework.Assert.AreEqual(Person.CheckCorrectNationality(n2.Nationality), false);
-            NUnit.Framework.Assert.AreEqual(Person.CheckCorrectSSN(n2.SSN, n2.Nationality), false);
+            Assert.AreEqual(Person.CheckCorrectName(n2.Name), false);
+            Assert.AreEqual(Person.CheckCorrectNationality(n2.Nationality), false);
+            Assert.AreEqual(Person.CheckCorrectSSN(n2.SSN, n2.Nationality), false);
         }
     }
 }
