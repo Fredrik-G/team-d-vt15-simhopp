@@ -75,6 +75,7 @@
     <Compile Include="Addjudge.Designer.cs">
       <DependentUpon>Addjudge.cs</DependentUpon>
     </Compile>
+    <Compile Include="CheckInput.cs" />
     <Compile Include="DimIt.cs" />
     <Compile Include="EditViewContest.cs">
       <SubType>Form</SubType>
