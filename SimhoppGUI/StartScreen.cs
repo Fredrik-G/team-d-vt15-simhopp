@@ -1,15 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Simhopp.View;
-using SimhoppGUI;
+
 namespace SimhoppGUI
 {
     public partial class StartScreen : Form, IStartScreen
@@ -19,86 +11,106 @@ namespace SimhoppGUI
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             InitializeComponent();
         }
+        /// <summary>
+        /// Creates a correct date string from DateTimePicker.
+        /// dd/mm/yyyy
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public static string CreateDateString(DateTimePicker date)
+        {
+            return date.Value.Day.ToString() +
+                           "/" + date.Value.Month.ToString() +
+                           "/" + date.Value.Year.ToString();
+        }
+        /// <summary>
+        /// Creates a NewContest-form and attemps to create a new contest with the input from NewContest.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StartScreenNewContesttBtn_Click(object sender, EventArgs e)
         {
-            using (new DialogOverlay())
-            using (NewContest newContest = new NewContest())
+            //Dims the background form and makes it non-interactive.
+            using (new DimIt())
+            using (var newContest = new NewContest())
             {
                 if (newContest.ShowDialog(this) == DialogResult.OK)
                 {
                     newContest.Show();
                 }
-                if (EventCreateContest != null)
+                if (EventCreateContest == null)
                 {
-                    string startDate = newContest.NewContestStartDateDTP.Value.Day.ToString() +
-                                  "/" + newContest.NewContestStartDateDTP.Value.Month.ToString() +
-                                  "/" + newContest.NewContestStartDateDTP.Value.Year.ToString();
-                    string endDate = newContest.NewContestEndDateDTP.Value.Day.ToString() +
-                                  "/" + newContest.NewContestEndDateDTP.Value.Month.ToString() +
-                                  "/" + newContest.NewContestEndDateDTP.Value.Year.ToString();
-                    try
-                    {
-                        this.EventCreateContest(newContest.newContestCityTB.Text, newContest.newContestNameTB.Text, startDate, endDate);
-                    }
-                    catch (Exception exception)
-                    {
-
-                    }
+                    return;
+                }
+                var startDate = CreateDateString(newContest.NewContestStartDateDTP);
+                var endDate = CreateDateString(newContest.NewContestEndDateDTP);
+                try
+                {
+                    EventCreateContest(newContest.newContestCityTB.Text, newContest.newContestNameTB.Text, startDate, endDate);
+                }
+                catch (Exception exception)
+                {
+                    // do something
                 }
             }
         }
         private void StartScreenStartContestBtn_Click(object sender, EventArgs e)
         {
-            using (new DialogOverlay())
-            using (StartContest StartContest = new StartContest())
+            //Dims the background form and makes it non-interactive.
+            using (new DimIt())
+            using (var startContest = new StartContest())
             {
-                if (StartContest.ShowDialog(this) == DialogResult.OK)
+                if (startContest.ShowDialog(this) == DialogResult.OK)
                 {
-                    StartContest.Show();
+                    startContest.Show();
                 }
             }
         }
         private void StartScreenEditViewContestBtn_Click(object sender, EventArgs e)
         {
-            using (new DialogOverlay())
-            using (EditViewContest Edit_viewContest = new EditViewContest(EventGetContestsList))
+            //Dims the background form and makes it non-interactive.
+            using (new DimIt())
+            using (var editViewContest = new EditViewContest(EventGetContestsList))
             {
-                if (Edit_viewContest.ShowDialog(this) == DialogResult.OK)
+                if (editViewContest.ShowDialog(this) == DialogResult.OK)
                 {
-                    Edit_viewContest.Show();
+                    editViewContest.Show();
                 }
             }
         }
         private void StartScreenAddDiverContestBtn_Click(object sender, EventArgs e)
         {
-            using (new DialogOverlay())
-            using (AddDiver AddDiver = new AddDiver())
+            //Dims the background form and makes it non-interactive.
+            using (new DimIt())
+            using (var addDiver = new AddDiver())
             {
-                if (AddDiver.ShowDialog(this) == DialogResult.OK)
+                if (addDiver.ShowDialog(this) == DialogResult.OK)
                 {
-                    AddDiver.Show();
+                    addDiver.Show();
                 }
             }
         }
         private void StartScreenAddJudgeBtn_Click(object sender, EventArgs e)
         {
-            using (new DialogOverlay())
-            using (Addjudge Addjudge = new Addjudge())
+            //Dims the background form and makes it non-interactive.
+            using (new DimIt())
+            using (var addjudge = new Addjudge())
             {
-                if (Addjudge.ShowDialog(this) == DialogResult.OK)
+                if (addjudge.ShowDialog(this) == DialogResult.OK)
                 {
-                    Addjudge.Show();
+                    addjudge.Show();
                 }
             }
         }
         private void StartScreenViewJudgeClient_Click(object sender, EventArgs e)
         {
-            using (new DialogOverlay())
-            using (JudgeClient JudgeClient = new JudgeClient())
+            //Dims the background form and makes it non-interactive.
+            using (new DimIt())
+            using (var judgeClient = new JudgeClient())
             {
-                if (JudgeClient.ShowDialog(this) == DialogResult.OK)
+                if (judgeClient.ShowDialog(this) == DialogResult.OK)
                 {
-                    JudgeClient.Show();
+                    judgeClient.Show();
                 }
             }
         }

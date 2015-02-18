@@ -24,6 +24,11 @@ namespace SimhoppGUI
             Close();
         }
 
+        /// <summary>
+        /// Closes this form if the input is correct. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void newContestCreateBtn_Click(object sender, EventArgs e)
         {
             //var correctDate = CheckInput.CheckCorrectDate(NewContestStartDateDTP, NewContestEndDateDTP);

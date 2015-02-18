@@ -9,7 +9,7 @@ using Simhopp.Model;
 
 namespace SimhoppGUI
 {
-    public class CheckInput
+    public abstract class CheckInput
     {
         #region Correct Input
         public static bool CheckCorrectInput(TextBox nameTextBox, TextBox placeTextBox)
