@@ -26,31 +26,22 @@ namespace SimhoppGUI
 
         private void newContestCreateBtn_Click(object sender, EventArgs e)
         {
-            if (!Contest.CheckCorrectName(newContestNameTB.Text))
+            //var correctDate = CheckInput.CheckCorrectDate(NewContestStartDateDTP, NewContestEndDateDTP);
+            if(CheckInput.CheckCorrectInput(newContestNameTB, newContestCityTB))
             {
-                newContestNameTB.BackColor = Color.Red;
-            }
-            if (!Contest.CheckCorrectPlace(newContestCityTB.Text))
-            {
-                newContestCityTB.BackColor = Color.Red;
-            }
-
-            if (Contest.CheckCorrectName(newContestNameTB.Text) &&
-                Contest.CheckCorrectPlace(newContestCityTB.Text))
-            {
-                DialogResult = DialogResult.OK;
-            }
+               DialogResult = DialogResult.OK; 
+            }          
         }
 
         private void newContestNameTB_Click(object sender, EventArgs e)
         {
-            newContestNameTB.BackColor = System.Drawing.SystemColors.Window;
+            newContestNameTB.BackColor = SystemColors.Window;
             newContestNameTB.Text = "";
         }
 
         private void newContestCityTB_Click(object sender, EventArgs e)
         {
-            newContestCityTB.BackColor = System.Drawing.SystemColors.Window;
+            newContestCityTB.BackColor = SystemColors.Window;
             newContestCityTB.Text = "";
         }
 

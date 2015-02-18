@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.EditViewContestEditChangesBtn = new System.Windows.Forms.Button();
             this.EditViewContestEditEndtDateTp = new System.Windows.Forms.DateTimePicker();
             this.EditViewContestEditStartDateTp = new System.Windows.Forms.DateTimePicker();
@@ -39,12 +40,13 @@
             this.label4 = new System.Windows.Forms.Label();
             this.EditViewContestCloseBtn = new System.Windows.Forms.Button();
             this.ContestsDataGridView = new System.Windows.Forms.DataGridView();
+            this.toolTipEditViewContest = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.ContestsDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // EditViewContestEditChangesBtn
             // 
-            this.EditViewContestEditChangesBtn.Location = new System.Drawing.Point(66, 420);
+            this.EditViewContestEditChangesBtn.Location = new System.Drawing.Point(103, 414);
             this.EditViewContestEditChangesBtn.Name = "EditViewContestEditChangesBtn";
             this.EditViewContestEditChangesBtn.Size = new System.Drawing.Size(113, 27);
             this.EditViewContestEditChangesBtn.TabIndex = 18;
@@ -81,6 +83,8 @@
             this.EditViewContestEditContestPlaceTb.Name = "EditViewContestEditContestPlaceTb";
             this.EditViewContestEditContestPlaceTb.Size = new System.Drawing.Size(200, 20);
             this.EditViewContestEditContestPlaceTb.TabIndex = 14;
+            this.toolTipEditViewContest.SetToolTip(this.EditViewContestEditContestPlaceTb, "\"Stockholm\", \"Boulogne-Billancourt\"");
+            this.EditViewContestEditContestPlaceTb.Click += new System.EventHandler(this.EditViewContestEditContestPlaceTb_Click);
             // 
             // EditViewContestEditContestNameTb
             // 
@@ -88,6 +92,8 @@
             this.EditViewContestEditContestNameTb.Name = "EditViewContestEditContestNameTb";
             this.EditViewContestEditContestNameTb.Size = new System.Drawing.Size(200, 20);
             this.EditViewContestEditContestNameTb.TabIndex = 13;
+            this.toolTipEditViewContest.SetToolTip(this.EditViewContestEditContestNameTb, "\"Jerusalem-VM\", \"He\'Man\", \"Asp.Net\"");
+            this.EditViewContestEditContestNameTb.Click += new System.EventHandler(this.EditViewContestEditContestNameTb_Click);
             // 
             // label2
             // 
@@ -118,7 +124,7 @@
             // 
             // EditViewContestCloseBtn
             // 
-            this.EditViewContestCloseBtn.Location = new System.Drawing.Point(203, 420);
+            this.EditViewContestCloseBtn.Location = new System.Drawing.Point(240, 414);
             this.EditViewContestCloseBtn.Name = "EditViewContestCloseBtn";
             this.EditViewContestCloseBtn.Size = new System.Drawing.Size(113, 27);
             this.EditViewContestCloseBtn.TabIndex = 20;
@@ -181,5 +187,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button EditViewContestCloseBtn;
         private System.Windows.Forms.DataGridView ContestsDataGridView;
+        private System.Windows.Forms.ToolTip toolTipEditViewContest;
     }
 }
