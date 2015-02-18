@@ -162,17 +162,20 @@ namespace SimhoppUnitTest
             for (int i = 0; i < 15; i++)
             {
                 c1.AddParticipant(d3);
-                c1.participantsList[i].TotalPoints = i;
+                c1.GetParticipants()[i].TotalPoints = i;
+                c1.GetParticipants()[i].TotalPoints = i;
             }
             
-            Assert.AreEqual(0, c1.participantsList[0].TotalPoints);
-            Assert.AreEqual(2, c1.participantsList[2].TotalPoints);
+            Assert.AreEqual(0, c1.GetParticipants()[0].TotalPoints);
+            Assert.AreEqual(2, c1.GetParticipants()[2].TotalPoints);
 
-            c1.SortParticipants(ref c1.participantsList, true);
 
-            Assert.AreEqual(14, c1.participantsList[0].TotalPoints);
-            Assert.AreEqual(13, c1.participantsList[1].TotalPoints);
-            Assert.AreEqual(12, c1.participantsList[2].TotalPoints);
+            var participants = c1.GetParticipants();
+            c1.SortParticipants(ref participants, true);
+
+            Assert.AreEqual(14, c1.GetParticipants()[0].TotalPoints);
+            Assert.AreEqual(13, c1.GetParticipants()[1].TotalPoints);
+            Assert.AreEqual(12, c1.GetParticipants()[2].TotalPoints);
         }
 
         [Test]
