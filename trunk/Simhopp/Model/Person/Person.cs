@@ -18,6 +18,7 @@ namespace Simhopp.Model
         protected string nationality;
         protected string ssn;
         #endregion
+
         /// <summary>
         /// Default constructor 
         /// </summary>
@@ -79,22 +80,44 @@ namespace Simhopp.Model
             }
         }
         #endregion
+
         /// <summary>
         /// Regex patterns for testing input data
         /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
         #region Check correct input
+        
+        /// <summary>
+        /// Allowed characters: "A-Z ',.-"
+        /// "Jimmy Makkonen", "J. Makkonen"
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns>returns true or false</returns>
         public static bool CheckCorrectName(string name)
         {
             Regex patternName = new Regex(@"^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*$");
             return patternName.IsMatch(name);
         }
+
+        /// <summary>
+        /// Allowed characters: "A-Z ,-"
+        /// "Sweden", "USA"
+        /// </summary>
+        /// <param name="nationality"></param>
+        /// <returns>returns true or false</returns>
         public static bool CheckCorrectNationality(string nationality)
         {
             Regex patternNationality = new Regex(@"^[a-zA-Z]+(([\,\- ][a-zA-Z ])?)*$");
             return patternNationality.IsMatch(nationality);
         }
+
+        /// <summary>
+        /// Allowed characters: "1-9 -"
+        /// Swedish: yyyymmdd-xxxx
+        /// Rest: xxx-yy-zzzz
+        /// </summary>
+        /// <param name="ssn"></param>
+        /// <param name="nationality"></param>
+        /// <returns>returns true or false</returns>
         public static bool CheckCorrectSSN(string ssn, string nationality)
         {
             if (nationality == "Sweden")

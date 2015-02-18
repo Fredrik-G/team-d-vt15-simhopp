@@ -8,12 +8,20 @@ using System.Text.RegularExpressions;
 
 namespace Simhopp.Model
 {
+    /// <summary>
+    /// Class that inherits from person class and holds information about a diver.
+    /// </summary>
     public class Diver : Person
     {
         /// <summary>
         /// A default constructor without parameters
         /// </summary>
-        public Diver() { }
+        public Diver()
+        {
+            this.name = "";
+            this.nationality = "";
+            this.ssn = "";
+        }
         /// <summary>
         /// A constructor that do take paramteters
         /// </summary>

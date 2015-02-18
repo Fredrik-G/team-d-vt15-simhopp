@@ -214,13 +214,12 @@ namespace Simhopp.Model
             throw new InstanceNotFoundException("Person with " + ssn + " not found.");
         }
 
-
         public void SimulateContest()
         {
             for (int jumpNo = 0; jumpNo < 3; jumpNo++)
             {
                 MakeJump(jumpNo);
-                SortParticipants(ref participantsList, true);
+                SortParticipants(ref participantsList, false);
             }
         }
 
