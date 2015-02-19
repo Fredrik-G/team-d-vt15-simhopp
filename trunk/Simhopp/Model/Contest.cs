@@ -21,7 +21,7 @@ namespace Simhopp.Model
         private TrickList trickList = new TrickList();
         private List<Judge> judgeList = new List<Judge>();
         private List<Participant> participantsList = new List<Participant>();
-        private List<Participant> liveResultList;
+        private List<Participant> liveResultList = new List<Participant>();
 
         #endregion
 
@@ -248,11 +248,17 @@ namespace Simhopp.Model
         /// </summary>
         public void SimulateContest()
         {
+            liveResultList.Clear();
+            foreach (var participant in participantsList)
+            {
+                liveResultList.Add(participant);
+            }
             for (int jumpNo = 0; jumpNo < 3; jumpNo++)
             {
                 MakeJump(jumpNo);
                 SortParticipants(ref participantsList, false);
             }
+            participantsList.Clear();
         }
 
         /// <summary>
@@ -282,7 +288,7 @@ namespace Simhopp.Model
         /// </summary>
         public void PrintResult()
         {
-            foreach (var participant in participantsList)
+            foreach (var participant in liveResultList)
             {
                 Console.WriteLine(participant.GetDiverInfo());
             }
@@ -349,7 +355,7 @@ namespace Simhopp.Model
             Console.Clear();
             Console.WriteLine("Round: " + (jumpNo + 1));
             int i = 1;
-            liveResultList = new List<Participant>(participantsList);
+            
             SortParticipants(ref liveResultList, true);
             foreach (var participant in liveResultList)
             {

@@ -1,120 +1,147 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
-  <Class Name="Simhopp.SimhoppConsole" Collapsed="true">
-    <Position X="11.25" Y="2.25" Width="1.5" />
+  <Comment CommentText="Basklass för Diver och Judge. (Namn, Land, SSN)">
+    <Position X="2.688" Y="1.312" Height="0.75" Width="1.7" />
+  </Comment>
+  <Comment CommentText="Namn och svårighetsgrad för ett trick. ">
+    <Position X="5.156" Y="1.323" Height="0.75" Width="1.7" />
+  </Comment>
+  <Comment CommentText="Hashtabell med alla trick inlagda. ">
+    <Position X="7.635" Y="1.354" Height="0.75" Width="1.7" />
+  </Comment>
+  <Comment CommentText="Resultat för ett hopp med uträkning för poängen för hoppet. ">
+    <Position X="10.281" Y="1.333" Height="0.75" Width="1.7" />
+  </Comment>
+  <Comment CommentText="Ett deltagarobjekt som innehåller en Diver, tre JumpResultobjekt och den totala poängen för deltagaren.">
+    <Position X="12.76" Y="0.958" Height="1.125" Width="1.7" />
+  </Comment>
+  <Comment CommentText="Tävlingsobjekt som innehåller listor för deltagare såväl som domare. Har också information om tävlingens namn, plats och datum. Styr hur en tävling utförs. ">
+    <Position X="15.531" Y="0.771" Height="1.333" Width="1.7" />
+  </Comment>
+  <Comment CommentText="Konsollprogram för att administrera en tävling med hjälp av menysnurra.">
+    <Position X="18.24" Y="1.323" Height="0.76" Width="1.7" />
+  </Comment>
+  <Comment CommentText="Skapar ett simhoppconsoleobjekt och kör det. ">
+    <Position X="20.479" Y="1.292" Height="0.75" Width="1.7" />
+  </Comment>
+  <Comment CommentText="Kopplingen mellan applikationen och SQLitedatabasen. Ställer querys till databasen.">
+    <Position X="24.312" Y="1.302" Height="0.75" Width="2.565" />
+  </Comment>
+  <Class Name="Simhopp.SimhoppConsole">
+    <Position X="18" Y="2.25" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AEACQAQAAAAAAQIAAAAAAAAAAIBAgBCCAAAAAIAAAAA=</HashCode>
       <FileName>ConsoleSimhopp.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Simhopp.Program" Collapsed="true">
-    <Position X="10.25" Y="3.25" Width="1.5" />
+  <Class Name="Simhopp.Program">
+    <Position X="20.5" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Simhopp.Simhopp" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="9.25" Y="2.25" Width="1.5" />
+    <Position X="32.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AEAAAAQAAAAAAQAEAAAAAAABAIBAAACCAAAAAACAAAA=</HashCode>
       <FileName>Simhopp.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="Simhopp.Model.Contest" Collapsed="true">
-    <Position X="5.25" Y="0.5" Width="1.5" />
+  <Class Name="Simhopp.Model.Contest">
+    <Position X="15" Y="2.25" Width="2.75" />
     <TypeIdentifier>
       <HashCode>QEAAQAABQARYAgAAACQAAAwgBIAEQAACBEhAAMAQAAA=</HashCode>
       <FileName>Model\Contest.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Simhopp.Model.DatabaseController" Collapsed="true">
-    <Position X="7" Y="0.5" Width="1.5" />
+  <Class Name="Simhopp.Model.DatabaseController">
+    <Position X="24.25" Y="2.25" Width="2.75" />
     <TypeIdentifier>
       <HashCode>IAAAEAAAAAAAgAAgBAAAAAAEAAAAAAAAAAAAASEAAAA=</HashCode>
       <FileName>Model\DatabaseController.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Simhopp.Model.JumpResult" Collapsed="true">
-    <Position X="8.75" Y="0.5" Width="1.5" />
+  <Class Name="Simhopp.Model.JumpResult">
+    <Position X="10" Y="2.25" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAECAAABAAAAAAAABAAAAAAAAAACAABAAAAAQAAAACA=</HashCode>
       <FileName>Model\JumpResult.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Simhopp.Model.Participant" Collapsed="true">
-    <Position X="7" Y="1.5" Width="1.5" />
+  <Class Name="Simhopp.Model.Participant">
+    <Position X="12.5" Y="2.25" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAIAQAACAAAAAAAABAAAAIAAAQAAAAEAAQAQAIAAACQ=</HashCode>
       <FileName>Model\Participant.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Simhopp.Model.Diver" Collapsed="true">
-    <Position X="0.5" Y="4.5" Width="1.5" />
+  <Class Name="Simhopp.Model.Diver">
+    <Position X="1.5" Y="6.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Model\Person\Diver.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Simhopp.Model.Judge" Collapsed="true">
-    <Position X="2.75" Y="4.5" Width="1.5" />
+  <Class Name="Simhopp.Model.Judge">
+    <Position X="3.5" Y="6.5" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Model\Person\Judge.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Simhopp.Model.Person">
-    <Position X="1.25" Y="0.5" Width="2.5" />
+    <Position X="2.25" Y="2.25" Width="2.5" />
     <TypeIdentifier>
       <HashCode>EEAAAgAAAAAAAAAAAAAAAAQAAAAEAAAQAAAJAAAACAA=</HashCode>
       <FileName>Model\Person\Person.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Simhopp.Model.Trick" Collapsed="true">
-    <Position X="5.25" Y="2.5" Width="1.5" />
+  <Class Name="Simhopp.Model.Trick">
+    <Position X="5" Y="2.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAABAAAAAQAAAAAAAAQAAAAEAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Model\Trick.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Simhopp.Model.TrickList" Collapsed="true">
-    <Position X="7" Y="2.5" Width="1.5" />
+  <Class Name="Simhopp.Model.TrickList">
+    <Position X="7.25" Y="2.25" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AABAAABAAABACQAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
       <FileName>Model\TrickList.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Simhopp.Presenter.PresenterStartScreen" Collapsed="true">
-    <Position X="5.25" Y="1.5" Width="1.5" />
+  <Class Name="Simhopp.Presenter.PresenterStartScreen">
+    <Position X="32.25" Y="2.5" Width="3" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAABAAAAAAgAAACAAAA=</HashCode>
       <FileName>Presenter\PresenterStartScreen.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Interface Name="Simhopp.Model.ISimhopp" Collapsed="true">
-    <Position X="5.25" Y="3.75" Width="1.5" />
+    <Position X="32.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAACAAAA=</HashCode>
       <FileName>Model\ISimhopp.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Simhopp.View.IStartScreen" Collapsed="true">
-    <Position X="7" Y="3.75" Width="1.5" />
+    <Position X="34" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAQAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>View\IStartScreen.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Delegate Name="Simhopp.View.DelegateCreateContest" Collapsed="true">
-    <Position X="5.25" Y="4.75" Width="1.5" />
+    <Position X="32.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAACAABAAAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>View\IStartScreen.cs</FileName>
     </TypeIdentifier>
   </Delegate>
   <Delegate Name="Simhopp.View.DelegateGetContestsList" Collapsed="true">
-    <Position X="7" Y="4.75" Width="1.5" />
+    <Position X="34" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>View\IStartScreen.cs</FileName>
