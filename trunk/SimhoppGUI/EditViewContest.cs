@@ -36,19 +36,25 @@ namespace SimhoppGUI
             {
                 return;
             }
+            try
+            {
+                var row = cell.OwningRow;
+                EditViewContestEditContestNameTb.Text = row.Cells["Name"].Value.ToString();
+                EditViewContestEditContestPlaceTb.Text = row.Cells["Place"].Value.ToString();
 
-            var row = cell.OwningRow;
-            EditViewContestEditContestNameTb.Text = row.Cells["Name"].Value.ToString();
-            EditViewContestEditContestPlaceTb.Text = row.Cells["Place"].Value.ToString();
+                var date = row.Cells["StartDate"].Value.ToString().Split('/');
+                var temp = row.Cells["EndDate"].Value.ToString().Split('/');
 
-            var date = row.Cells["Date"].Value.ToString().Split('/');
-            var temp = row.Cells["Date"].Value.ToString().Split('/');
-
-            date[0] = temp[1];
-            date[1] = temp[0];
-            var s = date[0] + "/" + date[1] + "/" + date[2];
-            EditViewContestEditStartDateTp.Text = s;
-
+                date[0] = temp[1];
+                date[1] = temp[0];
+                var s = date[0] + "/" + date[1] + "/" + date[2];
+                EditViewContestEditStartDateTp.Text = s;
+            }
+            catch (Exception exception)
+            {
+                //do something
+            }
+            
         }
         /// <summary>
         /// Updates the selected contest with the input from the textboxes. 
