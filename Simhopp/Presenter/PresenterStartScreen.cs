@@ -23,11 +23,37 @@ namespace Simhopp.Presenter
             this.View = view;
             this.View.EventCreateContest += CreateContest;
             this.View.EventGetContestsList += GetContestsList;
+            this.View.EventGetJudgesList += GetJudgesList;
+            this.View.EventGetDiversList += GetDiversList;
+            this.View.EventReadFromFile += ReadFromFile;
+            this.View.EventAddJudgeToList += AddJudgeToList;
+            this.View.EventAddDiverToList += AddDiverToList;
+            this.View.EventRemoveJudgeFromList += RemoveJudgeFromList;
+            this.View.EventRemoveDiverFromList += RemoveDiverFromList;
+
             //this.View.EventAddParticipant += AddParticipant;
             //this.View.EventAddJudge += AddJudge;
             //this.View.EventGetTrickDifficultyFromTrickHashTable += GetTrickDifficultyFromTrickHashTable;
             //this.View.EventGetResultFromParticipant += GetResultFromParticipant;
         }
+
+        #region Getters
+        public BindingList<Contest> GetContestsList()
+        {
+            return this.Model.GetContestsList();
+        }
+
+        public BindingList<Judge> GetJudgesList()
+        {
+            
+            return this.Model.GetJudgesList();
+        }
+
+        public BindingList<Diver> GetDiversList()
+        {
+            return this.Model.GetDiversList();
+        }
+        #endregion
 
         #region Methods
 
@@ -35,9 +61,28 @@ namespace Simhopp.Presenter
         {
             this.Model.CreateContest(place, name, startDate, endDate);
         }
-        public BindingList<Contest> GetContestsList()
+
+        public void ReadFromFile(string fileName)
         {
-            return this.Model.GetContestsList();
+            this.Model.ReadFromFile(fileName);
+        }
+
+        public void AddJudgeToList(string name, string nationality, string ssn)
+        {
+            this.Model.AddJudgeToList(name, nationality, ssn);
+        }
+        public void AddDiverToList(string name, string nationality, string ssn)
+        {
+            this.Model.AddDiverToList(name, nationality, ssn);
+        }
+
+        void RemoveJudgeFromList(string ssn)
+        {
+            this.Model.RemoveJudgeFromList(ssn);
+        }
+        void RemoveDiverFromList(string ssn)
+        {
+            this.Model.RemoveDiverFromList(ssn);
         }
         //public void AddParticipant(Diver diver)
         //{
