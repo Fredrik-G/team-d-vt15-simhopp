@@ -88,6 +88,7 @@
     <None Include="App.config" />
     <None Include="SimhoppClassDiagram.cd" />
     <None Include="packages.config" />
+    <None Include="SimhoppClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Model\Files\diver.txt">
