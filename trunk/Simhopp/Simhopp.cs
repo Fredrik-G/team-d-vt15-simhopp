@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
-using System.Reflection;
+using System.Linq;
 using Simhopp.Model;
 
 namespace Simhopp
@@ -19,17 +16,17 @@ namespace Simhopp
         /// <summary>
         /// A list that holds every judge that is stored in the database
         /// </summary>
-        List<Judge> judgeList = new List<Judge>();
+        BindingList<Judge> judgeList = new BindingList<Judge>();
         /// <summary>
         /// A list that holds every Diver that is stored in the database
         /// </summary>
-        List<Diver> diverList = new List<Diver>();
+        BindingList<Diver> diverList = new BindingList<Diver>();
 
         BindingList<Contest> contestList = new BindingList<Contest>();
 
         #endregion
-     
-        #region Methods
+
+        #region Getters
         /// <summary>
         /// Returns contests list.
         /// </summary>
@@ -39,9 +36,62 @@ namespace Simhopp
             return contestList;
         }
         /// <summary>
-        /// 
+        /// Returns judges list.
         /// </summary>
-        public void CreateContest(string place, string name, string startDate, string endDate)//, string endDate)
+        /// <returns></returns>
+        public BindingList<Judge> GetJudgesList()
+        {
+            return judgeList;
+        }
+        /// <summary>
+        /// Returns divers list.
+        /// </summary>
+        /// <returns></returns>
+        public BindingList<Diver> GetDiversList()
+        {
+            return diverList;
+        }
+        /// <summary>
+        /// A function that get a judge by its ssn
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns>returns a judge object</returns>
+        public Judge GetJudgeBySSN(string ssn)
+        {
+            try
+            {
+                return judgeList.SingleOrDefault(x => x.SSN == ssn);
+            }
+            catch (ArgumentNullException exception)
+            {
+                return null;
+                //do something
+            }
+        }
+        /// <summary>
+        /// A function that get a diver by its ssn
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns>returns a diver object</returns>
+        public Diver GetDiverBySSN(string ssn)
+        {
+            try
+            {
+                return diverList.SingleOrDefault(x => x.SSN == ssn);
+            }
+            catch (ArgumentNullException exception)
+            {
+                return null;
+                //do something
+            }
+        }
+        #endregion
+
+        #region Methods
+        /// <summary>
+        /// Creates a new contest
+        /// </summary>
+        public void CreateContest(string place, string name, string startDate, string endDate)
         {
             if (!Contest.CheckCorrectName(name))
             {
@@ -64,67 +114,58 @@ namespace Simhopp
                 contestList.Add(new Contest(place, name, startDate, endDate));
             }
         }
+
         /// <summary>
-        /// A function that get a judge by its name
+        /// Adds judge to judge list by name.
         /// </summary>
-        /// <param name="name"></param>
-        /// <returns>returns a judge object</returns>
-        public Judge GetJudgeByName(string name)
+        /// <param name="name">Judge name</param>
+        public void AddJudgeToList(string name, string nationality, string ssn)
         {
-            return judgeList.Find(x => x.Name == name);
+            var judge = new Judge(name, nationality, ssn);
+
+            try
+            {
+                judgeList.Add(judge);
+            }
+            catch (Exception exception)
+            {
+                //do something
+            }
         }
         /// <summary>
-        /// A function that get a diver by its name
+        /// Adds diver to diver list by name.
         /// </summary>
-        /// <param name="name"></param>
-        /// <returns>returns a diver object</returns>
-        public Diver GetDiverByName(string name)
+        /// <param name="name">Judge name</param>
+        public void AddDiverToList(string name, string nationality, string ssn)
         {
-            return diverList.Find(x => x.Name == name);
+            var diver = new Diver(name, nationality, ssn);
+
+            try
+            {
+                diverList.Add(diver);
+            }
+            catch (Exception exception)
+            {
+                //do something
+            }
         }
         /// <summary>
-        /// A function that adds a judge to a contest-object
+        /// Removes a judge from list by ssn.
         /// </summary>
-        /// <param name="name"></param>
-        public void AddJudgeByName(string name)
+        /// <param name="ssn"></param>
+        public void RemoveJudgeFromList(string ssn)
         {
-            //var judge = GetJudgeByName(name);
-            //if (judge == null)
-            //{
-            //    Console.WriteLine(name + " was not found");
-            //    return;
-            //}
-            //try
-            //{
-            //    contest.AddJudge(judge);
-            //}
-            //catch (Exception e)
-            //{
-            //    Console.WriteLine(e.Message);
-            //    Console.ReadKey();
-            //}
+            var judge = GetJudgeBySSN(ssn);
+            judgeList.Remove(judge);
         }
         /// <summary>
-        /// A function that adds a diver to a contest-object
+        /// Removes a diver from list by ssn.
         /// </summary>
-        /// <param name="name"></param>
-        public void AddDiverByName(string name)
+        /// <param name="ssn"></param>
+        public void RemoveDiverFromList(string ssn)
         {
-            //var diver = GetDiverByName(name);
-            //if (diver == null)
-            //{
-            //    Console.WriteLine(name + " was not found");
-            //    return;
-            //}
-            //try
-            //{
-            //    contest.AddParticipant(diver);
-            //}
-            //catch (Exception e)
-            //{
-            //    Console.WriteLine(e.Message);
-            //    Console.ReadKey();
-            //}
+            var diver = GetDiverBySSN(ssn);
+            diverList.Remove(diver);
         }
         /// <summary>
         /// A function that reads judges and divers from text files
@@ -134,25 +175,25 @@ namespace Simhopp
         {
             try
             {
-                using (StreamReader reader = new StreamReader(@"Model\Files\" + fileName))
+                using (var reader = new StreamReader(@"Model\Files\" + fileName))
                 {
-                    List<string> text = new List<string>();
+                    var text = new List<string>();
                     while (!reader.EndOfStream)
                     {
                         text.Add(reader.ReadLine());
                     }
                     foreach (var line in text)
                     {
-                        string[] temp = line.Split(';');
+                        var temp = line.Split(';');
 
                         if (fileName == "judge.txt")
                         {
-                            Judge judge = new Judge(temp[0], temp[1], temp[2]);
+                            var judge = new Judge(temp[0], temp[1], temp[2]);
                             judgeList.Add(judge);
                         }
                         else if (fileName == "diver.txt")
                         {
-                            Diver diver = new Diver(temp[0], temp[1], temp[2]);
+                            var diver = new Diver(temp[0], temp[1], temp[2]);
                             diverList.Add(diver);
                         }
                         else

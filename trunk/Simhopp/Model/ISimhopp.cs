@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace Simhopp.Model
 {
@@ -18,6 +13,14 @@ namespace Simhopp.Model
         //double GetResultFromParticipant(string ssn);
         //void CreateHtmlResultFile();
         void CreateContest(string place, string name, string startDate, string endDate);
+        void ReadFromFile(string fileName);
         BindingList<Contest> GetContestsList();
+        BindingList<Judge> GetJudgesList();
+        BindingList<Diver> GetDiversList();
+
+        void AddJudgeToList(string name, string nationality, string ssn);
+        void AddDiverToList(string name, string nationality, string ssn);
+        void RemoveJudgeFromList(string ssn);
+        void RemoveDiverFromList(string ssn);
     }
 }
