@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using System.Windows.Forms;
 using Simhopp.View;
 
@@ -6,11 +7,16 @@ namespace SimhoppGUI
 {
     public partial class StartScreen : Form, IStartScreen
     {
+        #region Constructor
+
         public StartScreen()
         {
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             InitializeComponent();
         }
+
+        #endregion
+
         /// <summary>
         /// Creates a correct date string from DateTimePicker.
         /// dd/mm/yyyy
@@ -30,28 +36,38 @@ namespace SimhoppGUI
         /// <param name="e"></param>
         private void StartScreenNewContesttBtn_Click(object sender, EventArgs e)
         {
-            //Dims the background form and makes it non-interactive.
-            using (new DimIt())
-            using (var newContest = new NewContest())
+            try
             {
-                if (newContest.ShowDialog(this) == DialogResult.OK)
+                //Dims the background form and makes it non-interactive.
+                using (new DimIt())
+                using (var newContest = new NewContest())
                 {
-                    newContest.Show();
+                    if (newContest.ShowDialog(this) == DialogResult.OK)
+                    {
+                        newContest.Show();
+                    }
+                    if (EventCreateContest == null)
+                    {
+                        return;
+                    }
+                    var startDate = CreateDateString(newContest.NewContestStartDateDTP);
+                    var endDate = CreateDateString(newContest.NewContestEndDateDTP);
+
+                    EventCreateContest(newContest.newContestCityTB.Text,
+                        newContest.newContestNameTB.Text, startDate, endDate);
                 }
-                if (EventCreateContest == null)
-                {
-                    return;
-                }
-                var startDate = CreateDateString(newContest.NewContestStartDateDTP);
-                var endDate = CreateDateString(newContest.NewContestEndDateDTP);
-                try
-                {
-                    EventCreateContest(newContest.newContestCityTB.Text, newContest.newContestNameTB.Text, startDate, endDate);
-                }
-                catch (Exception exception)
-                {
-                    // do something
-                }
+            }
+            catch (ArgumentNullException nullException)
+            {
+                MsgBox.CreateErrorBox(nullException.ToString(), MethodBase.GetCurrentMethod().Name);
+            }
+            catch (InvalidOperationException invalidOperationException)
+            {
+                MsgBox.CreateErrorBox(invalidOperationException.ToString(), MethodBase.GetCurrentMethod().Name);
+            }
+            catch (Exception exception)
+            {
+                MsgBox.CreateErrorBox(exception.ToString(), MethodBase.GetCurrentMethod().Name);
             }
         }
         private void StartScreenStartContestBtn_Click(object sender, EventArgs e)
@@ -82,7 +98,7 @@ namespace SimhoppGUI
         {
             //Dims the background form and makes it non-interactive.
             using (new DimIt())
-            using (var addDiver = new AddDiver())
+            using (var addDiver = new AddEditDiver(EventAddDiverToList,EventGetDiversList, EventReadFromFile))
             {
                 if (addDiver.ShowDialog(this) == DialogResult.OK)
                 {
@@ -94,7 +110,12 @@ namespace SimhoppGUI
         {
             //Dims the background form and makes it non-interactive.
             using (new DimIt())
-            using (var addjudge = new Addjudge())
+            using (var addjudge = new AddEditJudge
+                (EventAddJudgeToList,
+                EventRemoveJudgeFromList,
+                EventGetJudgesList,
+                EventReadFromFile
+                ))
             {
                 if (addjudge.ShowDialog(this) == DialogResult.OK)
                 {
@@ -116,7 +137,18 @@ namespace SimhoppGUI
         }
 
         public event DelegateCreateContest EventCreateContest = null;
+        public event DelegateReadFromFile EventReadFromFile = null;
+
         public event DelegateGetContestsList EventGetContestsList = null;
+        public event DelegateGetJudgesList EventGetJudgesList = null;
+        public event DelegateGetDiversList EventGetDiversList = null;
+
+        public event DelegateAddJudgeToList EventAddJudgeToList = null;
+        public event DelegateAddDiverToList EventAddDiverToList = null;
+
+        public event DelegateRemoveJudgeFromList EventRemoveJudgeFromList = null;
+        public event DelegateRemoveDiverFromList EventRemoveDiverFromList = null;
+
         //public event DelegateAddParticipant EventAddParticipant = null;
         //public event DelegateAddJudge EventAddJudge = null;
         //public event DelegateGetTrickDifficultyFromTrickHashTable EventGetTrickDifficultyFromTrickHashTable = null;

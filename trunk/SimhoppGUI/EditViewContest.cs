@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
 using Simhopp.Model;
 using Simhopp.View;
@@ -8,6 +9,7 @@ namespace SimhoppGUI
 {
     public partial class EditViewContest : Form
     {
+        #region Constructor
         public EditViewContest(DelegateGetContestsList eventGetContestsList)
         {
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -16,13 +18,11 @@ namespace SimhoppGUI
             if (eventGetContestsList != null)
             {
                 ContestsDataGridView.DataSource = eventGetContestsList();
+                ContestsDataGridView.ReadOnly = true;
             }
         }
+        #endregion
 
-        private void EditViewContestCloseBtn_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
         /// <summary>
         /// Shows the selected contest in the textboxes below.
         /// </summary>
@@ -50,11 +50,19 @@ namespace SimhoppGUI
                 var s = date[0] + "/" + date[1] + "/" + date[2];
                 EditViewContestEditStartDateTp.Text = s;
             }
+            catch (ArgumentNullException nullException)
+            {
+                MsgBox.CreateErrorBox(nullException.ToString(), MethodBase.GetCurrentMethod().Name);
+            }
+            catch (ArgumentOutOfRangeException outOfRangeException)
+            {
+                MsgBox.CreateErrorBox(outOfRangeException.ToString(), MethodBase.GetCurrentMethod().Name);
+            }
             catch (Exception exception)
             {
-                //do something
+                MsgBox.CreateErrorBox(exception.ToString(), MethodBase.GetCurrentMethod().Name);
             }
-            
+
         }
         /// <summary>
         /// Updates the selected contest with the input from the textboxes. 
@@ -64,41 +72,64 @@ namespace SimhoppGUI
         /// <param name="e"></param>
         private void EditViewContestEditChangesBtn_Click(object sender, EventArgs e)
         {
-            var cell = ContestsDataGridView.SelectedCells.Cast<DataGridViewCell>().FirstOrDefault();
-
-            if (cell == null)
+            try
             {
-                return;
+                var cell = ContestsDataGridView.SelectedCells.Cast<DataGridViewCell>().FirstOrDefault();
+
+                if (cell == null)
+                {
+                    return;
+                }
+
+                var row = cell.OwningRow;
+
+                var startDate = StartScreen.CreateDateString(EditViewContestEditStartDateTp);
+                var correctStartDate = Contest.CheckCorrectDate(startDate);
+
+                var endDate = StartScreen.CreateDateString(EditViewContestEditEndtDateTp);
+                var correctEndDate = Contest.CheckCorrectDate(endDate);
+
+                //Kan datum ens bli fel med DateTimePicker?
+                if (!correctStartDate)
+                {
+                    EditViewContestEditStartDateTp.BackColor = Color.Red;
+                }
+                if (!correctEndDate)
+                {
+                    EditViewContestEditEndtDateTp.BackColor = Color.Red;
+                }
+
+                if (CheckInput.CheckCorrectContestInput(EditViewContestEditContestNameTb,
+                    EditViewContestEditContestPlaceTb) && correctStartDate && correctEndDate)
+                {
+                    row.Cells["Name"].Value = EditViewContestEditContestNameTb.Text;
+                    row.Cells["Place"].Value = EditViewContestEditContestPlaceTb.Text;
+                    row.Cells["StartDate"].Value = startDate;
+                    row.Cells["EndDate"].Value = endDate;
+                }
             }
 
-            var row = cell.OwningRow;
-
-            var startDate = StartScreen.CreateDateString(EditViewContestEditStartDateTp);
-            var correctStartDate = Contest.CheckCorrectDate(startDate);
-
-            var endDate = StartScreen.CreateDateString(EditViewContestEditEndtDateTp);
-            var correctEndDate = Contest.CheckCorrectDate(endDate);
-
-            //Kan datum ens bli fel med DateTimePicker?
-            if (!correctStartDate)
+            catch (ArgumentNullException nullException)
             {
-                EditViewContestEditStartDateTp.BackColor = Color.Red;
+                MsgBox.CreateErrorBox(nullException.ToString(), MethodBase.GetCurrentMethod().Name);
             }
-            if (!correctEndDate)
+            catch (ArgumentOutOfRangeException outOfRangeException)
             {
-                EditViewContestEditEndtDateTp.BackColor = Color.Red;
+                MsgBox.CreateErrorBox(outOfRangeException.ToString(), MethodBase.GetCurrentMethod().Name);
+            }
+            catch (Exception exception)
+            {
+                MsgBox.CreateErrorBox(exception.ToString(), MethodBase.GetCurrentMethod().Name);
             }
 
-            if (CheckInput.CheckCorrectInput(EditViewContestEditContestNameTb,
-                EditViewContestEditContestPlaceTb) && correctStartDate && correctEndDate)
-            {
-                row.Cells["Name"].Value = EditViewContestEditContestNameTb.Text;
-                row.Cells["Place"].Value = EditViewContestEditContestPlaceTb.Text;
-                row.Cells["StartDate"].Value = startDate;
-                row.Cells["EndDate"].Value = endDate;
-            }
         }
-
+        #region Close Button
+        private void EditViewContestCloseBtn_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+        #endregion
+        #region Click Textboxes
         private void EditViewContestEditContestNameTb_Click(object sender, EventArgs e)
         {
             EditViewContestEditContestNameTb.BackColor = SystemColors.Window;
@@ -110,5 +141,6 @@ namespace SimhoppGUI
             EditViewContestEditContestPlaceTb.BackColor = SystemColors.Window;
             EditViewContestEditContestPlaceTb.Text = "";
         }
+        #endregion
     }
 }

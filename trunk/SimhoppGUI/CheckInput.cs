@@ -9,39 +9,92 @@ using Simhopp.Model;
 
 namespace SimhoppGUI
 {
-    public abstract class CheckInput
+    /// <summary>
+    /// Static class that contains methods for checking if input is correct. 
+    /// Also shows incorrect input by coloring the wrong textboxes red.
+    /// </summary>
+    public static class CheckInput
     {
         #region Correct Input
-        public static bool CheckCorrectInput(TextBox nameTextBox, TextBox placeTextBox)
+        public static bool CheckCorrectContestInput(TextBox nameTextBox, TextBox placeTextBox)
         {
-            var correctName = CorrectNameInput(nameTextBox);
-            var correctPlace = CorrectPlaceInput(placeTextBox);
+            var correctName = CorrectContestNameInput(nameTextBox);
+            var correctPlace = CorrectContestPlaceInput(placeTextBox);
 
             return (correctName && correctPlace);
-            //return (CorrectNameInput(nameTextBox) && CorrectPlaceInput(placeTextBox));
+            //return (CorrectNameInput(nameTextBox) && CorrectPlaceInput(placeTextBox)); //funkar ej?
         }
-
-        private static bool CorrectNameInput(TextBox textBox)
+        public static bool CheckCorrectPersonInput(TextBox nameTextBox, TextBox nationalityTextBox, TextBox ssnTextBox)
         {
-            if (Contest.CheckCorrectName(textBox.Text))
+            var correctName = CorrectPersonNameInput(nameTextBox);
+            var correctNationality = CorrectPersonNationalityInput(nationalityTextBox);
+            var correctSSN = CorrectPersonSSNInput(ssnTextBox, nationalityTextBox);
+
+            return (correctName && correctNationality && correctSSN);
+        }
+        #endregion
+
+        #region Correct Contest
+        private static bool CorrectContestNameInput(TextBox nameTextBox)
+        {
+            if (Contest.CheckCorrectName(nameTextBox.Text))
             {
                 return true;
             }
             else
             {
-                ShowError(textBox);
+                ShowError(nameTextBox);
                 return false;
             }
         }
-        private static bool CorrectPlaceInput(TextBox textBox)
+        private static bool CorrectContestPlaceInput(TextBox placeTextBox)
         {
-            if (Contest.CheckCorrectPlace(textBox.Text))
+            if (Contest.CheckCorrectPlace(placeTextBox.Text))
             {
                 return true;
             }
             else
             {
-                ShowError(textBox);
+                ShowError(placeTextBox);
+                return false;
+            }
+        }
+        #endregion
+
+        #region Correct Person
+        private static bool CorrectPersonNameInput(TextBox nameTextBox)
+        {
+            if (Person.CheckCorrectName(nameTextBox.Text))
+            {
+                return true;
+            }
+            else
+            {
+                ShowError(nameTextBox);
+                return false;
+            }
+        }
+        private static bool CorrectPersonNationalityInput(TextBox nationalityTextBox)
+        {
+            if (Person.CheckCorrectNationality(nationalityTextBox.Text))
+            {
+                return true;
+            }
+            else
+            {
+                ShowError(nationalityTextBox);
+                return false;
+            }
+        }
+        private static bool CorrectPersonSSNInput(TextBox ssnTextBox, TextBox nationalityTextBox)
+        {
+            if (Person.CheckCorrectSSN(ssnTextBox.Text, nationalityTextBox.Text))
+            {
+                return true;
+            }
+            else
+            {
+                ShowError(ssnTextBox);
                 return false;
             }
         }
@@ -59,7 +112,7 @@ namespace SimhoppGUI
             }
             return true;
         }
-        #endregion
+        #endregion    
 
         private static void ShowError(TextBox textBox)
         {

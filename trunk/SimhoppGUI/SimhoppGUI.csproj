@@ -67,17 +67,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddDiver.cs">
+    <Compile Include="AddEditDiver.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddDiver.Designer.cs">
-      <DependentUpon>AddDiver.cs</DependentUpon>
+    <Compile Include="AddEditDiver.Designer.cs">
+      <DependentUpon>AddEditDiver.cs</DependentUpon>
     </Compile>
-    <Compile Include="Addjudge.cs">
+    <Compile Include="AddEditJudge.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Addjudge.Designer.cs">
-      <DependentUpon>Addjudge.cs</DependentUpon>
+    <Compile Include="AddEditJudge.Designer.cs">
+      <DependentUpon>AddEditJudge.cs</DependentUpon>
     </Compile>
     <Compile Include="CheckInput.cs" />
     <Compile Include="DimIt.cs" />
@@ -99,6 +99,7 @@
     <Compile Include="Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
+    <Compile Include="MsgBox.cs" />
     <Compile Include="NewContest.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -119,11 +120,11 @@
     <Compile Include="StartScreen.Designer.cs">
       <DependentUpon>StartScreen.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="AddDiver.resx">
-      <DependentUpon>AddDiver.cs</DependentUpon>
+    <EmbeddedResource Include="AddEditDiver.resx">
+      <DependentUpon>AddEditDiver.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Addjudge.resx">
-      <DependentUpon>Addjudge.cs</DependentUpon>
+    <EmbeddedResource Include="AddEditJudge.resx">
+      <DependentUpon>AddEditJudge.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditViewContest.resx">
       <DependentUpon>EditViewContest.cs</DependentUpon>

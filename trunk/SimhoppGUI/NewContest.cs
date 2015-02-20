@@ -32,7 +32,7 @@ namespace SimhoppGUI
         private void newContestCreateBtn_Click(object sender, EventArgs e)
         {
             //var correctDate = CheckInput.CheckCorrectDate(NewContestStartDateDTP, NewContestEndDateDTP);
-            if(CheckInput.CheckCorrectInput(newContestNameTB, newContestCityTB))
+            if(CheckInput.CheckCorrectContestInput(newContestNameTB, newContestCityTB))
             {
                DialogResult = DialogResult.OK; 
             }          
