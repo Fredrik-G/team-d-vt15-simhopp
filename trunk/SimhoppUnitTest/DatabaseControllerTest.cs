@@ -80,6 +80,9 @@ namespace SimhoppUnitTest
             dbc.CloseConnectionToDatabase();
         }
 
+        /// <summary>
+        /// Testing the RemoveDiverFromDatabase function. 
+        /// </summary>
         [Test]
         public void RemoveDiverFromDiverTableTest()
         {
@@ -100,8 +103,11 @@ namespace SimhoppUnitTest
             dbc.CloseConnectionToDatabase();
         }
 
+        /// <summary>
+        /// Testing the RemoveJudgeFromDatabase function. 
+        /// </summary>
         [Test]
-        public void RemoveJudgeFromDiverTableTest()
+        public void RemoveJudgeFromJudgeTableTest()
         {
             Judge j = new Judge("Gnurra G", "Swedish", "111111-1111");
             dbc.ConnectToDatabase();
@@ -120,6 +126,10 @@ namespace SimhoppUnitTest
             dbc.CloseConnectionToDatabase();
         }
 
+        /// <summary>
+        /// Testing the RemoveContestFromDatabase function. 
+        /// </summary>
+        /*
         [Test]
         public void RemoveContestFromContestTableTest()
         {
@@ -139,5 +149,6 @@ namespace SimhoppUnitTest
 
             dbc.CloseConnectionToDatabase();
         }
+          */
     }
 }
