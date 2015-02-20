@@ -19,6 +19,15 @@ namespace Simhopp.Model
         }
 
         /// <summary>
+        /// Default Constructor. Makes the Connection file and gets the path as input to where the database is.
+        /// </summary>
+        /// <param name="path">Database path.</param>
+        public DatabaseController(string path)
+        {
+            dbConnection = new SQLiteConnection("Data Source='" + path + "';Version=3;");
+        }
+
+        /// <summary>
         /// Opens the connection to the database.
         /// </summary>
         public void ConnectToDatabase() 
@@ -29,9 +38,37 @@ namespace Simhopp.Model
         /// <summary>
         /// Closes the connection to the database.
         /// </summary>
-        public void closeConnectionToDatabase() 
+        public void CloseConnectionToDatabase() 
         {
             dbConnection.Close();
+        }
+
+        /// <summary>
+        /// Returns true if the database table is empty, else false.
+        /// </summary>
+        /// <param name="tableName">Table to be searched.</param>
+        /// <returns></returns>
+        public bool IsTableEmpty(string tableName)
+        {
+            string sql = "SELECT COUNT(*) FROM " + tableName + "";
+            SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
+            int numberOfEntries = Convert.ToInt32(command.ExecuteScalar());
+            if (numberOfEntries == 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Clears a table from the database. Mainly for the test class to use.  
+        /// </summary>
+        /// <param name="tableName">Table to be cleared.</param>
+        public void ClearDatabase(string tableName)
+        {
+            string sql = "DELETE FROM " + tableName + " WHERE ID != 'null'";
+            SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
+            command.ExecuteNonQuery();
         }
 
         /// <summary>
@@ -40,7 +77,7 @@ namespace Simhopp.Model
         /// <param name="d">Diver objekt.</param>
         public void AddDivertoDatabase(Diver d)
         {
-            string sql = "INSERT INTO Diver(Name,SSN,Nationality) VALUES('" +d.Name + "', '" +d.SSN + "','" + d.Nationality + "')";
+            string sql = "INSERT INTO Diver(Name,SSN,Nationality) VALUES('" + d.Name + "', '" + d.SSN + "','" + d.Nationality + "')";
             SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
             command.ExecuteNonQuery();
         }
@@ -49,9 +86,9 @@ namespace Simhopp.Model
         /// Takes a contest objekt and adds that contest to the database table Contest.
         /// </summary>
         /// <param name="c">Contest object.</param>
-        public void AddContest(Contest c) 
+        public void AddContestToDatabase(Contest c) 
         {
-            string sql = "INSERT INTO Contest(Place, Name, StartDate, EndDate) VALUES('" + c.Place + "', '" + c.Name + "','" + c.StartDate + "')";
+            string sql = "INSERT INTO Contest(Place, Name, StartDate, EndDate) VALUES('" + c.Place + "', '" + c.Name + "','" + c.StartDate + "','" + c.EndDate + "')";
             SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
             command.ExecuteNonQuery();
         }
@@ -93,7 +130,6 @@ namespace Simhopp.Model
             {
                 Console.WriteLine("{0,-8}{1,-32}{2,-15}{3,-16}", ("ID: " + reader["ID"]), ("Name: " + reader["Name"]), ("NAT: " + reader["Nationality"]), ("SSN: " + reader["SSN"]));
             }
-        
         }
 
         /// <summary>
@@ -102,7 +138,7 @@ namespace Simhopp.Model
         /// <param name="d">Diver object.</param>
         public void RemoveDiverFromTable(Diver d) 
         {
-            string sql = "DELETE FROM Diver where SSN ='"+d.SSN+"'";
+            string sql = "DELETE FROM Diver where SSN ='" + d.SSN + "'";
             SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
             command.ExecuteNonQuery();
         }
@@ -113,10 +149,22 @@ namespace Simhopp.Model
         /// <param name="j">Judge object.</param>
         public void RemoveJudgeFromTable(Judge j)
         {
-            string sql = "DELETE FROM Judge where SSN ='"+j.SSN+"'";
+            string sql = "DELETE FROM Judge where SSN ='" + j.SSN + "'";
             SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
             command.ExecuteNonQuery();
         }
 
+        //Lägg till att alla klasser som har en tabel i databasen har ett id. Måste finnas för att följande ska kunna användas. 
+        /// <summary>
+        /// Removes a row (contest) based on its ID.
+        /// </summary>
+        /// <param name="c">Contest object.</param>
+        public void RemoveContestFromTable(Contest c)
+        {
+            /*string sql = "DELETE FROM Contest where SSN ='" + c.ID + "'";
+            SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
+            command.ExecuteNonQuery();
+            */
+        }
     }
 }
