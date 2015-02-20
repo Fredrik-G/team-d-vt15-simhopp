@@ -28,173 +28,225 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.StartContestStartBtn = new System.Windows.Forms.Button();
-            this.EditViewContestEndDateTp = new System.Windows.Forms.DateTimePicker();
-            this.EditViewContestStartDateTp = new System.Windows.Forms.DateTimePicker();
-            this.EditViewContestEndDateLabel = new System.Windows.Forms.Label();
-            this.EditViewContestContestPlaceTb = new System.Windows.Forms.TextBox();
-            this.EditViewContestContestNameTb = new System.Windows.Forms.TextBox();
-            this.EditViewContestStartDateLabel = new System.Windows.Forms.Label();
-            this.PlaceContestLabel = new System.Windows.Forms.Label();
-            this.NameContestLabel = new System.Windows.Forms.Label();
-            this.listViewEditViewContest = new System.Windows.Forms.ListView();
-            this.Name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Place = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Date = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.StartContestCloseBtn = new System.Windows.Forms.Button();
+            this.ContestsDataGridView = new System.Windows.Forms.DataGridView();
+            this.GlobalJudgesDataGridView = new System.Windows.Forms.DataGridView();
+            this.GlobalDiversDataGridView = new System.Windows.Forms.DataGridView();
+            this.JudgesDiversTabControl = new System.Windows.Forms.TabControl();
+            this.JudgeTabPage = new System.Windows.Forms.TabPage();
+            this.DiverTabPage = new System.Windows.Forms.TabPage();
+            this.JudgesTabControl = new System.Windows.Forms.TabControl();
+            this.GlobalJudgesTabPage = new System.Windows.Forms.TabPage();
+            this.CurrentJudgesTabPage = new System.Windows.Forms.TabPage();
+            this.DiversTabControl = new System.Windows.Forms.TabControl();
+            this.GlobalDiversTabPage = new System.Windows.Forms.TabPage();
+            this.CurrentDiversTabPage = new System.Windows.Forms.TabPage();
+            this.CurrentDiversDataGridView = new System.Windows.Forms.DataGridView();
+            this.CurrentJudgesDataGridView = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.ContestsDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GlobalJudgesDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GlobalDiversDataGridView)).BeginInit();
+            this.JudgesDiversTabControl.SuspendLayout();
+            this.JudgesTabControl.SuspendLayout();
+            this.GlobalJudgesTabPage.SuspendLayout();
+            this.CurrentJudgesTabPage.SuspendLayout();
+            this.DiversTabControl.SuspendLayout();
+            this.GlobalDiversTabPage.SuspendLayout();
+            this.CurrentDiversTabPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CurrentDiversDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CurrentJudgesDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
-            // StartContestStartBtn
+            // ContestsDataGridView
             // 
-            this.StartContestStartBtn.Location = new System.Drawing.Point(361, 446);
-            this.StartContestStartBtn.Name = "StartContestStartBtn";
-            this.StartContestStartBtn.Size = new System.Drawing.Size(93, 27);
-            this.StartContestStartBtn.TabIndex = 37;
-            this.StartContestStartBtn.Text = "Start contest";
-            this.StartContestStartBtn.UseVisualStyleBackColor = true;
+            this.ContestsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ContestsDataGridView.Location = new System.Drawing.Point(12, 12);
+            this.ContestsDataGridView.Name = "ContestsDataGridView";
+            this.ContestsDataGridView.Size = new System.Drawing.Size(510, 187);
+            this.ContestsDataGridView.TabIndex = 0;
             // 
-            // EditViewContestEndDateTp
+            // GlobalJudgesDataGridView
             // 
-            this.EditViewContestEndDateTp.Location = new System.Drawing.Point(129, 446);
-            this.EditViewContestEndDateTp.Name = "EditViewContestEndDateTp";
-            this.EditViewContestEndDateTp.Size = new System.Drawing.Size(200, 20);
-            this.EditViewContestEndDateTp.TabIndex = 27;
+            this.GlobalJudgesDataGridView.AllowUserToResizeColumns = false;
+            this.GlobalJudgesDataGridView.AllowUserToResizeRows = false;
+            this.GlobalJudgesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.GlobalJudgesDataGridView.Location = new System.Drawing.Point(0, 0);
+            this.GlobalJudgesDataGridView.Name = "GlobalJudgesDataGridView";
+            this.GlobalJudgesDataGridView.ReadOnly = true;
+            this.GlobalJudgesDataGridView.Size = new System.Drawing.Size(364, 217);
+            this.GlobalJudgesDataGridView.TabIndex = 1;
             // 
-            // EditViewContestStartDateTp
+            // GlobalDiversDataGridView
             // 
-            this.EditViewContestStartDateTp.Location = new System.Drawing.Point(129, 388);
-            this.EditViewContestStartDateTp.Name = "EditViewContestStartDateTp";
-            this.EditViewContestStartDateTp.Size = new System.Drawing.Size(200, 20);
-            this.EditViewContestStartDateTp.TabIndex = 26;
+            this.GlobalDiversDataGridView.AllowUserToResizeColumns = false;
+            this.GlobalDiversDataGridView.AllowUserToResizeRows = false;
+            this.GlobalDiversDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.GlobalDiversDataGridView.Location = new System.Drawing.Point(6, 6);
+            this.GlobalDiversDataGridView.Name = "GlobalDiversDataGridView";
+            this.GlobalDiversDataGridView.ReadOnly = true;
+            this.GlobalDiversDataGridView.Size = new System.Drawing.Size(355, 206);
+            this.GlobalDiversDataGridView.TabIndex = 2;
             // 
-            // EditViewContestEndDateLabel
+            // JudgesDiversTabControl
             // 
-            this.EditViewContestEndDateLabel.AutoSize = true;
-            this.EditViewContestEndDateLabel.Location = new System.Drawing.Point(34, 446);
-            this.EditViewContestEndDateLabel.Name = "EditViewContestEndDateLabel";
-            this.EditViewContestEndDateLabel.Size = new System.Drawing.Size(52, 13);
-            this.EditViewContestEndDateLabel.TabIndex = 25;
-            this.EditViewContestEndDateLabel.Text = "End Date";
+            this.JudgesDiversTabControl.Controls.Add(this.JudgeTabPage);
+            this.JudgesDiversTabControl.Controls.Add(this.DiverTabPage);
+            this.JudgesDiversTabControl.Location = new System.Drawing.Point(903, 39);
+            this.JudgesDiversTabControl.Name = "JudgesDiversTabControl";
+            this.JudgesDiversTabControl.SelectedIndex = 0;
+            this.JudgesDiversTabControl.Size = new System.Drawing.Size(168, 94);
+            this.JudgesDiversTabControl.TabIndex = 3;
+            this.JudgesDiversTabControl.SelectedIndexChanged += new System.EventHandler(this.JudgesDiversTabControl_SelectedIndexChanged);
             // 
-            // EditViewContestContestPlaceTb
+            // JudgeTabPage
             // 
-            this.EditViewContestContestPlaceTb.Location = new System.Drawing.Point(129, 330);
-            this.EditViewContestContestPlaceTb.Name = "EditViewContestContestPlaceTb";
-            this.EditViewContestContestPlaceTb.ReadOnly = true;
-            this.EditViewContestContestPlaceTb.Size = new System.Drawing.Size(200, 20);
-            this.EditViewContestContestPlaceTb.TabIndex = 24;
+            this.JudgeTabPage.Location = new System.Drawing.Point(4, 22);
+            this.JudgeTabPage.Name = "JudgeTabPage";
+            this.JudgeTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.JudgeTabPage.Size = new System.Drawing.Size(160, 68);
+            this.JudgeTabPage.TabIndex = 0;
+            this.JudgeTabPage.Text = "Judges";
+            this.JudgeTabPage.UseVisualStyleBackColor = true;
             // 
-            // EditViewContestContestNameTb
+            // DiverTabPage
             // 
-            this.EditViewContestContestNameTb.Location = new System.Drawing.Point(129, 272);
-            this.EditViewContestContestNameTb.Name = "EditViewContestContestNameTb";
-            this.EditViewContestContestNameTb.ReadOnly = true;
-            this.EditViewContestContestNameTb.Size = new System.Drawing.Size(200, 20);
-            this.EditViewContestContestNameTb.TabIndex = 23;
+            this.DiverTabPage.Location = new System.Drawing.Point(4, 22);
+            this.DiverTabPage.Name = "DiverTabPage";
+            this.DiverTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.DiverTabPage.Size = new System.Drawing.Size(502, 309);
+            this.DiverTabPage.TabIndex = 1;
+            this.DiverTabPage.Text = "Divers";
+            this.DiverTabPage.UseVisualStyleBackColor = true;
             // 
-            // EditViewContestStartDateLabel
+            // JudgesTabControl
             // 
-            this.EditViewContestStartDateLabel.AutoSize = true;
-            this.EditViewContestStartDateLabel.Location = new System.Drawing.Point(34, 388);
-            this.EditViewContestStartDateLabel.Name = "EditViewContestStartDateLabel";
-            this.EditViewContestStartDateLabel.Size = new System.Drawing.Size(55, 13);
-            this.EditViewContestStartDateLabel.TabIndex = 22;
-            this.EditViewContestStartDateLabel.Text = "Start Date";
+            this.JudgesTabControl.Controls.Add(this.GlobalJudgesTabPage);
+            this.JudgesTabControl.Controls.Add(this.CurrentJudgesTabPage);
+            this.JudgesTabControl.Location = new System.Drawing.Point(12, 214);
+            this.JudgesTabControl.Name = "JudgesTabControl";
+            this.JudgesTabControl.SelectedIndex = 0;
+            this.JudgesTabControl.Size = new System.Drawing.Size(374, 241);
+            this.JudgesTabControl.TabIndex = 0;
             // 
-            // PlaceContestLabel
+            // GlobalJudgesTabPage
             // 
-            this.PlaceContestLabel.AutoSize = true;
-            this.PlaceContestLabel.Location = new System.Drawing.Point(34, 330);
-            this.PlaceContestLabel.Name = "PlaceContestLabel";
-            this.PlaceContestLabel.Size = new System.Drawing.Size(34, 13);
-            this.PlaceContestLabel.TabIndex = 21;
-            this.PlaceContestLabel.Text = "Place";
+            this.GlobalJudgesTabPage.Controls.Add(this.GlobalJudgesDataGridView);
+            this.GlobalJudgesTabPage.Location = new System.Drawing.Point(4, 22);
+            this.GlobalJudgesTabPage.Name = "GlobalJudgesTabPage";
+            this.GlobalJudgesTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.GlobalJudgesTabPage.Size = new System.Drawing.Size(366, 215);
+            this.GlobalJudgesTabPage.TabIndex = 0;
+            this.GlobalJudgesTabPage.Text = "Global Judges";
+            this.GlobalJudgesTabPage.UseVisualStyleBackColor = true;
             // 
-            // NameContestLabel
+            // CurrentJudgesTabPage
             // 
-            this.NameContestLabel.AutoSize = true;
-            this.NameContestLabel.Location = new System.Drawing.Point(34, 272);
-            this.NameContestLabel.Name = "NameContestLabel";
-            this.NameContestLabel.Size = new System.Drawing.Size(74, 13);
-            this.NameContestLabel.TabIndex = 20;
-            this.NameContestLabel.Text = "Contest Name";
+            this.CurrentJudgesTabPage.Controls.Add(this.CurrentJudgesDataGridView);
+            this.CurrentJudgesTabPage.Location = new System.Drawing.Point(4, 22);
+            this.CurrentJudgesTabPage.Name = "CurrentJudgesTabPage";
+            this.CurrentJudgesTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.CurrentJudgesTabPage.Size = new System.Drawing.Size(366, 215);
+            this.CurrentJudgesTabPage.TabIndex = 1;
+            this.CurrentJudgesTabPage.Text = "Curent Judges";
+            this.CurrentJudgesTabPage.UseVisualStyleBackColor = true;
             // 
-            // listViewEditViewContest
+            // DiversTabControl
             // 
-            this.listViewEditViewContest.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.Name,
-            this.Place,
-            this.Date});
-            this.listViewEditViewContest.Location = new System.Drawing.Point(37, 39);
-            this.listViewEditViewContest.Name = "listViewEditViewContest";
-            this.listViewEditViewContest.Size = new System.Drawing.Size(490, 170);
-            this.listViewEditViewContest.TabIndex = 19;
-            this.listViewEditViewContest.UseCompatibleStateImageBehavior = false;
-            this.listViewEditViewContest.View = System.Windows.Forms.View.Details;
+            this.DiversTabControl.Controls.Add(this.GlobalDiversTabPage);
+            this.DiversTabControl.Controls.Add(this.CurrentDiversTabPage);
+            this.DiversTabControl.Location = new System.Drawing.Point(392, 214);
+            this.DiversTabControl.Name = "DiversTabControl";
+            this.DiversTabControl.SelectedIndex = 0;
+            this.DiversTabControl.Size = new System.Drawing.Size(369, 241);
+            this.DiversTabControl.TabIndex = 0;
             // 
-            // Name
+            // GlobalDiversTabPage
             // 
-            this.Name.Text = "Contest Name";
-            this.Name.Width = 176;
+            this.GlobalDiversTabPage.Controls.Add(this.GlobalDiversDataGridView);
+            this.GlobalDiversTabPage.Location = new System.Drawing.Point(4, 22);
+            this.GlobalDiversTabPage.Name = "GlobalDiversTabPage";
+            this.GlobalDiversTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.GlobalDiversTabPage.Size = new System.Drawing.Size(361, 215);
+            this.GlobalDiversTabPage.TabIndex = 0;
+            this.GlobalDiversTabPage.Text = "Global Divers";
+            this.GlobalDiversTabPage.UseVisualStyleBackColor = true;
             // 
-            // Place
+            // CurrentDiversTabPage
             // 
-            this.Place.Text = "Place";
-            this.Place.Width = 199;
+            this.CurrentDiversTabPage.Controls.Add(this.CurrentDiversDataGridView);
+            this.CurrentDiversTabPage.Location = new System.Drawing.Point(4, 22);
+            this.CurrentDiversTabPage.Name = "CurrentDiversTabPage";
+            this.CurrentDiversTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.CurrentDiversTabPage.Size = new System.Drawing.Size(361, 193);
+            this.CurrentDiversTabPage.TabIndex = 1;
+            this.CurrentDiversTabPage.Text = "Current Divers";
+            this.CurrentDiversTabPage.UseVisualStyleBackColor = true;
             // 
-            // Date
+            // CurrentDiversDataGridView
             // 
-            this.Date.Text = "Date";
-            this.Date.Width = 334;
+            this.CurrentDiversDataGridView.AllowUserToResizeColumns = false;
+            this.CurrentDiversDataGridView.AllowUserToResizeRows = false;
+            this.CurrentDiversDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.CurrentDiversDataGridView.Location = new System.Drawing.Point(0, 3);
+            this.CurrentDiversDataGridView.Name = "CurrentDiversDataGridView";
+            this.CurrentDiversDataGridView.ReadOnly = true;
+            this.CurrentDiversDataGridView.Size = new System.Drawing.Size(250, 122);
+            this.CurrentDiversDataGridView.TabIndex = 4;
             // 
-            // StartContestCloseBtn
+            // CurrentJudgesDataGridView
             // 
-            this.StartContestCloseBtn.Location = new System.Drawing.Point(480, 446);
-            this.StartContestCloseBtn.Name = "StartContestCloseBtn";
-            this.StartContestCloseBtn.Size = new System.Drawing.Size(93, 27);
-            this.StartContestCloseBtn.TabIndex = 38;
-            this.StartContestCloseBtn.Text = "Close";
-            this.StartContestCloseBtn.UseVisualStyleBackColor = true;
-            this.StartContestCloseBtn.Click += new System.EventHandler(this.StartContestCloseBtn_Click);
+            this.CurrentJudgesDataGridView.AllowUserToResizeColumns = false;
+            this.CurrentJudgesDataGridView.AllowUserToResizeRows = false;
+            this.CurrentJudgesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.CurrentJudgesDataGridView.Location = new System.Drawing.Point(-1, 0);
+            this.CurrentJudgesDataGridView.Name = "CurrentJudgesDataGridView";
+            this.CurrentJudgesDataGridView.ReadOnly = true;
+            this.CurrentJudgesDataGridView.Size = new System.Drawing.Size(367, 215);
+            this.CurrentJudgesDataGridView.TabIndex = 4;
             // 
             // StartContest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(585, 517);
-            this.Controls.Add(this.StartContestCloseBtn);
-            this.Controls.Add(this.StartContestStartBtn);
-            this.Controls.Add(this.EditViewContestEndDateTp);
-            this.Controls.Add(this.EditViewContestStartDateTp);
-            this.Controls.Add(this.EditViewContestEndDateLabel);
-            this.Controls.Add(this.EditViewContestContestPlaceTb);
-            this.Controls.Add(this.EditViewContestContestNameTb);
-            this.Controls.Add(this.EditViewContestStartDateLabel);
-            this.Controls.Add(this.PlaceContestLabel);
-            this.Controls.Add(this.NameContestLabel);
-            this.Controls.Add(this.listViewEditViewContest);
-            //this.Name = "StartContest";
+            this.ClientSize = new System.Drawing.Size(1221, 593);
+            this.Controls.Add(this.JudgesTabControl);
+            this.Controls.Add(this.DiversTabControl);
+            this.Controls.Add(this.JudgesDiversTabControl);
+            this.Controls.Add(this.ContestsDataGridView);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "StartContest";
             this.Text = "StartContest";
+            ((System.ComponentModel.ISupportInitialize)(this.ContestsDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GlobalJudgesDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GlobalDiversDataGridView)).EndInit();
+            this.JudgesDiversTabControl.ResumeLayout(false);
+            this.JudgesTabControl.ResumeLayout(false);
+            this.GlobalJudgesTabPage.ResumeLayout(false);
+            this.CurrentJudgesTabPage.ResumeLayout(false);
+            this.DiversTabControl.ResumeLayout(false);
+            this.GlobalDiversTabPage.ResumeLayout(false);
+            this.CurrentDiversTabPage.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.CurrentDiversDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CurrentJudgesDataGridView)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button StartContestStartBtn;
-        private System.Windows.Forms.DateTimePicker EditViewContestEndDateTp;
-        private System.Windows.Forms.DateTimePicker EditViewContestStartDateTp;
-        private System.Windows.Forms.Label EditViewContestEndDateLabel;
-        private System.Windows.Forms.TextBox EditViewContestContestPlaceTb;
-        private System.Windows.Forms.TextBox EditViewContestContestNameTb;
-        private System.Windows.Forms.Label EditViewContestStartDateLabel;
-        private System.Windows.Forms.Label PlaceContestLabel;
-        private System.Windows.Forms.Label NameContestLabel;
-        private System.Windows.Forms.ListView listViewEditViewContest;
-        private System.Windows.Forms.ColumnHeader Name;
-        private System.Windows.Forms.ColumnHeader Place;
-        private System.Windows.Forms.ColumnHeader Date;
-        private System.Windows.Forms.Button StartContestCloseBtn;
+        private System.Windows.Forms.DataGridView ContestsDataGridView;
+        private System.Windows.Forms.DataGridView GlobalJudgesDataGridView;
+        private System.Windows.Forms.DataGridView GlobalDiversDataGridView;
+        private System.Windows.Forms.TabControl JudgesDiversTabControl;
+        private System.Windows.Forms.TabPage JudgeTabPage;
+        private System.Windows.Forms.TabPage DiverTabPage;
+        private System.Windows.Forms.TabControl JudgesTabControl;
+        private System.Windows.Forms.TabPage GlobalJudgesTabPage;
+        private System.Windows.Forms.TabPage CurrentJudgesTabPage;
+        private System.Windows.Forms.TabControl DiversTabControl;
+        private System.Windows.Forms.TabPage GlobalDiversTabPage;
+        private System.Windows.Forms.TabPage CurrentDiversTabPage;
+        private System.Windows.Forms.DataGridView CurrentJudgesDataGridView;
+        private System.Windows.Forms.DataGridView CurrentDiversDataGridView;
     }
 }
