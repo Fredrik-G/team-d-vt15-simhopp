@@ -73,8 +73,10 @@ namespace SimhoppGUI
         private void StartScreenStartContestBtn_Click(object sender, EventArgs e)
         {
             //Dims the background form and makes it non-interactive.
+            EventReadFromFile("judge.txt");
+            EventReadFromFile("diver.txt");
             using (new DimIt())
-            using (var startContest = new StartContest())
+            using (var startContest = new StartContest(EventGetContestsList, EventGetJudgesList, EventGetDiversList))
             {
                 if (startContest.ShowDialog(this) == DialogResult.OK)
                 {
