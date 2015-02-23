@@ -11,9 +11,43 @@ namespace SimhoppGUI
 {
     public partial class AddEditJudge : Form
     {
+        #region Data
         private DelegateAddJudgeToList eventAddJudgeToList;
         private DelegateRemoveJudgeFromList eventRemoveJudgeFromList;
 
+        #endregion
+        #region Properties
+        public string AddName
+        {
+            get { return AddJudgeNameTb.Text; }
+            set { AddJudgeNameTb.Text = value; }
+        }
+        public string UpdateName
+        {
+            get { return UpdateJudgeNameTb.Text; }
+            set { UpdateJudgeNameTb.Text = value; }
+        }
+        public string AddNationality
+        {
+            get { return AddJudgeNationaltyTb.Text; }
+            set { AddJudgeNationaltyTb.Text = value; }
+        }
+        public string UpdateNationality
+        {
+            get { return UpdateJudgeNationalityTb.Text; }
+            set { UpdateJudgeNationalityTb.Text = value; }
+        }
+        public string AddSSN
+        {
+            get { return AddJudgeSSNTb.Text; }
+            set { AddJudgeSSNTb.Text = value; }
+        }
+        public string UpdateSSN
+        {
+            get { return UpdateJudgeSSNTb.Text; }
+            set { UpdateJudgeSSNTb.Text = value; }
+        } 
+        #endregion
         #region Constructor
         public AddEditJudge
             (DelegateAddJudgeToList eventAddJudgeToList,
@@ -22,7 +56,6 @@ namespace SimhoppGUI
             DelegateReadFromFile eventReadFromFile
             )
         {
-            
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             InitializeComponent();
 
@@ -76,9 +109,9 @@ namespace SimhoppGUI
 
         private void UpdateTextBoxes(DataGridViewRow row)
         {
-            UpdateJudgeNameTb.Text = row.Cells["Name"].Value.ToString();
-            UpdateJudgeNationalityTb.Text = row.Cells["Nationality"].Value.ToString();
-            UpdateJudgeSSNTb.Text = row.Cells["SSN"].Value.ToString();
+            UpdateName = row.Cells["Name"].Value.ToString();
+            UpdateNationality = row.Cells["Nationality"].Value.ToString();
+            UpdateSSN = row.Cells["SSN"].Value.ToString();
         }
 
         private void AddJudgeButton_Click(object sender, EventArgs e)
@@ -87,7 +120,7 @@ namespace SimhoppGUI
             {
                 if (CheckInput.CheckCorrectPersonInput(AddJudgeNameTb, AddJudgeNationaltyTb, AddJudgeSSNTb))
                 {
-                    eventAddJudgeToList(AddJudgeNameTb.Text, AddJudgeNationaltyTb.Text, AddJudgeSSNTb.Text);
+                    eventAddJudgeToList(AddName, AddNationality, AddSSN);
                 }
             }
             catch (Exception exception)
@@ -117,9 +150,9 @@ namespace SimhoppGUI
 
                 if (CheckInput.CheckCorrectPersonInput(UpdateJudgeNameTb, UpdateJudgeNationalityTb, UpdateJudgeSSNTb))
                 {
-                    row.Cells["Name"].Value = UpdateJudgeNameTb.Text;
-                    row.Cells["Nationality"].Value = UpdateJudgeNationalityTb.Text;
-                    row.Cells["SSN"].Value = UpdateJudgeSSNTb.Text;
+                    row.Cells["Name"].Value = UpdateName;
+                    row.Cells["Nationality"].Value = UpdateNationality;
+                    row.Cells["SSN"].Value = UpdateSSN;
                 }
             }
             catch (ArgumentNullException nullException)
@@ -142,14 +175,14 @@ namespace SimhoppGUI
         /// <param name="e"></param>
         private void UpdateJudgeRemoveBtn_Click(object sender, EventArgs e)
         {
-            eventRemoveJudgeFromList(UpdateJudgeSSNTb.Text);
+            eventRemoveJudgeFromList(UpdateSSN);
 
             //Resets the textboxes if list is empty.
             if (JudgesDataGridView.Rows.Count == 0)
             {
-                UpdateJudgeNameTb.Text = "";
-                UpdateJudgeNationalityTb.Text = "";
-                UpdateJudgeSSNTb.Text = "";
+                UpdateName = "";
+                UpdateNationality = "";
+                UpdateSSN = "";
             }
         }
 
@@ -168,18 +201,18 @@ namespace SimhoppGUI
         private void AddJudgeNameTb_Click(object sender, EventArgs e)
         {
             UpdateJudgeNameTb.BackColor = SystemColors.Window;
-            UpdateJudgeNameTb.Text = "";
+            UpdateName = "";
         }
         private void UpdateJudgeNationalityTb_Click(object sender, EventArgs e)
         {
             UpdateJudgeNationalityTb.BackColor = SystemColors.Window;
-            UpdateJudgeNationalityTb.Text = "";
+            UpdateNationality = "";
         }
 
         private void UpdateJudgeSSNTb_Click(object sender, EventArgs e)
         {
             UpdateJudgeSSNTb.BackColor = SystemColors.Window;
-            UpdateJudgeSSNTb.Text = "";
+            UpdateSSN = "";
         }
         #endregion
         #region Close Button
@@ -192,9 +225,5 @@ namespace SimhoppGUI
             Close();
         }
         #endregion
-
-
-
-
     }
 }

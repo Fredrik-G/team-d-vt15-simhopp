@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using Simhopp;
 using Simhopp.View;
 
 namespace SimhoppGUI
@@ -33,17 +34,27 @@ namespace SimhoppGUI
                 ContestsDataGridView.DataSource = this.eventGetContestsList();
                 ContestsDataGridView.ReadOnly = true;
             }
-
             if (eventGetJudgesList != null)
             {
-                GlobalJudgesDataGridView.DataSource = this.eventGetDiversList();
+                GlobalJudgesDataGridView.DataSource = this.eventGetJudgesList();
+            }
+            if (eventGetDiversList != null)
+            {
+                GlobalDiversDataGridView.DataSource = this.eventGetDiversList();
             }
         }
         #endregion
 
-        private void JudgesDiversTabControl_SelectedIndexChanged(object sender, EventArgs e)
+        private void ContestsDataGridView_SelectionChanged(object sender, EventArgs e)
         {
-            
+
         }
+        private void JudgesTabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //MsgBox.CreateErrorBox("a","b");
+        }
+
+
+
     }
 }

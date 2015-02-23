@@ -13,11 +13,28 @@ namespace SimhoppGUI
 {
     public partial class NewContest : Form
     {
+        #region Properties
+
+        public string ContestName
+        {
+            get { return newContestNameTB.Text; }
+            set { newContestNameTB.Text = value; }
+        }
+
+        public string City
+        {
+            get { return newContestCityTB.Text; }
+            set { newContestCityTB.Text = value; }
+        }
+
+        #endregion
+
         public NewContest()
         {
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             InitializeComponent();
         }
+
 
         private void NewContestCloseBtn_Click(object sender, EventArgs e)
         {
@@ -41,13 +58,13 @@ namespace SimhoppGUI
         private void newContestNameTB_Click(object sender, EventArgs e)
         {
             newContestNameTB.BackColor = SystemColors.Window;
-            newContestNameTB.Text = "";
+            ContestName = "";
         }
 
         private void newContestCityTB_Click(object sender, EventArgs e)
         {
             newContestCityTB.BackColor = SystemColors.Window;
-            newContestCityTB.Text = "";
+            City = "";
         }
 
     }
