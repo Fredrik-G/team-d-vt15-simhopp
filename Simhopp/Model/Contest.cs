@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
+using System.Linq;
 using System.Management.Instrumentation;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -123,13 +124,27 @@ namespace Simhopp.Model
         }
         #endregion
 
-        #region Methods
+
+        #region Getters
 
         public List<Participant> GetParticipants()
         {
             return participantsList;
         }
 
+        public List<Judge> GetJudgesList()
+        {
+            return judgeList;
+        }
+
+        public List<Diver> GetDiversList()
+        {
+            return participantsList.Select(participant => participant.GetDiver()).ToList();
+        }
+
+        #endregion
+
+        #region Methods
         public bool IsJudgeInContest(Judge judge)
         {
             return judgeList.Find(x => x.SSN == judge.SSN) != null;
