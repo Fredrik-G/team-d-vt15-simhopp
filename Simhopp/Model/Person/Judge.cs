@@ -18,6 +18,7 @@ namespace Simhopp.Model
         /// </summary>
         public Judge()
         {
+            this.id = -1;
             this.name = "";
             this.nationality = "";
             this.ssn = "";
@@ -30,6 +31,7 @@ namespace Simhopp.Model
         /// <param name="ssn"></param>
         public Judge(string name, string nationality, string ssn)
         {
+            this.id = -1;
             this.name = name;
             this.nationality = nationality;
             this.ssn = ssn;
