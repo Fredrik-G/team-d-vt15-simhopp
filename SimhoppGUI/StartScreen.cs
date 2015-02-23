@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 using Simhopp;
@@ -51,13 +52,17 @@ namespace SimhoppGUI
                     {
                         return;
                     }
-                    var startDate = CreateDateString(newContest.NewContestStartDateDTP);
-                    var endDate = CreateDateString(newContest.NewContestEndDateDTP);
+                    if (newContest.DialogResult == DialogResult.OK)
+                    {
+                        var startDate = CreateDateString(newContest.NewContestStartDateDTP);
+                        var endDate = CreateDateString(newContest.NewContestEndDateDTP);
 
-                    EventCreateContest(newContest.newContestCityTB.Text,
-                        newContest.newContestNameTB.Text, startDate, endDate);
+                        EventCreateContest(newContest.City, newContest.ContestName, startDate, endDate);
+                    }
+
                 }
             }
+
             catch (ArgumentNullException nullException)
             {
                 MsgBox.CreateErrorBox(nullException.ToString(), MethodBase.GetCurrentMethod().Name);
@@ -101,7 +106,7 @@ namespace SimhoppGUI
         {
             //Dims the background form and makes it non-interactive.
             using (new DimIt())
-            using (var addDiver = new AddEditDiver(EventAddDiverToList,EventGetDiversList, EventReadFromFile))
+            using (var addDiver = new AddEditDiver(EventAddDiverToList, EventGetDiversList, EventReadFromFile))
             {
                 if (addDiver.ShowDialog(this) == DialogResult.OK)
                 {

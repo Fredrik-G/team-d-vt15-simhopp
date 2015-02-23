@@ -10,6 +10,33 @@ namespace SimhoppGUI
 {
     public partial class EditViewContest : Form
     {
+        #region Properties
+        public string ContestName
+        {
+            get { return EditViewContestEditContestNameTb.Text; }
+            set { EditViewContestEditContestNameTb.Text = value; }
+        }
+
+        public string Place
+        {
+            get { return EditViewContestEditContestPlaceTb.Text; }
+            set { EditViewContestEditContestPlaceTb.Text = value; }
+        }
+
+        public string StartDate
+        {
+            get { return EditViewContestEditStartDateTp.Text; }
+            set { EditViewContestEditStartDateTp.Text = value; }
+        }
+
+        public string EndDate
+        {
+            get { return EditViewContestEditEndtDateTp.Text; }
+            set { EditViewContestEditEndtDateTp.Text = value; }
+        }
+
+        #endregion
+
         #region Constructor
         public EditViewContest(DelegateGetContestsList eventGetContestsList)
         {
@@ -40,16 +67,11 @@ namespace SimhoppGUI
             try
             {
                 var row = cell.OwningRow;
-                EditViewContestEditContestNameTb.Text = row.Cells["Name"].Value.ToString();
-                EditViewContestEditContestPlaceTb.Text = row.Cells["Place"].Value.ToString();
 
-                var date = row.Cells["StartDate"].Value.ToString().Split('/');
-                var temp = row.Cells["EndDate"].Value.ToString().Split('/');
-
-                date[0] = temp[1];
-                date[1] = temp[0];
-                var s = date[0] + "/" + date[1] + "/" + date[2];
-                EditViewContestEditStartDateTp.Text = s;
+                ContestName = row.Cells["Name"].Value.ToString();
+                Place = row.Cells["Place"].Value.ToString();
+                StartDate = CreateDateTimePicker(row, "StartDate");
+                EndDate = CreateDateTimePicker(row, "EndDate");
             }
             catch (ArgumentNullException nullException)
             {
@@ -63,7 +85,21 @@ namespace SimhoppGUI
             {
                 MsgBox.CreateErrorBox(exception.ToString(), MethodBase.GetCurrentMethod().Name);
             }
+        }
+        /// <summary>
+        /// Creates a date string used by DateTimePicker.
+        /// </summary>
+        /// <param name="row"></param>
+        /// <param name="cellName"></param>
+        /// <returns></returns>
+        private string CreateDateTimePicker(DataGridViewRow row, string cellName)
+        {
+            var date = row.Cells[cellName].Value.ToString().Split('/');
+            var temp = row.Cells[cellName].Value.ToString().Split('/');
 
+            date[0] = temp[1];
+            date[1] = temp[0];
+            return date[0] + "/" + date[1] + "/" + date[2];
         }
         /// <summary>
         /// Updates the selected contest with the input from the textboxes. 
@@ -103,8 +139,8 @@ namespace SimhoppGUI
                 if (CheckInput.CheckCorrectContestInput(EditViewContestEditContestNameTb,
                     EditViewContestEditContestPlaceTb) && correctStartDate && correctEndDate)
                 {
-                    row.Cells["Name"].Value = EditViewContestEditContestNameTb.Text;
-                    row.Cells["Place"].Value = EditViewContestEditContestPlaceTb.Text;
+                    row.Cells["Name"].Value = Name;
+                    row.Cells["Place"].Value = Place;
                     row.Cells["StartDate"].Value = startDate;
                     row.Cells["EndDate"].Value = endDate;
                 }
@@ -134,13 +170,13 @@ namespace SimhoppGUI
         private void EditViewContestEditContestNameTb_Click(object sender, EventArgs e)
         {
             EditViewContestEditContestNameTb.BackColor = SystemColors.Window;
-            EditViewContestEditContestNameTb.Text = "";
+            Name = "";
         }
 
         private void EditViewContestEditContestPlaceTb_Click(object sender, EventArgs e)
         {
             EditViewContestEditContestPlaceTb.BackColor = SystemColors.Window;
-            EditViewContestEditContestPlaceTb.Text = "";
+            Place = "";
         }
         #endregion
     }
