@@ -644,7 +644,11 @@ namespace Simhopp.Model
         #endregion
 
         #region Trick Methods
-        public void AddTrickToDatabase(Diver d)
+        /// <summary>
+        /// Adds a Trick objekt to the database.
+        /// </summary>
+        /// <param name="t"></param>
+        public void AddTrickToDatabase(Trick t)
         {
             if (dbConnection == null)
             {
@@ -654,19 +658,19 @@ namespace Simhopp.Model
             {
                 try
                 {
-                    string sql = "INSERT INTO Diver(Name,SSN,Nationality) VALUES('" + d.Name + "', '" + d.SSN + "','" + d.Nationality + "')";
+                    string sql = "INSERT INTO Trick(Name,Difficulty) VALUES('" + t.Name + "', '" + t.Difficulty + "')";
                     SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
                     command.ExecuteNonQuery();
                 }
 
                 catch (SQLiteException sqliteEx)
                 {
-                    MsgBox.CreateErrorBox("Could not add the following Diver to database: \n" + d.Name + ", " + d.Nationality + ", " + d.SSN + "\nExeption: " + sqliteEx, MethodBase.GetCurrentMethod().Name);
+                    MsgBox.CreateErrorBox("Could not add the following Trick to database: \n" + t.Name + ", " + t.Difficulty + "\nExeption: " + sqliteEx, MethodBase.GetCurrentMethod().Name);
                 }
 
                 catch (Exception e)
                 {
-                    MsgBox.CreateErrorBox("Could not add the following Diver to database: \n" + d.Name + ", " + d.Nationality + ", " + d.SSN + "\nExeption: " + e, MethodBase.GetCurrentMethod().Name);
+                    MsgBox.CreateErrorBox("Could not add the following Trick to database: \n" + t.Name + ", " + t.Difficulty + "\nExeption: " + e, MethodBase.GetCurrentMethod().Name);
                 }
             }
         }
