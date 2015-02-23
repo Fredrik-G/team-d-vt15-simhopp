@@ -99,7 +99,6 @@
     <Compile Include="Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
-    <Compile Include="MsgBox.cs" />
     <Compile Include="NewContest.cs">
       <SubType>Form</SubType>
     </Compile>

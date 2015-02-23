@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using System.Windows.Forms;
+using Simhopp;
 using Simhopp.View;
 
 namespace SimhoppGUI
