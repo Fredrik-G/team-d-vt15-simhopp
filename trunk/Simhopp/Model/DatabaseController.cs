@@ -220,7 +220,7 @@ namespace Simhopp.Model
         /// Takes a diver objekt and adds that Diver to the database table Diver. 
         /// </summary>
         /// <param name="d">Diver objekt.</param>
-        public void AddDivertoDatabase(Diver d)
+        public void AddDiverToDatabase(Diver d)
         {
             if (dbConnection == null)
             {
@@ -532,7 +532,6 @@ namespace Simhopp.Model
 
             }
         }
-        #endregion
 
         /// <summary>
         /// Gets the judges from datbase, puts them in a lisa and returns it.
@@ -587,6 +586,7 @@ namespace Simhopp.Model
             }
             return null;
         }
+        #endregion
 
         #region Contest Methods
         /// <summary>
@@ -644,7 +644,32 @@ namespace Simhopp.Model
         #endregion
 
         #region Trick Methods
+        public void AddTrickToDatabase(Diver d)
+        {
+            if (dbConnection == null)
+            {
+                NoConnectionErrorMessage();
+            }
+            else
+            {
+                try
+                {
+                    string sql = "INSERT INTO Diver(Name,SSN,Nationality) VALUES('" + d.Name + "', '" + d.SSN + "','" + d.Nationality + "')";
+                    SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
+                    command.ExecuteNonQuery();
+                }
 
+                catch (SQLiteException sqliteEx)
+                {
+                    MsgBox.CreateErrorBox("Could not add the following Diver to database: \n" + d.Name + ", " + d.Nationality + ", " + d.SSN + "\nExeption: " + sqliteEx, MethodBase.GetCurrentMethod().Name);
+                }
+
+                catch (Exception e)
+                {
+                    MsgBox.CreateErrorBox("Could not add the following Diver to database: \n" + d.Name + ", " + d.Nationality + ", " + d.SSN + "\nExeption: " + e, MethodBase.GetCurrentMethod().Name);
+                }
+            }
+        }
         #endregion
 
         #region Jump Methods
