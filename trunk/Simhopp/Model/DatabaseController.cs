@@ -336,12 +336,12 @@ namespace Simhopp.Model
 
                 catch (SQLiteException sqliteEx)
                 {
-                    MsgBox.CreateErrorBox("Could not update the following diver from database: \n" + d.Name + ", " + d.Nationality + ", " + d.SSN + "\nExeption: " + sqliteEx, MethodBase.GetCurrentMethod().Name);
+                    MsgBox.CreateErrorBox("Could not update the following Diver in database: \n" + d.Name + ", " + d.Nationality + ", " + d.SSN + "\nExeption: " + sqliteEx, MethodBase.GetCurrentMethod().Name);
                 }
 
                 catch (Exception e)
                 {
-                    MsgBox.CreateErrorBox("Could not update the following diver from database: \n" + d.Name + ", " + d.Nationality + ", " + d.SSN + "\nExeption: " + e, MethodBase.GetCurrentMethod().Name);
+                    MsgBox.CreateErrorBox("Could not update the following Diver in database: \n" + d.Name + ", " + d.Nationality + ", " + d.SSN + "\nExeption: " + e, MethodBase.GetCurrentMethod().Name);
                 }
 
             }
@@ -446,7 +446,89 @@ namespace Simhopp.Model
                 }
             }
         }
+
+        public void UpdateDiver(Judge j)
+        {
+            if (dbConnection == null)
+            {
+                NoConnectionErrorMessage();
+            }
+            else
+            {
+                try
+                {
+                    string sql = "UPDATE Judge SET Name = '" + j.Name + "', SSN = '" + j.SSN + "', Nationality = '" + j.Nationality + "' WHERE ID = '" + j.Id + "'";
+                    SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
+                    command.ExecuteNonQuery();
+                }
+
+                catch (SQLiteException sqliteEx)
+                {
+                    MsgBox.CreateErrorBox("Could not update the following Judge in database: \n" + j.Name + ", " + j.Nationality + ", " + j.SSN + "\nExeption: " + sqliteEx, MethodBase.GetCurrentMethod().Name);
+                }
+
+                catch (Exception e)
+                {
+                    MsgBox.CreateErrorBox("Could not update the following Judge in database: \n" + j.Name + ", " + j.Nationality + ", " + j.SSN + "\nExeption: " + e, MethodBase.GetCurrentMethod().Name);
+                }
+
+            }
+        }
         #endregion
+
+        /// <summary>
+        /// Gets the judges from datbase, puts them in a lisa and returns it.
+        /// </summary>
+        /// <returns>List of Judge objects.</returns>
+        public List<Judge> GetJudges()
+        {
+            if (dbConnection == null)
+            {
+                NoConnectionErrorMessage();
+            }
+            else
+            {
+                try
+                {
+                    string sql = "SELECT * FROM Judge";
+                    SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
+                    SQLiteDataReader reader = command.ExecuteReader();
+                    List<Judge> jl = new List<Judge>();
+                    while (reader.Read())
+                    {
+                        Judge j = new Judge(Convert.ToInt32(reader["ID"]), Convert.ToString(reader["Name"]), Convert.ToString(reader["Nationality"]), Convert.ToString(reader["SSN"]));
+                        jl.Add(j);
+                    }
+                    return jl;
+                }
+
+                catch (SQLiteException sqliteEx)
+                {
+                    MsgBox.CreateErrorBox("Could not get Judges from database.\n" + sqliteEx, MethodBase.GetCurrentMethod().Name);
+                }
+
+                catch (FormatException formatEx)
+                {
+                    MsgBox.CreateErrorBox("Could not get Judges from database.\n" + formatEx.GetType() + "\n" + formatEx, MethodBase.GetCurrentMethod().Name);
+                }
+
+                catch (InvalidCastException invalidCastEx)
+                {
+                    MsgBox.CreateErrorBox("Could not get Judges from database.\n" + invalidCastEx.GetType() + "\n" + invalidCastEx, MethodBase.GetCurrentMethod().Name);
+                }
+
+                catch (OverflowException overflowEx)
+                {
+                    MsgBox.CreateErrorBox("Could not get Judges from database.\n" + overflowEx.GetType() + "\n" + overflowEx, MethodBase.GetCurrentMethod().Name);
+                }
+
+                catch (Exception e)
+                {
+                    MsgBox.CreateErrorBox("Could not get Judges from database.\n" + e, MethodBase.GetCurrentMethod().Name);
+                }
+            }
+            return null;
+        }
 
         #region Contest Methods
         /// <summary>
