@@ -28,13 +28,14 @@ namespace SimhoppUnitTest
         {
             Diver d = new Diver("Jimmy McNultey", "Finish", "111-22-3333");
             //DatabaseController dbc = new DatabaseController("simhoppTestDB.db");
+            dbc.CloseConnectionToDatabase();
             dbc.ConnectToDatabase();
             dbc.ClearDatabase("Diver");
-            bool emptyOrNot = dbc.IsTableEmpty("Diver");
+            bool emptyOrNot = dbc.TableIsEmpty("Diver");
             Assert.AreEqual(emptyOrNot, true);
 
             dbc.AddDivertoDatabase(d);
-            emptyOrNot = dbc.IsTableEmpty("Diver");
+            emptyOrNot = dbc.TableIsEmpty("Diver");
             Assert.AreEqual(emptyOrNot, false);
 
             dbc.CloseConnectionToDatabase();
@@ -50,11 +51,11 @@ namespace SimhoppUnitTest
             Judge j = new Judge("Gnurra G", "Swedish", "111111-1111");
             dbc.ConnectToDatabase();
             dbc.ClearDatabase("Judge");
-            bool emptyOrNot = dbc.IsTableEmpty("Judge");
+            bool emptyOrNot = dbc.TableIsEmpty("Judge");
             Assert.AreEqual(emptyOrNot, true);
 
             dbc.AddJudgeToDatabase(j);
-            emptyOrNot = dbc.IsTableEmpty("Judge");
+            emptyOrNot = dbc.TableIsEmpty("Judge");
             Assert.AreEqual(emptyOrNot, false);
 
             dbc.CloseConnectionToDatabase();
@@ -70,11 +71,11 @@ namespace SimhoppUnitTest
             Contest c = new Contest("VM", "G-vik", "12/02/2015", "13/02/2015");
             dbc.ConnectToDatabase();
             dbc.ClearDatabase("Contest");
-            bool emptyOrNot = dbc.IsTableEmpty("Contest");
+            bool emptyOrNot = dbc.TableIsEmpty("Contest");
             Assert.AreEqual(emptyOrNot, true);
 
             dbc.AddContestToDatabase(c);
-            emptyOrNot = dbc.IsTableEmpty("Contest");
+            emptyOrNot = dbc.TableIsEmpty("Contest");
             Assert.AreEqual(emptyOrNot, false);
 
             dbc.CloseConnectionToDatabase();
@@ -89,15 +90,15 @@ namespace SimhoppUnitTest
             Diver d = new Diver("Jimmy McNultey", "Finish", "111-22-3333");
             dbc.ConnectToDatabase();
             dbc.ClearDatabase("Diver");
-            bool emptyOrNot = dbc.IsTableEmpty("Diver");
+            bool emptyOrNot = dbc.TableIsEmpty("Diver");
             Assert.AreEqual(emptyOrNot, true);
 
             dbc.AddDivertoDatabase(d);
-            emptyOrNot = dbc.IsTableEmpty("Diver");
+            emptyOrNot = dbc.TableIsEmpty("Diver");
             Assert.AreEqual(emptyOrNot, false);
 
             dbc.RemoveDiverFromTable(d);
-            emptyOrNot = dbc.IsTableEmpty("Diver");
+            emptyOrNot = dbc.TableIsEmpty("Diver");
             Assert.AreEqual(emptyOrNot, true);
 
             dbc.CloseConnectionToDatabase();
@@ -112,15 +113,15 @@ namespace SimhoppUnitTest
             Judge j = new Judge("Gnurra G", "Swedish", "111111-1111");
             dbc.ConnectToDatabase();
             dbc.ClearDatabase("Judge");
-            bool emptyOrNot = dbc.IsTableEmpty("Judge");
+            bool emptyOrNot = dbc.TableIsEmpty("Judge");
             Assert.AreEqual(emptyOrNot, true);
 
             dbc.AddJudgeToDatabase(j);
-            emptyOrNot = dbc.IsTableEmpty("Judge");
+            emptyOrNot = dbc.TableIsEmpty("Judge");
             Assert.AreEqual(emptyOrNot, false);
 
             dbc.RemoveJudgeFromTable(j);
-            emptyOrNot = dbc.IsTableEmpty("Judge");
+            emptyOrNot = dbc.TableIsEmpty("Judge");
             Assert.AreEqual(emptyOrNot, true);
 
             dbc.CloseConnectionToDatabase();
@@ -136,15 +137,15 @@ namespace SimhoppUnitTest
             Contest c = new Contest("VM", "G-vik", "12/02/2015", "13/02/2015");
             dbc.ConnectToDatabase();
             dbc.ClearDatabase("Contest");
-            bool emptyOrNot = dbc.IsTableEmpty("Contest");
+            bool emptyOrNot = dbc.TableIsEmpty("Contest");
             Assert.AreEqual(emptyOrNot, true);
 
             dbc.AddContestToDatabase(c);
-            emptyOrNot = dbc.IsTableEmpty("Contest");
+            emptyOrNot = dbc.TableIsEmpty("Contest");
             Assert.AreEqual(emptyOrNot, false);
 
             dbc.RemoveContestFromTable(c);
-            emptyOrNot = dbc.IsTableEmpty("Contest");
+            emptyOrNot = dbc.TableIsEmpty("Contest");
             Assert.AreEqual(emptyOrNot, true);
 
             dbc.CloseConnectionToDatabase();
