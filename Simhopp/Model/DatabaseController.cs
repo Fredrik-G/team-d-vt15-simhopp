@@ -5,8 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Forms;
 using System.Data.SQLite;
+using System.Reflection;
+using Simhopp;
 
 namespace Simhopp.Model
 {
@@ -27,15 +28,13 @@ namespace Simhopp.Model
 
             catch (SQLiteException sqliteEx)
             {
-                Console.WriteLine("Could not connect to the database.\n" + sqliteEx.GetType() + "\n" + sqliteEx);
-                MessageBox.Show("Could not connect to the database.\n" + sqliteEx.GetType() + "\n" + sqliteEx);
+                MsgBox.CreateErrorBox("Could not connect to the database.\n" + sqliteEx.GetType() + "\n" + sqliteEx, MethodBase.GetCurrentMethod().Name);
                 dbConnection = null;
             }
 
             catch (Exception e)
             {
-                Console.WriteLine("Could not connect to the database.\n" + e.GetType() + "\n" + e);
-                MessageBox.Show("Could not connect to the database.\n" + e.GetType() + "\n" + e);
+                MsgBox.CreateErrorBox("Could not connect to the database.\n" + e.GetType() + "\n" + e, MethodBase.GetCurrentMethod().Name);
                 dbConnection = null;
             }
 
@@ -54,15 +53,13 @@ namespace Simhopp.Model
 
             catch (SQLiteException sqliteEx)
             {
-                Console.WriteLine("Could not connect to the database.\n" + sqliteEx.GetType() + "\n" + sqliteEx);
-                MessageBox.Show("Could not connect to the database.\n" + sqliteEx.GetType() + "\n" + sqliteEx);
+                MsgBox.CreateErrorBox("Could not connect to the database.\n" + sqliteEx.GetType() + "\n" + sqliteEx, MethodBase.GetCurrentMethod().Name);
                 dbConnection = null;
             }
 
             catch (Exception e)
             {
-                Console.WriteLine("Could not connect to the database.\n" + e.GetType() + "\n" + e);
-                MessageBox.Show("Could not connect to the database.\n" + e.GetType() + "\n" + e);
+                MsgBox.CreateErrorBox("Could not connect to the database.\n" + e.GetType() + "\n" + e, MethodBase.GetCurrentMethod().Name);
                 dbConnection = null;
             }
         }
@@ -78,18 +75,16 @@ namespace Simhopp.Model
             {
                 dbConnection.Open();
             }
-            
+
             catch (SQLiteException sqliteEx)
             {
-                Console.WriteLine("Could not connect to the database.\n" + sqliteEx.GetType() + "\n" +sqliteEx);
-                MessageBox.Show("Could not connect to the database.\n" + sqliteEx.GetType() + "\n" + sqliteEx);
+                MsgBox.CreateErrorBox("Could not connect to the database.\n" + sqliteEx.GetType() + "\n" + sqliteEx, MethodBase.GetCurrentMethod().Name);
                 dbConnection = null;
             }
 
             catch (Exception e)
             {
-                Console.WriteLine("Could not connect to the database.\n" + e.GetType() + "\n" + e);
-                MessageBox.Show("Could not connect to the database.\n" + e.GetType() + "\n" + e);
+                MsgBox.CreateErrorBox("Could not connect to the database.\n" + e.GetType() + "\n" + e, MethodBase.GetCurrentMethod().Name);
                 dbConnection = null;
             }
         }
@@ -102,8 +97,7 @@ namespace Simhopp.Model
         {
             if (dbConnection == null)
             {
-                Console.WriteLine("The connection to the database has not been initialized.");
-                MessageBox.Show("The connection to the database has not been initialized.");
+                MsgBox.CreateErrorBox("The connection to the database has not been initialized.", MethodBase.GetCurrentMethod().Name);
             }
             else
             {
@@ -114,15 +108,13 @@ namespace Simhopp.Model
 
                 catch (SQLiteException sqliteEx)
                 {
-                    Console.WriteLine("Could not close connection to the database.\n" + sqliteEx.GetType() + "\n" + sqliteEx);
-                    MessageBox.Show("Could not close connection to the database.\n" + sqliteEx.GetType() + "\n" + sqliteEx);
+                    MsgBox.CreateErrorBox("Could not close connection to the database.\n" + sqliteEx.GetType() + "\n" + sqliteEx, MethodBase.GetCurrentMethod().Name);
                     dbConnection = null;
                 }
 
                 catch (Exception e)
                 {
-                    Console.WriteLine("Could not close connection to the database.\n" + e.GetType() + "\n" + e);
-                    MessageBox.Show("Could not close connection to the database.\n" + e.GetType() + "\n" + e);
+                    MsgBox.CreateErrorBox("Could not close connection to the database.\n" + e.GetType() + "\n" + e, MethodBase.GetCurrentMethod().Name);
                     dbConnection = null;
                 }
             }
@@ -154,13 +146,29 @@ namespace Simhopp.Model
                     }
                     return false;
                 }
-                catch (SQLiteException sqliteex)
+                catch (SQLiteException sqliteEx)
                 {
-                    Console.WriteLine(sqliteex);
+                    MsgBox.CreateErrorBox("Could not find out if " + tableName + " is empty or not.\n" + sqliteEx.GetType() + "\n" + sqliteEx, MethodBase.GetCurrentMethod().Name);
                 }
+
+                catch (FormatException formatEx)
+                {
+                    MsgBox.CreateErrorBox("Could not find out if " + tableName + " is empty or not.\n" + formatEx.GetType() + "\n" + formatEx, MethodBase.GetCurrentMethod().Name);
+                }
+
+                catch (InvalidCastException invalidCastEx)
+                {
+                    MsgBox.CreateErrorBox("Could not find out if " + tableName + " is empty or not.\n" + invalidCastEx.GetType() + "\n" + invalidCastEx, MethodBase.GetCurrentMethod().Name);
+                }
+
+                catch (OverflowException overflowEx)
+                {
+                    MsgBox.CreateErrorBox("Could not find out if " + tableName + " is empty or not.\n" + overflowEx.GetType() + "\n" + overflowEx, MethodBase.GetCurrentMethod().Name);
+                }
+
                 catch (Exception e)
                 {
-                    Console.WriteLine(e);
+                    MsgBox.CreateErrorBox("Could not find out if " + tableName + " is empty or not.\n" + e.GetType() + "\n" + e, MethodBase.GetCurrentMethod().Name);
                 }
                 return false;
             }
@@ -188,15 +196,13 @@ namespace Simhopp.Model
 
                         catch (SQLiteException sqliteEx)
                         {
-                            Console.WriteLine("Table " + tableName + " could not be cleared.\n" + sqliteEx.GetType() + "\n" + sqliteEx);
-                            MessageBox.Show("Table " + tableName + " could not be cleared.\n" + sqliteEx.GetType() + "\n" + sqliteEx);
+                            MsgBox.CreateErrorBox("Table " + tableName + " could not be cleared.\n" + sqliteEx.GetType() + "\n" + sqliteEx, MethodBase.GetCurrentMethod().Name);
                             dbConnection = null;
                         }
 
                         catch (Exception e)
                         {
-                            Console.WriteLine("Table " + tableName + " could not be cleared.\n" + e.GetType() + "\n" + e);
-                            MessageBox.Show("Table " + tableName + " could not be cleared.\n" + e.GetType() + "\n" + e);
+                            MsgBox.CreateErrorBox("Table " + tableName + " could not be cleared.\n" + e.GetType() + "\n" + e, MethodBase.GetCurrentMethod().Name);
                             dbConnection = null;
                         }
 
@@ -205,8 +211,7 @@ namespace Simhopp.Model
 
         public void NoConnectionErrorMessage()
         {
-            Console.WriteLine("Connection to a database is missing.");
-            MessageBox.Show("Connection to a database is missing.");
+            MsgBox.CreateErrorBox("Connection to a database is missing.", MethodBase.GetCurrentMethod().Name);
         }
         #endregion
 
@@ -232,14 +237,12 @@ namespace Simhopp.Model
 
                 catch (SQLiteException sqliteEx)
                 {
-                    Console.WriteLine("Could not add the following Diver to database: \n" + d.Name + ", " + d.Nationality + ", " + d.SSN + "\nExeption: " + sqliteEx);
-                    MessageBox.Show("Could not add the following Diver to database: \n" + d.Name + ", " + d.Nationality + ", " + d.SSN + "\nExeption: " + sqliteEx);
+                    MsgBox.CreateErrorBox("Could not add the following Diver to database: \n" + d.Name + ", " + d.Nationality + ", " + d.SSN + "\nExeption: " + sqliteEx, MethodBase.GetCurrentMethod().Name);
                 }
 
                 catch (Exception e)
                 {
-                    Console.WriteLine("Could not add the following Diver to database: \n" + d.Name + ", " + d.Nationality + ", " + d.SSN + "\nExeption: " + e);
-                    MessageBox.Show("Could not add the following Diver to database: \n" + d.Name + ", " + d.Nationality + ", " + d.SSN + "\nExeption: " + e);
+                    MsgBox.CreateErrorBox("Could not add the following Diver to database: \n" + d.Name + ", " + d.Nationality + ", " + d.SSN + "\nExeption: " + e, MethodBase.GetCurrentMethod().Name);
                 }
             }
         }
@@ -265,27 +268,22 @@ namespace Simhopp.Model
 
                 catch (SQLiteException sqliteEx)
                 {
-                    Console.WriteLine("Could not delete the following diver from database: \n" + d.Name + ", " + d.Nationality +
-                                      ", " + d.SSN + "\nExeption: " + sqliteEx);
-                    MessageBox.Show("Could not delete the following diver from database: \n" + d.Name + ", " + d.Nationality +
-                                      ", " + d.SSN + "\nExeption: " + sqliteEx);
+                    MsgBox.CreateErrorBox("Could not delete the following diver from database: \n" + d.Name + ", " + d.Nationality + ", " + d.SSN + "\nExeption: " + sqliteEx, MethodBase.GetCurrentMethod().Name);
                 }
 
                 catch (Exception e)
                 {
-                    Console.WriteLine("Could not delete the following diver from database: \n" + d.Name + ", " + d.Nationality +
-                                      ", " + d.SSN + "\nExeption: " + e);
-                    MessageBox.Show("Could not delete the following diver from database: \n" + d.Name + ", " + d.Nationality +
-                                      ", " + d.SSN + "\nExeption: " + e);
+                    MsgBox.CreateErrorBox("Could not delete the following diver from database: \n" + d.Name + ", " + d.Nationality + ", " + d.SSN + "\nExeption: " + e, MethodBase.GetCurrentMethod().Name);
                 }
                 
             }
         }
 
         /// <summary>
+        /// Console function.
         /// Prints all the rows in the Diver table in the console.
         /// </summary>
-        public void PrintDiverTable()
+        public void PrintDiverTableInConsole()
         {
             if (dbConnection == null)
             {
@@ -308,18 +306,42 @@ namespace Simhopp.Model
                 catch (SQLiteException sqliteEx)
                 {
                     Console.WriteLine("Could not print the Diver table.\n" + sqliteEx);
-                    MessageBox.Show("Could not print the Diver table.\n" + sqliteEx);
                 }
 
                 catch (Exception e)
                 {
                     Console.WriteLine("Could not print the Diver table.\n" + e);
-                    MessageBox.Show("Could not print the Diver table.\n" + e);
                 }
             }
         }
 
+        public void EditDiver(Diver d)
+        {
+            if (dbConnection == null)
+            {
+                NoConnectionErrorMessage();
+            }
+            else
+            {
+                try
+                {
+                    string sql = "UPDATE Diver SET Name = '" + d.Name + "', SSN = '" + d.SSN + "', Nationality = '" + d.Nationality + "' WHERE ID = '" + d.Id + "'";
+                    SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
+                    command.ExecuteNonQuery();
+                }
 
+                catch (SQLiteException sqliteEx)
+                {
+                    MsgBox.CreateErrorBox("Could not update the following diver from database: \n" + d.Name + ", " + d.Nationality + ", " + d.SSN + "\nExeption: " + sqliteEx, MethodBase.GetCurrentMethod().Name);
+                }
+
+                catch (Exception e)
+                {
+                    MsgBox.CreateErrorBox("Could not update the following diver from database: \n" + d.Name + ", " + d.Nationality + ", " + d.SSN + "\nExeption: " + e, MethodBase.GetCurrentMethod().Name);
+                }
+
+            }
+        }
         #endregion
 
         #region Judge Methods
@@ -344,18 +366,12 @@ namespace Simhopp.Model
 
                 catch (SQLiteException sqliteEx)
                 {
-                    Console.WriteLine("Could not add following Judge to database: \n" + j.Name + ", " + j.Nationality +
-                                      ", " + j.SSN + "\nExeption: " + sqliteEx);
-                    MessageBox.Show("Could not add following Judge to database: \n" + j.Name + ", " + j.Nationality +
-                                      ", " + j.SSN + "\nExeption: " + sqliteEx);
+                    MsgBox.CreateErrorBox("Could not add following Judge to database: \n" + j.Name + ", " + j.Nationality + ", " + j.SSN + "\nExeption: " + sqliteEx, MethodBase.GetCurrentMethod().Name);
                 }
 
                 catch (Exception e)
                 {
-                    Console.WriteLine("Could not add following Judge to database: \n" + j.Name + ", " + j.Nationality +
-                                      ", " + j.SSN + "\nExeption: " + e);
-                    MessageBox.Show("Could not add following Judge to database: \n" + j.Name + ", " + j.Nationality +
-                                      ", " + j.SSN + "\nExeption: " + e);
+                    MsgBox.CreateErrorBox("Could not add following Judge to database: \n" + j.Name + ", " + j.Nationality + ", " + j.SSN + "\nExeption: " + e, MethodBase.GetCurrentMethod().Name);
                 }
             }
         }
@@ -382,18 +398,12 @@ namespace Simhopp.Model
 
                 catch (SQLiteException sqliteEx)
                 {
-                    Console.WriteLine("Could not delete the following Judge from database: \n" + j.Name + ", " + j.Nationality +
-                                      ", " + j.SSN + "\nExeption: " + sqliteEx);
-                    MessageBox.Show("Could not delete the following Judge from database: \n" + j.Name + ", " + j.Nationality +
-                                      ", " + j.SSN + "\nExeption: " + sqliteEx);
+                    MsgBox.CreateErrorBox("Could not delete the following Judge from database: \n" + j.Name + ", " + j.Nationality + ", " + j.SSN + "\nExeption: " + sqliteEx, MethodBase.GetCurrentMethod().Name);
                 }
 
                 catch (Exception e)
                 {
-                    Console.WriteLine("Could not delete the following Judge from database: \n" + j.Name + ", " + j.Nationality +
-                                      ", " + j.SSN + "\nExeption: " + e);
-                    MessageBox.Show("Could not delete the following Judge from database: \n" + j.Name + ", " + j.Nationality +
-                                      ", " + j.SSN + "\nExeption: " + e);
+                    MsgBox.CreateErrorBox("Could not delete the following Judge from database: \n" + j.Name + ", " + j.Nationality + ", " + j.SSN + "\nExeption: " + e, MethodBase.GetCurrentMethod().Name);
                 }
 
             }
@@ -423,19 +433,15 @@ namespace Simhopp.Model
 
                 catch (SQLiteException sqliteEx)
                 {
-                    Console.WriteLine("Could not print the Judge table.\n" + sqliteEx);
-                    MessageBox.Show("Could not print the Judge table.\n" + sqliteEx);
+                    Console.WriteLine("Could not print the Judge table.\n" + sqliteEx, MethodBase.GetCurrentMethod().Name);
                 }
 
                 catch (Exception e)
                 {
-                    Console.WriteLine("Could not print the Judge table.\n" + e);
-                    MessageBox.Show("Could not print the Judge table.\n" + e);
+                    Console.WriteLine("Could not print the Judge table.\n" + e, MethodBase.GetCurrentMethod().Name);
                 }
             }
         }
-
-
         #endregion
 
         #region Contest Methods
@@ -460,14 +466,12 @@ namespace Simhopp.Model
 
                 catch (SQLiteException sqliteEx)
                 {
-                    Console.WriteLine("Could not add the following Contest to database: \n" + c.Place + "', '" + c.Name + "','" + c.StartDate + "','" + c.EndDate + "\nExeption: " + sqliteEx);
-                    MessageBox.Show("Could not add the following Contest to database: \n" + c.Place + "', '" + c.Name + "','" + c.StartDate + "','" + c.EndDate + "\nExeption: " + sqliteEx);
+                    MsgBox.CreateErrorBox("Could not add the following Contest to database: \n" + c.Place + "', '" + c.Name + "','" + c.StartDate + "','" + c.EndDate + "\nExeption: " + sqliteEx, MethodBase.GetCurrentMethod().Name);
                 }
 
                 catch (Exception e)
                 {
-                    Console.WriteLine("Could not add the following Contest to database: \n" + c.Place + "', '" + c.Name + "','" + c.StartDate + "','" + c.EndDate + "\nExeption: " + e);
-                    MessageBox.Show("Could not add the following Contest to database: \n" + c.Place + "', '" + c.Name + "','" + c.StartDate + "','" + c.EndDate + "\nExeption: " + e);
+                    MsgBox.CreateErrorBox("Could not add the following Contest to database: \n" + c.Place + "', '" + c.Name + "','" + c.StartDate + "','" + c.EndDate + "\nExeption: " + e, MethodBase.GetCurrentMethod().Name);
                 }
             }
         }
