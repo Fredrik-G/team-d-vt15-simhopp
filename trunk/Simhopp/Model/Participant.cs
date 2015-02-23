@@ -58,6 +58,14 @@ namespace Simhopp.Model
         }
         #endregion
 
+        #region Getters
+
+        public Diver GetDiver()
+        {
+            return diver;
+        }
+        #endregion
+
         #region Methods
         /// <summary>
         /// Gets divers information.

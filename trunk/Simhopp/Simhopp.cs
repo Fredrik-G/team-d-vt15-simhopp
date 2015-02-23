@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using Simhopp.Model;
 
 namespace Simhopp
@@ -24,6 +25,7 @@ namespace Simhopp
 
         BindingList<Contest> contestList = new BindingList<Contest>();
 
+        DatabaseController databaseController = new DatabaseController();
         #endregion
 
         #region Getters
@@ -50,6 +52,57 @@ namespace Simhopp
         public BindingList<Diver> GetDiversList()
         {
             return diverList;
+        }
+
+        public List<Judge> GetJudgesInContest(string contestName)
+        {
+            try
+            {
+                var selectedContest = contestList.SingleOrDefault(x => x.Name == contestName);
+                return selectedContest.GetJudgesList();            
+            }
+            catch (NullReferenceException)
+            {
+                return new List<Judge>();
+            }
+            catch (ArgumentNullException nullException)
+            {
+                MsgBox.CreateErrorBox(" " + nullException, MethodBase.GetCurrentMethod().ToString());
+            }               
+            catch (Exception exception)
+            {
+                MsgBox.CreateErrorBox(" " + exception, MethodBase.GetCurrentMethod().ToString());
+            }
+
+            return new List<Judge>(); 
+        }
+
+        /// <summary>
+        /// Returns list of divers in a given contest.
+        /// </summary>
+        /// <param name="contestName"></param>
+        /// <returns></returns>
+        public List<Diver> GetDiversInContest(string contestName)
+        {                   //OBS SÖK EJ PÅ CONTEST NAME
+            try
+            {
+                var selectedContest = contestList.SingleOrDefault(x => x.Name == contestName);
+                return selectedContest.GetDiversList();
+            }
+            catch (NullReferenceException)
+            {
+                return new List<Diver>();
+            }
+            catch (ArgumentNullException nullException)
+            {
+                MsgBox.CreateErrorBox(" " + nullException, MethodBase.GetCurrentMethod().ToString());
+            }
+            catch (Exception exception)
+            {
+                MsgBox.CreateErrorBox(" " + exception, MethodBase.GetCurrentMethod().ToString());
+            }
+
+            return new List<Diver>();
         }
         /// <summary>
         /// A function that get a judge by its ssn
@@ -166,6 +219,42 @@ namespace Simhopp
         {
             var diver = GetDiverBySSN(ssn);
             diverList.Remove(diver);
+        }
+
+        /// <summary>
+        /// Adds judge to judge list by name.
+        /// </summary>
+        /// <param name="name">Judge name</param>
+        public void AddJudgeToContest(string contestName, string ssn)
+        {                   //SÖK EJ PÅ CONTEST NAME
+            try
+            {
+                var judge = GetJudgeBySSN(ssn);
+                var selectedContest = contestList.SingleOrDefault(x => x.Name == contestName);
+                selectedContest.AddJudge(judge);
+            }
+            catch (NullReferenceException nullReferenceException)
+            {
+                MsgBox.CreateErrorBox("" + nullReferenceException, MethodBase.GetCurrentMethod().ToString());
+            }
+            catch (ArgumentNullException argumentNullException)
+            {
+                MsgBox.CreateErrorBox("" + argumentNullException, MethodBase.GetCurrentMethod().ToString());
+            }
+            catch (Exception exception)
+            {
+                MsgBox.CreateErrorBox("" + exception, MethodBase.GetCurrentMethod().ToString());
+            }
+        }
+
+        public void ReadJudgesFromDatabase()
+        {
+            databaseController.ConnectToDatabase();
+            var judges = databaseController.GetJudges();
+            foreach (var judge in judges)
+            {
+                judgeList.Add(judge);
+            }
         }
         /// <summary>
         /// A function that reads judges and divers from text files
