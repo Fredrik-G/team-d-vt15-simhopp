@@ -35,6 +35,13 @@ namespace Simhopp
         /// <returns></returns>
         public BindingList<Contest> GetContestsList()
         {
+            //DEBUG
+            contestList.Add(new Contest(1, "asd", "a", "11/11/2011", "11/11/2011"));
+            contestList.Add(new Contest(2, "asd", "b", "11/11/2011", "11/11/2011"));
+            contestList.Add(new Contest(3, "asd", "c", "11/11/2011", "11/11/2011"));
+            contestList.Add(new Contest(4, "asd", "d", "11/11/2011", "11/11/2011"));
+            contestList.Add(new Contest(5, "asd", "e", "11/11/2011", "11/11/2011"));
+            //-DEBUG
             return contestList;
         }
         /// <summary>
@@ -53,28 +60,40 @@ namespace Simhopp
         {
             return diverList;
         }
-
-        public List<Judge> GetJudgesInContest(string contestName)
+        /// <summary>
+        /// Returns a list of judges in a given contest by contest id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public BindingList<Judge> GetJudgesInContest(int id)
         {
             try
             {
-                var selectedContest = contestList.SingleOrDefault(x => x.Name == contestName);
-                return selectedContest.GetJudgesList();            
+                var selectedContest = contestList.SingleOrDefault(x => x.Id == id);
+                var judgesInContest = selectedContest.GetJudgesList();
+
+                var judges = new BindingList<Judge>();
+
+                foreach (var judge in judgesInContest)
+                {
+                    judges.Add(judge);
+                }
+                return judges;
             }
             catch (NullReferenceException)
             {
-                return new List<Judge>();
+                return new BindingList<Judge>();
             }
             catch (ArgumentNullException nullException)
             {
-                MsgBox.CreateErrorBox(" " + nullException, MethodBase.GetCurrentMethod().ToString());
-            }               
+                MsgBox.CreateErrorBox(nullException.ToString(), MethodBase.GetCurrentMethod().ToString());
+            }
             catch (Exception exception)
             {
-                MsgBox.CreateErrorBox(" " + exception, MethodBase.GetCurrentMethod().ToString());
+                MsgBox.CreateErrorBox(exception.ToString(), MethodBase.GetCurrentMethod().ToString());
             }
 
-            return new List<Judge>(); 
+            return new BindingList<Judge>();
         }
 
         /// <summary>
@@ -82,30 +101,39 @@ namespace Simhopp
         /// </summary>
         /// <param name="contestName"></param>
         /// <returns></returns>
-        public List<Diver> GetDiversInContest(string contestName)
-        {                   //OBS SÖK EJ PÅ CONTEST NAME
+        public BindingList<Diver> GetDiversInContest(int id)
+        {
             try
             {
-                var selectedContest = contestList.SingleOrDefault(x => x.Name == contestName);
-                return selectedContest.GetDiversList();
+                var selectedContest = contestList.SingleOrDefault(x => x.Id == id);
+
+                var diversInContest = selectedContest.GetDiversList();
+
+                var divers = new BindingList<Diver>();
+
+                foreach (var diver in diversInContest)
+                {
+                    divers.Add(diver);
+                }
+                return divers;
             }
             catch (NullReferenceException)
             {
-                return new List<Diver>();
+                return new BindingList<Diver>();
             }
             catch (ArgumentNullException nullException)
             {
-                MsgBox.CreateErrorBox(" " + nullException, MethodBase.GetCurrentMethod().ToString());
+                MsgBox.CreateErrorBox(nullException.ToString(), MethodBase.GetCurrentMethod().ToString());
             }
             catch (Exception exception)
             {
-                MsgBox.CreateErrorBox(" " + exception, MethodBase.GetCurrentMethod().ToString());
+                MsgBox.CreateErrorBox(exception.ToString(), MethodBase.GetCurrentMethod().ToString());
             }
 
-            return new List<Diver>();
+            return new BindingList<Diver>();
         }
         /// <summary>
-        /// A function that get a judge by its ssn
+        /// A function that gets a judge by its ssn.
         /// </summary>
         /// <param name="name"></param>
         /// <returns>returns a judge object</returns>
@@ -222,31 +250,110 @@ namespace Simhopp
         }
 
         /// <summary>
-        /// Adds judge to judge list by name.
+        /// Removes a judge from a given contest.
         /// </summary>
-        /// <param name="name">Judge name</param>
-        public void AddJudgeToContest(string contestName, string ssn)
-        {                   //SÖK EJ PÅ CONTEST NAME
+        /// <param name="contestId"></param>
+        /// <param name="ssn"></param>
+        public void RemoveJudgeFromContest(int contestId, string ssn)
+        {
+            try
+            {
+                var selectedContest = contestList.SingleOrDefault(x => x.Id == contestId);
+                selectedContest.RemoveJudgeFromList(ssn);
+            }
+
+            catch (NullReferenceException nullReferenceException)
+            {
+                MsgBox.CreateErrorBox(nullReferenceException.ToString(), MethodBase.GetCurrentMethod().ToString());
+            }
+            catch (ArgumentNullException argumentNullException)
+            {
+                MsgBox.CreateErrorBox(argumentNullException.ToString(), MethodBase.GetCurrentMethod().ToString());
+            }
+            catch (Exception exception)
+            {
+                MsgBox.CreateErrorBox(exception.ToString(), MethodBase.GetCurrentMethod().ToString());
+            }
+        }
+
+        /// <summary>
+        /// Removes a diver from a given contest.
+        /// </summary>
+        /// <param name="contestId"></param>
+        /// <param name="ssn"></param>
+        public void RemoveDiverFromContest(int contestId, string ssn)
+        {
+            try
+            {
+                var selectedContest = contestList.SingleOrDefault(x => x.Id == contestId);
+                selectedContest.RemoveDiverFromList(ssn);
+            }
+            catch (NullReferenceException nullReferenceException)
+            {
+                MsgBox.CreateErrorBox(nullReferenceException.ToString(), MethodBase.GetCurrentMethod().ToString());
+            }
+            catch (ArgumentNullException argumentNullException)
+            {
+                MsgBox.CreateErrorBox(argumentNullException.ToString(), MethodBase.GetCurrentMethod().ToString());
+            }
+            catch (Exception exception)
+            {
+                MsgBox.CreateErrorBox(exception.ToString(), MethodBase.GetCurrentMethod().ToString());
+            }
+
+        }
+        /// <summary>
+        /// Adds judge to a given contest.
+        /// </summary>
+        /// <param name="contestId"></param>
+        /// <param name="ssn"></param>
+        public void AddJudgeToContest(int contestId, string ssn)
+        {
             try
             {
                 var judge = GetJudgeBySSN(ssn);
-                var selectedContest = contestList.SingleOrDefault(x => x.Name == contestName);
+                var selectedContest = contestList.SingleOrDefault(x => x.Id == contestId);
                 selectedContest.AddJudge(judge);
             }
             catch (NullReferenceException nullReferenceException)
             {
-                MsgBox.CreateErrorBox("" + nullReferenceException, MethodBase.GetCurrentMethod().ToString());
+                MsgBox.CreateErrorBox(nullReferenceException.ToString(), MethodBase.GetCurrentMethod().ToString());
             }
             catch (ArgumentNullException argumentNullException)
             {
-                MsgBox.CreateErrorBox("" + argumentNullException, MethodBase.GetCurrentMethod().ToString());
+                MsgBox.CreateErrorBox(argumentNullException.ToString(), MethodBase.GetCurrentMethod().ToString());
             }
             catch (Exception exception)
             {
-                MsgBox.CreateErrorBox("" + exception, MethodBase.GetCurrentMethod().ToString());
+                MsgBox.CreateErrorBox(exception.ToString(), MethodBase.GetCurrentMethod().ToString());
             }
         }
-
+        /// <summary>
+        /// Adds diver to a given contest.
+        /// </summary>
+        /// <param name="contestId"></param>
+        /// <param name="ssn"></param>
+        public void AddDiverToContest(int contestId, string ssn)
+        {
+            try
+            {
+                var diver = GetDiverBySSN(ssn);
+                var selectedContest = contestList.SingleOrDefault(x => x.Id == contestId);
+                selectedContest.AddParticipant(diver);
+            }
+            catch (NullReferenceException nullReferenceException)
+            {
+                MsgBox.CreateErrorBox(nullReferenceException.ToString(), MethodBase.GetCurrentMethod().ToString());
+            }
+            catch (ArgumentNullException argumentNullException)
+            {
+                MsgBox.CreateErrorBox(argumentNullException.ToString(), MethodBase.GetCurrentMethod().ToString());
+            }
+            catch (Exception exception)
+            {
+                MsgBox.CreateErrorBox(exception.ToString(), MethodBase.GetCurrentMethod().ToString());
+            }
+        }
         public void ReadJudgesFromDatabase()
         {
             databaseController.ConnectToDatabase();

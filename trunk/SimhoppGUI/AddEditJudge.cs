@@ -215,7 +215,7 @@ namespace SimhoppGUI
             UpdateSSN = "";
         }
         #endregion
-        #region Close Button
+        #region Close Buttons
         private void AddJudgePreviousBtn_Click(object sender, EventArgs e)
         {
             Close();
