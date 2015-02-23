@@ -61,6 +61,14 @@ namespace Simhopp.Model
         #endregion
 
         #region Properties
+
+        public int Id
+        {
+            get
+            {
+                return this.id;
+            }
+        }
         public string Name
         {
             get
