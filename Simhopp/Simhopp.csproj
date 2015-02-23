@@ -77,6 +77,7 @@
     <Compile Include="Model\Person\Diver.cs" />
     <Compile Include="Model\Person\Judge.cs" />
     <Compile Include="Model\Person\Person.cs" />
+    <Compile Include="MsgBox.cs" />
     <Compile Include="Presenter\PresenterStartScreen.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

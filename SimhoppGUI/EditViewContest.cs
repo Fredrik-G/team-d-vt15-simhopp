@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
+using Simhopp;
 using Simhopp.Model;
 using Simhopp.View;
 namespace SimhoppGUI

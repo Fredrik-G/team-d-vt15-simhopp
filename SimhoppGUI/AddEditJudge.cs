@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
+using Simhopp;
 using Simhopp.View;
 
 namespace SimhoppGUI

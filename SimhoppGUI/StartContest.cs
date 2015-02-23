@@ -1,13 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System;
-using System.Drawing;
-using System.Linq;
-using System.Reflection;
-using System.Threading;
 using System.Windows.Forms;
 using Simhopp.View;
 
@@ -50,7 +41,7 @@ namespace SimhoppGUI
         }
         #endregion
 
-        private void JudgesDiversTabControl_SelectedIndexChanged(object sender, System.EventArgs e)
+        private void JudgesDiversTabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
             
         }
