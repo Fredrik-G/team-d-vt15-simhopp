@@ -316,7 +316,7 @@ namespace Simhopp.Model
         }
 
         /// <summary>
-        /// Update a diver row in database.
+        /// Update a diver row in the database.
         /// </summary>
         /// <param name="d">Diver object.</param>
         public void UpdateDiver(Diver d)
@@ -345,6 +345,60 @@ namespace Simhopp.Model
                 }
 
             }
+        }
+
+        /// <summary>
+        /// Gets the divers from datbase, puts them in a lisa and returns it.
+        /// </summary>
+        /// <returns>List of Judge objects.</returns>
+        public List<Diver> GetDivers()
+        {
+            if (dbConnection == null)
+            {
+                NoConnectionErrorMessage();
+            }
+            else
+            {
+                try
+                {
+                    string sql = "SELECT * FROM Diver";
+                    SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
+                    SQLiteDataReader reader = command.ExecuteReader();
+                    List<Diver> dl = new List<Diver>();
+                    while (reader.Read())
+                    {
+                        Diver d = new Diver(Convert.ToInt32(reader["ID"]), Convert.ToString(reader["Name"]), Convert.ToString(reader["Nationality"]), Convert.ToString(reader["SSN"]));
+                        dl.Add(d);
+                    }
+                    return dl;
+                }
+
+                catch (SQLiteException sqliteEx)
+                {
+                    MsgBox.CreateErrorBox("Could not get Divers from database.\n" + sqliteEx, MethodBase.GetCurrentMethod().Name);
+                }
+
+                catch (FormatException formatEx)
+                {
+                    MsgBox.CreateErrorBox("Could not get Divers from database.\n" + formatEx.GetType() + "\n" + formatEx, MethodBase.GetCurrentMethod().Name);
+                }
+
+                catch (InvalidCastException invalidCastEx)
+                {
+                    MsgBox.CreateErrorBox("Could not get Divers from database.\n" + invalidCastEx.GetType() + "\n" + invalidCastEx, MethodBase.GetCurrentMethod().Name);
+                }
+
+                catch (OverflowException overflowEx)
+                {
+                    MsgBox.CreateErrorBox("Could not get Divers from database.\n" + overflowEx.GetType() + "\n" + overflowEx, MethodBase.GetCurrentMethod().Name);
+                }
+
+                catch (Exception e)
+                {
+                    MsgBox.CreateErrorBox("Could not get Divers from database.\n" + e, MethodBase.GetCurrentMethod().Name);
+                }
+            }
+            return null;
         }
         #endregion
 
@@ -447,6 +501,10 @@ namespace Simhopp.Model
             }
         }
 
+        /// <summary>
+        /// Updates a Judge row in the database.
+        /// </summary>
+        /// <param name="j"></param>
         public void UpdateDiver(Judge j)
         {
             if (dbConnection == null)
