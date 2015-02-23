@@ -591,31 +591,42 @@ namespace Simhopp.Model
         #region Contest Methods
         /// <summary>
         /// Takes a contest objekt and adds that contest to the database table Contest.
+        /// Only adds the contest objekt if the id is not set wich means the contest is 
+        /// not already stored in the database.
         /// </summary>
         /// <param name="c">Contest object.</param>
         public void AddContestToDatabase(Contest c)
         {
-            if (dbConnection == null)
+            if (c.Id == -1)
             {
-                NoConnectionErrorMessage();
-            }
-            else
-            {
-                try
+                if (dbConnection == null)
                 {
-                    string sql = "INSERT INTO Contest(Place, Name, StartDate, EndDate) VALUES('" + c.Place + "', '" + c.Name + "','" + c.StartDate + "','" + c.EndDate + "')";
-                    SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
-                    command.ExecuteNonQuery();
+                    NoConnectionErrorMessage();
                 }
-
-                catch (SQLiteException sqliteEx)
+                else
                 {
-                    MsgBox.CreateErrorBox("Could not add the following Contest to database: \n" + c.Place + "', '" + c.Name + "','" + c.StartDate + "','" + c.EndDate + "\nExeption: " + sqliteEx, MethodBase.GetCurrentMethod().Name);
-                }
+                    try
+                    {
+                        string sql = "INSERT INTO Contest(Place, Name, StartDate, EndDate) VALUES('" + c.Place + "', '" +
+                                     c.Name + "','" + c.StartDate + "','" + c.EndDate + "')";
+                        SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
+                        command.ExecuteNonQuery();
+                    }
 
-                catch (Exception e)
-                {
-                    MsgBox.CreateErrorBox("Could not add the following Contest to database: \n" + c.Place + "', '" + c.Name + "','" + c.StartDate + "','" + c.EndDate + "\nExeption: " + e, MethodBase.GetCurrentMethod().Name);
+                    catch (SQLiteException sqliteEx)
+                    {
+                        MsgBox.CreateErrorBox(
+                            "Could not add the following Contest to database: \n" + c.Place + "', '" + c.Name + "','" +
+                            c.StartDate + "','" + c.EndDate + "\nExeption: " + sqliteEx,
+                            MethodBase.GetCurrentMethod().Name);
+                    }
+
+                    catch (Exception e)
+                    {
+                        MsgBox.CreateErrorBox(
+                            "Could not add the following Contest to database: \n" + c.Place + "', '" + c.Name + "','" +
+                            c.StartDate + "','" + c.EndDate + "\nExeption: " + e, MethodBase.GetCurrentMethod().Name);
+                    }
                 }
             }
         }
@@ -633,14 +644,64 @@ namespace Simhopp.Model
             */
         }
 
+        public List<Contest> GetContests()
+        {
+            if (dbConnection == null)
+            {
+                NoConnectionErrorMessage();
+            }
+            else
+            {
+                try
+                {
+                    string sql = "SELECT * FROM Contest";
+                    SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
+                    SQLiteDataReader reader = command.ExecuteReader();
+                    List<Contest> cl = new List<Contest>();
+                    while (reader.Read())
+                    {
+                        Contest c = new Contest(Convert.ToInt32(reader["ID"]), Convert.ToString(reader["Place"]), Convert.ToString(reader["Name"]), Convert.ToString(reader["StartDate"]), Convert.ToString(reader["EndDate"]));
+                        ///för varje contest med id == x ska det finnas ett antal hopp osv. hämta den listan från jump.
+                        cl.Add(c);
+                    }
+                    return cl;
+                }
+
+                catch (SQLiteException sqliteEx)
+                {
+                    MsgBox.CreateErrorBox("Could not get Contests from database.\n" + sqliteEx, MethodBase.GetCurrentMethod().Name);
+                }
+
+                catch (FormatException formatEx)
+                {
+                    MsgBox.CreateErrorBox("Could not get Contests from database.\n" + formatEx.GetType() + "\n" + formatEx, MethodBase.GetCurrentMethod().Name);
+                }
+
+                catch (InvalidCastException invalidCastEx)
+                {
+                    MsgBox.CreateErrorBox("Could not get Contests from database.\n" + invalidCastEx.GetType() + "\n" + invalidCastEx, MethodBase.GetCurrentMethod().Name);
+                }
+
+                catch (OverflowException overflowEx)
+                {
+                    MsgBox.CreateErrorBox("Could not get Contests from database.\n" + overflowEx.GetType() + "\n" + overflowEx, MethodBase.GetCurrentMethod().Name);
+                }
+
+                catch (Exception e)
+                {
+                    MsgBox.CreateErrorBox("Could not get Contests from database.\n" + e, MethodBase.GetCurrentMethod().Name);
+                }
+            }
+            return null;
+        } //Inte färdig. Andra funktioner som måste göras först för att få den att fungera. 
+
         /// <summary>
         /// Save the contest, diver, judge, jump and points result data in the database.  
         /// </summary>
-        public void SaveFinishedContestToDatabase()
+        public void SaveFinishedContestToDatabase() //Gör så att den funkar. Förmodligen en av de sista funktionerna att ge sig på.
         {
             
         }
-
         #endregion
 
         #region Trick Methods
@@ -674,10 +735,116 @@ namespace Simhopp.Model
                 }
             }
         }
+
+        /// <summary>
+        /// Adds trick to the database by name and difficulty by creating a 
+        /// Trick object and sending it to the other AddTrickToDatabase(Trick t) function.
+        /// </summary>
+        /// <param name="trickName"></param>
+        /// <param name="difficulty"></param>
+        public void AddTrickToDatabase(string trickName, double difficulty)
+        {
+            Trick t = new Trick(trickName, difficulty);
+            AddTrickToDatabase(t);
+        }
+
+        /// <summary>
+        /// Returns a trick id from the database based on a trick name.
+        /// </summary>
+        /// <param name="trickName">Trick name</param>
+        /// <returns>Trick ID number.</returns>
+        public int GetTrickIdByName(string trickName)
+        {
+            if (dbConnection == null)
+            {
+                NoConnectionErrorMessage();
+            }
+            else
+            {
+                try
+                {
+                    string sql = "SELECT * FROM Contest WHERE name = '" + trickName + "'";
+                    SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
+                    SQLiteDataReader reader = command.ExecuteReader();
+                    int id = Convert.ToInt32(reader["ID"]);
+                    return id;
+                }
+
+                catch (SQLiteException sqliteEx)
+                {
+                    MsgBox.CreateErrorBox("Could not get Trick ID from database.\n" + sqliteEx, MethodBase.GetCurrentMethod().Name);
+                }
+
+                catch (FormatException formatEx)
+                {
+                    MsgBox.CreateErrorBox("Could not get Trick ID from database.\n" + formatEx.GetType() + "\n" + formatEx, MethodBase.GetCurrentMethod().Name);
+                }
+
+                catch (InvalidCastException invalidCastEx)
+                {
+                    MsgBox.CreateErrorBox("Could not get Trick ID from database.\n" + invalidCastEx.GetType() + "\n" + invalidCastEx, MethodBase.GetCurrentMethod().Name);
+                }
+
+                catch (OverflowException overflowEx)
+                {
+                    MsgBox.CreateErrorBox("Could not get Trick ID from database.\n" + overflowEx.GetType() + "\n" + overflowEx, MethodBase.GetCurrentMethod().Name);
+                }
+
+                catch (Exception e)
+                {
+                    MsgBox.CreateErrorBox("Could not get Trick ID from database.\n" + e, MethodBase.GetCurrentMethod().Name);
+                }
+            }
+            return -1;
+        }
         #endregion
 
-        #region Jump Methods
+        #region JumpResults Methods
 
+        public void AddJumpResultToDatabase(JumpResult jr) ///Gör färdigt efter get trick id by name. Bättre att ta ett participantobjekt???
+        {
+            /*if (dbConnection == null)
+            {
+                NoConnectionErrorMessage();
+            }
+            else
+            {
+                try
+                {
+                    int trickId = GetTrickIdByName(jr.TrickName);
+                    string sqlJump = "INSERT INTO Jump(Date, TotalPoint, Diver, Contest, Trick) VALUES('" + Date + "', '" + jr.SumJudgePoints + "','" + jr. + "' SET @id = LAST_INSERTED_ID();)";
+                    SQLiteCommand command = new SQLiteCommand(sqlJump, dbConnection);
+                    command.ExecuteNonQuery();
+
+                    //get the id the jump got from database auto increment.
+                    string sql = "SELECT last_insert_rowid()";
+                    command = new SQLiteCommand(sql, dbConnection);
+                    int contestId = Convert.ToInt32(command.ExecuteScalar());
+                    
+                }
+
+                catch (SQLiteException sqliteEx)
+                {
+                    MsgBox.CreateErrorBox("Could not add following Judge to database: \n" + j.Name + ", " + j.Nationality + ", " + j.SSN + "\nExeption: " + sqliteEx, MethodBase.GetCurrentMethod().Name);
+                }
+
+                catch (Exception e)
+                {
+                    MsgBox.CreateErrorBox("Could not add following Judge to database: \n" + j.Name + ", " + j.Nationality + ", " + j.SSN + "\nExeption: " + e, MethodBase.GetCurrentMethod().Name);
+                }
+
+            }*/
+        }
+       
+        public List<JumpResult> GetJumpResults() //Gör så att denna funkar!!!
+        {
+            List<JumpResult> jr = new List<JumpResult>();
+            return jr;
+        }
+        #endregion
+
+        #region Trick
+        
         #endregion
     }
 }
