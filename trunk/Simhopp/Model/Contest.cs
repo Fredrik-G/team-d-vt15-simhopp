@@ -14,6 +14,8 @@ namespace Simhopp.Model
     public class Contest
     {
         #region Data
+
+        private int id;
         private string place;
         private string name;
         private string startDate;
@@ -28,6 +30,7 @@ namespace Simhopp.Model
         #region Constructor
         public Contest()
         {
+            this.id = -1;
             this.place = "";
             this.name = "";
             this.startDate = "";
@@ -37,6 +40,17 @@ namespace Simhopp.Model
 
         public Contest(string place, string name, string startDate, string endDate)
         {
+            this.id = -1;
+            this.place = place;
+            this.name = name;
+            this.startDate = startDate;
+            this.endDate = endDate;
+            trickList.ReadFromFile("tricklist.txt");
+        }
+
+        public Contest(int id, string place, string name, string startDate, string endDate)
+        {
+            this.id = id;
             this.place = place;
             this.name = name;
             this.startDate = startDate;
