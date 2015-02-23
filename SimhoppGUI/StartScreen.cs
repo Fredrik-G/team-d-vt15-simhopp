@@ -82,7 +82,17 @@ namespace SimhoppGUI
             EventReadFromFile("judge.txt");
             EventReadFromFile("diver.txt");
             using (new DimIt())
-            using (var startContest = new StartContest(EventGetContestsList, EventGetJudgesList, EventGetDiversList))
+            using (var startContest = new StartContest(
+                EventGetContestsList,
+                EventGetJudgesList,
+                EventGetDiversList,
+                EventGetJudgesInContest,
+                EventGetDiversInContest,
+                EventAddJudgeToContest,
+                EventAddDiverToContest,
+                EventRemoveJudgeFromContest,
+                EventRemoveDiverFromContest
+                ))
             {
                 if (startContest.ShowDialog(this) == DialogResult.OK)
                 {
@@ -150,13 +160,20 @@ namespace SimhoppGUI
         public event DelegateGetContestsList EventGetContestsList = null;
         public event DelegateGetJudgesList EventGetJudgesList = null;
         public event DelegateGetDiversList EventGetDiversList = null;
+        public event DelegateGetJudgesInContest EventGetJudgesInContest = null;
+        public event DelegateGetDiversInContest EventGetDiversInContest = null;
 
         public event DelegateAddJudgeToList EventAddJudgeToList = null;
         public event DelegateAddDiverToList EventAddDiverToList = null;
 
+        public event DelegateAddJudgeToContest EventAddJudgeToContest = null;
+        public event DelegateAddDiverToContest EventAddDiverToContest = null;
+
         public event DelegateRemoveJudgeFromList EventRemoveJudgeFromList = null;
         public event DelegateRemoveDiverFromList EventRemoveDiverFromList = null;
 
+        public event DelegateRemoveJudgeFromContest EventRemoveJudgeFromContest = null;
+        public event DelegateRemoveDiverFromContest EventRemoveDiverFromContest = null;
         //public event DelegateAddParticipant EventAddParticipant = null;
         //public event DelegateAddJudge EventAddJudge = null;
         //public event DelegateGetTrickDifficultyFromTrickHashTable EventGetTrickDifficultyFromTrickHashTable = null;

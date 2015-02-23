@@ -236,6 +236,28 @@ namespace Simhopp.Model
                 Console.WriteLine(e.Message);
             }
         }
+        /// <summary>
+        /// Removes a given judge from judge list.
+        /// </summary>
+        /// <param name="ssn"></param>
+        public void RemoveJudgeFromList(string ssn)
+        {
+            var judge = judgeList.SingleOrDefault(x => x.SSN == ssn);
+            judgeList.Remove(judge);
+        }
+
+        /// <summary>
+        /// Removes a given diver from participants list.
+        /// </summary>
+        /// <param name="ssn"></param>
+        public void RemoveDiverFromList(string ssn)
+        {           
+            foreach (var participant in participantsList.Where(participant => participant.GetDiverSSN() == ssn))
+            {
+                participantsList.Remove(participant);
+                return;
+            }
+        }
 
         /// <summary>
         /// Gets the number of participants in participants list.

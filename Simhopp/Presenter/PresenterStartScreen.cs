@@ -30,7 +30,12 @@ namespace Simhopp.Presenter
             this.View.EventAddDiverToList += AddDiverToList;
             this.View.EventRemoveJudgeFromList += RemoveJudgeFromList;
             this.View.EventRemoveDiverFromList += RemoveDiverFromList;
-
+            this.View.EventGetJudgesInContest += GetJudgesInContest;
+            this.View.EventGetDiversInContest += GetDiversInContest;
+            this.View.EventAddJudgeToContest += AddJudgeToContest;
+            this.View.EventAddDiverToContest += AddDiverToContest;
+            this.View.EventRemoveJudgeFromContest += RemoveJudgeFromContest;
+            this.View.EventRemoveDiverFromContest += RemoveDiverFromContest;
             //this.View.EventAddParticipant += AddParticipant;
             //this.View.EventAddJudge += AddJudge;
             //this.View.EventGetTrickDifficultyFromTrickHashTable += GetTrickDifficultyFromTrickHashTable;
@@ -52,6 +57,15 @@ namespace Simhopp.Presenter
         public BindingList<Diver> GetDiversList()
         {
             return this.Model.GetDiversList();
+        }
+
+        public BindingList<Judge> GetJudgesInContest(int id)
+        {
+            return this.Model.GetJudgesInContest(id);
+        }
+        public BindingList<Diver> GetDiversInContest(int id)
+        {
+            return this.Model.GetDiversInContest(id);
         }
         #endregion
 
@@ -76,6 +90,14 @@ namespace Simhopp.Presenter
             this.Model.AddDiverToList(name, nationality, ssn);
         }
 
+        public void AddJudgeToContest(int contestId, string ssn)
+        {
+            this.Model.AddJudgeToContest(contestId, ssn);
+        }
+        public void AddDiverToContest(int contestId, string ssn)
+        {
+            this.Model.AddDiverToContest(contestId, ssn);
+        }
         void RemoveJudgeFromList(string ssn)
         {
             this.Model.RemoveJudgeFromList(ssn);
@@ -83,6 +105,15 @@ namespace Simhopp.Presenter
         void RemoveDiverFromList(string ssn)
         {
             this.Model.RemoveDiverFromList(ssn);
+        }
+
+        void RemoveJudgeFromContest(int contestId, string ssn)
+        {
+            this.Model.RemoveJudgeFromContest(contestId, ssn);
+        }
+        void RemoveDiverFromContest(int contestId, string ssn)
+        {
+            this.Model.RemoveDiverFromContest(contestId, ssn);
         }
         //public void AddParticipant(Diver diver)
         //{
