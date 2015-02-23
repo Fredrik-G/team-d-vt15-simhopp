@@ -9,24 +9,40 @@ using System.Text.RegularExpressions;
 namespace Simhopp.Model
 {
     /// <summary>
-    /// Abstract class that is used for inherit properties from a person
+    /// Abstract class that is used for inherit properties from a person.
     /// </summary>
     public abstract class Person
     {
         #region Data
+        protected int id;
         protected string name;
         protected string nationality;
         protected string ssn;
         #endregion
 
         /// <summary>
-        /// Default constructor 
+        /// Default constructor.
         /// </summary>
-        protected Person() { }
+        protected Person()
+        {
+            this.id = -1;
+        }
 
         #region Properties
+
         /// <summary>
-        /// Property for person name
+        /// Property for person id.
+        /// </summary>
+        public int Id
+        {
+            get
+            {
+                return this.id;
+            }
+        }
+
+        /// <summary>
+        /// Property for person name.
         /// </summary>
         public string Name
         {
@@ -44,7 +60,7 @@ namespace Simhopp.Model
             }
         }
         /// <summary>
-        /// Property for person nationality
+        /// Property for person nationality.
         /// </summary>
         public string Nationality
         {
@@ -62,7 +78,7 @@ namespace Simhopp.Model
             }
         }
         /// <summary>
-        /// Property for person social security number
+        /// Property for person social security number.
         /// </summary>
         public string SSN
         {
@@ -82,7 +98,7 @@ namespace Simhopp.Model
         #endregion
 
         /// <summary>
-        /// Regex patterns for testing input data
+        /// Regex patterns for testing input data.
         /// </summary>
         #region Check correct input
         
