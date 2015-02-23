@@ -315,7 +315,11 @@ namespace Simhopp.Model
             }
         }
 
-        public void EditDiver(Diver d)
+        /// <summary>
+        /// Update a diver row in database.
+        /// </summary>
+        /// <param name="d">Diver object.</param>
+        public void UpdateDiver(Diver d)
         {
             if (dbConnection == null)
             {
