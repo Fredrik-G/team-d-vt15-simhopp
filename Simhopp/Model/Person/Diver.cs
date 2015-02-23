@@ -34,5 +34,13 @@ namespace Simhopp.Model
             this.nationality = nationality;
             this.ssn = ssn;
         }
+
+        public Diver(int id, string name, string nationality, string ssn)
+        {
+            this.id = id;
+            this.name = name;
+            this.nationality = nationality;
+            this.ssn = ssn;
+        }
     }
 }
