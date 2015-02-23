@@ -34,7 +34,7 @@ namespace SimhoppUnitTest
             bool emptyOrNot = dbc.TableIsEmpty("Diver");
             Assert.AreEqual(emptyOrNot, true);
 
-            dbc.AddDivertoDatabase(d);
+            dbc.AddDiverToDatabase(d);
             emptyOrNot = dbc.TableIsEmpty("Diver");
             Assert.AreEqual(emptyOrNot, false);
 
@@ -93,7 +93,7 @@ namespace SimhoppUnitTest
             bool emptyOrNot = dbc.TableIsEmpty("Diver");
             Assert.AreEqual(emptyOrNot, true);
 
-            dbc.AddDivertoDatabase(d);
+            dbc.AddDiverToDatabase(d);
             emptyOrNot = dbc.TableIsEmpty("Diver");
             Assert.AreEqual(emptyOrNot, false);
 
