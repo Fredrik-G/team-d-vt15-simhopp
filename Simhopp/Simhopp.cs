@@ -321,6 +321,11 @@ namespace Simhopp
         public void RemoveJudgeFromList(string ssn)
         {
             var judge = GetJudgeBySSN(ssn);
+            if (judge == null)
+            {
+                throw new NullReferenceException("Judge ssn " + ssn + " was not found.");
+            }
+
             judgeList.Remove(judge);
             databaseController.RemoveJudgeFromTable(judge);
         }
@@ -407,7 +412,7 @@ namespace Simhopp
                 judge.Nationality = nationality;
                 judge.SSN = ssn;
                 databaseController.UpdateDiver(judge);
-                                    //^ÄNDRA funktion
+                //^ÄNDRA funktion
             }
         }
         #endregion
