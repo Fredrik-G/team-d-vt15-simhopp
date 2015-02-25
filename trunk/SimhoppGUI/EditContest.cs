@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Drawing;
-using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using Simhopp;
 using Simhopp.Model;
-using Simhopp.View;
+
 namespace SimhoppGUI
 {
-    public partial class EditViewContest : Form
+    public partial class EditContest : Form
     {
         #region Properties
         public string ContestName
@@ -38,69 +37,40 @@ namespace SimhoppGUI
         #endregion
 
         #region Constructor
-        public EditViewContest(DelegateGetContestsList eventGetContestsList)
+        public EditContest(DataGridViewCell cell)
         {
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             InitializeComponent();
 
-            if (eventGetContestsList != null)
-            {
-                ContestsDataGridView.DataSource = eventGetContestsList();
-                ContestsDataGridView.ReadOnly = true;
-            }
-        }
-        #endregion
-
-        /// <summary>
-        /// Shows the selected contest in the textboxes below.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ContestsDataGridView_SelectionChanged(object sender, EventArgs e)
-        {
-            var cell = ContestsDataGridView.SelectedCells.Cast<DataGridViewCell>().FirstOrDefault();
-
-            if (cell == null)
-            {
-                return;
-            }
             try
             {
-                var row = cell.OwningRow;
-
-                ContestName = row.Cells["Name"].Value.ToString();
-                Place = row.Cells["Place"].Value.ToString();
-                StartDate = CreateDateTimePicker(row, "StartDate");
-                EndDate = CreateDateTimePicker(row, "EndDate");
-            }
-            catch (ArgumentNullException nullException)
-            {
-                MsgBox.CreateErrorBox(nullException.ToString(), MethodBase.GetCurrentMethod().Name);
+                var contestRow = cell.OwningRow;
+                ContestName = contestRow.Cells["Name"].Value.ToString();
+                Place = contestRow.Cells["Place"].Value.ToString();
+                StartDate = contestRow.Cells["StartDate"].Value.ToString();
+                EndDate = contestRow.Cells["EndDate"].Value.ToString();
             }
             catch (ArgumentOutOfRangeException outOfRangeException)
             {
                 MsgBox.CreateErrorBox(outOfRangeException.ToString(), MethodBase.GetCurrentMethod().Name);
+            }
+            catch (InvalidOperationException invalidOperationException)
+            {
+                MsgBox.CreateErrorBox(invalidOperationException.ToString(), MethodBase.GetCurrentMethod().Name);
             }
             catch (Exception exception)
             {
                 MsgBox.CreateErrorBox(exception.ToString(), MethodBase.GetCurrentMethod().Name);
             }
         }
-        /// <summary>
-        /// Creates a date string used by DateTimePicker.
-        /// </summary>
-        /// <param name="row"></param>
-        /// <param name="cellName"></param>
-        /// <returns></returns>
-        private string CreateDateTimePicker(DataGridViewRow row, string cellName)
-        {
-            var date = row.Cells[cellName].Value.ToString().Split('/');
-            var temp = row.Cells[cellName].Value.ToString().Split('/');
+        #endregion
 
-            date[0] = temp[1];
-            date[1] = temp[0];
-            return date[0] + "/" + date[1] + "/" + date[2];
+        #region Events
+
+        private void EditContest_Load(object sender, EventArgs e)
+        {
         }
+
         /// <summary>
         /// Updates the selected contest with the input from the textboxes. 
         /// Also checks if the input is correct.
@@ -111,15 +81,6 @@ namespace SimhoppGUI
         {
             try
             {
-                var cell = ContestsDataGridView.SelectedCells.Cast<DataGridViewCell>().FirstOrDefault();
-
-                if (cell == null)
-                {
-                    return;
-                }
-
-                var row = cell.OwningRow;
-
                 var startDate = StartScreen.CreateDateString(EditViewContestEditStartDateTp);
                 var correctStartDate = Contest.CheckCorrectDate(startDate);
 
@@ -136,14 +97,13 @@ namespace SimhoppGUI
                     EditViewContestEditEndtDateTp.BackColor = Color.Red;
                 }
 
-                //if (CheckInput.CheckCorrectContestInput(EditViewContestEditContestNameTb,
-                //    EditViewContestEditContestPlaceTb) && correctStartDate && correctEndDate)
-                //{
-                //    row.Cells["Name"].Value = Name;
-                //    row.Cells["Place"].Value = Place;
-                //    row.Cells["StartDate"].Value = startDate;
-                //    row.Cells["EndDate"].Value = endDate;
-                //}
+                if (CheckInput.CheckCorrectContestInput(InputErrorProvider,
+                    EditViewContestEditContestNameTb,
+                    EditViewContestEditContestPlaceTb) && correctStartDate && correctEndDate)
+                {
+                    //event update 
+
+                }
             }
 
             catch (ArgumentNullException nullException)
@@ -160,22 +120,24 @@ namespace SimhoppGUI
             }
 
         }
+
+        #endregion
+
         #region Close Button
         private void EditViewContestCloseBtn_Click(object sender, EventArgs e)
         {
             Close();
         }
         #endregion
+
         #region Click Textboxes
         private void EditViewContestEditContestNameTb_Click(object sender, EventArgs e)
         {
-            EditViewContestEditContestNameTb.BackColor = SystemColors.Window;
-            Name = "";
+            ContestName = "";
         }
 
         private void EditViewContestEditContestPlaceTb_Click(object sender, EventArgs e)
         {
-            EditViewContestEditContestPlaceTb.BackColor = SystemColors.Window;
             Place = "";
         }
         #endregion

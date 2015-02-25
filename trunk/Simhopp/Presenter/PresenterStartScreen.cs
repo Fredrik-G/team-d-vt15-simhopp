@@ -36,6 +36,8 @@ namespace Simhopp.Presenter
             this.View.EventAddDiverToContest += AddDiverToContest;
             this.View.EventRemoveJudgeFromContest += RemoveJudgeFromContest;
             this.View.EventRemoveDiverFromContest += RemoveDiverFromContest;
+            this.View.EventReadJudgesFromDatabase += ReadJudgesFromDatabase;
+            this.View.EventUpdateJudge += UpdateJudge;
             //this.View.EventAddParticipant += AddParticipant;
             //this.View.EventAddJudge += AddJudge;
             //this.View.EventGetTrickDifficultyFromTrickHashTable += GetTrickDifficultyFromTrickHashTable;
@@ -81,6 +83,15 @@ namespace Simhopp.Presenter
             this.Model.ReadFromFile(fileName);
         }
 
+        public void ReadJudgesFromDatabase()
+        {
+            this.Model.ReadJudgesFromDatabase();
+        }
+
+        public void ReadDiversFromDatabase()
+        {
+            this.Model.ReadDiversFromDatabase();
+        }
         public void AddJudgeToList(string name, string nationality, string ssn)
         {
             this.Model.AddJudgeToList(name, nationality, ssn);
@@ -114,6 +125,11 @@ namespace Simhopp.Presenter
         void RemoveDiverFromContest(int contestId, string ssn)
         {
             this.Model.RemoveDiverFromContest(contestId, ssn);
+        }
+
+        void UpdateJudge(int id, string name, string nationality, string ssn)
+        {
+            this.Model.UpdateJudge(id, name, nationality, ssn);
         }
         //public void AddParticipant(Diver diver)
         //{

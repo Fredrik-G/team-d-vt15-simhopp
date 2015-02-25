@@ -40,8 +40,11 @@
             this.CurrentDiversDataGridView = new System.Windows.Forms.DataGridView();
             this.GlobalDiversDataGridView = new System.Windows.Forms.DataGridView();
             this.ContestsDataGridView = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.CurrentJudgesLabel = new System.Windows.Forms.Label();
+            this.GlobalJudgesLabel = new System.Windows.Forms.Label();
+            this.GlobalDiversLabel = new System.Windows.Forms.Label();
+            this.CurrentlDiversLabel = new System.Windows.Forms.Label();
+            this.EditContestBtn = new System.Windows.Forms.Button();
             this.JudgesDiversTabControl.SuspendLayout();
             this.JudgeTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GlobalJudgesDataGridView)).BeginInit();
@@ -209,31 +212,64 @@
             this.ContestsDataGridView.TabStop = false;
             this.ContestsDataGridView.SelectionChanged += new System.EventHandler(this.ContestsDataGridView_SelectionChanged);
             // 
-            // label1
+            // CurrentJudgesLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(496, 209);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(78, 13);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Current Judges";
+            this.CurrentJudgesLabel.AutoSize = true;
+            this.CurrentJudgesLabel.Location = new System.Drawing.Point(496, 209);
+            this.CurrentJudgesLabel.Name = "CurrentJudgesLabel";
+            this.CurrentJudgesLabel.Size = new System.Drawing.Size(78, 13);
+            this.CurrentJudgesLabel.TabIndex = 6;
+            this.CurrentJudgesLabel.Text = "Current Judges";
             // 
-            // label2
+            // GlobalJudgesLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(149, 208);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(55, 13);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "All Judges";
+            this.GlobalJudgesLabel.AutoSize = true;
+            this.GlobalJudgesLabel.Location = new System.Drawing.Point(149, 208);
+            this.GlobalJudgesLabel.Name = "GlobalJudgesLabel";
+            this.GlobalJudgesLabel.Size = new System.Drawing.Size(55, 13);
+            this.GlobalJudgesLabel.TabIndex = 7;
+            this.GlobalJudgesLabel.Text = "All Judges";
+            // 
+            // GlobalDiversLabel
+            // 
+            this.GlobalDiversLabel.AutoSize = true;
+            this.GlobalDiversLabel.Location = new System.Drawing.Point(152, 208);
+            this.GlobalDiversLabel.Name = "GlobalDiversLabel";
+            this.GlobalDiversLabel.Size = new System.Drawing.Size(51, 13);
+            this.GlobalDiversLabel.TabIndex = 9;
+            this.GlobalDiversLabel.Text = "All Divers";
+            this.GlobalDiversLabel.Visible = false;
+            // 
+            // CurrentlDiversLabel
+            // 
+            this.CurrentlDiversLabel.AutoSize = true;
+            this.CurrentlDiversLabel.Location = new System.Drawing.Point(499, 209);
+            this.CurrentlDiversLabel.Name = "CurrentlDiversLabel";
+            this.CurrentlDiversLabel.Size = new System.Drawing.Size(74, 13);
+            this.CurrentlDiversLabel.TabIndex = 8;
+            this.CurrentlDiversLabel.Text = "Current Divers";
+            this.CurrentlDiversLabel.Visible = false;
+            // 
+            // EditContestBtn
+            // 
+            this.EditContestBtn.Location = new System.Drawing.Point(540, 40);
+            this.EditContestBtn.Name = "EditContestBtn";
+            this.EditContestBtn.Size = new System.Drawing.Size(75, 23);
+            this.EditContestBtn.TabIndex = 10;
+            this.EditContestBtn.Text = "Edit Contest";
+            this.EditContestBtn.UseVisualStyleBackColor = true;
+            this.EditContestBtn.Click += new System.EventHandler(this.EditContestBtn_Click);
             // 
             // StartContest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(762, 466);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.EditContestBtn);
+            this.Controls.Add(this.GlobalDiversLabel);
+            this.Controls.Add(this.CurrentlDiversLabel);
+            this.Controls.Add(this.GlobalJudgesLabel);
+            this.Controls.Add(this.CurrentJudgesLabel);
             this.Controls.Add(this.ContestsDataGridView);
             this.Controls.Add(this.JudgesDiversTabControl);
             this.MaximizeBox = false;
@@ -263,11 +299,14 @@
         private System.Windows.Forms.DataGridView CurrentJudgesDataGridView;
         private System.Windows.Forms.DataGridView CurrentDiversDataGridView;
         private System.Windows.Forms.DataGridView GlobalDiversDataGridView;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label CurrentJudgesLabel;
+        private System.Windows.Forms.Label GlobalJudgesLabel;
         private System.Windows.Forms.Button RemoveJudgeBtn;
         private System.Windows.Forms.Button AddJudgeBtn;
         private System.Windows.Forms.Button AddDiverBtn;
         private System.Windows.Forms.Button RemoveDiverBtn;
+        private System.Windows.Forms.Label GlobalDiversLabel;
+        private System.Windows.Forms.Label CurrentlDiversLabel;
+        private System.Windows.Forms.Button EditContestBtn;
     }
 }

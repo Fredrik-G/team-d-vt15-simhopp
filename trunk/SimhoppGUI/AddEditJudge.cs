@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
@@ -14,8 +15,9 @@ namespace SimhoppGUI
         #region Data
         private DelegateAddJudgeToList eventAddJudgeToList;
         private DelegateRemoveJudgeFromList eventRemoveJudgeFromList;
-
+        private DelegateUpdateJudge eventUpdateJudge;
         #endregion
+
         #region Properties
         public string AddName
         {
@@ -48,30 +50,31 @@ namespace SimhoppGUI
             set { UpdateJudgeSSNTb.Text = value; }
         } 
         #endregion
+
         #region Constructor
-        public AddEditJudge
-            (DelegateAddJudgeToList eventAddJudgeToList,
+        public AddEditJudge( DelegateAddJudgeToList eventAddJudgeToList,
             DelegateRemoveJudgeFromList eventRemoveJudgeFromList,
             DelegateGetJudgesList eventGetJudgesList,
-            DelegateReadFromFile eventReadFromFile
-            )
+            DelegateUpdateJudge eventUpdateJudge)
         {
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             InitializeComponent();
 
             this.eventAddJudgeToList = eventAddJudgeToList;
             this.eventRemoveJudgeFromList = eventRemoveJudgeFromList;
+            this.eventUpdateJudge = eventUpdateJudge;
 
             if (eventGetJudgesList != null)
             {
-                //OBS TA BORT READ FILE
-                eventReadFromFile("judge.txt");
-                //OBS TA BORT READ FILE
                 JudgesDataGridView.DataSource = eventGetJudgesList();
                 JudgesDataGridView.ReadOnly = true;
+                JudgesDataGridView.Columns["Id"].Visible = false;                
             }
         }
+
         #endregion
+
+        #region Events
 
         /// <summary>
         /// Shows the selected judge in the textboxes below.
@@ -90,7 +93,9 @@ namespace SimhoppGUI
                 }
                 var row = cell.OwningRow;
 
-                UpdateTextBoxes(row);
+                UpdateName = row.Cells["Name"].Value.ToString();
+                UpdateNationality = row.Cells["Nationality"].Value.ToString();
+                UpdateSSN = row.Cells["SSN"].Value.ToString();
 
             }
             catch (ArgumentNullException nullException)
@@ -106,22 +111,25 @@ namespace SimhoppGUI
                 MsgBox.CreateErrorBox(exception.ToString(), MethodBase.GetCurrentMethod().Name);
             }
         }
-
-        private void UpdateTextBoxes(DataGridViewRow row)
-        {
-            UpdateName = row.Cells["Name"].Value.ToString();
-            UpdateNationality = row.Cells["Nationality"].Value.ToString();
-            UpdateSSN = row.Cells["SSN"].Value.ToString();
-        }
-
+        /// <summary>
+        /// Attempts to add a judge to list.
+        /// Also checks if the input is correct.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddJudgeButton_Click(object sender, EventArgs e)
         {
             try
             {
-                if (CheckInput.CheckCorrectPersonInput(AddJudgeNameTb, AddJudgeNationaltyTb, AddJudgeSSNTb))
+                if (CheckInput.CheckCorrectPersonInput(InputErrorProvider, AddJudgeNameTb, AddJudgeNationaltyTb, AddJudgeSSNTb))
                 {
                     eventAddJudgeToList(AddName, AddNationality, AddSSN);
+                    InputErrorProvider.Clear();
                 }
+            }
+            catch (DuplicateNameException)
+            {//judge already exists
+                InputErrorProvider.SetError(AddJudgeSSNTb, "Error: Judge already exists");
             }
             catch (Exception exception)
             {
@@ -148,12 +156,22 @@ namespace SimhoppGUI
 
                 var row = cell.OwningRow;
 
-                if (CheckInput.CheckCorrectPersonInput(UpdateJudgeNameTb, UpdateJudgeNationalityTb, UpdateJudgeSSNTb))
+                if (CheckInput.CheckCorrectPersonInput(InputErrorProvider,
+                    UpdateJudgeNameTb,
+                    UpdateJudgeNationalityTb,
+                    UpdateJudgeSSNTb))
                 {
-                    row.Cells["Name"].Value = UpdateName;
-                    row.Cells["Nationality"].Value = UpdateNationality;
-                    row.Cells["SSN"].Value = UpdateSSN;
+                    eventUpdateJudge(Convert.ToInt16(row.Cells["Id"].Value), UpdateName, UpdateNationality, UpdateSSN);
+
+                    //force refresh to show changes. 
+                    JudgesDataGridView.Refresh();
+
+                    InputErrorProvider.Clear();
                 }
+            }
+            catch (DuplicateNameException)
+            {//judge med det ssn finns redan
+                InputErrorProvider.SetError(UpdateJudgeSSNTb, "Error: Judge ssn already in use");
             }
             catch (ArgumentNullException nullException)
             {
@@ -168,6 +186,7 @@ namespace SimhoppGUI
                 MsgBox.CreateErrorBox(exception.ToString(), MethodBase.GetCurrentMethod().Name);
             }
         }
+
         /// <summary>
         /// Removes the selected judge from the judge list.
         /// </summary>
@@ -197,8 +216,11 @@ namespace SimhoppGUI
             JudgesDataGridView_SelectionChanged(null, null);
         }
 
+        #endregion
+
         #region Click Textboxes
-        private void AddJudgeNameTb_Click(object sender, EventArgs e)
+
+        private void UpdateJudgeNameTb_Click(object sender, EventArgs e)
         {
             UpdateJudgeNameTb.BackColor = SystemColors.Window;
             UpdateName = "";
@@ -214,7 +236,25 @@ namespace SimhoppGUI
             UpdateJudgeSSNTb.BackColor = SystemColors.Window;
             UpdateSSN = "";
         }
+
+        private void AddJudgeNameTb_Click(object sender, EventArgs e)
+        {
+            AddJudgeNameTb.BackColor = SystemColors.Window;
+            AddName = "";
+        }
+        private void AddJudgeNationaltyTb_Click(object sender, EventArgs e)
+        {
+            AddJudgeNationaltyTb.BackColor = SystemColors.Window;
+            AddNationality = "";
+        }
+
+        private void AddJudgeSSNTb_Click(object sender, EventArgs e)
+        {
+            AddJudgeSSNTb.BackColor = SystemColors.Window;
+            AddSSN = "";
+        }
         #endregion
+
         #region Close Buttons
         private void AddJudgePreviousBtn_Click(object sender, EventArgs e)
         {

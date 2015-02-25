@@ -14,6 +14,8 @@ namespace Simhopp.Model
         //void CreateHtmlResultFile();
         void CreateContest(string place, string name, string startDate, string endDate);
         void ReadFromFile(string fileName);
+        void ReadJudgesFromDatabase();
+        void ReadDiversFromDatabase();
 
         BindingList<Contest> GetContestsList();
         BindingList<Judge> GetJudgesList();
@@ -32,5 +34,7 @@ namespace Simhopp.Model
 
         void RemoveJudgeFromContest(int contestId, string ssn);
         void RemoveDiverFromContest(int contestId, string ssn);
+
+        void UpdateJudge(int id, string name, string nationality, string ssn);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -17,15 +18,28 @@ namespace Simhopp
         /// <summary>
         /// A list that holds every judge that is stored in the database
         /// </summary>
-        BindingList<Judge> judgeList = new BindingList<Judge>();
+        private BindingList<Judge> judgeList = new BindingList<Judge>();
         /// <summary>
         /// A list that holds every Diver that is stored in the database
         /// </summary>
-        BindingList<Diver> diverList = new BindingList<Diver>();
+        private BindingList<Diver> diverList = new BindingList<Diver>();
 
-        BindingList<Contest> contestList = new BindingList<Contest>();
+        private BindingList<Contest> contestList = new BindingList<Contest>();
 
-        DatabaseController databaseController = new DatabaseController();
+        private DatabaseController databaseController;
+        #endregion
+
+        #region Constructor
+
+        /// <summary>
+        /// Default constructor. Creates a database connection. 
+        /// </summary>
+        public Simhopp()
+        {
+            databaseController = new DatabaseController(@"M:/Desktop/simhoppTestDB.db");
+            databaseController.ConnectToDatabase();
+        }
+
         #endregion
 
         #region Getters
@@ -95,7 +109,6 @@ namespace Simhopp
 
             return new BindingList<Judge>();
         }
-
         /// <summary>
         /// Returns list of divers in a given contest.
         /// </summary>
@@ -168,7 +181,6 @@ namespace Simhopp
         }
         #endregion
 
-        #region Methods
         /// <summary>
         /// Creates a new contest
         /// </summary>
@@ -196,57 +208,132 @@ namespace Simhopp
             }
         }
 
+        #region Add methods
+
         /// <summary>
         /// Adds judge to judge list by name.
         /// </summary>
         /// <param name="name">Judge name</param>
+        /// <param name="nationality">Judge nationality</param>
+        /// <param name="ssn">Judge ssn</param>
         public void AddJudgeToList(string name, string nationality, string ssn)
         {
-            var judge = new Judge(name, nationality, ssn);
+            //kollar om judge redan finns i judgelist. 
+            if (GetJudgeBySSN(ssn) != null)
+            {
+                throw new DuplicateNameException("Judge already exists in list");
+            }
 
             try
             {
-                judgeList.Add(judge);
+                judgeList.Add(new Judge(name, nationality, ssn));
             }
             catch (Exception exception)
             {
                 //do something
             }
         }
+
         /// <summary>
-        /// Adds diver to diver list by name.
+        /// Adds a diver to diver list.
         /// </summary>
-        /// <param name="name">Judge name</param>
+        /// <param name="name">Diver name</param>
+        /// <param name="nationality">Diver nationality</param>
+        /// <param name="ssn">Diver ssn</param>
         public void AddDiverToList(string name, string nationality, string ssn)
         {
-            var diver = new Diver(name, nationality, ssn);
-
+            if (GetDiverBySSN(ssn) != null)
+            {
+                throw new DuplicateNameException("Diver already exists in list");
+            }
             try
             {
-                diverList.Add(diver);
+                diverList.Add(new Diver(name, nationality, ssn));
             }
             catch (Exception exception)
             {
                 //do something
             }
         }
+
         /// <summary>
-        /// Removes a judge from list by ssn.
+        /// Adds judge to a given contest.
+        /// </summary>
+        /// <param name="contestId"></param>
+        /// <param name="ssn"></param>
+        public void AddJudgeToContest(int contestId, string ssn)
+        {
+            try
+            {
+                var judge = GetJudgeBySSN(ssn);
+                var selectedContest = contestList.SingleOrDefault(x => x.Id == contestId);
+                selectedContest.AddJudge(judge);
+            }
+            catch (NullReferenceException nullReferenceException)
+            {
+                MsgBox.CreateErrorBox(nullReferenceException.ToString(), MethodBase.GetCurrentMethod().ToString());
+            }
+            catch (ArgumentNullException argumentNullException)
+            {
+                MsgBox.CreateErrorBox(argumentNullException.ToString(), MethodBase.GetCurrentMethod().ToString());
+            }
+            catch (Exception exception)
+            {
+                MsgBox.CreateErrorBox(exception.ToString(), MethodBase.GetCurrentMethod().ToString());
+            }
+        }
+
+        /// <summary>
+        /// Adds diver to a given contest.
+        /// </summary>
+        /// <param name="contestId"></param>
+        /// <param name="ssn"></param>
+        public void AddDiverToContest(int contestId, string ssn)
+        {
+            try
+            {
+                var diver = GetDiverBySSN(ssn);
+                var selectedContest = contestList.SingleOrDefault(x => x.Id == contestId);
+                selectedContest.AddParticipant(diver);
+            }
+            catch (NullReferenceException nullReferenceException)
+            {
+                MsgBox.CreateErrorBox(nullReferenceException.ToString(), MethodBase.GetCurrentMethod().ToString());
+            }
+            catch (ArgumentNullException argumentNullException)
+            {
+                MsgBox.CreateErrorBox(argumentNullException.ToString(), MethodBase.GetCurrentMethod().ToString());
+            }
+            catch (Exception exception)
+            {
+                MsgBox.CreateErrorBox(exception.ToString(), MethodBase.GetCurrentMethod().ToString());
+            }
+        }
+
+        #endregion
+
+        #region Remove methods
+
+        /// <summary>
+        /// Removes a judge from list and database.
         /// </summary>
         /// <param name="ssn"></param>
         public void RemoveJudgeFromList(string ssn)
         {
             var judge = GetJudgeBySSN(ssn);
             judgeList.Remove(judge);
+            databaseController.RemoveJudgeFromTable(judge);
         }
+
         /// <summary>
-        /// Removes a diver from list by ssn.
+        /// Removes a diver from list and database.
         /// </summary>
         /// <param name="ssn"></param>
         public void RemoveDiverFromList(string ssn)
         {
             var diver = GetDiverBySSN(ssn);
             diverList.Remove(diver);
+            databaseController.RemoveDiverFromTable(diver);
         }
 
         /// <summary>
@@ -302,61 +389,36 @@ namespace Simhopp
             }
 
         }
-        /// <summary>
-        /// Adds judge to a given contest.
-        /// </summary>
-        /// <param name="contestId"></param>
-        /// <param name="ssn"></param>
-        public void AddJudgeToContest(int contestId, string ssn)
+
+        #endregion
+
+        #region Update methods
+
+        public void UpdateJudge(int id, string name, string nationality, string ssn)
         {
-            try
-            {
-                var judge = GetJudgeBySSN(ssn);
-                var selectedContest = contestList.SingleOrDefault(x => x.Id == contestId);
-                selectedContest.AddJudge(judge);
+            if (GetJudgeBySSN(ssn) != null)
+            {//judge med det ssn finns redan
+                throw new DuplicateNameException("Judge already exists");
             }
-            catch (NullReferenceException nullReferenceException)
+            var judge = judgeList.SingleOrDefault(x => x.Id == id);
+            if (judge != null)
             {
-                MsgBox.CreateErrorBox(nullReferenceException.ToString(), MethodBase.GetCurrentMethod().ToString());
-            }
-            catch (ArgumentNullException argumentNullException)
-            {
-                MsgBox.CreateErrorBox(argumentNullException.ToString(), MethodBase.GetCurrentMethod().ToString());
-            }
-            catch (Exception exception)
-            {
-                MsgBox.CreateErrorBox(exception.ToString(), MethodBase.GetCurrentMethod().ToString());
+                judge.Name = name;
+                judge.Nationality = nationality;
+                judge.SSN = ssn;
+                databaseController.UpdateDiver(judge);
+                                    //^ÄNDRA funktion
             }
         }
+        #endregion
+
+
+        #region Read from database
         /// <summary>
-        /// Adds diver to a given contest.
+        /// Reads judges from database and adds them to judgelist.
         /// </summary>
-        /// <param name="contestId"></param>
-        /// <param name="ssn"></param>
-        public void AddDiverToContest(int contestId, string ssn)
-        {
-            try
-            {
-                var diver = GetDiverBySSN(ssn);
-                var selectedContest = contestList.SingleOrDefault(x => x.Id == contestId);
-                selectedContest.AddParticipant(diver);
-            }
-            catch (NullReferenceException nullReferenceException)
-            {
-                MsgBox.CreateErrorBox(nullReferenceException.ToString(), MethodBase.GetCurrentMethod().ToString());
-            }
-            catch (ArgumentNullException argumentNullException)
-            {
-                MsgBox.CreateErrorBox(argumentNullException.ToString(), MethodBase.GetCurrentMethod().ToString());
-            }
-            catch (Exception exception)
-            {
-                MsgBox.CreateErrorBox(exception.ToString(), MethodBase.GetCurrentMethod().ToString());
-            }
-        }
         public void ReadJudgesFromDatabase()
         {
-            databaseController.ConnectToDatabase();
             var judges = databaseController.GetJudges();
             foreach (var judge in judges)
             {
@@ -364,7 +426,28 @@ namespace Simhopp
             }
         }
         /// <summary>
-        /// A function that reads judges and divers from text files
+        /// Reads divers from database and adds them to diverlist.
+        /// </summary>
+        public void ReadDiversFromDatabase()
+        {
+            var divers = databaseController.GetDivers();
+            foreach (var diver in divers)
+            {
+                diverList.Add(diver);
+            }
+        }
+        /// <summary>
+        /// Reads contests from database and adds them to contestlist.
+        /// </summary>
+        public void ReadContestsFromDatabase()
+        {
+            //get contest ej implementerad i databascontroller.
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Reads judges and divers from text files.
         /// </summary>
         /// <param name="fileName"></param>
         public void ReadFromFile(string fileName)
@@ -404,6 +487,5 @@ namespace Simhopp
                 Console.WriteLine("Error when reading file " + fileName + "\n" + e.Message);
             }
         }
-        #endregion
     }
 }

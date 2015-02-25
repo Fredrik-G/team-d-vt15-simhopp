@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Simhopp.Model;
+﻿using Simhopp.Model;
 
 namespace Simhopp
 {
@@ -11,6 +6,16 @@ namespace Simhopp
     {
         static void Main(string[] args)
         {
+            DatabaseController database = new DatabaseController(@"M:/Desktop/simhoppTestDB.db");
+            database.ConnectToDatabase();
+            database.ClearDatabase("Judge");
+
+            for (var i = 0; i < 10; i++)
+            {
+                database.AddJudgeToDatabase(new Judge("kalle", "USA", "123-22-666" + i));   
+            }
+            
+
             SimhoppConsole simhopp = new SimhoppConsole();
             simhopp.Meny();
             
