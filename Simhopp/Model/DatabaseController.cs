@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Data.SQLite;
+using System.Globalization;
 using System.Reflection;
 using Simhopp;
 
@@ -127,7 +128,7 @@ namespace Simhopp.Model
         /// </summary>
         /// <param name="tableName">Table to be searched.</param>
         /// <returns></returns>
-        public bool TableIsEmpty(string tableName) //Fixa till denna. vad ska den returnera om ett exception händer.
+        public bool TableIsEmpty(string tableName) //Fixa till denna. vad ska den returnera om ett exception händer. Fråga Kjell!!
         {
             if (dbConnection == null)
             {
@@ -148,11 +149,7 @@ namespace Simhopp.Model
                         sql = "SELECT COUNT(*) FROM " + tableName + "";
                         command = new SQLiteCommand(sql, dbConnection);
                         var numberOfEntries = Convert.ToInt32(command.ExecuteScalar());
-                        if (numberOfEntries == 0)
-                        {
-                            return true;
-                        }
-                        return false;
+                        return numberOfEntries == 0;
                     }
                     else
                     {
@@ -644,12 +641,12 @@ namespace Simhopp.Model
             }
         }
 
-        //Lägg till att alla klasser som har en tabel i databasen har ett id. Måste finnas för att följande ska kunna användas. 
+        
         /// <summary>
         /// Removes a row (contest) based on its ID.
         /// </summary>
         /// <param name="c">Contest object.</param>
-        public void RemoveContestFromTable(Contest c)
+        public void RemoveContestFromTable(Contest c) //Lägg till att alla klasser som har en tabell i databasen har ett id. Måste finnas för att följande ska kunna användas. 
         {
             /*string sql = "DELETE FROM Contest where ??? ='" + c.??? + "'";
             SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
@@ -727,25 +724,23 @@ namespace Simhopp.Model
             if (dbConnection == null)
             {
                 NoConnectionErrorMessage();
+                return;
             }
-            else
+            try
             {
-                try
-                {
-                    string sql = "INSERT INTO Trick(Name,Difficulty) VALUES('" + t.Name + "', '" + t.Difficulty + "')";
-                    SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
-                    command.ExecuteNonQuery();
-                }
+                string sql = "INSERT INTO Trick(Name,Difficulty) VALUES('" + t.Name + "', '" + t.Difficulty.ToString(CultureInfo.InvariantCulture) + "')";
+                SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
+                command.ExecuteNonQuery();
+            }
 
-                catch (SQLiteException sqliteEx)
-                {
-                    MsgBox.CreateErrorBox("Could not add the following Trick to database: \n" + t.Name + ", " + t.Difficulty + "\nExeption: " + sqliteEx, MethodBase.GetCurrentMethod().Name);
-                }
+            catch (SQLiteException sqliteEx)
+            {
+                MsgBox.CreateErrorBox("Could not add the following Trick to database: \n" + t.Name + ", " + t.Difficulty + "\nExeption: " + sqliteEx, MethodBase.GetCurrentMethod().Name);
+            }
 
-                catch (Exception e)
-                {
-                    MsgBox.CreateErrorBox("Could not add the following Trick to database: \n" + t.Name + ", " + t.Difficulty + "\nExeption: " + e, MethodBase.GetCurrentMethod().Name);
-                }
+            catch (Exception e)
+            {
+                MsgBox.CreateErrorBox("Could not add the following Trick to database: \n" + t.Name + ", " + t.Difficulty + "\nExeption: " + e, MethodBase.GetCurrentMethod().Name);
             }
         }
 
@@ -776,10 +771,14 @@ namespace Simhopp.Model
             {
                 try
                 {
-                    string sql = "SELECT * FROM Contest WHERE name = '" + trickName + "'";
+                    int id = -1;
+                    string sql = "SELECT ID FROM Trick WHERE name = '" + trickName + "'";
                     SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
                     SQLiteDataReader reader = command.ExecuteReader();
-                    int id = Convert.ToInt32(reader["ID"]);
+                    while (reader.Read())
+                    {
+                        id = Convert.ToInt32(reader["ID"]);
+                    }
                     return id;
                 }
 
