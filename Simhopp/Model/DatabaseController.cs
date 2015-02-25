@@ -8,6 +8,7 @@ using System.Windows;
 using System.Data.SQLite;
 using System.Globalization;
 using System.Reflection;
+using System.Windows.Forms;
 using Simhopp;
 
 namespace Simhopp.Model
@@ -224,6 +225,10 @@ namespace Simhopp.Model
             MsgBox.CreateErrorBox("Connection to a database is missing.", MethodBase.GetCurrentMethod().Name);
         }
 
+        /// <summary>
+        /// Returns the id of the last entry put into the database.
+        /// </summary>
+        /// <returns>Last input id.</returns>
         private int GetLastId()
         {
             if (dbConnection == null)
@@ -264,25 +269,26 @@ namespace Simhopp.Model
             if (dbConnection == null)
             {
                 NoConnectionErrorMessage();
+                return;
             }
-            else
+            try
             {
-                try
+                if (d.Id == -1)
                 {
                     string sql = "INSERT INTO Diver(Name,SSN,Nationality) VALUES('" + d.Name + "', '" + d.SSN + "','" + d.Nationality + "')";
                     SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
                     command.ExecuteNonQuery();
                 }
+            }
 
-                catch (SQLiteException sqliteEx)
-                {
-                    MsgBox.CreateErrorBox("Could not add the following Diver to database: \n" + d.Name + ", " + d.Nationality + ", " + d.SSN + "\nExeption: " + sqliteEx, MethodBase.GetCurrentMethod().Name);
-                }
+            catch (SQLiteException sqliteEx)
+            {
+                MsgBox.CreateErrorBox("Could not add the following Diver to database: \n" + d.Name + ", " + d.Nationality + ", " + d.SSN + "\nExeption: " + sqliteEx, MethodBase.GetCurrentMethod().Name);
+            }
 
-                catch (Exception e)
-                {
-                    MsgBox.CreateErrorBox("Could not add the following Diver to database: \n" + d.Name + ", " + d.Nationality + ", " + d.SSN + "\nExeption: " + e, MethodBase.GetCurrentMethod().Name);
-                }
+            catch (Exception e)
+            {
+                MsgBox.CreateErrorBox("Could not add the following Diver to database: \n" + d.Name + ", " + d.Nationality + ", " + d.SSN + "\nExeption: " + e, MethodBase.GetCurrentMethod().Name);
             }
         }
 
@@ -451,25 +457,26 @@ namespace Simhopp.Model
             if (dbConnection == null)
             {
                 NoConnectionErrorMessage();
+                return;
             }
-            else
+            try
             {
-                try
+                if (j.Id == -1)
                 {
                     string sql = "INSERT INTO Judge(Name,SSN,Nationality) VALUES('" + j.Name + "', '" + j.SSN + "','" + j.Nationality + "')";
                     SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
                     command.ExecuteNonQuery();
                 }
+            }
 
-                catch (SQLiteException sqliteEx)
-                {
-                    MsgBox.CreateErrorBox("Could not add following Judge to database: \n" + j.Name + ", " + j.Nationality + ", " + j.SSN + "\nExeption: " + sqliteEx, MethodBase.GetCurrentMethod().Name);
-                }
+            catch (SQLiteException sqliteEx)
+            {
+                MsgBox.CreateErrorBox("Could not add following Judge to database: \n" + j.Name + ", " + j.Nationality + ", " + j.SSN + "\nExeption: " + sqliteEx, MethodBase.GetCurrentMethod().Name);
+            }
 
-                catch (Exception e)
-                {
-                    MsgBox.CreateErrorBox("Could not add following Judge to database: \n" + j.Name + ", " + j.Nationality + ", " + j.SSN + "\nExeption: " + e, MethodBase.GetCurrentMethod().Name);
-                }
+            catch (Exception e)
+            {
+                MsgBox.CreateErrorBox("Could not add following Judge to database: \n" + j.Name + ", " + j.Nationality + ", " + j.SSN + "\nExeption: " + e, MethodBase.GetCurrentMethod().Name);
             }
         }
 
@@ -479,30 +486,26 @@ namespace Simhopp.Model
         /// <param name="j">Judge object.</param>
         public void RemoveJudgeFromTable(Judge j)
         {
-            
             if (dbConnection == null)
             {
                 NoConnectionErrorMessage();
+                return;
             }
-            else
+            try
             {
-                try
-                {
-                    string sql = "DELETE FROM Judge where SSN ='" + j.SSN + "'";
-                    SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
-                    command.ExecuteNonQuery();
-                }
+                string sql = "DELETE FROM Judge where SSN ='" + j.SSN + "'";
+                SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
+                command.ExecuteNonQuery();
+            }
 
-                catch (SQLiteException sqliteEx)
-                {
-                    MsgBox.CreateErrorBox("Could not delete the following Judge from database: \n" + j.Name + ", " + j.Nationality + ", " + j.SSN + "\nExeption: " + sqliteEx, MethodBase.GetCurrentMethod().Name);
-                }
+            catch (SQLiteException sqliteEx)
+            {
+                MsgBox.CreateErrorBox("Could not delete the following Judge from database: \n" + j.Name + ", " + j.Nationality + ", " + j.SSN + "\nExeption: " + sqliteEx, MethodBase.GetCurrentMethod().Name);
+            }
 
-                catch (Exception e)
-                {
-                    MsgBox.CreateErrorBox("Could not delete the following Judge from database: \n" + j.Name + ", " + j.Nationality + ", " + j.SSN + "\nExeption: " + e, MethodBase.GetCurrentMethod().Name);
-                }
-
+            catch (Exception e)
+            {
+                MsgBox.CreateErrorBox("Could not delete the following Judge from database: \n" + j.Name + ", " + j.Nationality + ", " + j.SSN + "\nExeption: " + e, MethodBase.GetCurrentMethod().Name);
             }
         }
 
@@ -645,12 +648,29 @@ namespace Simhopp.Model
                 }
                 try
                 {
-                    string sql = "INSERT INTO Contest(Place, Name, StartDate, EndDate) VALUES('" + c.Place + "', '" +
-                                 c.Name + "','" + c.StartDate + "','" + c.EndDate + "')";
+                    //Add the contest info to contest database.
+                    string sql = "INSERT INTO Contest(Place, Name, StartDate, EndDate) VALUES('" + c.Place + "', '" + c.Name + "','" + c.StartDate + "','" + c.EndDate + "')";
                     SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
                     command.ExecuteNonQuery();
 
-                    
+                    int lastInsertedContestId = GetLastId();
+
+                    List<Judge> judgeList = c.GetJudgesList();
+
+                    //Add all new judges to the database and update their id.
+                    foreach (var judges in c.GetJudgesList())
+                    {
+                        if (judges.Id == -1)
+                        {
+                            AddJudgeToDatabase(judges);
+                            judges.Id = GetLastId();
+                        }
+                    }
+
+                    foreach (var participant in c.GetParticipants())
+                    {
+                        AddJumpResultToDatabase(participant, lastInsertedContestId);
+                    }
                 }
 
                 catch (SQLiteException sqliteEx)
@@ -835,7 +855,7 @@ namespace Simhopp.Model
 
         #region JumpResults Methods
 
-/*        public void AddJumpResultToDatabase(Participant p, int contestId) ///Gör färdigt efter get trick id by name. Bättre att ta ett participantobjekt???
+        public void AddJumpResultToDatabase(Participant participant, int contestId) ///Gör färdigt efter get trick id by name. Bättre att ta ett participantobjekt???
         {
             if (dbConnection == null)
             {
@@ -844,41 +864,31 @@ namespace Simhopp.Model
             }
             try
             {
-                JumpResult[] jumpResultsArray = p.GetJumpResults();
-                foreach (JumpResult jr in jumpResultsArray)
+                
+                AddDiverToDatabase(participant.GetDiver());
+
+                foreach (var jumpResult in participant.GetJumpResults())
                 {
+                    
                     //lägg till jump först sen evaluation.
-                    double[] judgePointArray = jr.GetJudgePointsArray();
-                    foreach (var judgePoint in judgePointArray)
+                    //double[] judgePoints = participant.GetJudgePointsArray();
+                    //foreach (var judgePoint in judgePoints)
                     {
                         
                     }
                 }
-
-
-                int trickId = GetTrickIdByName(p.TrickName);
-
-                string sqlJump = "INSERT INTO Jump(Date, TotalPoint, Diver, Contest, Trick) VALUES('" + Date + "', '" + jr.SumJudgePoints + "','" + jr. + "' SET @id = LAST_INSERTED_ID();)";
-                SQLiteCommand command = new SQLiteCommand(sqlJump, dbConnection);
-                command.ExecuteNonQuery();
-
-                //get the id the jump got from database auto increment.
-                string sql = "SELECT last_insert_rowid()";
-                command = new SQLiteCommand(sql, dbConnection);
-                int contestId = Convert.ToInt32(command.ExecuteScalar());
-                    
             }
 
             catch (SQLiteException sqliteEx)
             {
-                MsgBox.CreateErrorBox("Could not add following Judge to database: \n" + j.Name + ", " + j.Nationality + ", " + j.SSN + "\nExeption: " + sqliteEx, MethodBase.GetCurrentMethod().Name);
+                MsgBox.CreateErrorBox("Could not add following Judge to database: \n" + sqliteEx, MethodBase.GetCurrentMethod().Name);
             }
 
             catch (Exception e)
             {
-                MsgBox.CreateErrorBox("Could not add following Judge to database: \n" + j.Name + ", " + j.Nationality + ", " + j.SSN + "\nExeption: " + e, MethodBase.GetCurrentMethod().Name);
+                MsgBox.CreateErrorBox("Could not add following Judge to database: \n" + e, MethodBase.GetCurrentMethod().Name);
             }
-        }*/
+        }
        
         public List<JumpResult> GetJumpResults() //Gör så att denna funkar!!!
         {
