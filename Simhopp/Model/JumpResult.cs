@@ -107,6 +107,11 @@ namespace Simhopp.Model
             return judgePoints[judgeNo];
         }
 
+        public double[] GetJudgePointsArray()
+        {
+            return judgePoints;
+        }
+
         /// <summary>
         /// Stores a specific judges point in the corresponding place in the JudgePoints array.
         /// </summary>
