@@ -401,10 +401,12 @@ namespace Simhopp
 
         public void UpdateJudge(int id, string name, string nationality, string ssn)
         {
-            if (GetJudgeBySSN(ssn) != null)
+            var tempJudge = GetJudgeBySSN(ssn);
+            if (tempJudge != null && tempJudge.Id != id)
             {//judge med det ssn finns redan
                 throw new DuplicateNameException("Judge already exists");
             }
+
             var judge = judgeList.SingleOrDefault(x => x.Id == id);
             if (judge != null)
             {
@@ -415,6 +417,7 @@ namespace Simhopp
                 //^ÄNDRA funktion
             }
         }
+
         #endregion
 
 
