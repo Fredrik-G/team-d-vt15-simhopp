@@ -156,7 +156,7 @@ namespace Simhopp
             {
                 return judgeList.SingleOrDefault(x => x.SSN == ssn);
             }
-            catch (ArgumentNullException exception)
+            catch (ArgumentNullException)
             {
                 return null;
                 //do something
@@ -173,7 +173,7 @@ namespace Simhopp
             {
                 return diverList.SingleOrDefault(x => x.SSN == ssn);
             }
-            catch (ArgumentNullException exception)
+            catch (ArgumentNullException)
             {
                 return null;
                 //do something
@@ -228,7 +228,7 @@ namespace Simhopp
             {
                 judgeList.Add(new Judge(name, nationality, ssn));
             }
-            catch (Exception exception)
+            catch (Exception)
             {
                 //do something
             }
@@ -250,7 +250,7 @@ namespace Simhopp
             {
                 diverList.Add(new Diver(name, nationality, ssn));
             }
-            catch (Exception exception)
+            catch (Exception)
             {
                 //do something
             }
@@ -413,8 +413,7 @@ namespace Simhopp
                 judge.Name = name;
                 judge.Nationality = nationality;
                 judge.SSN = ssn;
-                databaseController.UpdateDiver(judge);
-                //^ÄNDRA funktion
+                databaseController.UpdateJudge(judge);
             }
         }
 
