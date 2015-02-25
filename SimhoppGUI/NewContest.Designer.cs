@@ -40,6 +40,8 @@
             this.NewContestEndDateDTP = new System.Windows.Forms.DateTimePicker();
             this.NewContestEndDateLabel = new System.Windows.Forms.Label();
             this.toolTipNewContest = new System.Windows.Forms.ToolTip(this.components);
+            this.InputErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.InputErrorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -139,6 +141,11 @@
             this.NewContestEndDateLabel.TabIndex = 0;
             this.NewContestEndDateLabel.Text = "End date";
             // 
+            // InputErrorProvider
+            // 
+            this.InputErrorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.InputErrorProvider.ContainerControl = this;
+            // 
             // NewContest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -158,6 +165,7 @@
             this.MinimizeBox = false;
             this.Name = "NewContest";
             this.Text = "NewContest";
+            ((System.ComponentModel.ISupportInitialize)(this.InputErrorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -176,5 +184,6 @@
         public System.Windows.Forms.TextBox newContestCityTB;
         public System.Windows.Forms.Button newContestCreateBtn;
         private System.Windows.Forms.ToolTip toolTipNewContest;
+        private System.Windows.Forms.ErrorProvider InputErrorProvider;
     }
 }

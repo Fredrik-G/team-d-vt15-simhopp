@@ -11,6 +11,8 @@ namespace Simhopp.View
     public delegate void DelegateCreateContest(string place, string name, string startDate, string endDate);
 
     public delegate void DelegateReadFromFile(string fileName);
+    public delegate void DelegateReadJudgesFromDatabase();
+    public delegate void DelegateReadDiversFromDatabase();
 
     public delegate BindingList<Contest> DelegateGetContestsList();
 
@@ -32,6 +34,7 @@ namespace Simhopp.View
     public delegate void DelegateRemoveJudgeFromContest(int contestId, string ssn);
     public delegate void DelegateRemoveDiverFromContest(int contestId, string ssn);
 
+    public delegate void DelegateUpdateJudge(int id, string name, string nationality, string ssn);
     //public delegate void DelegateAddParticipant(Diver diver);
     //public delegate void DelegateAddJudge(Judge judge);
     //public delegate double DelegateGetTrickDifficultyFromTrickHashTable(string trickName);
@@ -39,8 +42,11 @@ namespace Simhopp.View
     public interface IStartScreen
     {
         event DelegateCreateContest EventCreateContest;
+
         event DelegateReadFromFile EventReadFromFile;
-        
+        event DelegateReadJudgesFromDatabase EventReadJudgesFromDatabase;
+        event DelegateReadDiversFromDatabase EventReadDiversFromDatabase;
+
         event DelegateGetContestsList EventGetContestsList;
         event DelegateGetJudgesList EventGetJudgesList;
         event DelegateGetDiversList EventGetDiversList;
@@ -59,6 +65,8 @@ namespace Simhopp.View
 
         event DelegateRemoveJudgeFromContest EventRemoveJudgeFromContest;
         event DelegateRemoveDiverFromContest EventRemoveDiverFromContest;
+
+        event DelegateUpdateJudge EventUpdateJudge;
         //event DelegateAddParticipant EventAddParticipant;
         //event DelegateAddJudge EventAddJudge;
         //event DelegateGetTrickDifficultyFromTrickHashTable EventGetTrickDifficultyFromTrickHashTable;

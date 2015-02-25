@@ -109,6 +109,7 @@
             this.Controls.Add(this.StartScreenNewContesttBtn);
             this.Name = "StartScreen";
             this.Text = "StartScreen";
+            this.Load += new System.EventHandler(this.StartScreen_Load);
             this.ResumeLayout(false);
 
         }

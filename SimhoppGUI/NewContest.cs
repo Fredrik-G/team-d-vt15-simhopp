@@ -35,11 +35,7 @@ namespace SimhoppGUI
             InitializeComponent();
         }
 
-
-        private void NewContestCloseBtn_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
+        #region Events
 
         /// <summary>
         /// Closes this form if the input is correct. 
@@ -48,11 +44,10 @@ namespace SimhoppGUI
         /// <param name="e"></param>
         private void newContestCreateBtn_Click(object sender, EventArgs e)
         {
-            //var correctDate = CheckInput.CheckCorrectDate(NewContestStartDateDTP, NewContestEndDateDTP);
-            if(CheckInput.CheckCorrectContestInput(newContestNameTB, newContestCityTB))
+            if (CheckInput.CheckCorrectContestInput(InputErrorProvider, newContestNameTB, newContestCityTB))
             {
-               DialogResult = DialogResult.OK; 
-            }          
+                DialogResult = DialogResult.OK;
+            }
         }
 
         private void newContestNameTB_Click(object sender, EventArgs e)
@@ -67,5 +62,10 @@ namespace SimhoppGUI
             City = "";
         }
 
+        #endregion
+        private void NewContestCloseBtn_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

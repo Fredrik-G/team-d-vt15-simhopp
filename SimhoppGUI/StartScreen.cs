@@ -19,6 +19,12 @@ namespace SimhoppGUI
 
         #endregion
 
+        private void StartScreen_Load(object sender, EventArgs e)
+        {
+            EventReadJudgesFromDatabase();
+            EventReadDiversFromDatabase();
+        }
+
         /// <summary>
         /// Creates a correct date string from DateTimePicker.
         /// dd/mm/yyyy
@@ -31,6 +37,9 @@ namespace SimhoppGUI
                            "/" + date.Value.Month.ToString() +
                            "/" + date.Value.Year.ToString();
         }
+
+        #region Events
+
         /// <summary>
         /// Creates a NewContest-form and attemps to create a new contest with the input from NewContest.
         /// </summary>
@@ -76,6 +85,7 @@ namespace SimhoppGUI
                 MsgBox.CreateErrorBox(exception.ToString(), MethodBase.GetCurrentMethod().Name);
             }
         }
+
         private void StartScreenStartContestBtn_Click(object sender, EventArgs e)
         {
             //Dims the background form and makes it non-interactive.
@@ -100,6 +110,7 @@ namespace SimhoppGUI
                 }
             }
         }
+
         private void StartScreenEditViewContestBtn_Click(object sender, EventArgs e)
         {
             //Dims the background form and makes it non-interactive.
@@ -112,6 +123,7 @@ namespace SimhoppGUI
                 }
             }
         }
+
         private void StartScreenAddDiverContestBtn_Click(object sender, EventArgs e)
         {
             //Dims the background form and makes it non-interactive.
@@ -124,16 +136,15 @@ namespace SimhoppGUI
                 }
             }
         }
+
         private void StartScreenAddJudgeBtn_Click(object sender, EventArgs e)
         {
             //Dims the background form and makes it non-interactive.
             using (new DimIt())
-            using (var addjudge = new AddEditJudge
-                (EventAddJudgeToList,
-                EventRemoveJudgeFromList,
-                EventGetJudgesList,
-                EventReadFromFile
-                ))
+            using (var addjudge = new AddEditJudge(EventAddJudgeToList,
+                             EventRemoveJudgeFromList,
+                             EventGetJudgesList,
+                             EventUpdateJudge))
             {
                 if (addjudge.ShowDialog(this) == DialogResult.OK)
                 {
@@ -141,6 +152,7 @@ namespace SimhoppGUI
                 }
             }
         }
+
         private void StartScreenViewJudgeClient_Click(object sender, EventArgs e)
         {
             //Dims the background form and makes it non-interactive.
@@ -154,8 +166,15 @@ namespace SimhoppGUI
             }
         }
 
+        #endregion
+
+        #region Simhopp delegates
+
         public event DelegateCreateContest EventCreateContest = null;
+
         public event DelegateReadFromFile EventReadFromFile = null;
+        public event DelegateReadJudgesFromDatabase EventReadJudgesFromDatabase = null;
+        public event DelegateReadDiversFromDatabase EventReadDiversFromDatabase = null;
 
         public event DelegateGetContestsList EventGetContestsList = null;
         public event DelegateGetJudgesList EventGetJudgesList = null;
@@ -174,9 +193,15 @@ namespace SimhoppGUI
 
         public event DelegateRemoveJudgeFromContest EventRemoveJudgeFromContest = null;
         public event DelegateRemoveDiverFromContest EventRemoveDiverFromContest = null;
+
+        public event DelegateUpdateJudge EventUpdateJudge = null;
+
         //public event DelegateAddParticipant EventAddParticipant = null;
         //public event DelegateAddJudge EventAddJudge = null;
         //public event DelegateGetTrickDifficultyFromTrickHashTable EventGetTrickDifficultyFromTrickHashTable = null;
         //public event DelegateGetResultFromParticipant EventGetResultFromParticipant = null;
+
+        #endregion
+
     }
 }

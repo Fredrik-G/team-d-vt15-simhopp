@@ -74,6 +74,8 @@ namespace SimhoppGUI
         }
         #endregion
 
+        #region Events
+
         /// <summary>
         /// Occurs when a row is selected in Contest Grid.
         /// Shows the judges/divers that participate in the selected contest.
@@ -94,12 +96,14 @@ namespace SimhoppGUI
 
                 if (JudgesDiversTabControl.SelectedTab == JudgeTabPage)
                 {
-                    CurrentJudgesDataGridView.DataSource = eventGetJudgesInContest(Convert.ToInt16(row.Cells["Id"].Value));
+                    CurrentJudgesDataGridView.DataSource =
+                        eventGetJudgesInContest(Convert.ToInt16(row.Cells["Id"].Value));
                     CurrentJudgesDataGridView.Columns["Id"].Visible = false;
                 }
                 else if (JudgesDiversTabControl.SelectedTab == DiverTabPage)
                 {
-                    CurrentDiversDataGridView.DataSource = eventGetDiversInContest(Convert.ToInt16(row.Cells["Id"].Value));
+                    CurrentDiversDataGridView.DataSource =
+                        eventGetDiversInContest(Convert.ToInt16(row.Cells["Id"].Value));
                     CurrentDiversDataGridView.Columns["Id"].Visible = false;
                 }
 
@@ -136,6 +140,7 @@ namespace SimhoppGUI
                 MsgBox.CreateErrorBox(exception.ToString(), MethodBase.GetCurrentMethod().Name);
             }
         }
+
         /// <summary>
         /// Occurs when changing tabs. Used to update the current datagrid content immediately.
         /// </summary>
@@ -144,7 +149,23 @@ namespace SimhoppGUI
         private void JudgesDiversTabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
             ContestsDataGridView_SelectionChanged(null, null);
+            if (JudgesDiversTabControl.SelectedTab == JudgeTabPage)
+            {
+                GlobalJudgesLabel.Visible = true;
+                CurrentJudgesLabel.Visible = true;
+                GlobalDiversLabel.Visible = false;
+                CurrentlDiversLabel.Visible = false;
+            }
+            else if (JudgesDiversTabControl.SelectedTab == DiverTabPage)
+            {
+                GlobalDiversLabel.Visible = true;
+                CurrentlDiversLabel.Visible = true;
+                GlobalJudgesLabel.Visible = false;
+                CurrentJudgesLabel.Visible = false;
+            }
         }
+
+        #endregion
 
         #region Click Buttons
 
@@ -199,7 +220,7 @@ namespace SimhoppGUI
 
             if (personCell == null || contestCell == null)
             {
-               throw new NullReferenceException("cell is null");
+                throw new NullReferenceException("cell is null");
             }
 
             var personRow = personCell.OwningRow;
@@ -213,18 +234,50 @@ namespace SimhoppGUI
             {
                 eventAddDiverToContest(Convert.ToInt16(contestRow.Cells["Id"].Value), personRow.Cells["ssn"].Value.ToString());
             }
-            
+
             //force update 
             ContestsDataGridView_SelectionChanged(null, null);
         }
         private void RemoveJudgeBtn_Click(object sender, EventArgs e)
         {
-            RemovePersonFromContest(true);
+            try
+            {
+                RemovePersonFromContest(true);
+            }
+       
+            catch (NullReferenceException nullReferenceException)
+            {
+                MsgBox.CreateErrorBox(nullReferenceException.ToString(), MethodBase.GetCurrentMethod().Name);
+            }
+            catch (ArgumentNullException argumentNullException)
+            {
+                MsgBox.CreateErrorBox(argumentNullException.ToString(), MethodBase.GetCurrentMethod().Name);
+            }
+            catch (Exception exception)
+            {
+                MsgBox.CreateErrorBox(exception.ToString(), MethodBase.GetCurrentMethod().Name);
+            }
         }
 
         private void RemoveDiverBtn_Click(object sender, EventArgs e)
         {
-            RemovePersonFromContest(false);
+            try
+            {
+                RemovePersonFromContest(false);
+            }
+
+            catch (NullReferenceException nullReferenceException)
+            {
+                MsgBox.CreateErrorBox(nullReferenceException.ToString(), MethodBase.GetCurrentMethod().Name);
+            }
+            catch (ArgumentNullException argumentNullException)
+            {
+                MsgBox.CreateErrorBox(argumentNullException.ToString(), MethodBase.GetCurrentMethod().Name);
+            }
+            catch (Exception exception)
+            {
+                MsgBox.CreateErrorBox(exception.ToString(), MethodBase.GetCurrentMethod().Name);
+            }
         }
         /// <summary>
         /// Attempts to remove a person (judge/diver) from a contest.
@@ -232,14 +285,15 @@ namespace SimhoppGUI
         /// <param name="isJudge"></param>
         private void RemovePersonFromContest(bool isJudge)
         {
-            var personCell = isJudge ? GlobalJudgesDataGridView.SelectedCells.Cast<DataGridViewCell>().FirstOrDefault() :
-                GlobalDiversDataGridView.SelectedCells.Cast<DataGridViewCell>().FirstOrDefault();
+            var personCell = isJudge ? CurrentJudgesDataGridView.SelectedCells.Cast<DataGridViewCell>().FirstOrDefault() :
+                CurrentDiversDataGridView.SelectedCells.Cast<DataGridViewCell>().FirstOrDefault();
 
             var contestCell = ContestsDataGridView.SelectedCells.Cast<DataGridViewCell>().FirstOrDefault();
 
             if (personCell == null || contestCell == null)
-            {
-                throw new NullReferenceException("cell is null");
+            {//Händer om man klickar remove när det inte finns några current judges/divers. Ska man visa error eller bara ignorera det?
+               // throw new NullReferenceException("cell is null");
+                return;
             }
 
             var personRow = personCell.OwningRow;
@@ -251,12 +305,26 @@ namespace SimhoppGUI
             }
             else
             {
-                eventRemoveJudgeFromContest(Convert.ToInt16(contestRow.Cells["Id"].Value), personRow.Cells["ssn"].Value.ToString());
+                eventRemoveDiverFromContest(Convert.ToInt16(contestRow.Cells["Id"].Value), personRow.Cells["ssn"].Value.ToString());
             }
 
             //force update 
             ContestsDataGridView_SelectionChanged(null, null);
         }
+
+        private void EditContestBtn_Click(object sender, EventArgs e)
+        {
+            var selectedContest = ContestsDataGridView.SelectedCells.Cast<DataGridViewCell>().FirstOrDefault();
+            using (new DimIt())
+            using (var editViewContest = new EditContest(selectedContest))
+            {
+                if (editViewContest.ShowDialog(this) == DialogResult.OK)
+                {
+                    editViewContest.Show();
+                }
+            }
+        }
+
         #endregion
 
     }

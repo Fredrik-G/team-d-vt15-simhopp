@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.AddJudgeNameLabel = new System.Windows.Forms.Label();
             this.AddJudgeSSNLabel = new System.Windows.Forms.Label();
             this.AddJudgeNationalityLabel = new System.Windows.Forms.Label();
@@ -49,10 +50,13 @@
             this.UpdateJudgeClosebtn = new System.Windows.Forms.Button();
             this.tabPageAddJudge = new System.Windows.Forms.TabPage();
             this.JudgesDataGridView = new System.Windows.Forms.DataGridView();
+            this.InputErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.InputToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.tabControlAddEdit.SuspendLayout();
             this.tabPageEditJudge.SuspendLayout();
             this.tabPageAddJudge.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.JudgesDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.InputErrorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // AddJudgeNameLabel
@@ -91,6 +95,7 @@
             this.AddJudgeNameTb.Name = "AddJudgeNameTb";
             this.AddJudgeNameTb.Size = new System.Drawing.Size(148, 20);
             this.AddJudgeNameTb.TabIndex = 6;
+            this.InputToolTip.SetToolTip(this.AddJudgeNameTb, "Allowed characters: \"A-Z \',.-\"");
             this.AddJudgeNameTb.Click += new System.EventHandler(this.AddJudgeNameTb_Click);
             // 
             // AddJudgeNationaltyTb
@@ -99,6 +104,8 @@
             this.AddJudgeNationaltyTb.Name = "AddJudgeNationaltyTb";
             this.AddJudgeNationaltyTb.Size = new System.Drawing.Size(148, 20);
             this.AddJudgeNationaltyTb.TabIndex = 7;
+            this.InputToolTip.SetToolTip(this.AddJudgeNationaltyTb, "Allowed characters: \"A-Z ,-\"");
+            this.AddJudgeNationaltyTb.Click += new System.EventHandler(this.AddJudgeNationaltyTb_Click);
             // 
             // AddJudgeSSNTb
             // 
@@ -106,6 +113,8 @@
             this.AddJudgeSSNTb.Name = "AddJudgeSSNTb";
             this.AddJudgeSSNTb.Size = new System.Drawing.Size(148, 20);
             this.AddJudgeSSNTb.TabIndex = 8;
+            this.InputToolTip.SetToolTip(this.AddJudgeSSNTb, "Allowed characters: \"1-9 -\". Swedish: yyyymmdd-xxxx. Rest: xxx-yy-zzzz");
+            this.AddJudgeSSNTb.Click += new System.EventHandler(this.AddJudgeSSNTb_Click);
             // 
             // AddJudgeButton
             // 
@@ -123,6 +132,7 @@
             this.UpdateJudgeSSNTb.Name = "UpdateJudgeSSNTb";
             this.UpdateJudgeSSNTb.Size = new System.Drawing.Size(148, 20);
             this.UpdateJudgeSSNTb.TabIndex = 17;
+            this.InputToolTip.SetToolTip(this.UpdateJudgeSSNTb, "Allowed characters: \"1-9 -\". Swedish: yyyymmdd-xxxx. Rest: xxx-yy-zzzz");
             this.UpdateJudgeSSNTb.Click += new System.EventHandler(this.UpdateJudgeSSNTb_Click);
             // 
             // UpdateJudgeNationalityTb
@@ -131,6 +141,7 @@
             this.UpdateJudgeNationalityTb.Name = "UpdateJudgeNationalityTb";
             this.UpdateJudgeNationalityTb.Size = new System.Drawing.Size(148, 20);
             this.UpdateJudgeNationalityTb.TabIndex = 16;
+            this.InputToolTip.SetToolTip(this.UpdateJudgeNationalityTb, "Allowed characters: \"A-Z ,-\"");
             this.UpdateJudgeNationalityTb.Click += new System.EventHandler(this.UpdateJudgeNationalityTb_Click);
             // 
             // UpdateJudgeNameTb
@@ -139,6 +150,8 @@
             this.UpdateJudgeNameTb.Name = "UpdateJudgeNameTb";
             this.UpdateJudgeNameTb.Size = new System.Drawing.Size(148, 20);
             this.UpdateJudgeNameTb.TabIndex = 15;
+            this.InputToolTip.SetToolTip(this.UpdateJudgeNameTb, "Allowed characters: \"A-Z \',.-\"");
+            this.UpdateJudgeNameTb.Click += new System.EventHandler(this.UpdateJudgeNameTb_Click);
             // 
             // EditJudgeNationalityLabel
             // 
@@ -275,11 +288,16 @@
             this.JudgesDataGridView.TabIndex = 22;
             this.JudgesDataGridView.SelectionChanged += new System.EventHandler(this.JudgesDataGridView_SelectionChanged);
             // 
+            // InputErrorProvider
+            // 
+            this.InputErrorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.InputErrorProvider.ContainerControl = this;
+            // 
             // AddEditJudge
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(393, 478);
+            this.ClientSize = new System.Drawing.Size(388, 468);
             this.Controls.Add(this.JudgesDataGridView);
             this.Controls.Add(this.tabControlAddEdit);
             this.MaximizeBox = false;
@@ -292,6 +310,7 @@
             this.tabPageAddJudge.ResumeLayout(false);
             this.tabPageAddJudge.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.JudgesDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.InputErrorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -319,5 +338,7 @@
         private System.Windows.Forms.DataGridView JudgesDataGridView;
         private System.Windows.Forms.Button UpdateJudgeClosebtn;
         private System.Windows.Forms.Button UpdateJudgeRemoveBtn;
+        private System.Windows.Forms.ErrorProvider InputErrorProvider;
+        private System.Windows.Forms.ToolTip InputToolTip;
     }
 }

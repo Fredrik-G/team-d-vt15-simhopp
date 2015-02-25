@@ -99,12 +99,12 @@ namespace SimhoppGUI
 
                 var row = cell.OwningRow;
 
-                if (CheckInput.CheckCorrectPersonInput(UpdateDiverNameTb, UpdateDiverNationalityTb, UpdateDiverSSNTb))
-                {
-                    row.Cells["Name"].Value = UpdateDiverNameTb.Text;
-                    row.Cells["Nationality"].Value = UpdateDiverNationalityTb.Text;
-                    row.Cells["SSN"].Value = UpdateDiverSSNTb.Text;
-                }
+                //if (CheckInput.CheckCorrectPersonInput(UpdateDiverNameTb, UpdateDiverNationalityTb, UpdateDiverSSNTb))
+                //{
+                //    row.Cells["Name"].Value = UpdateDiverNameTb.Text;
+                //    row.Cells["Nationality"].Value = UpdateDiverNationalityTb.Text;
+                //    row.Cells["SSN"].Value = UpdateDiverSSNTb.Text;
+                //}
             }
             catch (ArgumentNullException nullException)
             {
@@ -164,10 +164,10 @@ namespace SimhoppGUI
         {
             try
             {
-                if (CheckInput.CheckCorrectPersonInput(AddDiverNameTb, AddDiverNationaltyTb, AddDiverSSNTb))
-                {
-                    eventAddDiverToList(AddDiverNameTb.Text, AddDiverNationaltyTb.Text, AddDiverSSNTb.Text);
-                }
+                //if (CheckInput.CheckCorrectPersonInput(AddDiverNameTb, AddDiverNationaltyTb, AddDiverSSNTb))
+                //{
+                //    eventAddDiverToList(AddDiverNameTb.Text, AddDiverNationaltyTb.Text, AddDiverSSNTb.Text);
+                //}
             }
             catch (Exception exception)
             {

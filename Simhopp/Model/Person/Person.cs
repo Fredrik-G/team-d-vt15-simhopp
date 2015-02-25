@@ -149,8 +149,5 @@ namespace Simhopp.Model
         }
         #endregion
     }
-
-
-
 }
 

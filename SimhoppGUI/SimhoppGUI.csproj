@@ -81,6 +81,12 @@
     </Compile>
     <Compile Include="CheckInput.cs" />
     <Compile Include="DimIt.cs" />
+    <Compile Include="EditContest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditContest.Designer.cs">
+      <DependentUpon>EditContest.cs</DependentUpon>
+    </Compile>
     <Compile Include="EditViewContest.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -124,6 +130,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddEditJudge.resx">
       <DependentUpon>AddEditJudge.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditContest.resx">
+      <DependentUpon>EditContest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditViewContest.resx">
       <DependentUpon>EditViewContest.cs</DependentUpon>
