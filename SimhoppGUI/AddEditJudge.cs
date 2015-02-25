@@ -70,7 +70,7 @@ namespace SimhoppGUI
             {
                 JudgesDataGridView.DataSource = eventGetJudgesList();
                 JudgesDataGridView.ReadOnly = true;
-                JudgesDataGridView.Columns["Id"].Visible = false;                
+                JudgesDataGridView.Columns["Id"].Visible = false;
             }
         }
 
@@ -209,7 +209,9 @@ namespace SimhoppGUI
             try
             {
                 eventRemoveJudgeFromList(UpdateSSN);
+                log.Info("Removed judge from list (" + UpdateName + ", " + UpdateNationality + ", " + UpdateSSN + ")");
             }
+
             //Occurs if there is no judges to remove.
             catch (NullReferenceException)
             {
@@ -223,9 +225,7 @@ namespace SimhoppGUI
                 UpdateName = "";
                 UpdateNationality = "";
                 UpdateSSN = "";
-            }
-
-            log.Info("Removed judge from list (" + UpdateName + ", " + UpdateNationality + ", " + UpdateSSN + ")");
+            }         
         }
 
         /// <summary>

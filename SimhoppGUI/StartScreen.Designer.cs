@@ -107,6 +107,8 @@
             this.Controls.Add(this.StartScreenEditViewContestBtn);
             this.Controls.Add(this.StartScreenStartContestBtn);
             this.Controls.Add(this.StartScreenNewContesttBtn);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "StartScreen";
             this.Text = "StartScreen";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.StartScreen_FormClosing);
