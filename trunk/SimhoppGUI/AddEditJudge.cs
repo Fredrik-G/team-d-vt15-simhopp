@@ -16,6 +16,8 @@ namespace SimhoppGUI
         private DelegateAddJudgeToList eventAddJudgeToList;
         private DelegateRemoveJudgeFromList eventRemoveJudgeFromList;
         private DelegateUpdateJudge eventUpdateJudge;
+
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         #endregion
 
         #region Properties
@@ -125,15 +127,19 @@ namespace SimhoppGUI
                 {
                     eventAddJudgeToList(AddName, AddNationality, AddSSN);
                     InputErrorProvider.Clear();
+
+                    log.Info("Added judge to list (" + AddName + ", " + AddNationality + ", " + AddSSN + ")");
                 }
             }
             catch (DuplicateNameException)
             {//judge already exists
                 InputErrorProvider.SetError(AddJudgeSSNTb, "Error: Judge already exists");
+                log.Debug("Attempted to add a judge which was already in list.");
             }
             catch (Exception exception)
             {
                 MsgBox.CreateErrorBox(exception.ToString(), MethodBase.GetCurrentMethod().Name);
+                log.Warn("Exception when adding a new judge", exception);
             }
         }
 
@@ -167,23 +173,29 @@ namespace SimhoppGUI
                     JudgesDataGridView.Refresh();
 
                     InputErrorProvider.Clear();
+
+                    log.Info("Updated judge (" + UpdateName + ", " + UpdateNationality + ", " + UpdateSSN + ")");
                 }
             }
             catch (DuplicateNameException)
             {//judge med det ssn finns redan
                 InputErrorProvider.SetError(UpdateJudgeSSNTb, "Error: Judge ssn already in use");
+                log.Debug("Attempted to add a judge which was already in list.");
             }
             catch (ArgumentNullException nullException)
             {
                 MsgBox.CreateErrorBox(nullException.ToString(), MethodBase.GetCurrentMethod().Name);
+                log.Warn("Argument null exception when trying to select judge cells", nullException);
             }
             catch (ArgumentOutOfRangeException outOfRangeException)
             {
                 MsgBox.CreateErrorBox(outOfRangeException.ToString(), MethodBase.GetCurrentMethod().Name);
+                log.Warn("Argument out of range exception when updating a judge", outOfRangeException);
             }
             catch (Exception exception)
             {
                 MsgBox.CreateErrorBox(exception.ToString(), MethodBase.GetCurrentMethod().Name);
+                log.Warn("Exception when updating a judge", exception);
             }
         }
 
@@ -194,8 +206,17 @@ namespace SimhoppGUI
         /// <param name="e"></param>
         private void UpdateJudgeRemoveBtn_Click(object sender, EventArgs e)
         {
-            eventRemoveJudgeFromList(UpdateSSN);
-
+            try
+            {
+                eventRemoveJudgeFromList(UpdateSSN);
+            }
+            //Occurs if there is no judges to remove.
+            catch (NullReferenceException)
+            {
+                //do nothing? warn user?
+                InputErrorProvider.SetError(UpdateJudgeRemoveBtn, "Error: No judge to remove.");
+            }
+                      
             //Resets the textboxes if list is empty.
             if (JudgesDataGridView.Rows.Count == 0)
             {
@@ -203,6 +224,8 @@ namespace SimhoppGUI
                 UpdateNationality = "";
                 UpdateSSN = "";
             }
+
+            log.Info("Removed judge from list (" + UpdateName + ", " + UpdateNationality + ", " + UpdateSSN + ")");
         }
 
         /// <summary>
@@ -213,6 +236,7 @@ namespace SimhoppGUI
         /// <param name="e"></param>
         private void tabControlAddEdit_SelectedIndexChanged(object sender, EventArgs e)
         {
+            InputErrorProvider.Clear();
             JudgesDataGridView_SelectionChanged(null, null);
         }
 

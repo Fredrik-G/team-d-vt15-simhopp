@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
+using log4net;
 using Simhopp;
 using Simhopp.Model;
 
@@ -9,6 +10,13 @@ namespace SimhoppGUI
 {
     public partial class EditContest : Form
     {
+        #region Data
+
+        private static readonly ILog log = LogManager.GetLogger
+            (MethodBase.GetCurrentMethod().DeclaringType);
+
+        #endregion
+
         #region Properties
         public string ContestName
         {
@@ -53,14 +61,17 @@ namespace SimhoppGUI
             catch (ArgumentOutOfRangeException outOfRangeException)
             {
                 MsgBox.CreateErrorBox(outOfRangeException.ToString(), MethodBase.GetCurrentMethod().Name);
+                log.Warn("Argument out of range exception when attempting to edit a contest", outOfRangeException);
             }
             catch (InvalidOperationException invalidOperationException)
             {
                 MsgBox.CreateErrorBox(invalidOperationException.ToString(), MethodBase.GetCurrentMethod().Name);
+                log.Warn("Invalid operation exception when attempting to edit a contest", invalidOperationException);
             }
             catch (Exception exception)
             {
                 MsgBox.CreateErrorBox(exception.ToString(), MethodBase.GetCurrentMethod().Name);
+                log.Warn("Exception when attempting to edit a contest", exception);
             }
         }
         #endregion
@@ -101,24 +112,26 @@ namespace SimhoppGUI
                     EditViewContestEditContestNameTb,
                     EditViewContestEditContestPlaceTb) && correctStartDate && correctEndDate)
                 {
-                    //event update 
 
+                    //event update 
                 }
             }
 
             catch (ArgumentNullException nullException)
             {
                 MsgBox.CreateErrorBox(nullException.ToString(), MethodBase.GetCurrentMethod().Name);
+                log.Warn("Argument null exception when attempting to update a contest", nullException);
             }
             catch (ArgumentOutOfRangeException outOfRangeException)
             {
                 MsgBox.CreateErrorBox(outOfRangeException.ToString(), MethodBase.GetCurrentMethod().Name);
+                log.Warn("Out of range exception when attempting to update a contest", outOfRangeException);
             }
             catch (Exception exception)
             {
                 MsgBox.CreateErrorBox(exception.ToString(), MethodBase.GetCurrentMethod().Name);
+                log.Warn("Exception when attempting to update a contest", exception);
             }
-
         }
 
         #endregion

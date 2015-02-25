@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using Simhopp.Presenter;
 using Simhopp.Model;
 
+[assembly: log4net.Config.XmlConfigurator(Watch = true)]
 
 namespace SimhoppGUI
 {

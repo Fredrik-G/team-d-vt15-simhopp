@@ -19,6 +19,8 @@ namespace SimhoppGUI
         private DelegateAddDiverToContest eventAddDiverToContest;
         private DelegateRemoveJudgeFromContest eventRemoveJudgeFromContest;
         private DelegateRemoveDiverFromContest eventRemoveDiverFromContest;
+
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         #endregion
 
         #region Constructor
@@ -67,9 +69,10 @@ namespace SimhoppGUI
                 GlobalJudgesDataGridView.Columns["Id"].Visible = false;
                 GlobalDiversDataGridView.Columns["Id"].Visible = false;
             }
-            catch (NullReferenceException)
+            catch (NullReferenceException nullReferenceException)
             {
                 //gör inget, kommer hit om "Id" inte finns.
+                log.Warn("Null reference exception when trying to start a contest", nullReferenceException);
             }
         }
         #endregion
@@ -106,38 +109,44 @@ namespace SimhoppGUI
                         eventGetDiversInContest(Convert.ToInt16(row.Cells["Id"].Value));
                     CurrentDiversDataGridView.Columns["Id"].Visible = false;
                 }
-
             }
 
-            catch (NullReferenceException)
+            catch (NullReferenceException nullReferenceException)
             {
                 //do nothing
+                log.Warn("Null reference exception when trying to show judges/divers in a contest", nullReferenceException);
             }
 
             catch (OverflowException overflowException)
             {
                 MsgBox.CreateErrorBox(overflowException.ToString(), MethodBase.GetCurrentMethod().Name);
+                log.Error("Overflow exception when trying to show judges/divers in a contest", overflowException);
             }
             catch (InvalidCastException invalidCastException)
             {
                 MsgBox.CreateErrorBox(invalidCastException.ToString(), MethodBase.GetCurrentMethod().Name);
+                log.Warn("Invalid cast exception when trying to show judges/divers in a contest", invalidCastException);
             }
             catch (FormatException formatException)
             {
                 MsgBox.CreateErrorBox(formatException.ToString(), MethodBase.GetCurrentMethod().Name);
+                log.Warn("Format exception when trying to show judges/divers in a contest", formatException);
             }
 
             catch (ArgumentNullException nullException)
             {
                 MsgBox.CreateErrorBox(nullException.ToString(), MethodBase.GetCurrentMethod().Name);
+                log.Warn("Null argument exception when trying to show judges/divers in a contest", nullException);
             }
             catch (ArgumentOutOfRangeException outOfRangeException)
             {
                 MsgBox.CreateErrorBox(outOfRangeException.ToString(), MethodBase.GetCurrentMethod().Name);
+                log.Warn("Out of range exception when trying to show judges/divers in a contest", outOfRangeException);
             }
             catch (Exception exception)
             {
                 MsgBox.CreateErrorBox(exception.ToString(), MethodBase.GetCurrentMethod().Name);
+                log.Error("Overflow exception when trying to show judges/divers in a contest", exception);
             }
         }
 

@@ -9,12 +9,18 @@ namespace SimhoppGUI
 {
     public partial class StartScreen : Form, IStartScreen
     {
+        #region Data
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        #endregion
+
         #region Constructor
 
         public StartScreen()
         {
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             InitializeComponent();
+
+            log.Info("New simhopp application started");
         }
 
         #endregion
@@ -67,6 +73,8 @@ namespace SimhoppGUI
                         var endDate = CreateDateString(newContest.NewContestEndDateDTP);
 
                         EventCreateContest(newContest.City, newContest.ContestName, startDate, endDate);
+                        log.Info("Created new contest(" + newContest.City +", " +
+                            newContest.ContestName + ", " + startDate + ", " + endDate + ").");
                     }
 
                 }
@@ -75,22 +83,24 @@ namespace SimhoppGUI
             catch (ArgumentNullException nullException)
             {
                 MsgBox.CreateErrorBox(nullException.ToString(), MethodBase.GetCurrentMethod().Name);
+                log.Warn("Null exception when creating a new contest", nullException);
             }
+            //Occurs if contest data is invalid.
             catch (InvalidOperationException invalidOperationException)
             {
                 MsgBox.CreateErrorBox(invalidOperationException.ToString(), MethodBase.GetCurrentMethod().Name);
+                log.Warn("Invalid operation when creating a new contest", invalidOperationException);
             }
             catch (Exception exception)
             {
                 MsgBox.CreateErrorBox(exception.ToString(), MethodBase.GetCurrentMethod().Name);
+                log.Warn("Exception when creating a new contest", exception);
             }
         }
 
         private void StartScreenStartContestBtn_Click(object sender, EventArgs e)
         {
             //Dims the background form and makes it non-interactive.
-            EventReadFromFile("judge.txt");
-            EventReadFromFile("diver.txt");
             using (new DimIt())
             using (var startContest = new StartContest(
                 EventGetContestsList,
@@ -166,6 +176,16 @@ namespace SimhoppGUI
             }
         }
 
+        /// <summary>
+        /// Occurs when the form is closing.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void StartScreen_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            log.Info("Simhopp application closing down");
+        }
+
         #endregion
 
         #region Simhopp delegates
@@ -195,6 +215,8 @@ namespace SimhoppGUI
         public event DelegateRemoveDiverFromContest EventRemoveDiverFromContest = null;
 
         public event DelegateUpdateJudge EventUpdateJudge = null;
+
+
 
         //public event DelegateAddParticipant EventAddParticipant = null;
         //public event DelegateAddJudge EventAddJudge = null;
