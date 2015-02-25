@@ -69,6 +69,11 @@ namespace Simhopp.Model
         {
             return jumpResults;
         }
+
+        public int GetDiverId()
+        {
+            return diver.Id;
+        }
         #endregion
 
         #region Methods
