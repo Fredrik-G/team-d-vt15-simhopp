@@ -137,14 +137,27 @@ namespace Simhopp.Model
             {
                 try
                 {
-                    string sql = "SELECT COUNT(*) FROM " + tableName + "";
+                    //Checks if the table exists in the database. 
+                    string sql = "SELECT count(*) FROM sqlite_master WHERE type='table' AND name='" + tableName + "'";
                     SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
-                    var numberOfEntries = Convert.ToInt32(command.ExecuteScalar());
-                    if (numberOfEntries == 0)
+                    var doesTableExist = Convert.ToInt32(command.ExecuteScalar());
+
+                    //If table exists, check if it is empty or not. 
+                    if (doesTableExist == 1)
                     {
-                        return true;
+                        sql = "SELECT COUNT(*) FROM " + tableName + "";
+                        command = new SQLiteCommand(sql, dbConnection);
+                        var numberOfEntries = Convert.ToInt32(command.ExecuteScalar());
+                        if (numberOfEntries == 0)
+                        {
+                            return true;
+                        }
+                        return false;
                     }
-                    return false;
+                    else
+                    {
+                        MsgBox.CreateErrorBox(tableName + "does not exist in the database.", MethodBase.GetCurrentMethod().Name);
+                    }
                 }
                 catch (SQLiteException sqliteEx)
                 {
