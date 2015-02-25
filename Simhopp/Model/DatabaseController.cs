@@ -8,7 +8,6 @@ using System.Windows;
 using System.Data.SQLite;
 using System.Globalization;
 using System.Reflection;
-using System.Windows.Forms;
 using Simhopp;
 
 namespace Simhopp.Model
