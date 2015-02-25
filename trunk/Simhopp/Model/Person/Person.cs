@@ -39,6 +39,10 @@ namespace Simhopp.Model
             {
                 return this.id;
             }
+            set
+            {
+                this.id = value;
+            }
         }
 
         /// <summary>
