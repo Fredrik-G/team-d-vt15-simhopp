@@ -56,6 +56,11 @@ namespace Simhopp.Model
         {
             jumpResults[jumpNo].TrickName = name;
         }
+
+        public void SetDiverId(int id)
+        {
+            diver.Id = id;
+        }
         #endregion
 
         #region Getters
