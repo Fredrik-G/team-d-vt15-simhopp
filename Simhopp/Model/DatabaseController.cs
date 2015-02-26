@@ -654,9 +654,8 @@ namespace Simhopp.Model
 
                     int lastInsertedContestId = GetLastId();
 
-                    List<Judge> judgeList = c.GetJudgesList();
-
                     //Add all new judges to the database and update their id.
+                    List<Judge> judgeList = c.GetJudgesList();
                     foreach (var judges in c.GetJudgesList())
                     {
                         if (judges.Id == -1)
@@ -666,9 +665,27 @@ namespace Simhopp.Model
                         }
                     }
 
-                    foreach (var participant in c.GetParticipants())
+
+                    foreach (var participant in c.GetLiveResultList())
                     {
-                        AddJumpResultToDatabase(participant, lastInsertedContestId);
+                        //Add participant to database if not already initialized and update divers id.
+                        if (participant.GetDiverId() == -1)
+                        {
+                            AddDiverToDatabase(participant.GetDiver());
+                            participant.SetDiverId(GetLastId());
+                        }
+
+                        foreach (var jumpResult in participant.GetJumpResults())
+                        {
+                            //Add Jump to database.
+                            AddJumpToDatabase(jumpResult.SumJudgePoints, participant.GetDiverId(), lastInsertedContestId, GetTrickIdByName(jumpResult.TrickName));
+                            int LatestJumpId = GetLastId();
+                            for (int i = 0; i < judgeList.Count; i++)
+                            {
+                                //Add evaluation to database.
+                                AddEvaluationToDatabase(LatestJumpId, judgeList[i].Id, jumpResult.GetJudgePoint(i));
+                            }
+                        }
                     }
                 }
 
