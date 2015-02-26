@@ -150,6 +150,11 @@ namespace Simhopp.Model
             return participantsList.Select(participant => participant.GetDiver()).ToList();
         }
 
+        public List<Participant> GetLiveResultList()
+        {
+            return liveResultList;
+        }
+
         #endregion
 
         #region Methods
