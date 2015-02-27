@@ -27,7 +27,7 @@ namespace Simhopp.Model
             {
                 dbConnection = new SQLiteConnection("Data Source=C:/Users/Anders/Database/simhopp.db; Version=3; FailIfMissing=True");
             }
-
+            #region Exceptions
             catch (SQLiteException sqliteEx)
             {
                 MsgBox.CreateErrorBox("Could not connect to the database.\n" + sqliteEx.GetType() + "\n" + sqliteEx, MethodBase.GetCurrentMethod().Name);
@@ -39,7 +39,7 @@ namespace Simhopp.Model
                 MsgBox.CreateErrorBox("Could not connect to the database.\n" + e.GetType() + "\n" + e, MethodBase.GetCurrentMethod().Name);
                 dbConnection = null;
             }
-
+            #endregion
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace Simhopp.Model
             {
                 dbConnection = new SQLiteConnection("Data Source='" + path + "'; Version=3; FailIfMissing=True");
             }
-
+            #region Exceptions
             catch (SQLiteException sqliteEx)
             {
                 MsgBox.CreateErrorBox("Could not connect to the database.\n" + sqliteEx.GetType() + "\n" + sqliteEx, MethodBase.GetCurrentMethod().Name);
@@ -64,6 +64,7 @@ namespace Simhopp.Model
                 MsgBox.CreateErrorBox("Could not connect to the database.\n" + e.GetType() + "\n" + e, MethodBase.GetCurrentMethod().Name);
                 dbConnection = null;
             }
+            #endregion
         }
         #endregion
 
@@ -78,6 +79,7 @@ namespace Simhopp.Model
                 dbConnection.Open();
             }
 
+            #region Exceptions
             catch (SQLiteException sqliteEx)
             {
                 MsgBox.CreateErrorBox("Could not connect to the database.\n" + sqliteEx.GetType() + "\n" + sqliteEx, MethodBase.GetCurrentMethod().Name);
@@ -89,38 +91,40 @@ namespace Simhopp.Model
                 MsgBox.CreateErrorBox("Could not connect to the database.\n" + e.GetType() + "\n" + e, MethodBase.GetCurrentMethod().Name);
                 dbConnection = null;
             }
+            #endregion
         }
         
 
         /// <summary>
         /// Closes the connection to the database.
         /// </summary>
-        public void CloseConnectionToDatabase() 
+        public void CloseConnectionToDatabase()
         {
             if (dbConnection == null)
             {
                 MsgBox.CreateErrorBox("The connection to the database has not been initialized.", MethodBase.GetCurrentMethod().Name);
+                return;
             }
-            else
+            try
             {
-                try
-                {
-                    dbConnection.Close();
-                }
-
-                catch (SQLiteException sqliteEx)
-                {
-                    MsgBox.CreateErrorBox("Could not close connection to the database.\n" + sqliteEx.GetType() + "\n" + sqliteEx, MethodBase.GetCurrentMethod().Name);
-                    dbConnection = null;
-                }
-
-                catch (Exception e)
-                {
-                    MsgBox.CreateErrorBox("Could not close connection to the database.\n" + e.GetType() + "\n" + e, MethodBase.GetCurrentMethod().Name);
-                    dbConnection = null;
-                }
+                dbConnection.Close();
             }
+            #region Exceptions
+
+            catch (SQLiteException sqliteEx)
+            {
+                MsgBox.CreateErrorBox("Could not close connection to the database.\n" + sqliteEx.GetType() + "\n" + sqliteEx, MethodBase.GetCurrentMethod().Name);
+                dbConnection = null;
+            }
+
+            catch (Exception e)
+            {
+                MsgBox.CreateErrorBox("Could not close connection to the database.\n" + e.GetType() + "\n" + e, MethodBase.GetCurrentMethod().Name);
+                dbConnection = null;
+            }
+            #endregion
         }
+
         #endregion
 
         #region Methods
@@ -152,11 +156,10 @@ namespace Simhopp.Model
                         var numberOfEntries = Convert.ToInt32(command.ExecuteScalar());
                         return numberOfEntries == 0;
                     }
-                    else
-                    {
-                        MsgBox.CreateErrorBox(tableName + "does not exist in the database.", MethodBase.GetCurrentMethod().Name);
-                    }
+                    MsgBox.CreateErrorBox(tableName + "does not exist in the database.", MethodBase.GetCurrentMethod().Name);
                 }
+                #region Exceptions
+
                 catch (SQLiteException sqliteEx)
                 {
                     MsgBox.CreateErrorBox("Could not find out if " + tableName + " is empty or not.\n" + sqliteEx.GetType() + "\n" + sqliteEx, MethodBase.GetCurrentMethod().Name);
@@ -181,6 +184,7 @@ namespace Simhopp.Model
                 {
                     MsgBox.CreateErrorBox("Could not find out if " + tableName + " is empty or not.\n" + e.GetType() + "\n" + e, MethodBase.GetCurrentMethod().Name);
                 }
+                #endregion
                 return false;
             }
             return false;
@@ -192,34 +196,36 @@ namespace Simhopp.Model
         /// <param name="tableName">Table to be cleared.</param>
         public void ClearDatabase(string tableName)
         {
-                    if (dbConnection == null)
+            if (dbConnection == null)
                     {
                         NoConnectionErrorMessage();
+                        return;
                     }
-                    else
-                    {
-                        try
-                        {
-                            string sql = "DELETE FROM " + tableName + " WHERE ID != 'null'";
-                            SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
-                            command.ExecuteNonQuery();
-                        }
+            try
+            {
+                string sql = "DELETE FROM " + tableName + " WHERE ID != 'null'";
+                SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
+                command.ExecuteNonQuery();
+            }
+            #region Exceptions
 
-                        catch (SQLiteException sqliteEx)
-                        {
-                            MsgBox.CreateErrorBox("Table " + tableName + " could not be cleared.\n" + sqliteEx.GetType() + "\n" + sqliteEx, MethodBase.GetCurrentMethod().Name);
-                            dbConnection = null;
-                        }
+            catch (SQLiteException sqliteEx)
+            {
+                MsgBox.CreateErrorBox("Table " + tableName + " could not be cleared.\n" + sqliteEx.GetType() + "\n" + sqliteEx, MethodBase.GetCurrentMethod().Name);
+                dbConnection = null;
+            }
 
-                        catch (Exception e)
-                        {
-                            MsgBox.CreateErrorBox("Table " + tableName + " could not be cleared.\n" + e.GetType() + "\n" + e, MethodBase.GetCurrentMethod().Name);
-                            dbConnection = null;
-                        }
-
-                    }
+            catch (Exception e)
+            {
+                MsgBox.CreateErrorBox("Table " + tableName + " could not be cleared.\n" + e.GetType() + "\n" + e, MethodBase.GetCurrentMethod().Name);
+                dbConnection = null;
+            }
+            #endregion
         }
 
+        /// <summary>
+        /// Sends a error to the MsgBox function.
+        /// </summary>
         public void NoConnectionErrorMessage()
         {
             MsgBox.CreateErrorBox("Connection to a database is missing.", MethodBase.GetCurrentMethod().Name);
@@ -243,6 +249,7 @@ namespace Simhopp.Model
                 int contestId = Convert.ToInt32(command.ExecuteScalar());
                 return contestId;
             }
+            #region Exceptions
 
             catch (SQLiteException sqliteEx)
             {
@@ -255,6 +262,7 @@ namespace Simhopp.Model
                 MsgBox.CreateErrorBox("Could not add following Judge to database: \n" + e, MethodBase.GetCurrentMethod().Name);
                 throw new Exception("Could not get last insert row id." + e);
             }
+            #endregion
         }
 
         #endregion
@@ -280,6 +288,7 @@ namespace Simhopp.Model
                     command.ExecuteNonQuery();
                 }
             }
+            #region Exceptions
 
             catch (SQLiteException sqliteEx)
             {
@@ -290,6 +299,7 @@ namespace Simhopp.Model
             {
                 MsgBox.CreateErrorBox("Could not add the following Diver to database: \n" + d.Name + ", " + d.Nationality + ", " + d.SSN + "\nExeption: " + e, MethodBase.GetCurrentMethod().Name);
             }
+            #endregion
         }
 
         /// <summary>
@@ -301,27 +311,26 @@ namespace Simhopp.Model
             if (dbConnection == null)
             {
                 NoConnectionErrorMessage();
+                return;
             }
-            else
+            try
             {
-                try
-                {
-                    string sql = "DELETE FROM Diver where SSN ='" + d.SSN + "'";
-                    SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
-                    command.ExecuteNonQuery();
-                }
-
-                catch (SQLiteException sqliteEx)
-                {
-                    MsgBox.CreateErrorBox("Could not delete the following diver from database: \n" + d.Name + ", " + d.Nationality + ", " + d.SSN + "\nExeption: " + sqliteEx, MethodBase.GetCurrentMethod().Name);
-                }
-
-                catch (Exception e)
-                {
-                    MsgBox.CreateErrorBox("Could not delete the following diver from database: \n" + d.Name + ", " + d.Nationality + ", " + d.SSN + "\nExeption: " + e, MethodBase.GetCurrentMethod().Name);
-                }
-                
+                string sql = "DELETE FROM Diver where SSN ='" + d.SSN + "'";
+                SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
+                command.ExecuteNonQuery();
             }
+            #region Exceptions
+
+            catch (SQLiteException sqliteEx)
+            {
+                MsgBox.CreateErrorBox("Could not delete the following diver from database: \n" + d.Name + ", " + d.Nationality + ", " + d.SSN + "\nExeption: " + sqliteEx, MethodBase.GetCurrentMethod().Name);
+            }
+
+            catch (Exception e)
+            {
+                MsgBox.CreateErrorBox("Could not delete the following diver from database: \n" + d.Name + ", " + d.Nationality + ", " + d.SSN + "\nExeption: " + e, MethodBase.GetCurrentMethod().Name);
+            }
+            #endregion
         }
 
         /// <summary>
@@ -333,31 +342,31 @@ namespace Simhopp.Model
             if (dbConnection == null)
             {
                 NoConnectionErrorMessage();
+                return;
             }
-            else
+            try
             {
-                try
+                string sql = "SELECT * FROM Diver";
+                SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
+                SQLiteDataReader reader = command.ExecuteReader();
+                while (reader.Read())
                 {
-                    string sql = "SELECT * FROM Diver";
-                    SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
-                    SQLiteDataReader reader = command.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        Console.WriteLine("{0,-8}{1,-32}{2,-15}{3,-16}", ("ID: " + reader["ID"]),
-                            ("Name: " + reader["Name"]), ("NAT: " + reader["Nationality"]), ("SSN: " + reader["SSN"]));
-                    }
-                }
-
-                catch (SQLiteException sqliteEx)
-                {
-                    Console.WriteLine("Could not print the Diver table.\n" + sqliteEx);
-                }
-
-                catch (Exception e)
-                {
-                    Console.WriteLine("Could not print the Diver table.\n" + e);
+                    Console.WriteLine("{0,-8}{1,-32}{2,-15}{3,-16}", ("ID: " + reader["ID"]),
+                        ("Name: " + reader["Name"]), ("NAT: " + reader["Nationality"]), ("SSN: " + reader["SSN"]));
                 }
             }
+            #region Exceptions
+
+            catch (SQLiteException sqliteEx)
+            {
+                Console.WriteLine("Could not print the Diver table.\n" + sqliteEx);
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine("Could not print the Diver table.\n" + e);
+            }
+            #endregion
         }
 
         /// <summary>
@@ -369,27 +378,26 @@ namespace Simhopp.Model
             if (dbConnection == null)
             {
                 NoConnectionErrorMessage();
+                return;
             }
-            else
+            try
             {
-                try
-                {
-                    string sql = "UPDATE Diver SET Name = '" + d.Name + "', SSN = '" + d.SSN + "', Nationality = '" + d.Nationality + "' WHERE ID = '" + d.Id + "'";
-                    SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
-                    command.ExecuteNonQuery();
-                }
-
-                catch (SQLiteException sqliteEx)
-                {
-                    MsgBox.CreateErrorBox("Could not update the following Diver in database: \n" + d.Name + ", " + d.Nationality + ", " + d.SSN + "\nExeption: " + sqliteEx, MethodBase.GetCurrentMethod().Name);
-                }
-
-                catch (Exception e)
-                {
-                    MsgBox.CreateErrorBox("Could not update the following Diver in database: \n" + d.Name + ", " + d.Nationality + ", " + d.SSN + "\nExeption: " + e, MethodBase.GetCurrentMethod().Name);
-                }
-
+                string sql = "UPDATE Diver SET Name = '" + d.Name + "', SSN = '" + d.SSN + "', Nationality = '" + d.Nationality + "' WHERE ID = '" + d.Id + "'";
+                SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
+                command.ExecuteNonQuery();
             }
+            #region Exceptions
+
+            catch (SQLiteException sqliteEx)
+            {
+                MsgBox.CreateErrorBox("Could not update the following Diver in database: \n" + d.Name + ", " + d.Nationality + ", " + d.SSN + "\nExeption: " + sqliteEx, MethodBase.GetCurrentMethod().Name);
+            }
+
+            catch (Exception e)
+            {
+                MsgBox.CreateErrorBox("Could not update the following Diver in database: \n" + d.Name + ", " + d.Nationality + ", " + d.SSN + "\nExeption: " + e, MethodBase.GetCurrentMethod().Name);
+            }
+            #endregion
         }
 
         /// <summary>
@@ -417,6 +425,7 @@ namespace Simhopp.Model
                     }
                     return dl;
                 }
+                #region Exceptions
 
                 catch (SQLiteException sqliteEx)
                 {
@@ -442,10 +451,16 @@ namespace Simhopp.Model
                 {
                     MsgBox.CreateErrorBox("Could not get Divers from database.\n" + e, MethodBase.GetCurrentMethod().Name);
                 }
+                #endregion
             }
             return null;
         }
 
+        /// <summary>
+        /// Returns a diver id from database based on divers ssn.
+        /// </summary>
+        /// <param name="ssn">Diver ssn (social security number)</param>
+        /// <returns>diver id (int)</returns>
         public int GetDiverId(string ssn)
         {
             if (dbConnection == null)
@@ -466,6 +481,7 @@ namespace Simhopp.Model
                 }
                 return id;
             }
+            #region Exceptions
 
             catch (SQLiteException sqliteEx)
             {
@@ -491,6 +507,7 @@ namespace Simhopp.Model
             {
                 MsgBox.CreateErrorBox("Could not get Diver ID from database.\n" + e, MethodBase.GetCurrentMethod().Name);
             }
+            #endregion
             return -1; //Can't happen.
         }
 
@@ -517,6 +534,7 @@ namespace Simhopp.Model
                     command.ExecuteNonQuery();
                 }
             }
+            #region Exceptions
 
             catch (SQLiteException sqliteEx)
             {
@@ -527,6 +545,7 @@ namespace Simhopp.Model
             {
                 MsgBox.CreateErrorBox("Could not add following Judge to database: \n" + j.Name + ", " + j.Nationality + ", " + j.SSN + "\nExeption: " + e, MethodBase.GetCurrentMethod().Name);
             }
+            #endregion
         }
 
         /// <summary>
@@ -546,6 +565,7 @@ namespace Simhopp.Model
                 SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
                 command.ExecuteNonQuery();
             }
+            #region Exceptions
 
             catch (SQLiteException sqliteEx)
             {
@@ -556,6 +576,7 @@ namespace Simhopp.Model
             {
                 MsgBox.CreateErrorBox("Could not delete the following Judge from database: \n" + j.Name + ", " + j.Nationality + ", " + j.SSN + "\nExeption: " + e, MethodBase.GetCurrentMethod().Name);
             }
+            #endregion
         }
 
         /// <summary>
@@ -566,62 +587,61 @@ namespace Simhopp.Model
             if (dbConnection == null)
             {
                 NoConnectionErrorMessage();
+                return;
             }
-            else
+            try
             {
-                try
+                string sql = "SELECT * FROM Judge";
+                SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
+                SQLiteDataReader reader = command.ExecuteReader();
+                while (reader.Read())
                 {
-                    string sql = "SELECT * FROM Judge";
-                    SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
-                    SQLiteDataReader reader = command.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        Console.WriteLine("{0,-8}{1,-32}{2,-15}{3,-16}", ("ID: " + reader["ID"]), ("Name: " + reader["Name"]), ("NAT: " + reader["Nationality"]), ("SSN: " + reader["SSN"]));
-                    }
-                }
-
-                catch (SQLiteException sqliteEx)
-                {
-                    Console.WriteLine("Could not print the Judge table.\n" + sqliteEx, MethodBase.GetCurrentMethod().Name);
-                }
-
-                catch (Exception e)
-                {
-                    Console.WriteLine("Could not print the Judge table.\n" + e, MethodBase.GetCurrentMethod().Name);
+                    Console.WriteLine("{0,-8}{1,-32}{2,-15}{3,-16}", ("ID: " + reader["ID"]), ("Name: " + reader["Name"]), ("NAT: " + reader["Nationality"]), ("SSN: " + reader["SSN"]));
                 }
             }
+            #region Exceptions
+
+            catch (SQLiteException sqliteEx)
+            {
+                Console.WriteLine("Could not print the Judge table.\n" + sqliteEx, MethodBase.GetCurrentMethod().Name);
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine("Could not print the Judge table.\n" + e, MethodBase.GetCurrentMethod().Name);
+            }
+            #endregion
         }
 
         /// <summary>
         /// Updates a Judge row in the database.
         /// </summary>
-        /// <param name="j"></param>
+        /// <param name="j">Judge object.</param>
         public void UpdateJudge(Judge j)
         {
             if (dbConnection == null)
             {
                 NoConnectionErrorMessage();
+                return;
             }
-            else
+            try
             {
-                try
-                {
-                    string sql = "UPDATE Judge SET Name = '" + j.Name + "', SSN = '" + j.SSN + "', Nationality = '" + j.Nationality + "' WHERE ID = '" + j.Id + "'";
-                    SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
-                    command.ExecuteNonQuery();
-                }
-
-                catch (SQLiteException sqliteEx)
-                {
-                    MsgBox.CreateErrorBox("Could not update the following Judge in database: \n" + j.Name + ", " + j.Nationality + ", " + j.SSN + "\nExeption: " + sqliteEx, MethodBase.GetCurrentMethod().Name);
-                }
-
-                catch (Exception e)
-                {
-                    MsgBox.CreateErrorBox("Could not update the following Judge in database: \n" + j.Name + ", " + j.Nationality + ", " + j.SSN + "\nExeption: " + e, MethodBase.GetCurrentMethod().Name);
-                }
-
+                string sql = "UPDATE Judge SET Name = '" + j.Name + "', SSN = '" + j.SSN + "', Nationality = '" + j.Nationality + "' WHERE ID = '" + j.Id + "'";
+                SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
+                command.ExecuteNonQuery();
             }
+            #region Exceptions
+
+            catch (SQLiteException sqliteEx)
+            {
+                MsgBox.CreateErrorBox("Could not update the following Judge in database: \n" + j.Name + ", " + j.Nationality + ", " + j.SSN + "\nExeption: " + sqliteEx, MethodBase.GetCurrentMethod().Name);
+            }
+
+            catch (Exception e)
+            {
+                MsgBox.CreateErrorBox("Could not update the following Judge in database: \n" + j.Name + ", " + j.Nationality + ", " + j.SSN + "\nExeption: " + e, MethodBase.GetCurrentMethod().Name);
+            }
+            #endregion
         }
 
         /// <summary>
@@ -649,6 +669,7 @@ namespace Simhopp.Model
                     }
                     return jl;
                 }
+                #region Exceptions
 
                 catch (SQLiteException sqliteEx)
                 {
@@ -674,10 +695,16 @@ namespace Simhopp.Model
                 {
                     MsgBox.CreateErrorBox("Could not get Judges from database.\n" + e, MethodBase.GetCurrentMethod().Name);
                 }
+                #endregion
             }
             return null;
         }
 
+        /// <summary>
+        /// Gets a judge id from database based on the judges ssn.
+        /// </summary>
+        /// <param name="ssn">Judge ssn (social security number)</param>
+        /// <returns>Judge id int.</returns>
         public int GetJudgeId(string ssn)
         {
             if (dbConnection == null)
@@ -697,6 +724,7 @@ namespace Simhopp.Model
                 }
                 return id;
             }
+            #region Exceptions
 
             catch (SQLiteException sqliteEx)
             {
@@ -722,6 +750,7 @@ namespace Simhopp.Model
             {
                 MsgBox.CreateErrorBox("Could not get Trick ID from database.\n" + e, MethodBase.GetCurrentMethod().Name);
             }
+            #endregion
             return -1; //Can't happen.
         }
 
@@ -741,6 +770,11 @@ namespace Simhopp.Model
                 if (dbConnection == null)
                 {
                     NoConnectionErrorMessage();
+                    return;
+                }
+                if (c.IsFinished != true)
+                {
+                    MsgBox.CreateErrorBox("Contest is not finished and can not be saved to database.", MethodBase.GetCurrentMethod().Name);
                     return;
                 }
                 try
@@ -772,7 +806,7 @@ namespace Simhopp.Model
                     }
 
 
-                    foreach (var participant in c.GetLiveResultList())
+                    foreach (var participant in c.GetParticipants())
                     {
                         //Add participant to database if not already initialized and update divers id.
                         if (participant.GetDiverId() == -1)
@@ -803,7 +837,7 @@ namespace Simhopp.Model
                         }
                     }
                 }
-
+                #region Exceptions
                 catch (SQLiteException sqliteEx)
                 {
                     MsgBox.CreateErrorBox(
@@ -818,6 +852,7 @@ namespace Simhopp.Model
                         "Could not add the following Contest to database: \n" + c.Place + "', '" + c.Name + "','" +
                         c.StartDate + "','" + c.EndDate + "\nExeption: " + e, MethodBase.GetCurrentMethod().Name);
                 }
+                #endregion
             }
         }
 
@@ -834,6 +869,10 @@ namespace Simhopp.Model
             */
         }
 
+        /// <summary>
+        /// Creates a list of all the saved competitions in the database and returns that list.
+        /// </summary>
+        /// <returns>BindingList with contests.</returns>
         public BindingList<Contest> GetContestList()
         {
             if (dbConnection == null)
@@ -851,11 +890,11 @@ namespace Simhopp.Model
                     while (reader.Read())
                     {
                         Contest c = new Contest(Convert.ToInt32(reader["ID"]), Convert.ToString(reader["Place"]), Convert.ToString(reader["Name"]), Convert.ToString(reader["StartDate"]), Convert.ToString(reader["EndDate"]));
-                        //för varje contest med id == x ska det finnas ett antal hopp osv. hämta den listan från jump.
                         cl.Add(c);
                     }
                     return cl;
                 }
+                #region Exceptions
 
                 catch (SQLiteException sqliteEx)
                 {
@@ -881,11 +920,44 @@ namespace Simhopp.Model
                 {
                     MsgBox.CreateErrorBox("Could not get Contests from database.\n" + e, MethodBase.GetCurrentMethod().Name);
                 }
+                #endregion
             }
             return null;
-        } 
+        }
 
-        public Contest LoadContest
+        /// <summary>
+        /// Builds up a contest object from informations stored in database and returns it.
+        /// </summary>
+        /// <param name="contest"></param>
+        /// <returns>Contest object.</returns>
+        public Contest GetContest(Contest contest)
+        {
+            if (dbConnection == null)
+            {
+                NoConnectionErrorMessage();
+            }
+            try
+            {
+                string sql = "SELECT * FROM Jump WHERE Contest = '" + contest.Id + "'";
+                SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
+                SQLiteDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+
+                }
+
+
+                return contest;
+            }
+            #region Exceptions
+
+            catch (Exception e)
+            {
+
+            }
+            #endregion
+            return null;
+        }
         #endregion
 
         #region Trick Methods
@@ -906,6 +978,7 @@ namespace Simhopp.Model
                 SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
                 command.ExecuteNonQuery();
             }
+            #region Exceptions
 
             catch (SQLiteException sqliteEx)
             {
@@ -916,6 +989,7 @@ namespace Simhopp.Model
             {
                 MsgBox.CreateErrorBox("Could not add the following Trick to database: \n" + t.Name + ", " + t.Difficulty + "\nExeption: " + e, MethodBase.GetCurrentMethod().Name);
             }
+            #endregion
         }
 
         /// <summary>
@@ -955,6 +1029,7 @@ namespace Simhopp.Model
                     }
                     return id;
                 }
+                #region Exceptions
 
                 catch (SQLiteException sqliteEx)
                 {
@@ -980,6 +1055,7 @@ namespace Simhopp.Model
                 {
                     MsgBox.CreateErrorBox("Could not get Trick ID from database.\n" + e, MethodBase.GetCurrentMethod().Name);
                 }
+                #endregion
             }
             return -1;
         }
@@ -1011,6 +1087,7 @@ namespace Simhopp.Model
                     }
                 }
             }
+            #region Exceptions
 
             catch (SQLiteException sqliteEx)
             {
@@ -1021,6 +1098,7 @@ namespace Simhopp.Model
             {
                 MsgBox.CreateErrorBox("Could not add following Judge to database: \n" + e, MethodBase.GetCurrentMethod().Name);
             }
+            #endregion
         }
        
         public List<JumpResult> GetJumpResults() //Gör så att denna funkar!!!
@@ -1051,6 +1129,7 @@ namespace Simhopp.Model
                 SQLiteCommand command = new SQLiteCommand(sqlJump, dbConnection);
                 command.ExecuteNonQuery();
             }
+            #region Exceptions
 
             catch (SQLiteException sqliteEx)
             {
@@ -1061,6 +1140,7 @@ namespace Simhopp.Model
             {
                 MsgBox.CreateErrorBox("Could not add Jump to database: \n" + e, MethodBase.GetCurrentMethod().Name);
             }
+            #endregion
         }
         #endregion
 
@@ -1078,6 +1158,7 @@ namespace Simhopp.Model
                 SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
                 command.ExecuteNonQuery();
             }
+            #region Exceptions
 
             catch (SQLiteException sqliteEx)
             {
@@ -1088,7 +1169,7 @@ namespace Simhopp.Model
             {
                 MsgBox.CreateErrorBox("Could not add evaluation to database: \n" + e, MethodBase.GetCurrentMethod().Name);
             }
-            
+            #endregion
         }
         #endregion
 
