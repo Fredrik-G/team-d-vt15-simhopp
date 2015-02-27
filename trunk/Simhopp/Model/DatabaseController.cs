@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Text;
@@ -395,7 +396,7 @@ namespace Simhopp.Model
         /// Gets the divers from datbase, puts them in a lisa and returns it.
         /// </summary>
         /// <returns>List of Judge objects.</returns>
-        public List<Diver> GetDivers()
+        public BindingList<Diver> GetDiverList()
         {
             if (dbConnection == null)
             {
@@ -408,7 +409,7 @@ namespace Simhopp.Model
                     string sql = "SELECT * FROM Diver";
                     SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
                     SQLiteDataReader reader = command.ExecuteReader();
-                    List<Diver> dl = new List<Diver>();
+                    BindingList<Diver> dl = new BindingList<Diver>();
                     while (reader.Read())
                     {
                         Diver d = new Diver(Convert.ToInt32(reader["ID"]), Convert.ToString(reader["Name"]), Convert.ToString(reader["Nationality"]), Convert.ToString(reader["SSN"]));
@@ -450,49 +451,49 @@ namespace Simhopp.Model
             if (dbConnection == null)
             {
                 NoConnectionErrorMessage();
+                throw new Exception("No connection to database.");
             }
-            else
+
+            try
             {
-                try
+                int id = -1;
+                string sql = "SELECT ID FROM Diver WHERE SSN = '" + ssn + "'";
+                SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
+                SQLiteDataReader reader = command.ExecuteReader();
+                while (reader.Read())
                 {
-                    int id = -1;
-                    string sql = "SELECT ID FROM Diver WHERE SSN = '" + ssn + "'";
-                    SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
-                    SQLiteDataReader reader = command.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        id = Convert.ToInt32(reader["ID"]);
-                    }
-                    return id;
+                    id = Convert.ToInt32(reader["ID"]);
                 }
-
-                catch (SQLiteException sqliteEx)
-                {
-                    MsgBox.CreateErrorBox("Could not get Diver ID from database.\n" + sqliteEx, MethodBase.GetCurrentMethod().Name);
-                }
-
-                catch (FormatException formatEx)
-                {
-                    MsgBox.CreateErrorBox("Could not get Diver ID from database.\n" + formatEx.GetType() + "\n" + formatEx, MethodBase.GetCurrentMethod().Name);
-                }
-
-                catch (InvalidCastException invalidCastEx)
-                {
-                    MsgBox.CreateErrorBox("Could not get Diver ID from database.\n" + invalidCastEx.GetType() + "\n" + invalidCastEx, MethodBase.GetCurrentMethod().Name);
-                }
-
-                catch (OverflowException overflowEx)
-                {
-                    MsgBox.CreateErrorBox("Could not get Diver ID from database.\n" + overflowEx.GetType() + "\n" + overflowEx, MethodBase.GetCurrentMethod().Name);
-                }
-
-                catch (Exception e)
-                {
-                    MsgBox.CreateErrorBox("Could not get Diver ID from database.\n" + e, MethodBase.GetCurrentMethod().Name);
-                }
+                return id;
             }
-            return -1;
+
+            catch (SQLiteException sqliteEx)
+            {
+                MsgBox.CreateErrorBox("Could not get Diver ID from database.\n" + sqliteEx, MethodBase.GetCurrentMethod().Name);
+            }
+
+            catch (FormatException formatEx)
+            {
+                MsgBox.CreateErrorBox("Could not get Diver ID from database.\n" + formatEx.GetType() + "\n" + formatEx, MethodBase.GetCurrentMethod().Name);
+            }
+
+            catch (InvalidCastException invalidCastEx)
+            {
+                MsgBox.CreateErrorBox("Could not get Diver ID from database.\n" + invalidCastEx.GetType() + "\n" + invalidCastEx, MethodBase.GetCurrentMethod().Name);
+            }
+
+            catch (OverflowException overflowEx)
+            {
+                MsgBox.CreateErrorBox("Could not get Diver ID from database.\n" + overflowEx.GetType() + "\n" + overflowEx, MethodBase.GetCurrentMethod().Name);
+            }
+
+            catch (Exception e)
+            {
+                MsgBox.CreateErrorBox("Could not get Diver ID from database.\n" + e, MethodBase.GetCurrentMethod().Name);
+            }
+            return -1; //Can't happen.
         }
+
         #endregion
 
         #region Judge Methods
@@ -627,7 +628,7 @@ namespace Simhopp.Model
         /// Gets the judges from datbase, puts them in a lisa and returns it.
         /// </summary>
         /// <returns>List of Judge objects.</returns>
-        public List<Judge> GetJudges()
+        public BindingList<Judge> GetJudgeList()
         {
             if (dbConnection == null)
             {
@@ -640,7 +641,7 @@ namespace Simhopp.Model
                     string sql = "SELECT * FROM Judge";
                     SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
                     SQLiteDataReader reader = command.ExecuteReader();
-                    List<Judge> jl = new List<Judge>();
+                    BindingList<Judge> jl = new BindingList<Judge>();
                     while (reader.Read())
                     {
                         Judge j = new Judge(Convert.ToInt32(reader["ID"]), Convert.ToString(reader["Name"]), Convert.ToString(reader["Nationality"]), Convert.ToString(reader["SSN"]));
@@ -682,48 +683,46 @@ namespace Simhopp.Model
             if (dbConnection == null)
             {
                 NoConnectionErrorMessage();
+                throw new Exception("No connection to database.");
             }
-            else
+            try
             {
-                try
+                int id = -1;
+                string sql = "SELECT ID FROM Judge WHERE SSN = '" + ssn + "'";
+                SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
+                SQLiteDataReader reader = command.ExecuteReader();
+                while (reader.Read())
                 {
-                    int id = -1;
-                    string sql = "SELECT ID FROM Judge WHERE SSN = '" + ssn + "'";
-                    SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
-                    SQLiteDataReader reader = command.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        id = Convert.ToInt32(reader["ID"]);
-                    }
-                    return id;
+                    id = Convert.ToInt32(reader["ID"]);
                 }
-
-                catch (SQLiteException sqliteEx)
-                {
-                    MsgBox.CreateErrorBox("Could not get Trick ID from database.\n" + sqliteEx, MethodBase.GetCurrentMethod().Name);
-                }
-
-                catch (FormatException formatEx)
-                {
-                    MsgBox.CreateErrorBox("Could not get Trick ID from database.\n" + formatEx.GetType() + "\n" + formatEx, MethodBase.GetCurrentMethod().Name);
-                }
-
-                catch (InvalidCastException invalidCastEx)
-                {
-                    MsgBox.CreateErrorBox("Could not get Trick ID from database.\n" + invalidCastEx.GetType() + "\n" + invalidCastEx, MethodBase.GetCurrentMethod().Name);
-                }
-
-                catch (OverflowException overflowEx)
-                {
-                    MsgBox.CreateErrorBox("Could not get Trick ID from database.\n" + overflowEx.GetType() + "\n" + overflowEx, MethodBase.GetCurrentMethod().Name);
-                }
-
-                catch (Exception e)
-                {
-                    MsgBox.CreateErrorBox("Could not get Trick ID from database.\n" + e, MethodBase.GetCurrentMethod().Name);
-                }
+                return id;
             }
-            return -1;
+
+            catch (SQLiteException sqliteEx)
+            {
+                MsgBox.CreateErrorBox("Could not get Trick ID from database.\n" + sqliteEx, MethodBase.GetCurrentMethod().Name);
+            }
+
+            catch (FormatException formatEx)
+            {
+                MsgBox.CreateErrorBox("Could not get Trick ID from database.\n" + formatEx.GetType() + "\n" + formatEx, MethodBase.GetCurrentMethod().Name);
+            }
+
+            catch (InvalidCastException invalidCastEx)
+            {
+                MsgBox.CreateErrorBox("Could not get Trick ID from database.\n" + invalidCastEx.GetType() + "\n" + invalidCastEx, MethodBase.GetCurrentMethod().Name);
+            }
+
+            catch (OverflowException overflowEx)
+            {
+                MsgBox.CreateErrorBox("Could not get Trick ID from database.\n" + overflowEx.GetType() + "\n" + overflowEx, MethodBase.GetCurrentMethod().Name);
+            }
+
+            catch (Exception e)
+            {
+                MsgBox.CreateErrorBox("Could not get Trick ID from database.\n" + e, MethodBase.GetCurrentMethod().Name);
+            }
+            return -1; //Can't happen.
         }
 
         #endregion
@@ -835,7 +834,7 @@ namespace Simhopp.Model
             */
         }
 
-        public List<Contest> GetContests()
+        public BindingList<Contest> GetContestList()
         {
             if (dbConnection == null)
             {
@@ -848,11 +847,11 @@ namespace Simhopp.Model
                     string sql = "SELECT * FROM Contest";
                     SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
                     SQLiteDataReader reader = command.ExecuteReader();
-                    List<Contest> cl = new List<Contest>();
+                    BindingList<Contest> cl = new BindingList<Contest>();
                     while (reader.Read())
                     {
                         Contest c = new Contest(Convert.ToInt32(reader["ID"]), Convert.ToString(reader["Place"]), Convert.ToString(reader["Name"]), Convert.ToString(reader["StartDate"]), Convert.ToString(reader["EndDate"]));
-                        ///för varje contest med id == x ska det finnas ett antal hopp osv. hämta den listan från jump.
+                        //för varje contest med id == x ska det finnas ett antal hopp osv. hämta den listan från jump.
                         cl.Add(c);
                     }
                     return cl;
@@ -884,7 +883,9 @@ namespace Simhopp.Model
                 }
             }
             return null;
-        } //Inte färdig. Andra funktioner som måste göras först för att få den att fungera. 
+        } 
+
+        public Contest LoadContest
         #endregion
 
         #region Trick Methods
