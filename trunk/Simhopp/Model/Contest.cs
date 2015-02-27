@@ -377,10 +377,15 @@ namespace Simhopp.Model
         /// </summary>
         public void CreateHtmlResultFile()
         {
-            using (var fs = new FileStream("result.htm", FileMode.Create))
+            FileStream fileStream = null;
+            try
             {
-                using (var writer = new StreamWriter(fs, Encoding.UTF8))
+                fileStream = new FileStream("result.htm", FileMode.Create);
+
+                using (var writer = new StreamWriter(fileStream, Encoding.UTF8))
                 {
+                    fileStream = null;
+
                     writer.WriteLine("<H2>" + this.Name + "\t" + this.Place + "</H2>");
                     writer.WriteLine("<ol>");
                     var resultList = CreateResultList();
@@ -389,6 +394,13 @@ namespace Simhopp.Model
                         writer.WriteLine("<li>" + line + "</li>");
                     }
                     writer.WriteLine("</ol>");
+                }
+            }
+            finally
+            {
+                if (fileStream != null)
+                {
+                    fileStream.Dispose();
                 }
             }
         }
