@@ -1,21 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data.Entity.ModelConfiguration.Conventions;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Data.SQLite;
 using System.Globalization;
 using System.Reflection;
-using Simhopp;
 
 namespace Simhopp.Model
 {
-    public class DatabaseController
+    /// <summary>
+    /// Controlls the connection to a database and handles SQL queries.
+    /// There should not be any queries outside of this class.
+    /// </summary>
+    public class DatabaseController : IDisposable
     {
+        #region Data
+
         private SQLiteConnection dbConnection;
+
+        #endregion
 
         #region Constructors
         /// <summary>
@@ -72,7 +74,7 @@ namespace Simhopp.Model
         /// <summary>
         /// Opens the connection to the database.
         /// </summary>
-        public void ConnectToDatabase() 
+        public void ConnectToDatabase()
         {
             try
             {
@@ -93,7 +95,7 @@ namespace Simhopp.Model
             }
             #endregion
         }
-        
+
 
         /// <summary>
         /// Closes the connection to the database.
@@ -138,55 +140,52 @@ namespace Simhopp.Model
             if (dbConnection == null)
             {
                 NoConnectionErrorMessage();
-            }
-            else
-            {
-                try
-                {
-                    //Checks if the table exists in the database. 
-                    string sql = "SELECT count(*) FROM sqlite_master WHERE type='table' AND name='" + tableName + "'";
-                    SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
-                    var doesTableExist = Convert.ToInt32(command.ExecuteScalar());
-
-                    //If table exists, check if it is empty or not. 
-                    if (doesTableExist == 1)
-                    {
-                        sql = "SELECT COUNT(*) FROM " + tableName + "";
-                        command = new SQLiteCommand(sql, dbConnection);
-                        var numberOfEntries = Convert.ToInt32(command.ExecuteScalar());
-                        return numberOfEntries == 0;
-                    }
-                    MsgBox.CreateErrorBox(tableName + "does not exist in the database.", MethodBase.GetCurrentMethod().Name);
-                }
-                #region Exceptions
-
-                catch (SQLiteException sqliteEx)
-                {
-                    MsgBox.CreateErrorBox("Could not find out if " + tableName + " is empty or not.\n" + sqliteEx.GetType() + "\n" + sqliteEx, MethodBase.GetCurrentMethod().Name);
-                }
-
-                catch (FormatException formatEx)
-                {
-                    MsgBox.CreateErrorBox("Could not find out if " + tableName + " is empty or not.\n" + formatEx.GetType() + "\n" + formatEx, MethodBase.GetCurrentMethod().Name);
-                }
-
-                catch (InvalidCastException invalidCastEx)
-                {
-                    MsgBox.CreateErrorBox("Could not find out if " + tableName + " is empty or not.\n" + invalidCastEx.GetType() + "\n" + invalidCastEx, MethodBase.GetCurrentMethod().Name);
-                }
-
-                catch (OverflowException overflowEx)
-                {
-                    MsgBox.CreateErrorBox("Could not find out if " + tableName + " is empty or not.\n" + overflowEx.GetType() + "\n" + overflowEx, MethodBase.GetCurrentMethod().Name);
-                }
-
-                catch (Exception e)
-                {
-                    MsgBox.CreateErrorBox("Could not find out if " + tableName + " is empty or not.\n" + e.GetType() + "\n" + e, MethodBase.GetCurrentMethod().Name);
-                }
-                #endregion
                 return false;
             }
+            try
+            {
+                //Checks if the table exists in the database. 
+                string sql = "SELECT count(*) FROM sqlite_master WHERE type='table' AND name='" + tableName + "'";
+                SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
+                var doesTableExist = Convert.ToInt32(command.ExecuteScalar());
+
+                //If table exists, check if it is empty or not. 
+                if (doesTableExist == 1)
+                {
+                    sql = "SELECT COUNT(*) FROM " + tableName + "";
+                    command = new SQLiteCommand(sql, dbConnection);
+                    var numberOfEntries = Convert.ToInt32(command.ExecuteScalar());
+                    return numberOfEntries == 0;
+                }
+                MsgBox.CreateErrorBox(tableName + "does not exist in the database.", MethodBase.GetCurrentMethod().Name);
+            }
+            #region Exceptions
+
+            catch (SQLiteException sqliteEx)
+            {
+                MsgBox.CreateErrorBox("Could not find out if " + tableName + " is empty or not.\n" + sqliteEx.GetType() + "\n" + sqliteEx, MethodBase.GetCurrentMethod().Name);
+            }
+
+            catch (FormatException formatEx)
+            {
+                MsgBox.CreateErrorBox("Could not find out if " + tableName + " is empty or not.\n" + formatEx.GetType() + "\n" + formatEx, MethodBase.GetCurrentMethod().Name);
+            }
+
+            catch (InvalidCastException invalidCastEx)
+            {
+                MsgBox.CreateErrorBox("Could not find out if " + tableName + " is empty or not.\n" + invalidCastEx.GetType() + "\n" + invalidCastEx, MethodBase.GetCurrentMethod().Name);
+            }
+
+            catch (OverflowException overflowEx)
+            {
+                MsgBox.CreateErrorBox("Could not find out if " + tableName + " is empty or not.\n" + overflowEx.GetType() + "\n" + overflowEx, MethodBase.GetCurrentMethod().Name);
+            }
+
+            catch (Exception e)
+            {
+                MsgBox.CreateErrorBox("Could not find out if " + tableName + " is empty or not.\n" + e.GetType() + "\n" + e, MethodBase.GetCurrentMethod().Name);
+            }
+            #endregion
             return false;
         }
 
@@ -197,10 +196,10 @@ namespace Simhopp.Model
         public void ClearDatabase(string tableName)
         {
             if (dbConnection == null)
-                    {
-                        NoConnectionErrorMessage();
-                        return;
-                    }
+            {
+                NoConnectionErrorMessage();
+                return;
+            }
             try
             {
                 string sql = "DELETE FROM " + tableName + " WHERE ID != 'null'";
@@ -409,51 +408,50 @@ namespace Simhopp.Model
             if (dbConnection == null)
             {
                 NoConnectionErrorMessage();
+                return new BindingList<Diver>();
             }
-            else
+            try
             {
-                try
+                string sql = "SELECT * FROM Diver";
+                SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
+                SQLiteDataReader reader = command.ExecuteReader();
+                BindingList<Diver> dl = new BindingList<Diver>();
+                while (reader.Read())
                 {
-                    string sql = "SELECT * FROM Diver";
-                    SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
-                    SQLiteDataReader reader = command.ExecuteReader();
-                    BindingList<Diver> dl = new BindingList<Diver>();
-                    while (reader.Read())
-                    {
-                        Diver d = new Diver(Convert.ToInt32(reader["ID"]), Convert.ToString(reader["Name"]), Convert.ToString(reader["Nationality"]), Convert.ToString(reader["SSN"]));
-                        dl.Add(d);
-                    }
-                    return dl;
+                    Diver d = new Diver(Convert.ToInt32(reader["ID"]), Convert.ToString(reader["Name"]), Convert.ToString(reader["Nationality"]), Convert.ToString(reader["SSN"]));
+                    dl.Add(d);
                 }
+                return dl;
+            }
                 #region Exceptions
 
-                catch (SQLiteException sqliteEx)
-                {
-                    MsgBox.CreateErrorBox("Could not get Divers from database.\n" + sqliteEx, MethodBase.GetCurrentMethod().Name);
-                }
-
-                catch (FormatException formatEx)
-                {
-                    MsgBox.CreateErrorBox("Could not get Divers from database.\n" + formatEx.GetType() + "\n" + formatEx, MethodBase.GetCurrentMethod().Name);
-                }
-
-                catch (InvalidCastException invalidCastEx)
-                {
-                    MsgBox.CreateErrorBox("Could not get Divers from database.\n" + invalidCastEx.GetType() + "\n" + invalidCastEx, MethodBase.GetCurrentMethod().Name);
-                }
-
-                catch (OverflowException overflowEx)
-                {
-                    MsgBox.CreateErrorBox("Could not get Divers from database.\n" + overflowEx.GetType() + "\n" + overflowEx, MethodBase.GetCurrentMethod().Name);
-                }
-
-                catch (Exception e)
-                {
-                    MsgBox.CreateErrorBox("Could not get Divers from database.\n" + e, MethodBase.GetCurrentMethod().Name);
-                }
-                #endregion
+            catch (SQLiteException sqliteEx)
+            {
+                MsgBox.CreateErrorBox("Could not get Divers from database.\n" + sqliteEx, MethodBase.GetCurrentMethod().Name);
             }
-            return null;
+
+            catch (FormatException formatEx)
+            {
+                MsgBox.CreateErrorBox("Could not get Divers from database.\n" + formatEx.GetType() + "\n" + formatEx, MethodBase.GetCurrentMethod().Name);
+            }
+
+            catch (InvalidCastException invalidCastEx)
+            {
+                MsgBox.CreateErrorBox("Could not get Divers from database.\n" + invalidCastEx.GetType() + "\n" + invalidCastEx, MethodBase.GetCurrentMethod().Name);
+            }
+
+            catch (OverflowException overflowEx)
+            {
+                MsgBox.CreateErrorBox("Could not get Divers from database.\n" + overflowEx.GetType() + "\n" + overflowEx, MethodBase.GetCurrentMethod().Name);
+            }
+
+            catch (Exception e)
+            {
+                MsgBox.CreateErrorBox("Could not get Divers from database.\n" + e, MethodBase.GetCurrentMethod().Name);
+            }
+            #endregion
+
+            return new BindingList<Diver>();
         }
 
         /// <summary>
@@ -684,6 +682,7 @@ namespace Simhopp.Model
             if (dbConnection == null)
             {
                 NoConnectionErrorMessage();
+                return new BindingList<Judge>();
             }
             else
             {
@@ -728,7 +727,7 @@ namespace Simhopp.Model
                 }
                 #endregion
             }
-            return null;
+            return new BindingList<Judge>();
         }
 
         /// <summary>
@@ -867,98 +866,101 @@ namespace Simhopp.Model
         /// <param name="c">Contest object.</param>
         public void AddContestToDatabase(Contest c)
         {
-            if (c.Id == -1)
+            //Checks if the given contest already exists in the database.
+            if (c.Id != -1)
             {
-                if (dbConnection == null)
-                {
-                    NoConnectionErrorMessage();
-                    return;
-                }
-                if (c.IsFinished != true)
-                {
-                    MsgBox.CreateErrorBox("Contest is not finished and can not be saved to database.", MethodBase.GetCurrentMethod().Name);
-                    return;
-                }
-                try
-                {
-                    //Add the contest info to contest database.
-                    string sql = "INSERT INTO Contest(Place, Name, StartDate, EndDate) VALUES('" + c.Place + "', '" + c.Name + "','" + c.StartDate + "','" + c.EndDate + "')";
-                    SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
-                    command.ExecuteNonQuery();
-
-                    int lastInsertedContestId = GetLastId();
-
-                    //Add all new judges to the database and update their id.
-                    foreach (var judges in c.GetJudgesList())
-                    {
-                        if (judges.Id == -1)
-                        {
-                            //Checks if judge exicts in database already.
-                            int judgeId = GetJudgeId(judges.SSN);
-                            if (judgeId != -1)
-                            {
-                                judges.Id = judgeId;
-                            }
-                            else
-                            {
-                                AddJudgeToDatabase(judges);
-                                judges.Id = GetLastId();
-                            }
-                        }
-                    }
-
-
-                    foreach (var participant in c.GetParticipants())
-                    {
-                        //Add participant to database if not already initialized and update divers id.
-                        if (participant.GetDiverId() == -1)
-                        {
-                            int diverId = GetDiverId(participant.GetDiverSSN());
-                            if (diverId != -1)
-                            {
-                                participant.SetDiverId(diverId);   
-                            }
-                            else
-                            {
-                                AddDiverToDatabase(participant.GetDiver());
-                                participant.SetDiverId(GetLastId());
-                            }
-                        }
-
-                        foreach (var jumpResult in participant.GetJumpResults())
-                        {
-                            //Add Jump to database.
-                            AddJumpToDatabase(jumpResult.SumJudgePoints, participant.GetDiverId(), lastInsertedContestId, GetTrickIdByName(jumpResult.TrickName));
-                            int LatestJumpId = GetLastId();
-                            int pointNumber = 0;
-                            foreach (var judges in c.GetJudgesList())
-                            {
-                                //Add evaluation to database.
-                                AddEvaluationToDatabase(LatestJumpId, judges.Id, jumpResult.GetJudgePoint(pointNumber++));
-                            }
-                        }
-                    }
-                }
-                #region Exceptions
-                catch (SQLiteException sqliteEx)
-                {
-                    MsgBox.CreateErrorBox(
-                        "Could not add the following Contest to database: \n" + c.Place + "', '" + c.Name + "','" +
-                        c.StartDate + "','" + c.EndDate + "\nExeption: " + sqliteEx,
-                        MethodBase.GetCurrentMethod().Name);
-                }
-
-                catch (Exception e)
-                {
-                    MsgBox.CreateErrorBox(
-                        "Could not add the following Contest to database: \n" + c.Place + "', '" + c.Name + "','" +
-                        c.StartDate + "','" + c.EndDate + "\nExeption: " + e, MethodBase.GetCurrentMethod().Name);
-                }
-                #endregion
+                //msgbox här?
+                return;
             }
+            if (dbConnection == null)
+            {
+                NoConnectionErrorMessage();
+                return;
+            }
+            if (!c.IsFinished)
+            {
+                MsgBox.CreateErrorBox("Contest is not finished and can not be saved to database.", MethodBase.GetCurrentMethod().Name);
+                return;
+            }
+            try
+            {
+                //Add the contest info to contest database.
+                string sql = "INSERT INTO Contest(Place, Name, StartDate, EndDate) VALUES('" + c.Place + "', '" + c.Name + "','" + c.StartDate + "','" + c.EndDate + "')";
+                SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
+                command.ExecuteNonQuery();
+
+                int lastInsertedContestId = GetLastId();
+
+                //Add all new judges to the database and update their id.
+                foreach (var judges in c.GetJudgesList())
+                {
+                    if (judges.Id == -1)
+                    {
+                        //Checks if judge exicts in database already.
+                        int judgeId = GetJudgeId(judges.SSN);
+                        if (judgeId != -1)
+                        {
+                            judges.Id = judgeId;
+                        }
+                        else
+                        {
+                            AddJudgeToDatabase(judges);
+                            judges.Id = GetLastId();
+                        }
+                    }
+                }
+
+
+                foreach (var participant in c.GetParticipants())
+                {
+                    //Add participant to database if not already initialized and update divers id.
+                    if (participant.GetDiverId() == -1)
+                    {
+                        int diverId = GetDiverId(participant.GetDiverSSN());
+                        if (diverId != -1)
+                        {
+                            participant.SetDiverId(diverId);
+                        }
+                        else
+                        {
+                            AddDiverToDatabase(participant.GetDiver());
+                            participant.SetDiverId(GetLastId());
+                        }
+                    }
+
+                    foreach (var jumpResult in participant.GetJumpResults())
+                    {
+                        //Add Jump to database.
+                        AddJumpToDatabase(jumpResult.SumJudgePoints, participant.GetDiverId(), lastInsertedContestId, GetTrickIdByName(jumpResult.TrickName));
+                        int LatestJumpId = GetLastId();
+                        int pointNumber = 0;
+                        foreach (var judges in c.GetJudgesList())
+                        {
+                            //Add evaluation to database.
+                            AddEvaluationToDatabase(LatestJumpId, judges.Id, jumpResult.GetJudgePoint(pointNumber++));
+                        }
+                    }
+                }
+            }
+                #region Exceptions
+            catch (SQLiteException sqliteEx)
+            {
+                MsgBox.CreateErrorBox(
+                    "Could not add the following Contest to database: \n" + c.Place + "', '" + c.Name + "','" +
+                    c.StartDate + "','" + c.EndDate + "\nExeption: " + sqliteEx,
+                    MethodBase.GetCurrentMethod().Name);
+            }
+
+            catch (Exception e)
+            {
+                MsgBox.CreateErrorBox(
+                    "Could not add the following Contest to database: \n" + c.Place + "', '" + c.Name + "','" +
+                    c.StartDate + "','" + c.EndDate + "\nExeption: " + e, MethodBase.GetCurrentMethod().Name);
+            }
+            #endregion
         }
 
-        
+
         /// <summary>
         /// Removes a row (contest) based on its ID.
         /// </summary>
@@ -980,51 +982,50 @@ namespace Simhopp.Model
             if (dbConnection == null)
             {
                 NoConnectionErrorMessage();
+                return new BindingList<Contest>();
             }
-            else
+            try
             {
-                try
+                string sql = "SELECT * FROM Contest";
+                SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
+                SQLiteDataReader reader = command.ExecuteReader();
+                BindingList<Contest> cl = new BindingList<Contest>();
+                while (reader.Read())
                 {
-                    string sql = "SELECT * FROM Contest";
-                    SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
-                    SQLiteDataReader reader = command.ExecuteReader();
-                    BindingList<Contest> cl = new BindingList<Contest>();
-                    while (reader.Read())
-                    {
-                        Contest c = new Contest(Convert.ToInt32(reader["ID"]), Convert.ToString(reader["Place"]), Convert.ToString(reader["Name"]), Convert.ToString(reader["StartDate"]), Convert.ToString(reader["EndDate"]));
-                        cl.Add(c);
-                    }
-                    return cl;
+                    Contest c = new Contest(Convert.ToInt32(reader["ID"]), Convert.ToString(reader["Place"]), Convert.ToString(reader["Name"]), Convert.ToString(reader["StartDate"]), Convert.ToString(reader["EndDate"]));
+                    cl.Add(c);
                 }
+                return cl;
+            }
                 #region Exceptions
 
-                catch (SQLiteException sqliteEx)
-                {
-                    MsgBox.CreateErrorBox("Could not get Contests from database.\n" + sqliteEx, MethodBase.GetCurrentMethod().Name);
-                }
-
-                catch (FormatException formatEx)
-                {
-                    MsgBox.CreateErrorBox("Could not get Contests from database.\n" + formatEx.GetType() + "\n" + formatEx, MethodBase.GetCurrentMethod().Name);
-                }
-
-                catch (InvalidCastException invalidCastEx)
-                {
-                    MsgBox.CreateErrorBox("Could not get Contests from database.\n" + invalidCastEx.GetType() + "\n" + invalidCastEx, MethodBase.GetCurrentMethod().Name);
-                }
-
-                catch (OverflowException overflowEx)
-                {
-                    MsgBox.CreateErrorBox("Could not get Contests from database.\n" + overflowEx.GetType() + "\n" + overflowEx, MethodBase.GetCurrentMethod().Name);
-                }
-
-                catch (Exception e)
-                {
-                    MsgBox.CreateErrorBox("Could not get Contests from database.\n" + e, MethodBase.GetCurrentMethod().Name);
-                }
-                #endregion
+            catch (SQLiteException sqliteEx)
+            {
+                MsgBox.CreateErrorBox("Could not get Contests from database.\n" + sqliteEx, MethodBase.GetCurrentMethod().Name);
             }
-            return null;
+
+            catch (FormatException formatEx)
+            {
+                MsgBox.CreateErrorBox("Could not get Contests from database.\n" + formatEx.GetType() + "\n" + formatEx, MethodBase.GetCurrentMethod().Name);
+            }
+
+            catch (InvalidCastException invalidCastEx)
+            {
+                MsgBox.CreateErrorBox("Could not get Contests from database.\n" + invalidCastEx.GetType() + "\n" + invalidCastEx, MethodBase.GetCurrentMethod().Name);
+            }
+
+            catch (OverflowException overflowEx)
+            {
+                MsgBox.CreateErrorBox("Could not get Contests from database.\n" + overflowEx.GetType() + "\n" + overflowEx, MethodBase.GetCurrentMethod().Name);
+            }
+
+            catch (Exception e)
+            {
+                MsgBox.CreateErrorBox("Could not get Contests from database.\n" + e, MethodBase.GetCurrentMethod().Name);
+            }
+            #endregion
+
+            return new BindingList<Contest>();
         }
 
         /// <summary>
@@ -1116,50 +1117,49 @@ namespace Simhopp.Model
             if (dbConnection == null)
             {
                 NoConnectionErrorMessage();
+                throw new Exception("No connetion to database.");
             }
-            else
+            try
             {
-                try
+                int id = -1;
+                string sql = "SELECT ID FROM Trick WHERE name = '" + trickName + "'";
+                SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
+                SQLiteDataReader reader = command.ExecuteReader();
+                while (reader.Read())
                 {
-                    int id = -1;
-                    string sql = "SELECT ID FROM Trick WHERE name = '" + trickName + "'";
-                    SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
-                    SQLiteDataReader reader = command.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        id = Convert.ToInt32(reader["ID"]);
-                    }
-                    return id;
+                    id = Convert.ToInt32(reader["ID"]);
                 }
+                return id;
+            }
                 #region Exceptions
 
-                catch (SQLiteException sqliteEx)
-                {
-                    MsgBox.CreateErrorBox("Could not get Trick ID from database.\n" + sqliteEx, MethodBase.GetCurrentMethod().Name);
-                }
-
-                catch (FormatException formatEx)
-                {
-                    MsgBox.CreateErrorBox("Could not get Trick ID from database.\n" + formatEx.GetType() + "\n" + formatEx, MethodBase.GetCurrentMethod().Name);
-                }
-
-                catch (InvalidCastException invalidCastEx)
-                {
-                    MsgBox.CreateErrorBox("Could not get Trick ID from database.\n" + invalidCastEx.GetType() + "\n" + invalidCastEx, MethodBase.GetCurrentMethod().Name);
-                }
-
-                catch (OverflowException overflowEx)
-                {
-                    MsgBox.CreateErrorBox("Could not get Trick ID from database.\n" + overflowEx.GetType() + "\n" + overflowEx, MethodBase.GetCurrentMethod().Name);
-                }
-
-                catch (Exception e)
-                {
-                    MsgBox.CreateErrorBox("Could not get Trick ID from database.\n" + e, MethodBase.GetCurrentMethod().Name);
-                }
-                #endregion
+            catch (SQLiteException sqliteEx)
+            {
+                MsgBox.CreateErrorBox("Could not get Trick ID from database.\n" + sqliteEx, MethodBase.GetCurrentMethod().Name);
             }
-            return -1;
+
+            catch (FormatException formatEx)
+            {
+                MsgBox.CreateErrorBox("Could not get Trick ID from database.\n" + formatEx.GetType() + "\n" + formatEx, MethodBase.GetCurrentMethod().Name);
+            }
+
+            catch (InvalidCastException invalidCastEx)
+            {
+                MsgBox.CreateErrorBox("Could not get Trick ID from database.\n" + invalidCastEx.GetType() + "\n" + invalidCastEx, MethodBase.GetCurrentMethod().Name);
+            }
+
+            catch (OverflowException overflowEx)
+            {
+                MsgBox.CreateErrorBox("Could not get Trick ID from database.\n" + overflowEx.GetType() + "\n" + overflowEx, MethodBase.GetCurrentMethod().Name);
+            }
+
+            catch (Exception e)
+            {
+                MsgBox.CreateErrorBox("Could not get Trick ID from database.\n" + e, MethodBase.GetCurrentMethod().Name);
+            }
+            #endregion
+
+            return -1; //Can't happen.
         }
 
         #endregion
@@ -1175,17 +1175,17 @@ namespace Simhopp.Model
             }
             try
             {
-                
+
                 AddDiverToDatabase(participant.GetDiver());
 
                 foreach (var jumpResult in participant.GetJumpResults())
                 {
-                    
+
                     //lägg till jump först sen evaluation.
                     //double[] judgePoints = participant.GetJudgePointsArray();
                     //foreach (var judgePoint in judgePoints)
                     {
-                        
+
                     }
                 }
             }
@@ -1202,7 +1202,7 @@ namespace Simhopp.Model
             }
             #endregion
         }
-       
+
         public List<JumpResult> GetJumpResults() //Gör så att denna funkar!!!
         {
             List<JumpResult> jr = new List<JumpResult>();
@@ -1247,9 +1247,15 @@ namespace Simhopp.Model
         #endregion
 
         #region Evaluation
+        /// <summary>
+        /// Adds a jump evaluation to the database.
+        /// </summary>
+        /// <param name="jumpId"></param>
+        /// <param name="judgeId"></param>
+        /// <param name="point"></param>
         public void AddEvaluationToDatabase(int jumpId, int judgeId, double point)
         {
-        if (dbConnection == null)
+            if (dbConnection == null)
             {
                 NoConnectionErrorMessage();
                 return;
@@ -1278,5 +1284,23 @@ namespace Simhopp.Model
         #region Trick
 
         #endregion
+
+        #region IDisposable methods
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                dbConnection.Close();
+            }
+        }
+
+        #endregion
+
     }
 }

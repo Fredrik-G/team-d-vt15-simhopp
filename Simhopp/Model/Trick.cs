@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Simhopp.Model
+﻿namespace Simhopp.Model
 {
     /// <summary>
     /// Class that holds information about a trick (name and difficulty).
@@ -45,13 +39,12 @@ namespace Simhopp.Model
         {
             get 
             {
-                if (this.name == null)
-                {
-                    throw new Exception("Name is null");
-                }
                 return this.name; 
             }
-            set { this.name = value; }
+            set
+            {
+                this.name = value;
+            }
         }
         /// <summary>
         /// Getter/Setter for difficulty value.
@@ -60,13 +53,12 @@ namespace Simhopp.Model
         {
             get 
             {
-                if (Double.IsNaN(this.difficulty))
-                {
-                    throw new Exception("Difficulty is NaN");
-                }
                 return this.difficulty; 
             }
-            set { this.difficulty = value; }
+            set
+            {
+                this.difficulty = value;
+            }
         }
         #endregion
     }

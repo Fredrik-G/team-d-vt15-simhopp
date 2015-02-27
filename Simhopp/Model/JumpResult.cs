@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 
 namespace Simhopp.Model
 {
@@ -13,21 +8,17 @@ namespace Simhopp.Model
     /// </summary>
     public class JumpResult
     {
-        #region JumpResult Variables
+        #region Variables
         private string trickName;
         private double[] judgePoints;
         private double sumJudgePoints;
         #endregion
 
-        #region JumpResult Properties
+        #region Properties
         public string TrickName
         {
             get
             {
-                if (this.trickName == null)
-                {
-                    throw new Exception("trickName is null");
-                }
                 return trickName;
             }
             set
@@ -39,10 +30,6 @@ namespace Simhopp.Model
         { 
             get 
             {
-                if (Double.IsNaN(this.sumJudgePoints))
-                {
-                    throw new Exception("sumJudgePoints is NaN.");
-                }
                 return this.sumJudgePoints;
             } 
             set 
@@ -53,7 +40,7 @@ namespace Simhopp.Model
 
         #endregion
         
-        #region JumpResult Constructors
+        #region Constructors
 
         /// <summary>
         /// Default constructor.
@@ -62,7 +49,7 @@ namespace Simhopp.Model
         {
             trickName = "";
             judgePoints = new double[7]; 
-            for (int i = 0; i < judgePoints.Length; i++)
+            for (var i = 0; i < judgePoints.Length; i++)
             {
                 judgePoints[i] = 0;
             }
@@ -84,19 +71,12 @@ namespace Simhopp.Model
         public JumpResult(string trickName, double j0, double j1, double j2, double j3, double j4, double j5, double j6)
         {
             this.trickName = trickName;
-            judgePoints = new double[7]; 
-            judgePoints[0] = j0;
-            judgePoints[1] = j1;
-            judgePoints[2] = j2;
-            judgePoints[3] = j3;
-            judgePoints[4] = j4;
-            judgePoints[5] = j5;
-            judgePoints[6] = j6;
+            judgePoints = new[] { j0, j1, j2, j3, j4, j5, j6 }; 
             CalculateResult();
         }
         #endregion
 
-        #region JumpResult Methods
+        #region Methods
         /// <summary>
         /// Returns a specific judge result depending on the judgeNo number. 
         /// </summary>
@@ -107,6 +87,10 @@ namespace Simhopp.Model
             return judgePoints[judgeNo];
         }
 
+        /// <summary>
+        /// Returns judgepoints.
+        /// </summary>
+        /// <returns></returns>
         public double[] GetJudgePointsArray()
         {
             return judgePoints;

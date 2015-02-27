@@ -11,19 +11,30 @@ namespace Simhopp.Model
     /// </summary>
     public class Judge : Person
     {
+        #region Data
+
         private string hash = string.Empty;
         private string salt = string.Empty;
         private static RNGCryptoServiceProvider rngCrypto = new RNGCryptoServiceProvider();
 
+        #endregion
+
+        #region Properties
+
         public string Hash
         {
-            get { return hash;  }
+            get { return hash; }
         }
 
         public string Salt
         {
             get { return salt; }
         }
+
+        #endregion
+
+        #region Constructors
+
         /// <summary>
         /// Default constructor
         /// </summary>
@@ -34,8 +45,9 @@ namespace Simhopp.Model
             this.nationality = "";
             this.ssn = "";
         }
+
         /// <summary>
-        /// Constructor
+        /// Constructor with parameters.
         /// </summary>
         /// <param name="name"></param>
         /// <param name="nationality"></param>
@@ -48,6 +60,14 @@ namespace Simhopp.Model
             this.ssn = ssn;
         }
 
+        /// <summary>
+        /// Constructor with parameters.
+        /// Should only be used by databasecontroller.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="nationality"></param>
+        /// <param name="ssn"></param>
         public Judge(int id, string name, string nationality, string ssn)
         {
             this.id = id;
@@ -55,6 +75,10 @@ namespace Simhopp.Model
             this.nationality = nationality;
             this.ssn = ssn;
         }
+
+        #endregion
+
+        #region Methods
 
         /// <summary>
         /// Calculates a pseudo-random salt used for authentication.
@@ -78,15 +102,20 @@ namespace Simhopp.Model
         {
             if (salt == string.Empty)
             {
-                throw new Exception("Salt is not set. Run Judge.CalculateSalt first");
+                throw new Exception("Salt is not set. Run Judge.CalculateSalt first.");
             }
 
             var stringToHash = password + salt;
             var crypt = new SHA256Managed();
             var tempString = String.Empty;
-            var crypto = crypt.ComputeHash(Encoding.UTF8.GetBytes(stringToHash), 0, Encoding.UTF8.GetByteCount(stringToHash));
+            var crypto = crypt.ComputeHash(Encoding.UTF8.GetBytes(stringToHash), 0,
+                Encoding.UTF8.GetByteCount(stringToHash));
 
             hash = crypto.Aggregate(tempString, (current, bit) => current + bit.ToString("x2"));
+            // Same as foreach(var bit in crypto) tempstring += bit.ToString("x2));
+             
         }
+
+        #endregion
     }
 }

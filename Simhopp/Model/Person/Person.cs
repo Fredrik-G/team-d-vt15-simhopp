@@ -20,6 +20,8 @@ namespace Simhopp.Model
         protected string ssn;
         #endregion
 
+        #region Constructor
+
         /// <summary>
         /// Default constructor.
         /// </summary>
@@ -27,6 +29,8 @@ namespace Simhopp.Model
         {
             this.id = -1;
         }
+
+        #endregion
 
         #region Properties
 
@@ -52,10 +56,6 @@ namespace Simhopp.Model
         {
             get
             {
-                if (this.name == null)
-                {
-                    throw new Exception("Name is null");
-                }
                 return this.name;
             }
             set
@@ -70,10 +70,6 @@ namespace Simhopp.Model
         {
             get
             {
-                if (this.nationality == null)
-                {
-                    throw new Exception("Nationality is null");
-                }
                 return this.nationality;
             }
             set
@@ -88,10 +84,6 @@ namespace Simhopp.Model
         {
             get
             {
-                if (this.ssn == null)
-                {
-                    throw new Exception("Social security number is null");
-                }
                 return this.ssn;
             }
             set
@@ -100,12 +92,9 @@ namespace Simhopp.Model
             }
         }
         #endregion
-
-        /// <summary>
-        /// Regex patterns for testing input data.
-        /// </summary>
+       
         #region Check correct input
-        
+
         /// <summary>
         /// Allowed characters: "A-Z ',.-"
         /// "Jimmy Makkonen", "J. Makkonen"
@@ -114,7 +103,7 @@ namespace Simhopp.Model
         /// <returns>returns true or false</returns>
         public static bool CheckCorrectName(string name)
         {
-            Regex patternName = new Regex(@"^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*$");
+            var patternName = new Regex(@"^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*$");
             return patternName.IsMatch(name);
         }
 
@@ -126,7 +115,7 @@ namespace Simhopp.Model
         /// <returns>returns true or false</returns>
         public static bool CheckCorrectNationality(string nationality)
         {
-            Regex patternNationality = new Regex(@"^[a-zA-Z]+(([\,\- ][a-zA-Z ])?)*$");
+            var patternNationality = new Regex(@"^[a-zA-Z]+(([\,\- ][a-zA-Z ])?)*$");
             return patternNationality.IsMatch(nationality);
         }
 
@@ -142,16 +131,15 @@ namespace Simhopp.Model
         {
             if (nationality == "Sweden")
             {
-                Regex patternSwedishSSN = new Regex(@"^\d{8}-\d{4}$");
+                var patternSwedishSSN = new Regex(@"^\d{8}-\d{4}$");
                 return patternSwedishSSN.IsMatch(ssn);
             }
             else
             {
-                Regex patternSSN = new Regex(@"^\d{3}-\d{2}-\d{4}$");
+                var patternSSN = new Regex(@"^\d{3}-\d{2}-\d{4}$");
                 return patternSSN.IsMatch(ssn);
             }
         }
         #endregion
     }
 }
-
