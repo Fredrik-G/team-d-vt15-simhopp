@@ -17,6 +17,7 @@ namespace Simhopp.Model
         #region Data
 
         private int id;
+        private bool isFinished = false;
         private string place;
         private string name;
         private string startDate;
@@ -62,13 +63,30 @@ namespace Simhopp.Model
 
         #region Properties
 
+        public bool IsFinished
+        {
+            get
+            {
+                return isFinished;
+            }
+            set
+            {
+                this.isFinished = value;
+            }
+        }
+
         public int Id
         {
             get
             {
                 return this.id;
             }
+            set
+            {
+                this.id = value;
+            }
         }
+
         public string Name
         {
             get
@@ -312,17 +330,24 @@ namespace Simhopp.Model
         /// </summary>
         public void SimulateContest()
         {
-            liveResultList.Clear();
-            foreach (var participant in participantsList)
+            if (isFinished == true)
             {
-                liveResultList.Add(participant);
+                Console.WriteLine("Contest is already finished.");
+                return;
             }
-            for (int jumpNo = 0; jumpNo < 3; jumpNo++)
             {
-                MakeJump(jumpNo);
-                SortParticipants(ref participantsList, false);
+                liveResultList.Clear();
+                foreach (var participant in participantsList)
+                {
+                    liveResultList.Add(participant);
+                }
+                for (int jumpNo = 0; jumpNo < 3; jumpNo++)
+                {
+                    MakeJump(jumpNo);
+                    SortParticipants(ref participantsList, false);
+                }
+                isFinished = true;
             }
-            participantsList.Clear();
         }
 
         /// <summary>
