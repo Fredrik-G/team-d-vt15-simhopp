@@ -22,6 +22,9 @@ namespace Simhopp.View
     public delegate BindingList<Judge> DelegateGetJudgesInContest(int id);
     public delegate BindingList<Diver> DelegateGetDiversInContest(int id);
 
+    public delegate string DelegateGetJudgeHash(string ssn);
+    public delegate string DelegateGetJudgeSalt(string ssn);
+
     public delegate void DelegateAddJudgeToList(string name, string nationality, string ssn);
     public delegate void DelegateAddDiverToList(string name, string nationality, string ssn);
 
@@ -53,6 +56,9 @@ namespace Simhopp.View
 
         event DelegateGetJudgesInContest EventGetJudgesInContest;
         event DelegateGetDiversInContest EventGetDiversInContest;
+
+        event DelegateGetJudgeHash EventGetJudgeHash;
+        event DelegateGetJudgeSalt EventGetJudgeSalt;
 
         event DelegateAddJudgeToList EventAddJudgeToList;
         event DelegateAddDiverToList EventAddDiverToList;

@@ -30,7 +30,6 @@
         {
             this.StartScreenNewContesttBtn = new System.Windows.Forms.Button();
             this.StartScreenStartContestBtn = new System.Windows.Forms.Button();
-            this.StartScreenEditViewContestBtn = new System.Windows.Forms.Button();
             this.StartScreenAddDiverContestBtn = new System.Windows.Forms.Button();
             this.StartScreenAddJudgeBtn = new System.Windows.Forms.Button();
             this.StartScreenViewJudgeClient = new System.Windows.Forms.Button();
@@ -55,16 +54,6 @@
             this.StartScreenStartContestBtn.Text = "Start Contest";
             this.StartScreenStartContestBtn.UseVisualStyleBackColor = true;
             this.StartScreenStartContestBtn.Click += new System.EventHandler(this.StartScreenStartContestBtn_Click);
-            // 
-            // StartScreenEditViewContestBtn
-            // 
-            this.StartScreenEditViewContestBtn.Location = new System.Drawing.Point(246, 84);
-            this.StartScreenEditViewContestBtn.Name = "StartScreenEditViewContestBtn";
-            this.StartScreenEditViewContestBtn.Size = new System.Drawing.Size(72, 66);
-            this.StartScreenEditViewContestBtn.TabIndex = 2;
-            this.StartScreenEditViewContestBtn.Text = "View/Edit Contest";
-            this.StartScreenEditViewContestBtn.UseVisualStyleBackColor = true;
-            this.StartScreenEditViewContestBtn.Click += new System.EventHandler(this.StartScreenEditViewContestBtn_Click);
             // 
             // StartScreenAddDiverContestBtn
             // 
@@ -104,7 +93,6 @@
             this.Controls.Add(this.StartScreenViewJudgeClient);
             this.Controls.Add(this.StartScreenAddJudgeBtn);
             this.Controls.Add(this.StartScreenAddDiverContestBtn);
-            this.Controls.Add(this.StartScreenEditViewContestBtn);
             this.Controls.Add(this.StartScreenStartContestBtn);
             this.Controls.Add(this.StartScreenNewContesttBtn);
             this.MaximizeBox = false;
@@ -121,7 +109,6 @@
 
         private System.Windows.Forms.Button StartScreenNewContesttBtn;
         private System.Windows.Forms.Button StartScreenStartContestBtn;
-        private System.Windows.Forms.Button StartScreenEditViewContestBtn;
         private System.Windows.Forms.Button StartScreenAddDiverContestBtn;
         private System.Windows.Forms.Button StartScreenAddJudgeBtn;
         private System.Windows.Forms.Button StartScreenViewJudgeClient;

@@ -77,7 +77,7 @@ namespace Simhopp
         /// <summary>
         /// Returns a list of judges in a given contest by contest id.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Contest id</param>
         /// <returns></returns>
         public BindingList<Judge> GetJudgesInContest(int id)
         {
@@ -178,6 +178,16 @@ namespace Simhopp
                 return null;
                 //do something
             }
+        }
+
+        public string GetJudgeHash(string ssn)
+        {
+            return databaseController.GetJudgeHash(GetJudgeBySSN(ssn));
+        }
+
+        public string GetJudgeSalt(string ssn)
+        {
+            return databaseController.GetJudgeSalt(GetJudgeBySSN(ssn));
         }
         #endregion
 
