@@ -16,6 +16,7 @@ namespace Simhopp.Model
         #region Data
 
         private SQLiteConnection dbConnection;
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         #endregion
 
@@ -79,6 +80,7 @@ namespace Simhopp.Model
             try
             {
                 dbConnection.Open();
+                log.Info("New database connection open.");
             }
 
             #region Exceptions
@@ -110,6 +112,7 @@ namespace Simhopp.Model
             try
             {
                 dbConnection.Close();
+                log.Info("Database connection closed.");
             }
             #region Exceptions
 
@@ -130,13 +133,16 @@ namespace Simhopp.Model
         #endregion
 
         #region Methods
-        /// <summary>
         /// Returns true if the database table is empty, else false.
         /// </summary>
+        /// <summary>
         /// <param name="tableName">Table to be searched.</param>
         /// <returns></returns>
         public bool TableIsEmpty(string tableName) //Fixa till denna. vad ska den returnera om ett exception händer. Fråga Kjell!!
+            //denna funktion borde väl heta IsTableEmpty btw? boolvariabler/funktioner ska antyda yes/no/true/false enligt C# Code Style Guide - Scott Bellware
         {
+            log.Debug("Function " + MethodBase.GetCurrentMethod().Name + " run on table " + tableName);
+
             if (dbConnection == null)
             {
                 NoConnectionErrorMessage();
@@ -195,6 +201,8 @@ namespace Simhopp.Model
         /// <param name="tableName">Table to be cleared.</param>
         public void ClearDatabase(string tableName)
         {
+            log.Debug("Function " + MethodBase.GetCurrentMethod().Name + " run on table " + tableName);
+
             if (dbConnection == null)
             {
                 NoConnectionErrorMessage();
@@ -273,6 +281,8 @@ namespace Simhopp.Model
         /// <param name="d">Diver objekt.</param>
         public void AddDiverToDatabase(Diver d)
         {
+            log.Debug("Function " + MethodBase.GetCurrentMethod().Name + " run on SSN " + d.SSN);
+
             if (dbConnection == null)
             {
                 NoConnectionErrorMessage();
@@ -307,6 +317,8 @@ namespace Simhopp.Model
         /// <param name="d">Diver object.</param>
         public void RemoveDiverFromTable(Diver d)
         {
+            log.Debug("Function " + MethodBase.GetCurrentMethod().Name + " run on SSN " + d.SSN);
+
             if (dbConnection == null)
             {
                 NoConnectionErrorMessage();
@@ -338,6 +350,8 @@ namespace Simhopp.Model
         /// </summary>
         public void PrintDiverTableInConsole()
         {
+            log.Debug("Function " + MethodBase.GetCurrentMethod().Name + " used.");
+
             if (dbConnection == null)
             {
                 NoConnectionErrorMessage();
@@ -374,6 +388,8 @@ namespace Simhopp.Model
         /// <param name="d">Diver object.</param>
         public void UpdateDiver(Diver d)
         {
+            log.Debug("Function " + MethodBase.GetCurrentMethod().Name + " run on SSN " + d.SSN);
+
             if (dbConnection == null)
             {
                 NoConnectionErrorMessage();
@@ -405,6 +421,8 @@ namespace Simhopp.Model
         /// <returns>List of Judge objects.</returns>
         public BindingList<Diver> GetDiverList()
         {
+            log.Debug("Function " + MethodBase.GetCurrentMethod().Name + " used.");
+
             if (dbConnection == null)
             {
                 NoConnectionErrorMessage();
@@ -461,6 +479,8 @@ namespace Simhopp.Model
         /// <returns>diver id (int)</returns>
         public int GetDiverId(string ssn)
         {
+            log.Debug("Function " + MethodBase.GetCurrentMethod().Name + "run on SSN " + ssn);
+
             if (dbConnection == null)
             {
                 NoConnectionErrorMessage();
@@ -518,6 +538,8 @@ namespace Simhopp.Model
         /// <param name="j"></param>
         public void AddJudgeToDatabase(Judge j)
         {
+            log.Debug("Function " + MethodBase.GetCurrentMethod().Name + "run on SSN " + j.SSN);
+
             if (dbConnection == null)
             {
                 NoConnectionErrorMessage();
@@ -552,6 +574,8 @@ namespace Simhopp.Model
         /// <param name="j">Judge object.</param>
         public void RemoveJudgeFromTable(Judge j)
         {
+            log.Debug("Function " + MethodBase.GetCurrentMethod().Name + "run on SSN " + j.SSN);
+
             if (dbConnection == null)
             {
                 NoConnectionErrorMessage();
@@ -582,6 +606,8 @@ namespace Simhopp.Model
         /// </summary>
         public void PrintJudgeTable()
         {
+            log.Debug("Function " + MethodBase.GetCurrentMethod().Name + " used.");
+
             if (dbConnection == null)
             {
                 NoConnectionErrorMessage();
@@ -617,6 +643,8 @@ namespace Simhopp.Model
         /// <param name="j">Judge object.</param>
         public void UpdateJudge(Judge j)
         {
+            log.Debug("Function " + MethodBase.GetCurrentMethod().Name + "run on SSN " + j.SSN);
+
             if (dbConnection == null)
             {
                 NoConnectionErrorMessage();
@@ -648,6 +676,8 @@ namespace Simhopp.Model
         /// <param name="j"></param>
         public void UpdateJudgeWithHash(Judge j)
         {
+            log.Debug("Function " + MethodBase.GetCurrentMethod().Name + "run on SSN " + j.SSN);
+
             if (dbConnection == null)
             {
                 NoConnectionErrorMessage();
@@ -679,6 +709,8 @@ namespace Simhopp.Model
         /// <returns>List of Judge objects.</returns>
         public BindingList<Judge> GetJudgeList()
         {
+            log.Debug("Function " + MethodBase.GetCurrentMethod().Name + " used. ");
+
             if (dbConnection == null)
             {
                 NoConnectionErrorMessage();
@@ -737,6 +769,8 @@ namespace Simhopp.Model
         /// <returns>Judge id int.</returns>
         public int GetJudgeId(string ssn)
         {
+            log.Debug("Function " + MethodBase.GetCurrentMethod().Name + "run on SSN " + ssn);
+
             if (dbConnection == null)
             {
                 NoConnectionErrorMessage();
@@ -791,6 +825,8 @@ namespace Simhopp.Model
         /// <returns></returns>
         public string GetJudgeHash(Judge judge)
         {
+            log.Debug("Function " + MethodBase.GetCurrentMethod().Name + "run on SSN " + judge.SSN);
+
             if (dbConnection == null)
             {
                 NoConnectionErrorMessage();
@@ -826,6 +862,8 @@ namespace Simhopp.Model
         /// <returns></returns>
         public string GetJudgeSalt(Judge judge)
         {
+            log.Debug("Function " + MethodBase.GetCurrentMethod().Name + "run on SSN " + judge.SSN);
+
             if (dbConnection == null)
             {
                 NoConnectionErrorMessage();
@@ -866,6 +904,8 @@ namespace Simhopp.Model
         /// <param name="c">Contest object.</param>
         public void AddContestToDatabase(Contest c)
         {
+            log.Debug("Function " + MethodBase.GetCurrentMethod().Name + "run on name " + c.Name);
+
             //Checks if the given contest already exists in the database.
             if (c.Id != -1)
             {
@@ -967,6 +1007,8 @@ namespace Simhopp.Model
         /// <param name="c">Contest object.</param>
         public void RemoveContestFromTable(Contest c) //Lägg till att alla klasser som har en tabell i databasen har ett id. Måste finnas för att följande ska kunna användas. 
         {
+            log.Debug("Function " + MethodBase.GetCurrentMethod().Name + "run on name " + c.Name);
+
             /*string sql = "DELETE FROM Contest where ??? ='" + c.??? + "'";
             SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
             command.ExecuteNonQuery();
@@ -979,6 +1021,8 @@ namespace Simhopp.Model
         /// <returns>BindingList with contests.</returns>
         public BindingList<Contest> GetContestList()
         {
+            log.Debug("Function " + MethodBase.GetCurrentMethod().Name + " used.");
+
             if (dbConnection == null)
             {
                 NoConnectionErrorMessage();
@@ -1035,6 +1079,8 @@ namespace Simhopp.Model
         /// <returns>Contest object.</returns>
         public Contest GetContest(Contest contest)
         {
+            log.Debug("Function " + MethodBase.GetCurrentMethod().Name + "run on name " + contest.Name);
+
             if (dbConnection == null)
             {
                 NoConnectionErrorMessage();
@@ -1070,6 +1116,8 @@ namespace Simhopp.Model
         /// <param name="t"></param>
         public void AddTrickToDatabase(Trick t)
         {
+            log.Debug("Function " + MethodBase.GetCurrentMethod().Name + "run on name " + t.Name);
+
             if (dbConnection == null)
             {
                 NoConnectionErrorMessage();
@@ -1103,6 +1151,8 @@ namespace Simhopp.Model
         /// <param name="difficulty"></param>
         public void AddTrickToDatabase(string trickName, double difficulty)
         {
+            log.Debug("Function " + MethodBase.GetCurrentMethod().Name + "run on name " + trickName);
+
             Trick t = new Trick(trickName, difficulty);
             AddTrickToDatabase(t);
         }
@@ -1114,6 +1164,8 @@ namespace Simhopp.Model
         /// <returns>Trick ID number.</returns>
         public int GetTrickIdByName(string trickName)
         {
+            log.Debug("Function " + MethodBase.GetCurrentMethod().Name + "run on name " + trickName);
+
             if (dbConnection == null)
             {
                 NoConnectionErrorMessage();
@@ -1168,6 +1220,8 @@ namespace Simhopp.Model
 
         public void AddJumpResultToDatabase(Participant participant, int contestId) ///Gör färdigt efter get trick id by name. Bättre att ta ett participantobjekt???
         {
+            log.Debug("Function " + MethodBase.GetCurrentMethod().Name + "run on SSN " + participant.GetDiverSSN() +  " and contest id " + contestId);
+
             if (dbConnection == null)
             {
                 NoConnectionErrorMessage();
@@ -1205,6 +1259,7 @@ namespace Simhopp.Model
 
         public List<JumpResult> GetJumpResults() //Gör så att denna funkar!!!
         {
+            log.Debug("Function " + MethodBase.GetCurrentMethod().Name + " used");
             List<JumpResult> jr = new List<JumpResult>();
             return jr;
         }
@@ -1220,6 +1275,9 @@ namespace Simhopp.Model
         /// <param name="trickId">The trick that was performed.</param>
         public void AddJumpToDatabase(double totalPoints, int diverId, int contestId, int trickId)
         {
+            log.Debug("Function " + MethodBase.GetCurrentMethod().Name + "run on (diverId, contestId, trickId) ( + " +
+                diverId + ", " + contestId + ", " + trickId + ")");
+
             if (dbConnection == null)
             {
                 NoConnectionErrorMessage();
@@ -1244,6 +1302,7 @@ namespace Simhopp.Model
             }
             #endregion
         }
+
         #endregion
 
         #region Evaluation
@@ -1255,6 +1314,8 @@ namespace Simhopp.Model
         /// <param name="point"></param>
         public void AddEvaluationToDatabase(int jumpId, int judgeId, double point)
         {
+            log.Debug("Function " + MethodBase.GetCurrentMethod().Name + "run on (judgeId, jumpId) ( + " + judgeId + ", " + jumpId + ")");
+
             if (dbConnection == null)
             {
                 NoConnectionErrorMessage();
@@ -1297,6 +1358,7 @@ namespace Simhopp.Model
             if (disposing)
             {
                 dbConnection.Close();
+                log.Info("Database connection closed.");
             }
         }
 
