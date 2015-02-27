@@ -7,6 +7,8 @@ namespace SimhoppGUI
 {
     public class DimIt : IDisposable
     {
+        private List<Form> forms = new List<Form>();
+
         public DimIt()
         {
             var openForms = Application.OpenForms.Count;
@@ -31,12 +33,22 @@ namespace SimhoppGUI
 
         public void Dispose()
         {
-            foreach (var form in forms)
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
             {
-                form.Close();
+                foreach (var form in forms)
+                {
+                   // form.Close();
+                    form.Dispose();
+                }
             }
         }
 
-        private List<Form> forms = new List<Form>();
+        
     }
 }
