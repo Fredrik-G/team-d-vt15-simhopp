@@ -121,19 +121,6 @@ namespace SimhoppGUI
             }
         }
 
-        private void StartScreenEditViewContestBtn_Click(object sender, EventArgs e)
-        {
-            //Dims the background form and makes it non-interactive.
-            using (new DimIt())
-            using (var editViewContest = new EditViewContest(EventGetContestsList))
-            {
-                if (editViewContest.ShowDialog(this) == DialogResult.OK)
-                {
-                    editViewContest.Show();
-                }
-            }
-        }
-
         private void StartScreenAddDiverContestBtn_Click(object sender, EventArgs e)
         {
             //Dims the background form and makes it non-interactive.
@@ -167,7 +154,7 @@ namespace SimhoppGUI
         {
             //Dims the background form and makes it non-interactive.
             using (new DimIt())
-            using (var judgeClient = new JudgeClient())
+            using (var judgeClient = new JudgeClient(EventGetJudgeHash, EventGetJudgeSalt))
             {
                 if (judgeClient.ShowDialog(this) == DialogResult.OK)
                 {
@@ -201,6 +188,9 @@ namespace SimhoppGUI
         public event DelegateGetDiversList EventGetDiversList = null;
         public event DelegateGetJudgesInContest EventGetJudgesInContest = null;
         public event DelegateGetDiversInContest EventGetDiversInContest = null;
+
+        public event DelegateGetJudgeHash EventGetJudgeHash = null;
+        public event DelegateGetJudgeSalt EventGetJudgeSalt = null;
 
         public event DelegateAddJudgeToList EventAddJudgeToList = null;
         public event DelegateAddDiverToList EventAddDiverToList = null;

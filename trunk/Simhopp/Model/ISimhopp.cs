@@ -24,6 +24,9 @@ namespace Simhopp.Model
         BindingList<Judge> GetJudgesInContest(int id);
         BindingList<Diver> GetDiversInContest(int id);
 
+        string GetJudgeHash(string ssn);
+        string GetJudgeSalt(string ssn);
+
         void AddJudgeToList(string name, string nationality, string ssn);
         void AddDiverToList(string name, string nationality, string ssn);
         void AddJudgeToContest(int contestId, string ssn);

@@ -38,6 +38,8 @@ namespace Simhopp.Presenter
             this.View.EventRemoveDiverFromContest += RemoveDiverFromContest;
             this.View.EventReadJudgesFromDatabase += ReadJudgesFromDatabase;
             this.View.EventUpdateJudge += UpdateJudge;
+            this.View.EventGetJudgeHash += GetJudgeHash;
+            this.View.EventGetJudgeSalt += GetJudgeSalt;
             //this.View.EventAddParticipant += AddParticipant;
             //this.View.EventAddJudge += AddJudge;
             //this.View.EventGetTrickDifficultyFromTrickHashTable += GetTrickDifficultyFromTrickHashTable;
@@ -68,6 +70,16 @@ namespace Simhopp.Presenter
         public BindingList<Diver> GetDiversInContest(int id)
         {
             return this.Model.GetDiversInContest(id);
+        }
+
+        public string GetJudgeHash(string ssn)
+        {
+            return this.Model.GetJudgeHash(ssn);
+        }
+
+        public string GetJudgeSalt(string ssn)
+        {
+            return this.Model.GetJudgeSalt(ssn);
         }
         #endregion
 
