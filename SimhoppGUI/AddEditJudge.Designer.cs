@@ -97,6 +97,7 @@
             this.AddJudgeNameTb.TabIndex = 6;
             this.InputToolTip.SetToolTip(this.AddJudgeNameTb, "Allowed characters: \"A-Z \',.-\"");
             this.AddJudgeNameTb.Click += new System.EventHandler(this.AddJudgeNameTb_Click);
+            this.AddJudgeNameTb.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckEnterAdd);
             // 
             // AddJudgeNationaltyTb
             // 
@@ -106,6 +107,7 @@
             this.AddJudgeNationaltyTb.TabIndex = 7;
             this.InputToolTip.SetToolTip(this.AddJudgeNationaltyTb, "Allowed characters: \"A-Z ,-\"");
             this.AddJudgeNationaltyTb.Click += new System.EventHandler(this.AddJudgeNationaltyTb_Click);
+            this.AddJudgeNationaltyTb.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckEnterAdd);
             // 
             // AddJudgeSSNTb
             // 
@@ -115,6 +117,7 @@
             this.AddJudgeSSNTb.TabIndex = 8;
             this.InputToolTip.SetToolTip(this.AddJudgeSSNTb, "Allowed characters: \"1-9 -\". Swedish: yyyymmdd-xxxx. Rest: xxx-yy-zzzz");
             this.AddJudgeSSNTb.Click += new System.EventHandler(this.AddJudgeSSNTb_Click);
+            this.AddJudgeSSNTb.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckEnterAdd);
             // 
             // AddJudgeButton
             // 
@@ -134,6 +137,7 @@
             this.UpdateJudgeSSNTb.TabIndex = 17;
             this.InputToolTip.SetToolTip(this.UpdateJudgeSSNTb, "Allowed characters: \"1-9 -\". Swedish: yyyymmdd-xxxx. Rest: xxx-yy-zzzz");
             this.UpdateJudgeSSNTb.Click += new System.EventHandler(this.UpdateJudgeSSNTb_Click);
+            this.UpdateJudgeSSNTb.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckEnterUpdate);
             // 
             // UpdateJudgeNationalityTb
             // 
@@ -143,6 +147,7 @@
             this.UpdateJudgeNationalityTb.TabIndex = 16;
             this.InputToolTip.SetToolTip(this.UpdateJudgeNationalityTb, "Allowed characters: \"A-Z ,-\"");
             this.UpdateJudgeNationalityTb.Click += new System.EventHandler(this.UpdateJudgeNationalityTb_Click);
+            this.UpdateJudgeNationalityTb.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckEnterUpdate);
             // 
             // UpdateJudgeNameTb
             // 
@@ -152,6 +157,7 @@
             this.UpdateJudgeNameTb.TabIndex = 15;
             this.InputToolTip.SetToolTip(this.UpdateJudgeNameTb, "Allowed characters: \"A-Z \',.-\"");
             this.UpdateJudgeNameTb.Click += new System.EventHandler(this.UpdateJudgeNameTb_Click);
+            this.UpdateJudgeNameTb.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckEnterUpdate);
             // 
             // EditJudgeNationalityLabel
             // 
@@ -238,7 +244,7 @@
             this.UpdateJudgeRemoveBtn.Location = new System.Drawing.Point(98, 150);
             this.UpdateJudgeRemoveBtn.Name = "UpdateJudgeRemoveBtn";
             this.UpdateJudgeRemoveBtn.Size = new System.Drawing.Size(75, 23);
-            this.UpdateJudgeRemoveBtn.TabIndex = 24;
+            this.UpdateJudgeRemoveBtn.TabIndex = 19;
             this.UpdateJudgeRemoveBtn.Text = "Remove";
             this.UpdateJudgeRemoveBtn.UseVisualStyleBackColor = true;
             this.UpdateJudgeRemoveBtn.Click += new System.EventHandler(this.UpdateJudgeRemoveBtn_Click);
@@ -286,6 +292,7 @@
             this.JudgesDataGridView.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.JudgesDataGridView.Size = new System.Drawing.Size(360, 225);
             this.JudgesDataGridView.TabIndex = 22;
+            this.JudgesDataGridView.TabStop = false;
             this.JudgesDataGridView.SelectionChanged += new System.EventHandler(this.JudgesDataGridView_SelectionChanged);
             // 
             // InputErrorProvider
@@ -304,6 +311,7 @@
             this.MinimizeBox = false;
             this.Name = "AddEditJudge";
             this.Text = "Add/Edit Judge";
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckEnterAdd);
             this.tabControlAddEdit.ResumeLayout(false);
             this.tabPageEditJudge.ResumeLayout(false);
             this.tabPageEditJudge.PerformLayout();

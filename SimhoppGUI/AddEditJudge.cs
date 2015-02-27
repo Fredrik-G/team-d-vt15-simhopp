@@ -240,6 +240,34 @@ namespace SimhoppGUI
             JudgesDataGridView_SelectionChanged(null, null);
         }
 
+        /// <summary>
+        /// Checks if enter was pressed. 
+        /// If so, call event to add judge.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CheckEnterAdd(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)13)
+            {
+                AddJudgeButton_Click(null, null);
+            }
+        }
+
+        /// <summary>
+        /// Checks if enter was pressed. 
+        /// If so, call event to update judge.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CheckEnterUpdate(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)13)
+            {
+                UpdateJudgeButton_Click(null, null);
+            }
+        }
+
         #endregion
 
         #region Click Textboxes
@@ -289,5 +317,6 @@ namespace SimhoppGUI
             Close();
         }
         #endregion
+
     }
 }
