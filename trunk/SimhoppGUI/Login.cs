@@ -1,18 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Simhopp;
 using Simhopp.View;
 
 namespace SimhoppGUI
 {
+    /// <summary>
+    /// Allows a judge to log in. Authentication uses SHA256-encryption.
+    /// The program gets the judges password hash and his salt, 
+    /// then calculates the SHA256-hash for the inputed password + his hash (from database).
+    /// The judge is authenticated if correct hash = input hash.
+    /// </summary>
     public partial class Login : Form
     {
         private DelegateGetJudgeHash eventGetJudgeHash;
