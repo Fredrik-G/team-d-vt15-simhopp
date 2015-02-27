@@ -86,7 +86,7 @@ namespace Simhopp
                         {
                             contest.Name = "Simhoppstävlingen of doom";
                             contest.Place = "Örebro";
-                           
+
                             contest.AddJudge(GetJudgeByName("Tami Bennett"));
                             contest.AddJudge(GetJudgeByName("Curtis Cain"));
                             contest.AddJudge(GetJudgeByName("Jessie Banks"));
