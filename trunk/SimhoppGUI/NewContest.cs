@@ -13,8 +13,11 @@ namespace SimhoppGUI
 {
     public partial class NewContest : Form
     {
+        #region Data
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger
             (System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+        #endregion
 
         #region Properties
 
@@ -32,11 +35,15 @@ namespace SimhoppGUI
 
         #endregion
 
+        #region Constructor
+
         public NewContest()
         {
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             InitializeComponent();
         }
+
+        #endregion
 
         #region Events
 
@@ -57,6 +64,17 @@ namespace SimhoppGUI
             }
         }
 
+        private void CheckEnter(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)13)
+            {
+                newContestCreateBtn_Click(null, null);
+            }
+        }
+
+        #endregion
+
+        #region Click Textboxes
         private void newContestNameTB_Click(object sender, EventArgs e)
         {
             newContestNameTB.BackColor = SystemColors.Window;
@@ -70,9 +88,14 @@ namespace SimhoppGUI
         }
 
         #endregion
+
+        #region Close button
+
         private void NewContestCloseBtn_Click(object sender, EventArgs e)
         {
             Close();
         }
+
+        #endregion
     }
 }
