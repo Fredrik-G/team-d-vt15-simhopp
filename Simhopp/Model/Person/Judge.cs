@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
-
-using System.Text.RegularExpressions;
 
 namespace Simhopp.Model
 {
     /// <summary>
     /// Class that inherits from person class and holds information about a diver.
+    /// Also has hash & salt string and functions to calculate them. 
     /// </summary>
     public class Judge : Person
     {
@@ -59,19 +56,29 @@ namespace Simhopp.Model
             this.ssn = ssn;
         }
 
+        /// <summary>
+        /// Calculates a pseudo-random salt used for authentication.
+        /// </summary>
         public void CalculateSalt()
         {
-            var saltBytes = new byte[5];
+            const int SALT_SIZE = 5;
+
+            var saltBytes = new byte[SALT_SIZE];
             rngCrypto.GetNonZeroBytes(saltBytes);
 
             salt = saltBytes.Aggregate("", (current, x) => current + String.Format("{0:x2}", x));
         }
 
+        /// <summary>
+        /// Calculates a SHA256 hash from judge password + his salt. 
+        /// Judge.CalculateSalt has to be run before this function.
+        /// </summary>
+        /// <param name="password"></param>
         public void CalculateHash(string password)
         {
             if (salt == string.Empty)
             {
-                return;
+                throw new Exception("Salt is not set. Run Judge.CalculateSalt first");
             }
 
             var stringToHash = password + salt;
