@@ -100,7 +100,7 @@ namespace Simhopp.Model
         /// <param name="password"></param>
         public void CalculateHash(string password)
         {
-            if (salt == string.Empty)
+            if (string.IsNullOrEmpty(salt))
             {
                 throw new Exception("Salt is not set. Run Judge.CalculateSalt first.");
             }
