@@ -90,12 +90,6 @@
     <Compile Include="EditContest.Designer.cs">
       <DependentUpon>EditContest.cs</DependentUpon>
     </Compile>
-    <Compile Include="EditViewContest.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="EditViewContest.Designer.cs">
-      <DependentUpon>EditViewContest.cs</DependentUpon>
-    </Compile>
     <Compile Include="JudgeClient.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -136,9 +130,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditContest.resx">
       <DependentUpon>EditContest.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EditViewContest.resx">
-      <DependentUpon>EditViewContest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="JudgeClient.resx">
       <DependentUpon>JudgeClient.cs</DependentUpon>

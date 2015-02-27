@@ -431,22 +431,14 @@ namespace Simhopp
         /// </summary>
         public void ReadJudgesFromDatabase()
         {
-            var judges = databaseController.GetJudges();
-            foreach (var judge in judges)
-            {
-                judgeList.Add(judge);
-            }
+            judgeList = databaseController.GetJudgeList();
         }
         /// <summary>
         /// Reads divers from database and adds them to diverlist.
         /// </summary>
         public void ReadDiversFromDatabase()
         {
-            var divers = databaseController.GetDivers();
-            foreach (var diver in divers)
-            {
-                diverList.Add(diver);
-            }
+            diverList = databaseController.GetDiverList();
         }
         /// <summary>
         /// Reads contests from database and adds them to contestlist.
@@ -457,6 +449,8 @@ namespace Simhopp
         }
 
         #endregion
+
+        #region Read from file
 
         /// <summary>
         /// Reads judges and divers from text files.
@@ -499,5 +493,8 @@ namespace Simhopp
                 Console.WriteLine("Error when reading file " + fileName + "\n" + e.Message);
             }
         }
+
+        #endregion
+
     }
 }
