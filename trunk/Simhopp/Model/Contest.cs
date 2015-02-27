@@ -90,11 +90,7 @@ namespace Simhopp.Model
         public string Name
         {
             get
-            {
-                if (this.name == null)
-                {
-                    throw new Exception("Name is null");
-                }
+            {               
                 return this.name;
             }
             set
@@ -106,10 +102,6 @@ namespace Simhopp.Model
         {
             get
             {
-                if (this.place == null)
-                {
-                    throw new Exception("Place is null");
-                }
                 return this.place;
             }
             set
@@ -121,10 +113,6 @@ namespace Simhopp.Model
         {
             get
             {
-                if (this.startDate == null)
-                {
-                    throw new Exception("Date is null");
-                }
                 return this.startDate;
             }
             set
@@ -137,10 +125,6 @@ namespace Simhopp.Model
         {
             get
             {
-                if (this.endDate == null)
-                {
-                    throw new Exception("Date is null");
-                }
                 return this.endDate;
             }
             set
@@ -330,7 +314,7 @@ namespace Simhopp.Model
         /// </summary>
         public void SimulateContest()
         {
-            if (isFinished == true)
+            if (isFinished)
             {
                 Console.WriteLine("Contest is already finished.");
                 return;

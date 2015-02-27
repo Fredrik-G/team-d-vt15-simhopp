@@ -1,26 +1,35 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 
 namespace Simhopp.Model
 {
+    /// <summary>
+    /// Contains a tricklist (hashtable).
+    /// </summary>
     public class TrickList
     {
+        #region Data
+
         /// <summary>
         /// A Hashtable that contains an trickname as key and its difficulty as the value.
         /// </summary>
         private Hashtable trickList = new Hashtable();
 
+        #endregion
+
+        #region Constructor
+
         /// <summary>
         /// Default constructor. Size 127 cause of the number of tricks is 58. 58x2=116 --> closest upward prime 127. 
         /// </summary>
-        public TrickList() 
+        public TrickList()
         {
-            
+
         }
+
+        #endregion
+
         #region Methods
         /// <summary>
         /// Checks if the trickDictionary is empty and returns a boolean value.
@@ -58,7 +67,7 @@ namespace Simhopp.Model
             try
             {
                 trickList.Clear();
-                string[] allTricks = System.IO.File.ReadAllLines(@"Model\Files\" + filename);
+                string[] allTricks = File.ReadAllLines(@"Model\Files\" + filename);
                 foreach (string line in allTricks)
                 {
                     string[] trick = line.Split(';');
@@ -89,6 +98,7 @@ namespace Simhopp.Model
             }
            
         }
+
         /// <summary>
         /// Prints the entire hashtable in the Console window
         /// </summary>

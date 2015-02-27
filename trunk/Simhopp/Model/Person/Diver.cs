@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using System.Text.RegularExpressions;
-
-namespace Simhopp.Model
+﻿namespace Simhopp.Model
 {
     /// <summary>
     /// Class that inherits from person class and holds information about a diver.
     /// </summary>
     public class Diver : Person
     {
+        #region Constructors
+
         /// <summary>
         /// A default constructor without parameters
         /// </summary>
@@ -23,8 +17,9 @@ namespace Simhopp.Model
             this.nationality = "";
             this.ssn = "";
         }
+
         /// <summary>
-        /// A constructor that do take paramteters
+        /// Constructor with parameters.
         /// </summary>
         /// <param name="name"></param>
         /// <param name="nationality"></param>
@@ -37,6 +32,14 @@ namespace Simhopp.Model
             this.ssn = ssn;
         }
 
+        /// <summary>
+        /// Constructor with parameters.
+        /// Should only be used by databascontroller.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="nationality"></param>
+        /// <param name="ssn"></param>
         public Diver(int id, string name, string nationality, string ssn)
         {
             this.id = id;
@@ -44,5 +47,7 @@ namespace Simhopp.Model
             this.nationality = nationality;
             this.ssn = ssn;
         }
+
+        #endregion
     }
 }

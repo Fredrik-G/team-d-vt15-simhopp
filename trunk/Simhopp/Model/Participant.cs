@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Simhopp.Model
+﻿namespace Simhopp.Model
 {
     /// <summary>
     /// Class the hold a diver object, three jumpResult objects and one result.
@@ -24,6 +18,11 @@ namespace Simhopp.Model
         #endregion
 
         #region Constructor
+
+        /// <summary>
+        /// Constructor that takes a diver object as argument.
+        /// </summary>
+        /// <param name="diver"></param>
         public Participant(Diver diver)
         {
             for (var i = 0; i < 3; i++)
@@ -47,6 +46,7 @@ namespace Simhopp.Model
         {
             jumpResults[jumpNo].SetJudgePoint(judgeNo, point);
         }
+
         /// <summary>
         /// A function that sets a trick for a certain jump
         /// </summary>
@@ -57,6 +57,10 @@ namespace Simhopp.Model
             jumpResults[jumpNo].TrickName = name;
         }
 
+        /// <summary>
+        /// Sets the current divers id.
+        /// </summary>
+        /// <param name="id"></param>
         public void SetDiverId(int id)
         {
             diver.Id = id;
@@ -65,31 +69,77 @@ namespace Simhopp.Model
 
         #region Getters
 
+        /// <summary>
+        /// Returns the current diver.
+        /// </summary>
+        /// <returns></returns>
         public Diver GetDiver()
         {
             return diver;
         }
 
-        public JumpResult[] GetJumpResults()
-        {
-            return jumpResults;
-        }
-
-        public int GetDiverId()
-        {
-            return diver.Id;
-        }
-        #endregion
-
-        #region Methods
         /// <summary>
         /// Gets divers information.
         /// </summary>
         /// <returns>Returns diver name, nationality and totalpoints as string.</returns>
         public string GetDiverInfo()
         {
-            return diver.Name + "\t" + diver.Nationality +  "\t" + TotalPoints;
+            return diver.Name + "\t" + diver.Nationality + "\t" + TotalPoints;
         }
+
+        /// <summary>
+        /// Returns the current divers id.
+        /// </summary>
+        /// <returns></returns>
+        public int GetDiverId()
+        {
+            return diver.Id;
+        }
+
+        /// <summary>
+        /// Gets the current divers SSN.
+        /// </summary>
+        /// <returns></returns>
+        public string GetDiverSSN()
+        {
+            return diver.SSN;
+        }
+
+        /// <summary>
+        /// Gets the current divers name.
+        /// </summary>
+        /// <returns></returns>
+        public string GetDiverName()
+        {
+            return diver.Name;
+        }
+
+        /// <summary>
+        /// Gets the current divers nationality.
+        /// </summary>
+        /// <returns></returns>
+        public string GetDiverNationality()
+        {
+            return diver.Nationality;
+        }
+
+        /// <summary>
+        /// Returns jump results.
+        /// </summary>
+        /// <returns></returns>
+        public JumpResult[] GetJumpResults()
+        {
+            return jumpResults;
+        }
+
+        #endregion
+
+        #region Methods
+
+
+        /// <summary>
+        /// Calculates points for every jump result.
+        /// </summary>
         public void CalculatePoints()
         {
             foreach (var jumpResult in jumpResults)
@@ -97,6 +147,12 @@ namespace Simhopp.Model
                 jumpResult.CalculateResult();
             }
         }
+
+        /// <summary>
+        /// Updates the total point for every jump result.
+        /// TODO: nu får ju alla jump samma difficulity, borde man inte kunna ha olika?
+        /// </summary>
+        /// <param name="jumpDifficulty"></param>
         public void UpdateTotalPoints(double jumpDifficulty)
         {
             foreach (var jumpResult in jumpResults)
@@ -105,8 +161,6 @@ namespace Simhopp.Model
             }
         }
 
-
-
         /// <summary>
         /// Property for TotalPoints
         /// </summary>
@@ -114,30 +168,12 @@ namespace Simhopp.Model
         {
             get
             {
-                if (Double.IsNaN(this.totalPoints))
-                {
-                    throw new Exception("totalPoints is NaN");
-                }
                 return this.totalPoints;
             }
             set
             {
                 this.totalPoints = value;
             }
-        }
-        public string GetDiverSSN()
-        {
-            return diver.SSN;
-        }
-
-        public string GetDiverName()
-        {
-            return diver.Name;
-        }
-
-        public string GetDiverNationality()
-        {
-            return diver.Nationality;
         }
 
         /// <summary>

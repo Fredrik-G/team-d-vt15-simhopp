@@ -56,6 +56,7 @@ namespace Simhopp
             contestList.Add(new Contest(4, "asd", "d", "11/11/2011", "11/11/2011"));
             contestList.Add(new Contest(5, "asd", "e", "11/11/2011", "11/11/2011"));
             //-DEBUG
+            //TODO: remove ^
             return contestList;
         }
         /// <summary>
@@ -145,23 +146,18 @@ namespace Simhopp
 
             return new BindingList<Diver>();
         }
+
         /// <summary>
         /// A function that gets a judge by its ssn.
+        /// Throws ArgumentNullException if judge is not found.
         /// </summary>
         /// <param name="name"></param>
         /// <returns>returns a judge object</returns>
         public Judge GetJudgeBySSN(string ssn)
         {
-            try
-            {
-                return judgeList.SingleOrDefault(x => x.SSN == ssn);
-            }
-            catch (ArgumentNullException)
-            {
-                return null;
-                //do something
-            }
+            return judgeList.SingleOrDefault(x => x.SSN == ssn);
         }
+
         /// <summary>
         /// A function that get a diver by its ssn
         /// </summary>
@@ -169,26 +165,31 @@ namespace Simhopp
         /// <returns>returns a diver object</returns>
         public Diver GetDiverBySSN(string ssn)
         {
-            try
-            {
-                return diverList.SingleOrDefault(x => x.SSN == ssn);
-            }
-            catch (ArgumentNullException)
-            {
-                return null;
-                //do something
-            }
+            return diverList.SingleOrDefault(x => x.SSN == ssn);
         }
 
+        /// <summary>
+        /// Gets the hashcode for a given judge.
+        /// Throws ArgumentNullException if judge is not found.
+        /// </summary>
+        /// <param name="ssn"></param>
+        /// <returns></returns>
         public string GetJudgeHash(string ssn)
         {
             return databaseController.GetJudgeHash(GetJudgeBySSN(ssn));
         }
 
+        /// <summary>
+        /// Gets the salt for a given judge.
+        /// Throws ArgumentNullException if judge is not found.
+        /// </summary>
+        /// <param name="ssn"></param>
+        /// <returns></returns>
         public string GetJudgeSalt(string ssn)
         {
             return databaseController.GetJudgeSalt(GetJudgeBySSN(ssn));
         }
+
         #endregion
 
         /// <summary>
