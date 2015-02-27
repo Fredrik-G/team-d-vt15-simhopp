@@ -754,6 +754,77 @@ namespace Simhopp.Model
             return -1; //Can't happen.
         }
 
+        /// <summary>
+        /// Gets hash for judge.
+        /// </summary>
+        /// <param name="judge"></param>
+        /// <returns></returns>
+        public string GetJudgeHash(Judge judge)
+        {
+            if (dbConnection == null)
+            {
+                NoConnectionErrorMessage();
+                throw new Exception("No connection to database.");
+            }
+            try
+            {
+                var sql = "SELECT Hash FROM Judge WHERE ID = '" + judge.Id + "'";
+                var command = new SQLiteCommand(sql, dbConnection);
+                var reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    return Convert.ToString(reader["Hash"]);
+                }
+            }
+
+            catch (SQLiteException sqliteEx)
+            {
+                MsgBox.CreateErrorBox("Could not get Judge hash from database\n" + sqliteEx, MethodBase.GetCurrentMethod().Name);
+            }
+            catch (Exception e)
+            {
+                MsgBox.CreateErrorBox("Could not get Judge hash from database.\n" + e, MethodBase.GetCurrentMethod().Name);
+            }
+
+            return null;//Can't happen.
+        }
+        /// <summary>
+        /// Gets salt for judge.
+        /// </summary>
+        /// <param name="judge"></param>
+        /// <returns></returns>
+        public string GetJudgeSalt(Judge judge)
+        {
+            if (dbConnection == null)
+            {
+                NoConnectionErrorMessage();
+                throw new Exception("No connection to database.");
+            }
+            try
+            {
+                var sql = "SELECT Salt FROM Judge WHERE ID = '" + judge.Id + "'";
+                var command = new SQLiteCommand(sql, dbConnection);
+                var reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    return Convert.ToString(reader["Salt"]);
+                }
+            }
+
+            catch (SQLiteException sqliteEx)
+            {
+                MsgBox.CreateErrorBox("Could not get Judge salt from database\n" + sqliteEx, MethodBase.GetCurrentMethod().Name);
+            }
+            catch (Exception e)
+            {
+                MsgBox.CreateErrorBox("Could not get Judge salt from database.\n" + e, MethodBase.GetCurrentMethod().Name);
+            }
+
+            return null;//Can't happen.
+        }
+
         #endregion
 
         #region Contest Methods
