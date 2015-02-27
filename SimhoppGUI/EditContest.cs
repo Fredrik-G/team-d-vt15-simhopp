@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
 using log4net;
 using Simhopp;
-using Simhopp.Model;
 
 namespace SimhoppGUI
 {
@@ -93,27 +91,17 @@ namespace SimhoppGUI
             try
             {
                 var startDate = StartScreen.CreateDateString(EditViewContestEditStartDateTp);
-                var correctStartDate = Contest.CheckCorrectDate(startDate);
+                var correctStartDate = CheckInput.CheckCorrectDate(startDate);
 
                 var endDate = StartScreen.CreateDateString(EditViewContestEditEndtDateTp);
-                var correctEndDate = Contest.CheckCorrectDate(endDate);
-
-                //Kan datum ens bli fel med DateTimePicker?
-                if (!correctStartDate)
-                {
-                    EditViewContestEditStartDateTp.BackColor = Color.Red;
-                }
-                if (!correctEndDate)
-                {
-                    EditViewContestEditEndtDateTp.BackColor = Color.Red;
-                }
+                var correctEndDate = CheckInput.CheckCorrectDate(endDate);              
 
                 if (CheckInput.CheckCorrectContestInput(InputErrorProvider,
                     EditViewContestEditContestNameTb,
                     EditViewContestEditContestPlaceTb) && correctStartDate && correctEndDate)
                 {
 
-                    //event update 
+                    //TODO event update 
                 }
             }
 

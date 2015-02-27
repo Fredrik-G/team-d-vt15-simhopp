@@ -398,7 +398,13 @@ namespace Simhopp
         #endregion
 
         #region Update methods
-
+        /// <summary>
+        /// Updates a judge object in judgelist and in database.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="nationality"></param>
+        /// <param name="ssn"></param>
         public void UpdateJudge(int id, string name, string nationality, string ssn)
         {
             var tempJudge = GetJudgeBySSN(ssn);
@@ -418,7 +424,6 @@ namespace Simhopp
         }
 
         #endregion
-
 
         #region Read from database
         /// <summary>
