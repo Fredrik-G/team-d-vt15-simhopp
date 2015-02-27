@@ -645,6 +645,37 @@ namespace Simhopp.Model
         }
 
         /// <summary>
+        /// Updates a Judge row in the database.
+        /// </summary>
+        /// <param name="j"></param>
+        public void UpdateJudgeWithHash(Judge j)
+        {
+            if (dbConnection == null)
+            {
+                NoConnectionErrorMessage();
+                return;
+            }
+
+            try
+            {
+                var sql = "UPDATE Judge SET Name = '" + j.Name + "', SSN = '" + j.SSN + "'," +
+                             " Nationality = '" + j.Nationality + "', Hash = '" + j.Hash +
+                             "', Salt = '" + j.Salt + "' WHERE ID = '" + GetJudgeId(j.SSN) + "'";
+                var command = new SQLiteCommand(sql, dbConnection);
+                command.ExecuteNonQuery();
+            }
+
+            catch (SQLiteException sqliteEx)
+            {
+                MsgBox.CreateErrorBox("Could not update the following Judge in database: \n" + j.Name + ", " + j.Nationality + ", " + j.SSN + "\nExeption: " + sqliteEx, MethodBase.GetCurrentMethod().Name);
+            }
+
+            catch (Exception e)
+            {
+                MsgBox.CreateErrorBox("Could not update the following Judge in database: \n" + j.Name + ", " + j.Nationality + ", " + j.SSN + "\nExeption: " + e, MethodBase.GetCurrentMethod().Name);
+            }
+        }
+        /// <summary>
         /// Gets the judges from datbase, puts them in a lisa and returns it.
         /// </summary>
         /// <returns>List of Judge objects.</returns>
