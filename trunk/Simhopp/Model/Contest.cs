@@ -443,6 +443,7 @@ namespace Simhopp.Model
 
         #region Check correct input
         /// <summary>
+        /// Allowed characters: "a-Z '.- "
         /// "Jerusalem-VM, He'Man, Asp.Net"
         /// </summary>
         /// <param name="name"></param>
@@ -453,6 +454,7 @@ namespace Simhopp.Model
             return patternName.IsMatch(name);
         }
         /// <summary>
+        /// Allowed characters: "a-Z '.- "
         /// "Jerusalem-VM, He'Man, Asp.Net"
         /// </summary>
         /// <param name="place"></param>

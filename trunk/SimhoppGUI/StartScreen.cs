@@ -67,6 +67,7 @@ namespace SimhoppGUI
                     {
                         return;
                     }
+                    //Creates a new contest with the input from newContest-form. 
                     if (newContest.DialogResult == DialogResult.OK)
                     {
                         var startDate = CreateDateString(newContest.NewContestStartDateDTP);
@@ -76,7 +77,6 @@ namespace SimhoppGUI
                         log.Info("Created new contest(" + newContest.City +", " +
                             newContest.ContestName + ", " + startDate + ", " + endDate + ").");
                     }
-
                 }
             }
 

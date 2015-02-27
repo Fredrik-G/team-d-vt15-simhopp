@@ -46,11 +46,12 @@ namespace SimhoppGUI
         {
             if (Contest.CheckCorrectName(nameTextBox.Text))
             {
+                errorProvider.Clear();
                 return true;
             }
             else
             {
-                ShowError(errorProvider, nameTextBox);
+                ShowError(errorProvider, nameTextBox, "Incorrect name. Allowed characters: 'a-Z '.-'");
                 return false;
             }
         }
@@ -58,11 +59,12 @@ namespace SimhoppGUI
         {
             if (Contest.CheckCorrectPlace(placeTextBox.Text))
             {
+                errorProvider.Clear();
                 return true;
             }
             else
             {
-                ShowError(errorProvider, placeTextBox);
+                ShowError(errorProvider, placeTextBox, "Incorrect City. Allowed characters: 'a-Z '.-'");
                 return false;
             }
         }
@@ -73,11 +75,12 @@ namespace SimhoppGUI
         {
             if (Person.CheckCorrectName(nameTextBox.Text))
             {
+                errorProvider.Clear();
                 return true;
             }
             else
             {
-                ShowError(errorProvider, nameTextBox);
+                ShowError(errorProvider, nameTextBox, "Incorrect name. Allowed characters: 'A-Z ',.-'");
                 return false;
             }
         }
@@ -85,11 +88,12 @@ namespace SimhoppGUI
         {
             if (Person.CheckCorrectNationality(nationalityTextBox.Text))
             {
+                errorProvider.Clear();
                 return true;
             }
             else
             {
-                ShowError(errorProvider, nationalityTextBox);
+                ShowError(errorProvider, nationalityTextBox, "Incorrect nationality. Allowed characters: 'A-Z ,-'");
                 return false;
             }
         }
@@ -99,11 +103,12 @@ namespace SimhoppGUI
         {
             if (Person.CheckCorrectSSN(ssnTextBox.Text, nationalityTextBox.Text))
             {
+                errorProvider.Clear();
                 return true;
             }
             else
             {
-                ShowError(errorProvider, ssnTextBox);
+                ShowError(errorProvider, ssnTextBox, "Incorrect SSN. Swedish: yyyymmdd-xxxx. Rest: xxx-yy-zzzz");
                 return false;
             }
         }
@@ -111,21 +116,38 @@ namespace SimhoppGUI
 
         #region Correct Date
 
-        public static bool CheckCorrectDate(DateTimePicker startDate, DateTimePicker endDate)
+        /// <summary>
+        /// Checks if date is correct.
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public static bool CheckCorrectDate(string date)
         {
-            if (startDate.Value >= endDate.Value)
+            return Contest.CheckCorrectDate(date);
+        }
+
+        /// <summary>
+        /// Kollar om startdatum kommer efter slutdatum. Visar även ett error om datum är fel.
+        /// </summary>
+        /// <param name="errorProvider"></param>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
+        public static bool CheckCorrectStartDate(ErrorProvider errorProvider ,DateTimePicker startDate, DateTimePicker endDate)
+        {
+            if (startDate.Value > endDate.Value)
             {
-                endDate.ForeColor = Color.Red;
-                endDate.BackColor = Color.Red;
+                ShowError(errorProvider, startDate, "Start date can not occur before end date.");
                 return false;
             }
+            errorProvider.Clear();
             return true;
         }
         #endregion    
 
-        private static void ShowError(ErrorProvider errorProvider, TextBox textBox)
+        private static void ShowError(ErrorProvider errorProvider, Control control, string errorMessage)
         {
-            errorProvider.SetError(textBox, "Error: Invalid input");
+            errorProvider.SetError(control, "Error: " + errorMessage);
         }
     }
 }

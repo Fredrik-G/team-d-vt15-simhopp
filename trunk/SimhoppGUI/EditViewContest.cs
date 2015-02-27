@@ -51,6 +51,28 @@ namespace SimhoppGUI
         }
         #endregion
 
+        #region Methods
+
+        /// <summary>
+        /// Creates a date string used by DateTimePicker.
+        /// </summary>
+        /// <param name="row"></param>
+        /// <param name="cellName"></param>
+        /// <returns></returns>
+        private string CreateDateTimePicker(DataGridViewRow row, string cellName)
+        {
+            var date = row.Cells[cellName].Value.ToString().Split('/');
+            var temp = row.Cells[cellName].Value.ToString().Split('/');
+
+            date[0] = temp[1];
+            date[1] = temp[0];
+            return date[0] + "/" + date[1] + "/" + date[2];
+        }
+
+        #endregion
+
+        #region Events
+
         /// <summary>
         /// Shows the selected contest in the textboxes below.
         /// </summary>
@@ -86,21 +108,7 @@ namespace SimhoppGUI
                 MsgBox.CreateErrorBox(exception.ToString(), MethodBase.GetCurrentMethod().Name);
             }
         }
-        /// <summary>
-        /// Creates a date string used by DateTimePicker.
-        /// </summary>
-        /// <param name="row"></param>
-        /// <param name="cellName"></param>
-        /// <returns></returns>
-        private string CreateDateTimePicker(DataGridViewRow row, string cellName)
-        {
-            var date = row.Cells[cellName].Value.ToString().Split('/');
-            var temp = row.Cells[cellName].Value.ToString().Split('/');
 
-            date[0] = temp[1];
-            date[1] = temp[0];
-            return date[0] + "/" + date[1] + "/" + date[2];
-        }
         /// <summary>
         /// Updates the selected contest with the input from the textboxes. 
         /// Also checks if the input is correct.
@@ -121,10 +129,10 @@ namespace SimhoppGUI
                 var row = cell.OwningRow;
 
                 var startDate = StartScreen.CreateDateString(EditViewContestEditStartDateTp);
-                var correctStartDate = Contest.CheckCorrectDate(startDate);
+                var correctStartDate = CheckInput.CheckCorrectDate(startDate);
 
                 var endDate = StartScreen.CreateDateString(EditViewContestEditEndtDateTp);
-                var correctEndDate = Contest.CheckCorrectDate(endDate);
+                var correctEndDate = CheckInput.CheckCorrectDate(endDate);
 
                 //Kan datum ens bli fel med DateTimePicker?
                 if (!correctStartDate)
@@ -160,12 +168,16 @@ namespace SimhoppGUI
             }
 
         }
+
+        #endregion
+
         #region Close Button
         private void EditViewContestCloseBtn_Click(object sender, EventArgs e)
         {
             Close();
         }
         #endregion
+
         #region Click Textboxes
         private void EditViewContestEditContestNameTb_Click(object sender, EventArgs e)
         {

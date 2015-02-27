@@ -47,7 +47,11 @@ namespace SimhoppGUI
         /// <param name="e"></param>
         private void newContestCreateBtn_Click(object sender, EventArgs e)
         {
-            if (CheckInput.CheckCorrectContestInput(InputErrorProvider, newContestNameTB, newContestCityTB))
+            //Måste anropa checkinput här utanför if för att båda check-anropen ska göras. (eller?)
+            var correctDate = CheckInput.CheckCorrectStartDate(InputErrorProvider, NewContestStartDateDTP, NewContestEndDateDTP);
+            var correctInput = CheckInput.CheckCorrectContestInput(InputErrorProvider, newContestNameTB, newContestCityTB);
+
+            if (correctDate && correctInput)
             {
                 DialogResult = DialogResult.OK;
             }
