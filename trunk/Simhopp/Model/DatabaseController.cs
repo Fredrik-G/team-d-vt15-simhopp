@@ -444,6 +444,55 @@ namespace Simhopp.Model
             }
             return null;
         }
+
+        public int GetDiverId(string ssn)
+        {
+            if (dbConnection == null)
+            {
+                NoConnectionErrorMessage();
+            }
+            else
+            {
+                try
+                {
+                    int id = -1;
+                    string sql = "SELECT ID FROM Diver WHERE SSN = '" + ssn + "'";
+                    SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
+                    SQLiteDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        id = Convert.ToInt32(reader["ID"]);
+                    }
+                    return id;
+                }
+
+                catch (SQLiteException sqliteEx)
+                {
+                    MsgBox.CreateErrorBox("Could not get Diver ID from database.\n" + sqliteEx, MethodBase.GetCurrentMethod().Name);
+                }
+
+                catch (FormatException formatEx)
+                {
+                    MsgBox.CreateErrorBox("Could not get Diver ID from database.\n" + formatEx.GetType() + "\n" + formatEx, MethodBase.GetCurrentMethod().Name);
+                }
+
+                catch (InvalidCastException invalidCastEx)
+                {
+                    MsgBox.CreateErrorBox("Could not get Diver ID from database.\n" + invalidCastEx.GetType() + "\n" + invalidCastEx, MethodBase.GetCurrentMethod().Name);
+                }
+
+                catch (OverflowException overflowEx)
+                {
+                    MsgBox.CreateErrorBox("Could not get Diver ID from database.\n" + overflowEx.GetType() + "\n" + overflowEx, MethodBase.GetCurrentMethod().Name);
+                }
+
+                catch (Exception e)
+                {
+                    MsgBox.CreateErrorBox("Could not get Diver ID from database.\n" + e, MethodBase.GetCurrentMethod().Name);
+                }
+            }
+            return -1;
+        }
         #endregion
 
         #region Judge Methods
@@ -627,6 +676,56 @@ namespace Simhopp.Model
             }
             return null;
         }
+
+        public int GetJudgeId(string ssn)
+        {
+            if (dbConnection == null)
+            {
+                NoConnectionErrorMessage();
+            }
+            else
+            {
+                try
+                {
+                    int id = -1;
+                    string sql = "SELECT ID FROM Judge WHERE SSN = '" + ssn + "'";
+                    SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
+                    SQLiteDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        id = Convert.ToInt32(reader["ID"]);
+                    }
+                    return id;
+                }
+
+                catch (SQLiteException sqliteEx)
+                {
+                    MsgBox.CreateErrorBox("Could not get Trick ID from database.\n" + sqliteEx, MethodBase.GetCurrentMethod().Name);
+                }
+
+                catch (FormatException formatEx)
+                {
+                    MsgBox.CreateErrorBox("Could not get Trick ID from database.\n" + formatEx.GetType() + "\n" + formatEx, MethodBase.GetCurrentMethod().Name);
+                }
+
+                catch (InvalidCastException invalidCastEx)
+                {
+                    MsgBox.CreateErrorBox("Could not get Trick ID from database.\n" + invalidCastEx.GetType() + "\n" + invalidCastEx, MethodBase.GetCurrentMethod().Name);
+                }
+
+                catch (OverflowException overflowEx)
+                {
+                    MsgBox.CreateErrorBox("Could not get Trick ID from database.\n" + overflowEx.GetType() + "\n" + overflowEx, MethodBase.GetCurrentMethod().Name);
+                }
+
+                catch (Exception e)
+                {
+                    MsgBox.CreateErrorBox("Could not get Trick ID from database.\n" + e, MethodBase.GetCurrentMethod().Name);
+                }
+            }
+            return -1;
+        }
+
         #endregion
 
         #region Contest Methods
@@ -655,13 +754,21 @@ namespace Simhopp.Model
                     int lastInsertedContestId = GetLastId();
 
                     //Add all new judges to the database and update their id.
-                    List<Judge> judgeList = c.GetJudgesList();
                     foreach (var judges in c.GetJudgesList())
                     {
                         if (judges.Id == -1)
                         {
-                            AddJudgeToDatabase(judges);
-                            judges.Id = GetLastId();
+                            //Checks if judge exicts in database already.
+                            int judgeId = GetJudgeId(judges.SSN);
+                            if (judgeId != -1)
+                            {
+                                judges.Id = judgeId;
+                            }
+                            else
+                            {
+                                AddJudgeToDatabase(judges);
+                                judges.Id = GetLastId();
+                            }
                         }
                     }
 
@@ -671,8 +778,16 @@ namespace Simhopp.Model
                         //Add participant to database if not already initialized and update divers id.
                         if (participant.GetDiverId() == -1)
                         {
-                            AddDiverToDatabase(participant.GetDiver());
-                            participant.SetDiverId(GetLastId());
+                            int diverId = GetDiverId(participant.GetDiverSSN());
+                            if (diverId != -1)
+                            {
+                                participant.SetDiverId(diverId);   
+                            }
+                            else
+                            {
+                                AddDiverToDatabase(participant.GetDiver());
+                                participant.SetDiverId(GetLastId());
+                            }
                         }
 
                         foreach (var jumpResult in participant.GetJumpResults())
@@ -680,10 +795,11 @@ namespace Simhopp.Model
                             //Add Jump to database.
                             AddJumpToDatabase(jumpResult.SumJudgePoints, participant.GetDiverId(), lastInsertedContestId, GetTrickIdByName(jumpResult.TrickName));
                             int LatestJumpId = GetLastId();
-                            for (int i = 0; i < judgeList.Count; i++)
+                            int pointNumber = 0;
+                            foreach (var judges in c.GetJudgesList())
                             {
                                 //Add evaluation to database.
-                                AddEvaluationToDatabase(LatestJumpId, judgeList[i].Id, jumpResult.GetJudgePoint(i));
+                                AddEvaluationToDatabase(LatestJumpId, judges.Id, jumpResult.GetJudgePoint(pointNumber++));
                             }
                         }
                     }
