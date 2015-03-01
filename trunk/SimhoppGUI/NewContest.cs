@@ -78,13 +78,15 @@ namespace SimhoppGUI
         private void newContestNameTB_Click(object sender, EventArgs e)
         {
             newContestNameTB.BackColor = SystemColors.Window;
-            ContestName = "";
+            newContestNameTB.SelectionStart = 0;
+            newContestNameTB.SelectionLength= newContestNameTB.Text.Length;
         }
 
         private void newContestCityTB_Click(object sender, EventArgs e)
         {
             newContestCityTB.BackColor = SystemColors.Window;
-            City = "";
+            newContestCityTB.SelectionStart = 0;
+            newContestCityTB.SelectionLength = newContestCityTB.Text.Length;
         }
 
         #endregion

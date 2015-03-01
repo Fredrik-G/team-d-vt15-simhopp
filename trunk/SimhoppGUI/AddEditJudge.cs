@@ -275,36 +275,43 @@ namespace SimhoppGUI
         private void UpdateJudgeNameTb_Click(object sender, EventArgs e)
         {
             UpdateJudgeNameTb.BackColor = SystemColors.Window;
-            UpdateName = "";
+            UpdateJudgeNameTb.SelectionStart = 0;
+            UpdateJudgeNameTb.SelectionLength = UpdateJudgeNameTb.Text.Length;
         }
         private void UpdateJudgeNationalityTb_Click(object sender, EventArgs e)
         {
             UpdateJudgeNationalityTb.BackColor = SystemColors.Window;
-            UpdateNationality = "";
+            UpdateJudgeNationalityTb.SelectionStart = 0;
+            UpdateJudgeNationalityTb.SelectionLength = UpdateJudgeNationalityTb.Text.Length;
         }
 
         private void UpdateJudgeSSNTb_Click(object sender, EventArgs e)
         {
             UpdateJudgeSSNTb.BackColor = SystemColors.Window;
-            UpdateSSN = "";
+            UpdateJudgeSSNTb.SelectionStart = 0;
+            UpdateJudgeSSNTb.SelectionLength = UpdateJudgeSSNTb.Text.Length;
         }
 
         private void AddJudgeNameTb_Click(object sender, EventArgs e)
         {
             AddJudgeNameTb.BackColor = SystemColors.Window;
-            AddName = "";
+            AddJudgeNameTb.SelectionStart = 0;
+            AddJudgeNameTb.SelectionLength = AddJudgeNameTb.Text.Length;
         }
         private void AddJudgeNationaltyTb_Click(object sender, EventArgs e)
         {
             AddJudgeNationaltyTb.BackColor = SystemColors.Window;
-            AddNationality = "";
+            AddJudgeNationaltyTb.SelectionStart = 0;
+            AddJudgeNationaltyTb.SelectionLength = AddJudgeNationaltyTb.Text.Length;
         }
 
         private void AddJudgeSSNTb_Click(object sender, EventArgs e)
         {
             AddJudgeSSNTb.BackColor = SystemColors.Window;
-            AddSSN = "";
+            AddJudgeSSNTb.SelectionStart = 0;
+            AddJudgeSSNTb.SelectionLength = AddJudgeSSNTb.Text.Length;
         }
+
         #endregion
 
         #region Close Buttons
