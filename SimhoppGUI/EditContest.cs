@@ -134,12 +134,14 @@ namespace SimhoppGUI
         #region Click Textboxes
         private void EditViewContestEditContestNameTb_Click(object sender, EventArgs e)
         {
-            ContestName = "";
+            EditViewContestEditContestNameTb.SelectionStart = 0;
+            EditViewContestEditContestNameTb.SelectionLength = EditViewContestEditContestNameTb.Text.Length;
         }
 
         private void EditViewContestEditContestPlaceTb_Click(object sender, EventArgs e)
         {
-            Place = "";
+            EditViewContestEditContestPlaceTb.SelectionStart = 0;
+            EditViewContestEditContestPlaceTb.SelectionLength = EditViewContestEditContestPlaceTb.Text.Length;
         }
         #endregion
     }
