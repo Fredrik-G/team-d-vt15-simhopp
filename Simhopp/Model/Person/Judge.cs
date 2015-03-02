@@ -76,6 +76,16 @@ namespace Simhopp.Model
             this.ssn = ssn;
         }
 
+        public Judge(int id, string name, string nationality, string ssn, string hash, string salt)
+        {
+            this.id = id;
+            this.name = name;
+            this.nationality = nationality;
+            this.ssn = ssn;
+            this.hash = hash;
+            this.salt = salt;
+        }
+
         #endregion
 
         #region Methods
