@@ -219,6 +219,38 @@ namespace Simhopp.Model
             }
         }
 
+        public void AddParticipant(Participant participant)
+        {
+            try
+            {
+                if (participant == null)
+                {
+                    throw new NullReferenceException("participant is null");
+                }
+                /*else if (!Person.CheckCorrectName(diver.Name))
+                {
+                    throw new InvalidDataException("diver name is not set or invalid.");
+                }
+                else if (!Person.CheckCorrectNationality(diver.Nationality))
+                {
+                    throw new InvalidDataException("diver nationality is not set or invalid.");
+                }
+                else if (!Person.CheckCorrectSSN(diver.SSN, diver.Nationality))
+                {
+                    throw new InvalidDataException("diver social security number is not set or invalid.");
+                }*/
+
+                else
+                {
+                    participantsList.Add(participant);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
         /// <summary>
         /// Adds a judge to the judgelist. Catches exeptions if there should be something wrong with the judge that should be added. 
         /// </summary>
@@ -467,6 +499,8 @@ namespace Simhopp.Model
             Console.ReadKey();
         }
         #endregion
+
+
 
         #region Check correct input
         /// <summary>
