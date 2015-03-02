@@ -73,6 +73,7 @@ namespace SimhoppGUI
                 JudgesDataGridView.Columns["Id"].Visible = false;
                 JudgesDataGridView.Columns["Salt"].Visible = false;
                 JudgesDataGridView.Columns["Hash"].Visible = false;
+
             }
         }
 

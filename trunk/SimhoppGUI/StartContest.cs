@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using Simhopp;
+using Simhopp.Model;
 using Simhopp.View;
 
 namespace SimhoppGUI
@@ -20,6 +23,11 @@ namespace SimhoppGUI
         private DelegateRemoveJudgeFromContest eventRemoveJudgeFromContest;
         private DelegateRemoveDiverFromContest eventRemoveDiverFromContest;
         private DelegateUpdateContest eventUpdateContest;
+        private DelegateReadTricksFromDatabase eventReadTricksFromDatabase;
+
+        DataGridViewComboBoxColumn trick1ComboBoxColumn = new DataGridViewComboBoxColumn();
+        DataGridViewComboBoxColumn trick2ComboBoxColumn = new DataGridViewComboBoxColumn();
+        DataGridViewComboBoxColumn trick3ComboBoxColumn = new DataGridViewComboBoxColumn();
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         #endregion
@@ -36,7 +44,8 @@ namespace SimhoppGUI
                 DelegateAddDiverToContest eventAddDiverToContest,
                 DelegateRemoveJudgeFromContest eventRemoveJudgeFromContest,
                 DelegateRemoveDiverFromContest eventRemoveDiverFromContest,
-                DelegateUpdateContest eventUpdateContest
+                DelegateUpdateContest eventUpdateContest,
+                DelegateReadTricksFromDatabase eventReadTricksFromDatabase
             )
         {
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -52,11 +61,22 @@ namespace SimhoppGUI
             this.eventRemoveJudgeFromContest = eventRemoveJudgeFromContest;
             this.eventRemoveDiverFromContest = eventRemoveDiverFromContest;
             this.eventUpdateContest = eventUpdateContest;
+            this.eventReadTricksFromDatabase = eventReadTricksFromDatabase;      
+        }
+        #endregion
 
+        #region Events
+
+        /// <summary>
+        /// Occurs when the form is loaded.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void StartContest_Load(object sender, EventArgs e)
+        {
             if (eventGetContestsList != null)
             {
                 ContestsDataGridView.DataSource = this.eventGetContestsList();
-                
             }
             if (eventGetJudgesList != null)
             {
@@ -66,6 +86,7 @@ namespace SimhoppGUI
             {
                 GlobalDiversDataGridView.DataSource = this.eventGetDiversList();
             }
+
             try
             {
                 ContestsDataGridView.Columns["Id"].Visible = false;
@@ -73,20 +94,44 @@ namespace SimhoppGUI
                 GlobalDiversDataGridView.Columns["Id"].Visible = false;
 
                 ContestsDataGridView.Columns["IsFinished"].Visible = false;
-  
+
                 GlobalJudgesDataGridView.Columns["Salt"].Visible = false;
                 GlobalJudgesDataGridView.Columns["Hash"].Visible = false;
 
-                }
+                GlobalDiversDataGridView.Columns["SSN"].Visible = false;
+                GlobalJudgesDataGridView.Columns["SSN"].Visible = false;
+
+            }
             catch (NullReferenceException nullReferenceException)
             {
                 //gör inget, kommer hit om "Id" inte finns.
                 log.Warn("Null reference exception when trying to start a contest", nullReferenceException);
             }
-        }
-        #endregion
+           
+            var simhopp = new Simhopp.Simhopp();
+            simhopp.ReadTricksFromDatabase();
+            
+            trick1ComboBoxColumn.DataSource = simhopp.GetTrickList();
+            trick1ComboBoxColumn.DisplayMember = "name";
+            trick1ComboBoxColumn.ValueMember = "name";
+            trick1ComboBoxColumn.Name = "Trick 1";
 
-        #region Events
+            trick2ComboBoxColumn.DataSource = simhopp.GetTrickList();
+            trick2ComboBoxColumn.DisplayMember = "name";
+            trick2ComboBoxColumn.ValueMember = "name";
+            trick2ComboBoxColumn.Name = "Trick 2";
+
+            trick3ComboBoxColumn.DataSource = simhopp.GetTrickList();
+            trick3ComboBoxColumn.DisplayMember = "name";
+            trick3ComboBoxColumn.ValueMember = "name";
+            trick3ComboBoxColumn.Name = "Trick 3";
+
+            CurrentDiversDataGridView.Columns.Add(trick1ComboBoxColumn);
+            CurrentDiversDataGridView.Columns.Add(trick2ComboBoxColumn);
+            CurrentDiversDataGridView.Columns.Add(trick3ComboBoxColumn);
+
+            ContestsDataGridView.Select();
+        }
 
         /// <summary>
         /// Occurs when a row is selected in Contest Grid.
@@ -108,19 +153,36 @@ namespace SimhoppGUI
 
                 if (JudgesDiversTabControl.SelectedTab == JudgeTabPage)
                 {
+                  //  GlobalJudgesDataGridView.Select();
+
                     CurrentJudgesDataGridView.DataSource =
                         eventGetJudgesInContest(Convert.ToInt16(row.Cells["Id"].Value));
+
                     CurrentJudgesDataGridView.Columns["Id"].Visible = false;
                     CurrentJudgesDataGridView.Columns["Salt"].Visible = false;
                     CurrentJudgesDataGridView.Columns["Hash"].Visible = false;
+                    CurrentJudgesDataGridView.Columns["SSN"].Visible = false;
                 }
                 else if (JudgesDiversTabControl.SelectedTab == DiverTabPage)
                 {
                     CurrentDiversDataGridView.DataSource =
                         eventGetDiversInContest(Convert.ToInt16(row.Cells["Id"].Value));
+
                     CurrentDiversDataGridView.Columns["Id"].Visible = false;
                     CurrentJudgesDataGridView.Columns["Salt"].Visible = false;
                     CurrentJudgesDataGridView.Columns["Hash"].Visible = false;
+                    CurrentDiversDataGridView.Columns["SSN"].Visible = false;
+
+                    CurrentDiversDataGridView.Columns["Trick 1"].DisplayIndex = 4;
+                    CurrentDiversDataGridView.Columns["Trick 2"].DisplayIndex = 5;
+                    CurrentDiversDataGridView.Columns["Trick 3"].DisplayIndex = 6;
+
+                    CurrentDiversDataGridView.Columns["Name"].Width = 100;
+                    CurrentDiversDataGridView.Columns["Nationality"].Width = 70;
+                    CurrentDiversDataGridView.Columns["Trick 1"].Width = 150;
+                    CurrentDiversDataGridView.Columns["Trick 2"].Width = 150;
+                    CurrentDiversDataGridView.Columns["Trick 3"].Width = 150;
+
                 }
             }
 
@@ -266,7 +328,7 @@ namespace SimhoppGUI
             {
                 RemovePersonFromContest(true);
             }
-       
+
             catch (NullReferenceException nullReferenceException)
             {
                 MsgBox.CreateErrorBox(nullReferenceException.ToString(), MethodBase.GetCurrentMethod().Name);
@@ -314,7 +376,7 @@ namespace SimhoppGUI
 
             if (personCell == null || contestCell == null)
             {//Händer om man klickar remove när det inte finns några current judges/divers. Ska man visa error eller bara ignorera det?
-               // throw new NullReferenceException("cell is null");
+                // throw new NullReferenceException("cell is null");
                 return;
             }
 
@@ -349,5 +411,18 @@ namespace SimhoppGUI
 
         #endregion
 
+        private void StartContestBtn_Click(object sender, EventArgs e)
+        {
+            using (new DimIt())
+            using (var liveFeed = new LiveFeed())
+            {
+                if (liveFeed.ShowDialog(this) == DialogResult.OK)
+                {
+
+                }
+            }
+        }
+
+     
     }
 }

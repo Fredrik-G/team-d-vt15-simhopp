@@ -187,6 +187,11 @@ namespace Simhopp
             return databaseController.GetJudgeSalt(GetJudgeBySSN(ssn));
         }
 
+        public BindingList<Trick> GetTrickList()
+        {
+            return trickList.GetTrickList();
+        }
+        
         #endregion
 
         /// <summary>

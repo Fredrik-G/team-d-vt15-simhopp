@@ -33,6 +33,7 @@
             this.StartScreenAddDiverContestBtn = new System.Windows.Forms.Button();
             this.StartScreenAddJudgeBtn = new System.Windows.Forms.Button();
             this.StartScreenViewJudgeClient = new System.Windows.Forms.Button();
+            this.LivefeedBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // StartScreenNewContesttBtn
@@ -85,11 +86,22 @@
             this.StartScreenViewJudgeClient.UseVisualStyleBackColor = true;
             this.StartScreenViewJudgeClient.Click += new System.EventHandler(this.StartScreenViewJudgeClient_Click);
             // 
+            // LivefeedBtn
+            // 
+            this.LivefeedBtn.Location = new System.Drawing.Point(230, 80);
+            this.LivefeedBtn.Name = "LivefeedBtn";
+            this.LivefeedBtn.Size = new System.Drawing.Size(117, 74);
+            this.LivefeedBtn.TabIndex = 6;
+            this.LivefeedBtn.Text = "Live Feed";
+            this.LivefeedBtn.UseVisualStyleBackColor = true;
+            this.LivefeedBtn.Click += new System.EventHandler(this.LivefeedBtn_Click);
+            // 
             // StartScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(608, 250);
+            this.ClientSize = new System.Drawing.Size(608, 244);
+            this.Controls.Add(this.LivefeedBtn);
             this.Controls.Add(this.StartScreenViewJudgeClient);
             this.Controls.Add(this.StartScreenAddJudgeBtn);
             this.Controls.Add(this.StartScreenAddDiverContestBtn);
@@ -112,5 +124,6 @@
         private System.Windows.Forms.Button StartScreenAddDiverContestBtn;
         private System.Windows.Forms.Button StartScreenAddJudgeBtn;
         private System.Windows.Forms.Button StartScreenViewJudgeClient;
+        private System.Windows.Forms.Button LivefeedBtn;
     }
 }

@@ -45,6 +45,10 @@ namespace Simhopp.Model
             return (trickList2.Count == 0);
         }
 
+        public BindingList<Trick> GetTrickList()
+        {
+            return trickList2;          
+        }
         /// <summary>
         /// Adds a trick with an id to the trickDictionary.
         /// </summary>
