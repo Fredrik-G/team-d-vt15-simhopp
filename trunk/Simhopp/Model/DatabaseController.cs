@@ -1089,22 +1089,91 @@ namespace Simhopp.Model
             }
             try
             {
-                string sql = "SELECT * FROM Jump WHERE Contest = '" + contest.Id + "'";
-                SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
-                SQLiteDataReader reader = command.ExecuteReader();
-                while (reader.Read())
+
+                //Get all judges in the contest.
+                string sqlGetJudges = "SELECT DISTINCT Judge.ID, Judge.Name, Judge.SSN, Judge.Nationality, Judge.Hash, Judge.Salt" +
+                             " FROM Judge, Jump, Evaluation, Contest" +
+                             " WHERE Contest.ID = '" + contest.Id + "'" +
+                             " AND Evaluation.Judge = Judge.ID;";
+                SQLiteCommand commandGetJudges = new SQLiteCommand(sqlGetJudges, dbConnection);
+                SQLiteDataReader readerGetJudges = commandGetJudges.ExecuteReader();
+                while (readerGetJudges.Read())
                 {
-
+                    contest.AddJudge(new Judge(Convert.ToInt32(readerGetJudges["ID"]), 
+                                                Convert.ToString(readerGetJudges["Name"]), 
+                                                Convert.ToString(readerGetJudges["Nationality"]), 
+                                                Convert.ToString(readerGetJudges["SSN"]), 
+                                                Convert.ToString(readerGetJudges["Hash"]), 
+                                                Convert.ToString(readerGetJudges["Salt"])));
                 }
-
-
+                
+                //Add participants to contest.
+                //Get participant divers.
+                string sqlGetDivers = "SELECT DISTINCT Diver.ID, Diver.Name, Diver.Nationality, Diver.SSN" +
+                             " FROM Diver, Jump" +
+                             " WHERE Jump.Contest = '" + contest.Id + "'" +
+                             " AND Jump.Diver = Diver.ID;";
+                SQLiteCommand commandGetDivers = new SQLiteCommand(sqlGetDivers, dbConnection);
+                SQLiteDataReader readerGetDivers = commandGetDivers.ExecuteReader();
+                while (readerGetDivers.Read())
+                {
+                    
+                    Diver d = new Diver(Convert.ToInt32(readerGetDivers["ID"]), Convert.ToString(readerGetDivers["Name"]), Convert.ToString(readerGetDivers["SSN"]), Convert.ToString(readerGetDivers["Nationality"]));
+                    Participant p = new Participant(d);
+                    //Get participant jumpResults
+                    string sqlGetJumpResult = "SELECT DISTINCT Trick.Name, Evaluation.Point, Jump.TotalPoint" +
+                                              " FROM Trick, Evaluation, Jump" +
+                                              " WHERE Jump.Contest = '" + contest.Id + "'" +
+                                              " AND Jump.Diver = '" + d.Id + "'" +
+                                              " AND Jump.Trick = Trick.ID" +
+                                              " AND Jump.ID = Evaluation.Jump;";
+                    SQLiteCommand commandGetJumpResult = new SQLiteCommand(sqlGetJumpResult, dbConnection);
+                    SQLiteDataReader readerGetJumpResult = commandGetJumpResult.ExecuteReader();
+                    int numberOfJudges = contest.GetNumberOfJudges();
+                    int JumpNumber = 0;
+                    int judgeNumber = 0;
+                    while (readerGetJumpResult.Read() && JumpNumber < 3)
+                    {
+                        if (judgeNumber == (numberOfJudges - 1))
+                        {
+                            p.SetTrick(JumpNumber, Convert.ToString(readerGetJumpResult["Name"]));
+                            judgeNumber = 0;
+                            JumpNumber++;
+                        }
+                        p.SetJudgePoint(JumpNumber, judgeNumber, Convert.ToDouble(readerGetJumpResult["Point"]));
+                        judgeNumber++;
+                    }
+                    p.CalculatePoints();
+                    //Uppdatera tot poäng för alla tre hopp.
+                    contest.AddParticipant(p);
+                }
                 return contest;
             }
             #region Exceptions
 
+            catch (SQLiteException sqliteEx)
+            {
+                MsgBox.CreateErrorBox("Could not get contest from database.\n" + sqliteEx, MethodBase.GetCurrentMethod().Name);
+            }
+
+            catch (FormatException formatEx)
+            {
+                MsgBox.CreateErrorBox("Could not get contest from database.\n" + formatEx.GetType() + "\n" + formatEx, MethodBase.GetCurrentMethod().Name);
+            }
+
+            catch (InvalidCastException invalidCastEx)
+            {
+                MsgBox.CreateErrorBox("Could not get contest from database.\n" + invalidCastEx.GetType() + "\n" + invalidCastEx, MethodBase.GetCurrentMethod().Name);
+            }
+
+            catch (OverflowException overflowEx)
+            {
+                MsgBox.CreateErrorBox("Could not get contest from database.\n" + overflowEx.GetType() + "\n" + overflowEx, MethodBase.GetCurrentMethod().Name);
+            }
+
             catch (Exception e)
             {
-
+                MsgBox.CreateErrorBox("Could not get contest from database.\n" + e, MethodBase.GetCurrentMethod().Name);
             }
             #endregion
             return null;
