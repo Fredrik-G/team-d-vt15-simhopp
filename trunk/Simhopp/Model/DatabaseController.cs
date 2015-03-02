@@ -1147,7 +1147,7 @@ namespace Simhopp.Model
 
         public BindingList<Trick> GetTrickListFromDatabase()
         {
-            log.Debug("Function " + MethodBase.GetCurrentMethod().Name + "run on name " + contest.Name);
+            log.Debug("Function " + MethodBase.GetCurrentMethod().Name + " used. ");
 
             if (dbConnection == null)
             {
