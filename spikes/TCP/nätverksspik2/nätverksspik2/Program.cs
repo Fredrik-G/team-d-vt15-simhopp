@@ -18,12 +18,23 @@ namespace ConsoleApplication1
             serverSocket.Start();
             Console.WriteLine(" >> " + "Server Started");
 
+            #region localIpAddress
+            string localIP = string.Empty;
+            localIP = Dns.GetHostName();
+            IPHostEntry ipEntry = Dns.GetHostEntry(localIP);
+            IPAddress[] IP = ipEntry.AddressList;
+            Console.WriteLine("Server IP: " + IP[1].ToString());
+            #endregion
+
+
+
             counter = 0;
             while (true)
             {
                 TcpClient clientConnection = new TcpClient();
                 
                 counter += 1;
+
                 clientSocket = serverSocket.AcceptTcpClient();
                 Console.WriteLine(" >> " + "Client No:" + Convert.ToString(counter) + " started!");
                 handleClinet client = new handleClinet();
@@ -32,7 +43,7 @@ namespace ConsoleApplication1
                 {
                     clientConnection.Connect("127.0.0.1", 9058);
                     Console.WriteLine(" >> Connection to Client");
-                    sendMessage(clientSocket, "Hej Klient");
+                    //sendMessage(clientSocket, "Hej Klient", networkstream);
                 }
                 catch (SocketException se)
                 {
@@ -45,17 +56,17 @@ namespace ConsoleApplication1
             Console.WriteLine(" >> " + "exit");
             Console.ReadLine();
         }
-        public static void sendMessage(TcpClient serverSocket, string message)
+        public static void sendMessage(TcpClient serverSocket, string message, NetworkStream stream)
         {
-            NetworkStream clientStream = serverSocket.GetStream();
-
+            stream = serverSocket.GetStream();
+            
 
             ASCIIEncoding encoder = new ASCIIEncoding();
             byte[] outStream = encoder.GetBytes(message + "$");
 
-            clientStream.Write(outStream, 0, outStream.Length);
+            stream.Write(outStream, 0, outStream.Length);
 
-            clientStream.Flush();
+            stream.Flush();
         }
     }
    
@@ -70,7 +81,7 @@ namespace ConsoleApplication1
             this.clNo = clineNo;
             Thread ctThread = new Thread(doChat);
             ctThread.Start();
-            ctThread.IsBackground = true;
+            ctThread.IsBackground = false;
         }
         private void doChat()
         {
@@ -83,20 +94,21 @@ namespace ConsoleApplication1
 
             while (true)
             {
-                someClass s = new someClass("jocke", "hopp",10);
-               
+                try
+                {
+                someClass serializedObject = new someClass("jocke", "hopp",10);
+                NetworkStream networkStream = clientSocket.GetStream();
                 using (MemoryStream stream = new MemoryStream())
                 {
                     XmlSerializer xml = new XmlSerializer(typeof(someClass));
-                    xml.Serialize(stream, s);
+                    xml.Serialize(stream, serializedObject);
                     string myString = Encoding.UTF8.GetString(stream.ToArray());
-                    Program.sendMessage(clientSocket, myString);
+                    Program.sendMessage(clientSocket, myString, networkStream);
                 }
 
-                try
-                {
+                
                     requestCount = requestCount + 1;
-                    NetworkStream networkStream = clientSocket.GetStream();
+                   
                     networkStream.Read(bytesFrom, 0, (int)clientSocket.ReceiveBufferSize);
                    
                     dataFromClient = System.Text.Encoding.ASCII.GetString(bytesFrom);

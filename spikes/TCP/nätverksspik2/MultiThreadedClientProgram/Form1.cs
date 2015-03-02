@@ -146,13 +146,13 @@ namespace WindowsApplication1
                                 networkStream.Read(bytesFrom, 0, (int)clientSocket.ReceiveBufferSize);
                                 dataFromServer = System.Text.Encoding.ASCII.GetString(bytesFrom);
                                 dataFromServer = dataFromServer.Substring(0, dataFromServer.IndexOf("$"));
-                                using (networkStream)
+                                using (TextReader reader = new StringReader(dataFromServer))
                                 {
                                     XmlSerializer xml = new XmlSerializer(typeof(someClass));
-                                    heh = (someClass)xml.Deserialize(networkStream);
+                                    heh = (someClass)xml.Deserialize(reader);
                                     
                                 }
-                                AppendTextBox(dataFromServer);
+                                //AppendTextBox(dataFromServer);
                                 AppendTextBoxName(heh.Name);
                                 AppendTextBoxTrick(heh.Jump);
                                 AppendTextBoxDiff(heh.Point);
