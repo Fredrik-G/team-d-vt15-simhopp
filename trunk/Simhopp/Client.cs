@@ -16,6 +16,7 @@ namespace Simhopp
         TcpClient clientSocket;
         bool clientConnected;
         
+
         /// <summary>
         /// Constructor for a client
         /// </summary>
