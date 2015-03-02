@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data.SQLite;
 using System.Globalization;
 using System.Reflection;
+using System.Windows.Forms;
 
 namespace Simhopp.Model
 {
@@ -14,6 +15,7 @@ namespace Simhopp.Model
     public class DatabaseController : IDisposable
     {
         #region Data
+
 
         private SQLiteConnection dbConnection;
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
@@ -133,9 +135,9 @@ namespace Simhopp.Model
         #endregion
 
         #region Methods
+        /// <summary>
         /// Returns true if the database table is empty, else false.
         /// </summary>
-        /// <summary>
         /// <param name="tableName">Table to be searched.</param>
         /// <returns></returns>
         public bool TableIsEmpty(string tableName) //Fixa till denna. vad ska den returnera om ett exception händer. Fråga Kjell!!
@@ -925,7 +927,7 @@ namespace Simhopp.Model
             try
             {
                 //Add the contest info to contest database.
-                string sql = "INSERT INTO Contest(Place, Name, StartDate, EndDate) VALUES('" + c.Place + "', '" + c.Name + "','" + c.StartDate + "','" + c.EndDate + "')";
+                string sql = "INSERT INTO Contest(Place, Name, StartDate, EndDate, Finished) VALUES('" + c.Place + "', '" + c.Name + "','" + c.StartDate + "','" + c.EndDate + "','" + c.IsFinished + "')";
                 SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
                 command.ExecuteNonQuery();
 
@@ -972,12 +974,12 @@ namespace Simhopp.Model
                     {
                         //Add Jump to database.
                         AddJumpToDatabase(jumpResult.SumJudgePoints, participant.GetDiverId(), lastInsertedContestId, GetTrickIdByName(jumpResult.TrickName));
-                        int LatestJumpId = GetLastId();
+                        int latestJumpId = GetLastId();
                         int pointNumber = 0;
                         foreach (var judges in c.GetJudgesList())
                         {
                             //Add evaluation to database.
-                            AddEvaluationToDatabase(LatestJumpId, judges.Id, jumpResult.GetJudgePoint(pointNumber++));
+                            AddEvaluationToDatabase(latestJumpId, judges.Id, jumpResult.GetJudgePoint(pointNumber++));
                         }
                     }
                 }
@@ -1141,6 +1143,58 @@ namespace Simhopp.Model
                 MsgBox.CreateErrorBox("Could not add the following Trick to database: \n" + t.Name + ", " + t.Difficulty + "\nExeption: " + e, MethodBase.GetCurrentMethod().Name);
             }
             #endregion
+        }
+
+        public BindingList<Trick> GetTrickListFromDatabase()
+        {
+            log.Debug("Function " + MethodBase.GetCurrentMethod().Name + "run on name " + contest.Name);
+
+            if (dbConnection == null)
+            {
+                NoConnectionErrorMessage();
+            }
+            try
+            {
+                BindingList<Trick> trickList = new BindingList<Trick>();
+                string sql = "SELECT * FROM Trick";
+                SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
+                SQLiteDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    
+                    Trick t = new Trick(Convert.ToString(reader["Name"]), Convert.ToDouble(reader["Difficulty"]));
+                    trickList.Add(t);
+                }
+                return trickList;
+            }
+            #region Exceptions
+
+            catch (SQLiteException sqliteEx)
+            {
+                MsgBox.CreateErrorBox("Could not get Tricks from database.\n" + sqliteEx, MethodBase.GetCurrentMethod().Name);
+            }
+
+            catch (FormatException formatEx)
+            {
+                MsgBox.CreateErrorBox("Could not get Tricks from database.\n" + formatEx.GetType() + "\n" + formatEx, MethodBase.GetCurrentMethod().Name);
+            }
+
+            catch (InvalidCastException invalidCastEx)
+            {
+                MsgBox.CreateErrorBox("Could not get Tricks from database.\n" + invalidCastEx.GetType() + "\n" + invalidCastEx, MethodBase.GetCurrentMethod().Name);
+            }
+
+            catch (OverflowException overflowEx)
+            {
+                MsgBox.CreateErrorBox("Could not get Tricks from database.\n" + overflowEx.GetType() + "\n" + overflowEx, MethodBase.GetCurrentMethod().Name);
+            }
+
+            catch (Exception e)
+            {
+                MsgBox.CreateErrorBox("Could not get Tricks from database.\n" + e, MethodBase.GetCurrentMethod().Name);
+            }
+            #endregion
+            return null;
         }
 
         /// <summary>
