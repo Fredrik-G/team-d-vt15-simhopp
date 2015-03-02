@@ -50,11 +50,11 @@ namespace SimhoppGUI
         {
             get { return UpdateJudgeSSNTb.Text; }
             set { UpdateJudgeSSNTb.Text = value; }
-        } 
+        }
         #endregion
 
         #region Constructor
-        public AddEditJudge( DelegateAddJudgeToList eventAddJudgeToList,
+        public AddEditJudge(DelegateAddJudgeToList eventAddJudgeToList,
             DelegateRemoveJudgeFromList eventRemoveJudgeFromList,
             DelegateGetJudgesList eventGetJudgesList,
             DelegateUpdateJudge eventUpdateJudge)
@@ -71,6 +71,8 @@ namespace SimhoppGUI
                 JudgesDataGridView.DataSource = eventGetJudgesList();
                 JudgesDataGridView.ReadOnly = true;
                 JudgesDataGridView.Columns["Id"].Visible = false;
+                JudgesDataGridView.Columns["Salt"].Visible = false;
+                JudgesDataGridView.Columns["Hash"].Visible = false;
             }
         }
 
@@ -123,17 +125,18 @@ namespace SimhoppGUI
         {
             try
             {
-                if (CheckInput.CheckCorrectPersonInput(InputErrorProvider, AddJudgeNameTb, AddJudgeNationaltyTb, AddJudgeSSNTb))
+                if (CheckInput.CheckCorrectPersonInput(NameErrorProvider, NationalityErrorProvider,
+                    SSNErrorProvider, AddJudgeNameTb, AddJudgeNationaltyTb, AddJudgeSSNTb))
                 {
                     eventAddJudgeToList(AddName, AddNationality, AddSSN);
-                    InputErrorProvider.Clear();
+                    NameErrorProvider.Clear();
 
                     log.Info("Added judge to list (" + AddName + ", " + AddNationality + ", " + AddSSN + ")");
                 }
             }
             catch (DuplicateNameException)
-            {//judge already exists
-                InputErrorProvider.SetError(AddJudgeSSNTb, "Error: Judge already exists");
+            {//judge already exists            
+                NameErrorProvider.SetError(AddJudgeSSNTb, "Error: Judge already exists");
                 log.Debug("Attempted to add a judge which was already in list.");
             }
             catch (Exception exception)
@@ -162,24 +165,22 @@ namespace SimhoppGUI
 
                 var row = cell.OwningRow;
 
-                if (CheckInput.CheckCorrectPersonInput(InputErrorProvider,
-                    UpdateJudgeNameTb,
-                    UpdateJudgeNationalityTb,
-                    UpdateJudgeSSNTb))
+                if (CheckInput.CheckCorrectPersonInput(NameErrorProvider, NationalityErrorProvider,
+                     SSNErrorProvider, UpdateJudgeNameTb, UpdateJudgeNationalityTb, UpdateJudgeSSNTb))
                 {
                     eventUpdateJudge(Convert.ToInt16(row.Cells["Id"].Value), UpdateName, UpdateNationality, UpdateSSN);
 
                     //force refresh to show changes. 
                     JudgesDataGridView.Refresh();
 
-                    InputErrorProvider.Clear();
+                    NameErrorProvider.Clear();
 
                     log.Info("Updated judge (" + UpdateName + ", " + UpdateNationality + ", " + UpdateSSN + ")");
                 }
             }
             catch (DuplicateNameException)
             {//judge med det ssn finns redan
-                InputErrorProvider.SetError(UpdateJudgeSSNTb, "Error: Judge ssn already in use");
+                NameErrorProvider.SetError(UpdateJudgeSSNTb, "Error: Judge ssn already in use");
                 log.Debug("Attempted to add a judge which was already in list.");
             }
             catch (ArgumentNullException nullException)
@@ -216,16 +217,16 @@ namespace SimhoppGUI
             catch (NullReferenceException)
             {
                 //do nothing? warn user?
-                InputErrorProvider.SetError(UpdateJudgeRemoveBtn, "Error: No judge to remove.");
+                NameErrorProvider.SetError(UpdateJudgeRemoveBtn, "Error: No judge to remove.");
             }
-                      
+
             //Resets the textboxes if list is empty.
             if (JudgesDataGridView.Rows.Count == 0)
             {
                 UpdateName = "";
                 UpdateNationality = "";
                 UpdateSSN = "";
-            }         
+            }
         }
 
         /// <summary>
@@ -236,7 +237,7 @@ namespace SimhoppGUI
         /// <param name="e"></param>
         private void tabControlAddEdit_SelectedIndexChanged(object sender, EventArgs e)
         {
-            InputErrorProvider.Clear();
+            NameErrorProvider.Clear();
             JudgesDataGridView_SelectionChanged(null, null);
         }
 

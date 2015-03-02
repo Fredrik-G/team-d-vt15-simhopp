@@ -40,8 +40,10 @@
             this.label4 = new System.Windows.Forms.Label();
             this.EditViewContestCloseBtn = new System.Windows.Forms.Button();
             this.toolTipEditViewContest = new System.Windows.Forms.ToolTip(this.components);
-            this.InputErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.InputErrorProvider)).BeginInit();
+            this.NameErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.PlaceErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.NameErrorProvider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PlaceErrorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // EditViewContestEditChangesBtn
@@ -132,10 +134,13 @@
             this.EditViewContestCloseBtn.UseVisualStyleBackColor = true;
             this.EditViewContestCloseBtn.Click += new System.EventHandler(this.EditViewContestCloseBtn_Click);
             // 
-            // InputErrorProvider
+            // NameErrorProvider
             // 
-            this.InputErrorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
-            this.InputErrorProvider.ContainerControl = this;
+            this.NameErrorProvider.ContainerControl = this;
+            // 
+            // PlaceErrorProvider
+            // 
+            this.PlaceErrorProvider.ContainerControl = this;
             // 
             // EditContest
             // 
@@ -156,8 +161,8 @@
             this.MinimizeBox = false;
             this.Name = "EditContest";
             this.Text = "Edit Contest";
-            this.Load += new System.EventHandler(this.EditContest_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.InputErrorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NameErrorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PlaceErrorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -176,6 +181,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button EditViewContestCloseBtn;
         private System.Windows.Forms.ToolTip toolTipEditViewContest;
-        private System.Windows.Forms.ErrorProvider InputErrorProvider;
+        private System.Windows.Forms.ErrorProvider NameErrorProvider;
+        private System.Windows.Forms.ErrorProvider PlaceErrorProvider;
     }
 }

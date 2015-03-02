@@ -50,13 +50,17 @@
             this.UpdateJudgeClosebtn = new System.Windows.Forms.Button();
             this.tabPageAddJudge = new System.Windows.Forms.TabPage();
             this.JudgesDataGridView = new System.Windows.Forms.DataGridView();
-            this.InputErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.NameErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.InputToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.NationalityErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.SSNErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.tabControlAddEdit.SuspendLayout();
             this.tabPageEditJudge.SuspendLayout();
             this.tabPageAddJudge.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.JudgesDataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.InputErrorProvider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NameErrorProvider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NationalityErrorProvider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SSNErrorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // AddJudgeNameLabel
@@ -295,10 +299,20 @@
             this.JudgesDataGridView.TabStop = false;
             this.JudgesDataGridView.SelectionChanged += new System.EventHandler(this.JudgesDataGridView_SelectionChanged);
             // 
-            // InputErrorProvider
+            // NameErrorProvider
             // 
-            this.InputErrorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
-            this.InputErrorProvider.ContainerControl = this;
+            this.NameErrorProvider.BlinkRate = 150;
+            this.NameErrorProvider.ContainerControl = this;
+            // 
+            // NationalityErrorProvider
+            // 
+            this.NationalityErrorProvider.BlinkRate = 150;
+            this.NationalityErrorProvider.ContainerControl = this;
+            // 
+            // SSNErrorProvider
+            // 
+            this.SSNErrorProvider.BlinkRate = 150;
+            this.SSNErrorProvider.ContainerControl = this;
             // 
             // AddEditJudge
             // 
@@ -318,7 +332,9 @@
             this.tabPageAddJudge.ResumeLayout(false);
             this.tabPageAddJudge.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.JudgesDataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.InputErrorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NameErrorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NationalityErrorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SSNErrorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -346,7 +362,9 @@
         private System.Windows.Forms.DataGridView JudgesDataGridView;
         private System.Windows.Forms.Button UpdateJudgeClosebtn;
         private System.Windows.Forms.Button UpdateJudgeRemoveBtn;
-        private System.Windows.Forms.ErrorProvider InputErrorProvider;
+        private System.Windows.Forms.ErrorProvider NameErrorProvider;
         private System.Windows.Forms.ToolTip InputToolTip;
+        private System.Windows.Forms.ErrorProvider NationalityErrorProvider;
+        private System.Windows.Forms.ErrorProvider SSNErrorProvider;
     }
 }

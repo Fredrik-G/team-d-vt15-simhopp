@@ -37,9 +37,12 @@ namespace Simhopp.Presenter
             this.View.EventRemoveJudgeFromContest += RemoveJudgeFromContest;
             this.View.EventRemoveDiverFromContest += RemoveDiverFromContest;
             this.View.EventReadJudgesFromDatabase += ReadJudgesFromDatabase;
+            this.View.EventReadDiversFromDatabase += ReadDiversFromDatabase;
             this.View.EventUpdateJudge += UpdateJudge;
             this.View.EventGetJudgeHash += GetJudgeHash;
             this.View.EventGetJudgeSalt += GetJudgeSalt;
+            this.View.EventUpdateContest += UpdateContest;
+            this.View.EventReadTricksFromDatabase += ReadTricksFromDatabase;
             //this.View.EventAddParticipant += AddParticipant;
             //this.View.EventAddJudge += AddJudge;
             //this.View.EventGetTrickDifficultyFromTrickHashTable += GetTrickDifficultyFromTrickHashTable;
@@ -83,12 +86,12 @@ namespace Simhopp.Presenter
         }
         #endregion
 
-        #region Methods
-
         public void CreateContest(string place, string name, string startDate, string endDate)
         {
             this.Model.CreateContest(place, name, startDate, endDate);
         }
+
+        #region Read methods
 
         public void ReadFromFile(string fileName)
         {
@@ -104,10 +107,21 @@ namespace Simhopp.Presenter
         {
             this.Model.ReadDiversFromDatabase();
         }
+
+        public void ReadTricksFromDatabase()
+        {
+            this.Model.ReadTricksFromDatabase();
+        }
+
+        #endregion
+
+        #region Add methods
+
         public void AddJudgeToList(string name, string nationality, string ssn)
         {
             this.Model.AddJudgeToList(name, nationality, ssn);
         }
+
         public void AddDiverToList(string name, string nationality, string ssn)
         {
             this.Model.AddDiverToList(name, nationality, ssn);
@@ -117,57 +131,51 @@ namespace Simhopp.Presenter
         {
             this.Model.AddJudgeToContest(contestId, ssn);
         }
+
         public void AddDiverToContest(int contestId, string ssn)
         {
             this.Model.AddDiverToContest(contestId, ssn);
         }
-        void RemoveJudgeFromList(string ssn)
+
+        #endregion
+
+        #region Remove methods
+
+        private void RemoveJudgeFromList(string ssn)
         {
             this.Model.RemoveJudgeFromList(ssn);
         }
-        void RemoveDiverFromList(string ssn)
+
+        private void RemoveDiverFromList(string ssn)
         {
             this.Model.RemoveDiverFromList(ssn);
         }
 
-        void RemoveJudgeFromContest(int contestId, string ssn)
+        private void RemoveJudgeFromContest(int contestId, string ssn)
         {
             this.Model.RemoveJudgeFromContest(contestId, ssn);
         }
-        void RemoveDiverFromContest(int contestId, string ssn)
+
+        private void RemoveDiverFromContest(int contestId, string ssn)
         {
             this.Model.RemoveDiverFromContest(contestId, ssn);
         }
 
-        void UpdateJudge(int id, string name, string nationality, string ssn)
+        #endregion
+
+        #region Update methods
+
+        public void UpdateContest(int id, string name, string place, string startDate, string endDate)
+        {
+            this.Model.UpdateContest(id, name, place, startDate, endDate);
+        }
+
+        private void UpdateJudge(int id, string name, string nationality, string ssn)
         {
             this.Model.UpdateJudge(id, name, nationality, ssn);
         }
-        //public void AddParticipant(Diver diver)
-        //{
-        //    this.Model.AddParticipant(diver);
-        //}
-
-        //void AddJudge(Judge judge)
-        //{
-        //    this.Model.AddJudge(judge);
-        //}
-
-        //double GetTrickDifficultyFromTrickHashTable(string trickName)
-        //{
-        //    return this.Model.GetTrickDifficultyFromTrickHashTable(trickName);
-        //}
-
-        //double GetResultFromParticipant(string ssn)
-        //{
-        //    return this.Model.GetResultFromParticipant(ssn);
-        //}
-
-        //void CreateHtmlResultFile()
-        //{
-        //    this.Model.CreateHtmlResultFile();
-        //}
 
         #endregion
+
     }
 }

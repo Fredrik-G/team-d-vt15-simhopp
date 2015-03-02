@@ -19,6 +19,7 @@ namespace SimhoppGUI
         private DelegateAddDiverToContest eventAddDiverToContest;
         private DelegateRemoveJudgeFromContest eventRemoveJudgeFromContest;
         private DelegateRemoveDiverFromContest eventRemoveDiverFromContest;
+        private DelegateUpdateContest eventUpdateContest;
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         #endregion
@@ -34,7 +35,8 @@ namespace SimhoppGUI
                 DelegateAddJudgeToContest eventAddJudgeToContest,
                 DelegateAddDiverToContest eventAddDiverToContest,
                 DelegateRemoveJudgeFromContest eventRemoveJudgeFromContest,
-                DelegateRemoveDiverFromContest eventRemoveDiverFromContest
+                DelegateRemoveDiverFromContest eventRemoveDiverFromContest,
+                DelegateUpdateContest eventUpdateContest
             )
         {
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -49,11 +51,12 @@ namespace SimhoppGUI
             this.eventAddDiverToContest = eventAddDiverToContest;
             this.eventRemoveJudgeFromContest = eventRemoveJudgeFromContest;
             this.eventRemoveDiverFromContest = eventRemoveDiverFromContest;
+            this.eventUpdateContest = eventUpdateContest;
 
             if (eventGetContestsList != null)
             {
                 ContestsDataGridView.DataSource = this.eventGetContestsList();
-                ContestsDataGridView.ReadOnly = true;
+                
             }
             if (eventGetJudgesList != null)
             {
@@ -68,7 +71,13 @@ namespace SimhoppGUI
                 ContestsDataGridView.Columns["Id"].Visible = false;
                 GlobalJudgesDataGridView.Columns["Id"].Visible = false;
                 GlobalDiversDataGridView.Columns["Id"].Visible = false;
-            }
+
+                ContestsDataGridView.Columns["IsFinished"].Visible = false;
+  
+                GlobalJudgesDataGridView.Columns["Salt"].Visible = false;
+                GlobalJudgesDataGridView.Columns["Hash"].Visible = false;
+
+                }
             catch (NullReferenceException nullReferenceException)
             {
                 //gör inget, kommer hit om "Id" inte finns.
@@ -102,12 +111,16 @@ namespace SimhoppGUI
                     CurrentJudgesDataGridView.DataSource =
                         eventGetJudgesInContest(Convert.ToInt16(row.Cells["Id"].Value));
                     CurrentJudgesDataGridView.Columns["Id"].Visible = false;
+                    CurrentJudgesDataGridView.Columns["Salt"].Visible = false;
+                    CurrentJudgesDataGridView.Columns["Hash"].Visible = false;
                 }
                 else if (JudgesDiversTabControl.SelectedTab == DiverTabPage)
                 {
                     CurrentDiversDataGridView.DataSource =
                         eventGetDiversInContest(Convert.ToInt16(row.Cells["Id"].Value));
                     CurrentDiversDataGridView.Columns["Id"].Visible = false;
+                    CurrentJudgesDataGridView.Columns["Salt"].Visible = false;
+                    CurrentJudgesDataGridView.Columns["Hash"].Visible = false;
                 }
             }
 
@@ -325,11 +338,11 @@ namespace SimhoppGUI
         {
             var selectedContest = ContestsDataGridView.SelectedCells.Cast<DataGridViewCell>().FirstOrDefault();
             using (new DimIt())
-            using (var editViewContest = new EditContest(selectedContest))
+            using (var editContest = new EditContest(selectedContest, eventUpdateContest))
             {
-                if (editViewContest.ShowDialog(this) == DialogResult.OK)
+                if (editContest.ShowDialog(this) == DialogResult.OK)
                 {
-                    editViewContest.Show();
+                    ContestsDataGridView.Refresh();
                 }
             }
         }

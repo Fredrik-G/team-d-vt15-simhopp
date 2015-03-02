@@ -40,8 +40,10 @@
             this.NewContestEndDateDTP = new System.Windows.Forms.DateTimePicker();
             this.NewContestEndDateLabel = new System.Windows.Forms.Label();
             this.toolTipNewContest = new System.Windows.Forms.ToolTip(this.components);
-            this.InputErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.InputErrorProvider)).BeginInit();
+            this.NameErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.CityErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.NameErrorProvider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CityErrorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -143,10 +145,13 @@
             this.NewContestEndDateLabel.TabIndex = 0;
             this.NewContestEndDateLabel.Text = "End date";
             // 
-            // InputErrorProvider
+            // NameErrorProvider
             // 
-            this.InputErrorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
-            this.InputErrorProvider.ContainerControl = this;
+            this.NameErrorProvider.ContainerControl = this;
+            // 
+            // CityErrorProvider
+            // 
+            this.CityErrorProvider.ContainerControl = this;
             // 
             // NewContest
             // 
@@ -167,7 +172,8 @@
             this.MinimizeBox = false;
             this.Name = "NewContest";
             this.Text = "NewContest";
-            ((System.ComponentModel.ISupportInitialize)(this.InputErrorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NameErrorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CityErrorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -186,6 +192,7 @@
         public System.Windows.Forms.TextBox newContestCityTB;
         public System.Windows.Forms.Button newContestCreateBtn;
         private System.Windows.Forms.ToolTip toolTipNewContest;
-        private System.Windows.Forms.ErrorProvider InputErrorProvider;
+        private System.Windows.Forms.ErrorProvider NameErrorProvider;
+        private System.Windows.Forms.ErrorProvider CityErrorProvider;
     }
 }

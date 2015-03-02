@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using Simhopp.Model;
 
@@ -27,6 +28,8 @@ namespace Simhopp
         private BindingList<Contest> contestList = new BindingList<Contest>();
 
         private DatabaseController databaseController;
+
+        private TrickList trickList = new TrickList();
         #endregion
 
         #region Constructor
@@ -49,14 +52,7 @@ namespace Simhopp
         /// <returns></returns>
         public BindingList<Contest> GetContestsList()
         {
-            //DEBUG
-            contestList.Add(new Contest(1, "asd", "a", "11/11/2011", "11/11/2011"));
-            contestList.Add(new Contest(2, "asd", "b", "11/11/2011", "11/11/2011"));
-            contestList.Add(new Contest(3, "asd", "c", "11/11/2011", "11/11/2011"));
-            contestList.Add(new Contest(4, "asd", "d", "11/11/2011", "11/11/2011"));
-            contestList.Add(new Contest(5, "asd", "e", "11/11/2011", "11/11/2011"));
-            //-DEBUG
-            //TODO: remove ^
+            contestList = databaseController.GetContestList();
             return contestList;
         }
         /// <summary>
@@ -149,7 +145,7 @@ namespace Simhopp
 
         /// <summary>
         /// A function that gets a judge by its ssn.
-        /// Throws ArgumentNullException if judge is not found.
+        /// Throws NullReferenceException if judge is not found.
         /// </summary>
         /// <param name="name"></param>
         /// <returns>returns a judge object</returns>
@@ -176,7 +172,8 @@ namespace Simhopp
         /// <returns></returns>
         public string GetJudgeHash(string ssn)
         {
-            return databaseController.GetJudgeHash(GetJudgeBySSN(ssn));
+            var judge = GetJudgeBySSN(ssn);
+            return databaseController.GetJudgeHash(judge);
         }
 
         /// <summary>
@@ -234,10 +231,10 @@ namespace Simhopp
             {
                 throw new DuplicateNameException("Judge already exists in list");
             }
-
             try
             {
                 judgeList.Add(new Judge(name, nationality, ssn));
+                //TODO: ska man lägga judge till databas här?
             }
             catch (Exception)
             {
@@ -409,6 +406,32 @@ namespace Simhopp
         #endregion
 
         #region Update methods
+
+        /// <summary>
+        /// Updates a contest with given data.
+        /// Throws NullReferenceException if contest is not found.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="place"></param>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        public void UpdateContest(int id, string name, string place, string startDate, string endDate)
+        {
+            var contest = contestList.SingleOrDefault(x => x.Id == id);
+
+            if (contest == null)
+            {
+                throw new NullReferenceException("Contest with id " + id + "not found.");
+            }
+
+            contest.Name = name;
+            contest.Place = place;
+            contest.StartDate = startDate;
+            contest.EndDate = endDate;
+
+            //databaseController.UpdateContest();
+        }
         /// <summary>
         /// Updates a judge object in judgelist and in database.
         /// </summary>
@@ -425,13 +448,15 @@ namespace Simhopp
             }
 
             var judge = judgeList.SingleOrDefault(x => x.Id == id);
-            if (judge != null)
+            if (judge == null)
             {
-                judge.Name = name;
-                judge.Nationality = nationality;
-                judge.SSN = ssn;
-                databaseController.UpdateJudge(judge);
+                throw new NullReferenceException("Judge with id " + id + " not found");
             }
+
+            judge.Name = name;
+            judge.Nationality = nationality;
+            judge.SSN = ssn;
+            databaseController.UpdateJudge(judge);
         }
 
         #endregion
@@ -451,12 +476,13 @@ namespace Simhopp
         {
             diverList = databaseController.GetDiverList();
         }
+
         /// <summary>
-        /// Reads contests from database and adds them to contestlist.
+        /// Reads tricks from database and adds them to the tricklist.
         /// </summary>
-        public void ReadContestsFromDatabase()
+        public void ReadTricksFromDatabase()
         {
-            //get contest ej implementerad i databascontroller.
+            trickList.ReadFromDatabase(databaseController);
         }
 
         #endregion

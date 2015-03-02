@@ -17,6 +17,8 @@ namespace Simhopp.Model
         void ReadJudgesFromDatabase();
         void ReadDiversFromDatabase();
 
+        void ReadTricksFromDatabase();
+
         BindingList<Contest> GetContestsList();
         BindingList<Judge> GetJudgesList();
         BindingList<Diver> GetDiversList();
@@ -38,6 +40,7 @@ namespace Simhopp.Model
         void RemoveJudgeFromContest(int contestId, string ssn);
         void RemoveDiverFromContest(int contestId, string ssn);
 
+        void UpdateContest(int id, string name, string place, string startDate, string endDate);
         void UpdateJudge(int id, string name, string nationality, string ssn);
     }
 }
