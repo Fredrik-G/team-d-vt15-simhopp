@@ -7,27 +7,40 @@ namespace Simhopp
 {
     class Program
     {
-        static void Main(string[] args)
-        {          
+        private static void FillDatabase()
+        {
             var database = new DatabaseController(@"M:/Desktop/simhoppTestDB.db");
-            //database.ConnectToDatabase();
-           
-            //database.ClearDatabase("Judge");
+            database.ConnectToDatabase();
+
+            database.ClearDatabase("Judge");
 
             //for (var i = 0; i < 10; i++)
             //{
-            //    var judge = new Judge("kalle", "USA", "123-22-666" + i);
-
-            //    judge.CalculateSalt();
-            //    judge.CalculateHash("password" + i);                
-
-            //    database.AddJudgeToDatabase(judge);
-            //    database.UpdateJudgeWithHash(judge);
+            //    database.AddContestToDatabase(new Contest("Stockholm", "Simhopp", i + "-10-2010", "11-11-2011") {IsFinished = true});
             //}
 
-            var simhopp = new SimhoppConsole();
-            simhopp.Meny();
-            
+            for (var i = 0; i < 10; i++)
+            {
+                var judge = new Judge("kalle", "USA", "555-55-000" + i);
+
+                judge.CalculateSalt();
+                judge.CalculateHash("password" + i);
+
+                database.AddJudgeToDatabase(judge);
+                database.UpdateJudgeWithHash(judge);
+
+                database.AddDiverToDatabase(new Diver("kalle", "finland", "123-22-123" + i));
+            }
+        }
+        static void Main(string[] args)
+        {
+            //FillDatabase();
+
+           // var simhopp = new Simhopp();
+           // simhopp.ReadTricksFroMDatabase();
+
+            var console = new SimhoppConsole();
+            console.Meny();
         }
     }
 }

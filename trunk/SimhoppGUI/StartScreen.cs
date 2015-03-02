@@ -111,7 +111,8 @@ namespace SimhoppGUI
                 EventAddJudgeToContest,
                 EventAddDiverToContest,
                 EventRemoveJudgeFromContest,
-                EventRemoveDiverFromContest
+                EventRemoveDiverFromContest,
+                EventUpdateContest
                 ))
             {
                 if (startContest.ShowDialog(this) == DialogResult.OK)
@@ -182,6 +183,7 @@ namespace SimhoppGUI
         public event DelegateReadFromFile EventReadFromFile = null;
         public event DelegateReadJudgesFromDatabase EventReadJudgesFromDatabase = null;
         public event DelegateReadDiversFromDatabase EventReadDiversFromDatabase = null;
+        public event DelegateReadTricksFromDatabase EventReadTricksFromDatabase = null;
 
         public event DelegateGetContestsList EventGetContestsList = null;
         public event DelegateGetJudgesList EventGetJudgesList = null;
@@ -204,16 +206,10 @@ namespace SimhoppGUI
         public event DelegateRemoveJudgeFromContest EventRemoveJudgeFromContest = null;
         public event DelegateRemoveDiverFromContest EventRemoveDiverFromContest = null;
 
+
+        public event DelegateUpdateContest EventUpdateContest = null;
         public event DelegateUpdateJudge EventUpdateJudge = null;
 
-
-
-        //public event DelegateAddParticipant EventAddParticipant = null;
-        //public event DelegateAddJudge EventAddJudge = null;
-        //public event DelegateGetTrickDifficultyFromTrickHashTable EventGetTrickDifficultyFromTrickHashTable = null;
-        //public event DelegateGetResultFromParticipant EventGetResultFromParticipant = null;
-
         #endregion
-
     }
 }

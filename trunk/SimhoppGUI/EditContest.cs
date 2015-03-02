@@ -3,12 +3,16 @@ using System.Reflection;
 using System.Windows.Forms;
 using log4net;
 using Simhopp;
+using Simhopp.View;
 
 namespace SimhoppGUI
 {
     public partial class EditContest : Form
     {
         #region Data
+
+        private DelegateUpdateContest eventUpdateContest;
+        private int contestId;
 
         private static readonly ILog log = LogManager.GetLogger
             (MethodBase.GetCurrentMethod().DeclaringType);
@@ -43,14 +47,18 @@ namespace SimhoppGUI
         #endregion
 
         #region Constructor
-        public EditContest(DataGridViewCell cell)
+        public EditContest(DataGridViewCell cell, DelegateUpdateContest eventUpdateContest)
         {
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             InitializeComponent();
 
+            this.eventUpdateContest = eventUpdateContest;
+
             try
             {
                 var contestRow = cell.OwningRow;
+
+                contestId = Convert.ToInt16(contestRow.Cells["Id"].Value);
                 ContestName = contestRow.Cells["Name"].Value.ToString();
                 Place = contestRow.Cells["Place"].Value.ToString();
                 StartDate = contestRow.Cells["StartDate"].Value.ToString();
@@ -76,10 +84,6 @@ namespace SimhoppGUI
 
         #region Events
 
-        private void EditContest_Load(object sender, EventArgs e)
-        {
-        }
-
         /// <summary>
         /// Updates the selected contest with the input from the textboxes. 
         /// Also checks if the input is correct.
@@ -94,14 +98,20 @@ namespace SimhoppGUI
                 var correctStartDate = CheckInput.CheckCorrectDate(startDate);
 
                 var endDate = StartScreen.CreateDateString(EditViewContestEditEndtDateTp);
-                var correctEndDate = CheckInput.CheckCorrectDate(endDate);              
+                var correctEndDate = CheckInput.CheckCorrectDate(endDate);
 
-                if (CheckInput.CheckCorrectContestInput(InputErrorProvider,
+                if (CheckInput.CheckCorrectContestInput(NameErrorProvider,
+                    PlaceErrorProvider,
                     EditViewContestEditContestNameTb,
                     EditViewContestEditContestPlaceTb) && correctStartDate && correctEndDate)
                 {
+                    eventUpdateContest(contestId, EditViewContestEditContestNameTb.Text,
+                         EditViewContestEditContestPlaceTb.Text, startDate, endDate);
 
-                    //TODO event update 
+                    log.Info("Updated contest with (id,name,place,startdate,enddate): " + contestId+EditViewContestEditContestNameTb.Text + 
+                        EditViewContestEditContestPlaceTb.Text + startDate + endDate);
+
+                    DialogResult = DialogResult.OK;
                 }
             }
 

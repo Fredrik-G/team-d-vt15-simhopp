@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
+using System.Linq;
 
 namespace Simhopp.Model
 {
@@ -15,6 +18,7 @@ namespace Simhopp.Model
         /// A Hashtable that contains an trickname as key and its difficulty as the value.
         /// </summary>
         private Hashtable trickList = new Hashtable();
+        private BindingList<Trick> trickList2 = new BindingList<Trick>();
 
         #endregion
 
@@ -37,7 +41,8 @@ namespace Simhopp.Model
         /// <returns></returns>
         public bool IsEmpty()
         {
-            return (trickList.Count == 0);
+            //return (trickList.Count == 0);
+            return (trickList2.Count == 0);
         }
 
         /// <summary>
@@ -49,7 +54,8 @@ namespace Simhopp.Model
         {
             try
             {
-                trickList.Add(t.Name, t.Difficulty);
+                // trickList.Add(t.Name, t.Difficulty);
+                trickList2.Add(t);
             }
             catch
             {
@@ -75,11 +81,22 @@ namespace Simhopp.Model
                     AddTrick(t);
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine("Error: File " + filename + " could not be opened.\n" + e.Message);
             }
         }
+
+        /// <summary>
+        /// Reads tricks from database and adds them to the tricklist.
+        /// </summary>
+        /// <param name="database"></param>
+        public void ReadFromDatabase(DatabaseController database)
+        {
+            trickList2.Clear();
+            trickList2 = database.GetTrickListFromDatabase();
+        }
+
         /// <summary>
         /// Searches the trickList for a specific trick and then returns the tricks difficulty
         /// </summary>
@@ -89,14 +106,15 @@ namespace Simhopp.Model
         {
             try
             {
-                return (double)trickList[trickName];
+                //return (double)trickList[trickName];
+                return trickList2.SingleOrDefault(x => x.Name == trickName).Difficulty;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                Console.WriteLine("Trick " + trickName + " not found\n" + e.Message); 
+                Console.WriteLine("Trick " + trickName + " not found\n" + e.Message);
                 return 0.0;
             }
-           
+
         }
 
         /// <summary>
@@ -104,7 +122,7 @@ namespace Simhopp.Model
         /// </summary>
         public void PrintHashTable()
         {
-            foreach(DictionaryEntry de in trickList)
+            foreach (DictionaryEntry de in trickList)
             {
                 Console.WriteLine(de.Key + "\t" + de.Value);
             }

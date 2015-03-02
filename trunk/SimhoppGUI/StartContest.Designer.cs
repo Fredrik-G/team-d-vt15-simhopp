@@ -45,6 +45,7 @@
             this.GlobalDiversLabel = new System.Windows.Forms.Label();
             this.CurrentlDiversLabel = new System.Windows.Forms.Label();
             this.EditContestBtn = new System.Windows.Forms.Button();
+            this.StartContestBtn = new System.Windows.Forms.Button();
             this.JudgesDiversTabControl.SuspendLayout();
             this.JudgeTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GlobalJudgesDataGridView)).BeginInit();
@@ -110,6 +111,7 @@
             this.GlobalJudgesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GlobalJudgesDataGridView.Location = new System.Drawing.Point(-1, 0);
             this.GlobalJudgesDataGridView.Name = "GlobalJudgesDataGridView";
+            this.GlobalJudgesDataGridView.ReadOnly = true;
             this.GlobalJudgesDataGridView.RowHeadersWidth = 20;
             this.GlobalJudgesDataGridView.Size = new System.Drawing.Size(340, 227);
             this.GlobalJudgesDataGridView.TabIndex = 5;
@@ -126,6 +128,7 @@
             this.CurrentJudgesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.CurrentJudgesDataGridView.Location = new System.Drawing.Point(389, 0);
             this.CurrentJudgesDataGridView.Name = "CurrentJudgesDataGridView";
+            this.CurrentJudgesDataGridView.ReadOnly = true;
             this.CurrentJudgesDataGridView.RowHeadersWidth = 20;
             this.CurrentJudgesDataGridView.Size = new System.Drawing.Size(340, 227);
             this.CurrentJudgesDataGridView.TabIndex = 6;
@@ -176,6 +179,7 @@
             this.CurrentDiversDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.CurrentDiversDataGridView.Location = new System.Drawing.Point(389, 0);
             this.CurrentDiversDataGridView.Name = "CurrentDiversDataGridView";
+            this.CurrentDiversDataGridView.ReadOnly = true;
             this.CurrentDiversDataGridView.RowHeadersWidth = 20;
             this.CurrentDiversDataGridView.Size = new System.Drawing.Size(340, 227);
             this.CurrentDiversDataGridView.TabIndex = 7;
@@ -192,6 +196,7 @@
             this.GlobalDiversDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GlobalDiversDataGridView.Location = new System.Drawing.Point(-1, 0);
             this.GlobalDiversDataGridView.Name = "GlobalDiversDataGridView";
+            this.GlobalDiversDataGridView.ReadOnly = true;
             this.GlobalDiversDataGridView.RowHeadersWidth = 20;
             this.GlobalDiversDataGridView.Size = new System.Drawing.Size(340, 227);
             this.GlobalDiversDataGridView.TabIndex = 6;
@@ -207,6 +212,7 @@
             this.ContestsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ContestsDataGridView.Location = new System.Drawing.Point(12, 12);
             this.ContestsDataGridView.Name = "ContestsDataGridView";
+            this.ContestsDataGridView.ReadOnly = true;
             this.ContestsDataGridView.Size = new System.Drawing.Size(490, 185);
             this.ContestsDataGridView.TabIndex = 4;
             this.ContestsDataGridView.TabStop = false;
@@ -252,7 +258,7 @@
             // 
             // EditContestBtn
             // 
-            this.EditContestBtn.Location = new System.Drawing.Point(540, 40);
+            this.EditContestBtn.Location = new System.Drawing.Point(529, 149);
             this.EditContestBtn.Name = "EditContestBtn";
             this.EditContestBtn.Size = new System.Drawing.Size(75, 23);
             this.EditContestBtn.TabIndex = 10;
@@ -260,11 +266,21 @@
             this.EditContestBtn.UseVisualStyleBackColor = true;
             this.EditContestBtn.Click += new System.EventHandler(this.EditContestBtn_Click);
             // 
+            // StartContestBtn
+            // 
+            this.StartContestBtn.Location = new System.Drawing.Point(529, 120);
+            this.StartContestBtn.Name = "StartContestBtn";
+            this.StartContestBtn.Size = new System.Drawing.Size(75, 23);
+            this.StartContestBtn.TabIndex = 11;
+            this.StartContestBtn.Text = "Start Contest";
+            this.StartContestBtn.UseVisualStyleBackColor = true;
+            // 
             // StartContest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(762, 466);
+            this.Controls.Add(this.StartContestBtn);
             this.Controls.Add(this.EditContestBtn);
             this.Controls.Add(this.GlobalDiversLabel);
             this.Controls.Add(this.CurrentlDiversLabel);
@@ -308,5 +324,6 @@
         private System.Windows.Forms.Label GlobalDiversLabel;
         private System.Windows.Forms.Label CurrentlDiversLabel;
         private System.Windows.Forms.Button EditContestBtn;
+        private System.Windows.Forms.Button StartContestBtn;
     }
 }

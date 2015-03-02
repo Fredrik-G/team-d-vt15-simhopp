@@ -17,25 +17,28 @@ namespace SimhoppGUI
     public static class CheckInput
     {
         #region Correct Input
-        public static bool CheckCorrectContestInput(ErrorProvider errorProvider,
+        public static bool CheckCorrectContestInput(ErrorProvider nameErrorProvider,
+            ErrorProvider placeErrorProvider,
             TextBox nameTextBox,
             TextBox placeTextBox)
         {
-            var correctName = CorrectContestNameInput(errorProvider, nameTextBox);
-            var correctPlace = CorrectContestPlaceInput(errorProvider, placeTextBox);
+            var correctName = CorrectContestNameInput(nameErrorProvider, nameTextBox);
+            var correctPlace = CorrectContestPlaceInput(placeErrorProvider, placeTextBox);
 
             return (correctName && correctPlace);
-            //return (CorrectNameInput(nameTextBox) && CorrectPlaceInput(placeTextBox)); //funkar ej?
+
         }
-        public static bool CheckCorrectPersonInput(ErrorProvider errorProvider,
+
+        public static bool CheckCorrectPersonInput(ErrorProvider nameErrorProvider,
+            ErrorProvider nationalityErrorProvider,
+            ErrorProvider ssnErrorProvider,
             TextBox nameTextBox,
             TextBox nationalityTextBox,
             TextBox ssnTextBox)
         {
-
-            var correctName = CorrectPersonNameInput(errorProvider, nameTextBox);
-            var correctNationality = CorrectPersonNationalityInput(errorProvider, nationalityTextBox);
-            var correctSSN = CorrectPersonSSNInput(errorProvider, ssnTextBox, nationalityTextBox);
+            var correctName = CorrectPersonNameInput(nameErrorProvider, nameTextBox);
+            var correctNationality = CorrectPersonNationalityInput(nationalityErrorProvider, nationalityTextBox);
+            var correctSSN = CorrectPersonSSNInput(ssnErrorProvider, ssnTextBox, nationalityTextBox);
 
             return (correctName && correctNationality && correctSSN);
         }
