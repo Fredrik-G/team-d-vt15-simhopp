@@ -25,11 +25,7 @@ namespace SimhoppGUI
 
         #endregion
 
-        private void StartScreen_Load(object sender, EventArgs e)
-        {
-            EventReadJudgesFromDatabase();
-            EventReadDiversFromDatabase();
-        }
+
 
         /// <summary>
         /// Creates a correct date string from DateTimePicker.
@@ -45,6 +41,17 @@ namespace SimhoppGUI
         }
 
         #region Events
+        /// <summary>
+        /// Occurs on form load.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void StartScreen_Load(object sender, EventArgs e)
+        {
+            EventReadJudgesFromDatabase();
+            EventReadDiversFromDatabase();
+            EventReadTricksFromDatabase();
+        }
 
         /// <summary>
         /// Creates a NewContest-form and attemps to create a new contest with the input from NewContest.
@@ -98,6 +105,11 @@ namespace SimhoppGUI
             }
         }
 
+        /// <summary>
+        /// Creates a StartContest-form.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StartScreenStartContestBtn_Click(object sender, EventArgs e)
         {
             //Dims the background form and makes it non-interactive.
@@ -113,7 +125,7 @@ namespace SimhoppGUI
                 EventRemoveJudgeFromContest,
                 EventRemoveDiverFromContest,
                 EventUpdateContest,
-                EventReadTricksFromDatabase
+                EventGetTrickList
                 ))
             {
                 if (startContest.ShowDialog(this) == DialogResult.OK)
@@ -203,6 +215,7 @@ namespace SimhoppGUI
         public event DelegateGetDiversList EventGetDiversList = null;
         public event DelegateGetJudgesInContest EventGetJudgesInContest = null;
         public event DelegateGetDiversInContest EventGetDiversInContest = null;
+        public event DelegateGetTrickList EventGetTrickList = null;
 
         public event DelegateGetJudgeHash EventGetJudgeHash = null;
         public event DelegateGetJudgeSalt EventGetJudgeSalt = null;

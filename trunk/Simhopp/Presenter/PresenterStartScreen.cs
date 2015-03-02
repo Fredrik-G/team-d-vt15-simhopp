@@ -43,6 +43,7 @@ namespace Simhopp.Presenter
             this.View.EventGetJudgeSalt += GetJudgeSalt;
             this.View.EventUpdateContest += UpdateContest;
             this.View.EventReadTricksFromDatabase += ReadTricksFromDatabase;
+            this.View.EventGetTrickList += GetTrickList;
             //this.View.EventAddParticipant += AddParticipant;
             //this.View.EventAddJudge += AddJudge;
             //this.View.EventGetTrickDifficultyFromTrickHashTable += GetTrickDifficultyFromTrickHashTable;
@@ -57,7 +58,7 @@ namespace Simhopp.Presenter
 
         public BindingList<Judge> GetJudgesList()
         {
-            
+
             return this.Model.GetJudgesList();
         }
 
@@ -111,6 +112,11 @@ namespace Simhopp.Presenter
         public void ReadTricksFromDatabase()
         {
             this.Model.ReadTricksFromDatabase();
+        }
+
+        public BindingList<Trick> GetTrickList()
+        {
+            return this.Model.GetTrickList();
         }
 
         #endregion
