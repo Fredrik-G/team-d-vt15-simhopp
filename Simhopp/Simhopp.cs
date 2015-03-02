@@ -12,7 +12,7 @@ namespace Simhopp
     /// <summary>
     /// Class that creates and handles a contest-object
     /// </summary>
-    public class Simhopp : ISimhopp
+    public class Simhopp : ISimhopp, IDisposable
     {
         #region Data
         /// <summary>
@@ -502,6 +502,24 @@ namespace Simhopp
             catch (IOException e)
             {
                 Console.WriteLine("Error when reading file " + fileName + "\n" + e.Message);
+            }
+        }
+
+        #endregion
+
+        #region IDisposable methods
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                databaseController.Dispose();
             }
         }
 
