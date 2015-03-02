@@ -23,7 +23,7 @@ namespace SimhoppGUI
         private DelegateRemoveJudgeFromContest eventRemoveJudgeFromContest;
         private DelegateRemoveDiverFromContest eventRemoveDiverFromContest;
         private DelegateUpdateContest eventUpdateContest;
-        private DelegateReadTricksFromDatabase eventReadTricksFromDatabase;
+        private DelegateGetTrickList eventGetTrickList;
 
         DataGridViewComboBoxColumn trick1ComboBoxColumn = new DataGridViewComboBoxColumn();
         DataGridViewComboBoxColumn trick2ComboBoxColumn = new DataGridViewComboBoxColumn();
@@ -45,7 +45,7 @@ namespace SimhoppGUI
                 DelegateRemoveJudgeFromContest eventRemoveJudgeFromContest,
                 DelegateRemoveDiverFromContest eventRemoveDiverFromContest,
                 DelegateUpdateContest eventUpdateContest,
-                DelegateReadTricksFromDatabase eventReadTricksFromDatabase
+                DelegateGetTrickList eventGetTrickList
             )
         {
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -61,7 +61,7 @@ namespace SimhoppGUI
             this.eventRemoveJudgeFromContest = eventRemoveJudgeFromContest;
             this.eventRemoveDiverFromContest = eventRemoveDiverFromContest;
             this.eventUpdateContest = eventUpdateContest;
-            this.eventReadTricksFromDatabase = eventReadTricksFromDatabase;      
+            this.eventGetTrickList = eventGetTrickList;
         }
         #endregion
 
@@ -107,21 +107,18 @@ namespace SimhoppGUI
                 //gör inget, kommer hit om "Id" inte finns.
                 log.Warn("Null reference exception when trying to start a contest", nullReferenceException);
             }
-           
-            var simhopp = new Simhopp.Simhopp();
-            simhopp.ReadTricksFromDatabase();
-            
-            trick1ComboBoxColumn.DataSource = simhopp.GetTrickList();
+
+            trick1ComboBoxColumn.DataSource = eventGetTrickList();
             trick1ComboBoxColumn.DisplayMember = "name";
             trick1ComboBoxColumn.ValueMember = "name";
             trick1ComboBoxColumn.Name = "Trick 1";
 
-            trick2ComboBoxColumn.DataSource = simhopp.GetTrickList();
+            trick2ComboBoxColumn.DataSource = eventGetTrickList();
             trick2ComboBoxColumn.DisplayMember = "name";
             trick2ComboBoxColumn.ValueMember = "name";
             trick2ComboBoxColumn.Name = "Trick 2";
 
-            trick3ComboBoxColumn.DataSource = simhopp.GetTrickList();
+            trick3ComboBoxColumn.DataSource = eventGetTrickList();
             trick3ComboBoxColumn.DisplayMember = "name";
             trick3ComboBoxColumn.ValueMember = "name";
             trick3ComboBoxColumn.Name = "Trick 3";
@@ -253,6 +250,11 @@ namespace SimhoppGUI
 
         #region Click Buttons
 
+        /// <summary>
+        /// Occurs when Add judge button is clicked. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddJudgeBtn_Click(object sender, EventArgs e)
         {
             try
@@ -272,6 +274,12 @@ namespace SimhoppGUI
                 MsgBox.CreateErrorBox(exception.ToString(), MethodBase.GetCurrentMethod().Name);
             }
         }
+
+        /// <summary>
+        /// Occurs when Add Diver button is clicked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddDiverBtn_Click(object sender, EventArgs e)
         {
             try
@@ -313,15 +321,23 @@ namespace SimhoppGUI
             if (isJudge)
             {
                 eventAddJudgeToContest(Convert.ToInt16(contestRow.Cells["Id"].Value), personRow.Cells["ssn"].Value.ToString());
+                log.Debug("Added judge with ssn: " + personRow.Cells["ssn"].Value + "to contest id " + Convert.ToInt16(contestRow.Cells["Id"].Value));
             }
             else
             {
                 eventAddDiverToContest(Convert.ToInt16(contestRow.Cells["Id"].Value), personRow.Cells["ssn"].Value.ToString());
+                log.Debug("Added diver with ssn: " + personRow.Cells["ssn"].Value + "to contest id " + Convert.ToInt16(contestRow.Cells["Id"].Value));
             }
 
             //force update 
             ContestsDataGridView_SelectionChanged(null, null);
         }
+
+        /// <summary>
+        /// Occurs when remove judge button is clicked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RemoveJudgeBtn_Click(object sender, EventArgs e)
         {
             try
@@ -343,6 +359,11 @@ namespace SimhoppGUI
             }
         }
 
+        /// <summary>
+        /// Occurs when removed diver button is clicked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RemoveDiverBtn_Click(object sender, EventArgs e)
         {
             try
@@ -363,6 +384,7 @@ namespace SimhoppGUI
                 MsgBox.CreateErrorBox(exception.ToString(), MethodBase.GetCurrentMethod().Name);
             }
         }
+
         /// <summary>
         /// Attempts to remove a person (judge/diver) from a contest.
         /// </summary>
@@ -386,10 +408,12 @@ namespace SimhoppGUI
             if (isJudge)
             {
                 eventRemoveJudgeFromContest(Convert.ToInt16(contestRow.Cells["Id"].Value), personRow.Cells["ssn"].Value.ToString());
+                log.Debug("Removed judge with ssn: " + personRow.Cells["ssn"].Value + "from contest id " + Convert.ToInt16(contestRow.Cells["Id"].Value));
             }
             else
             {
                 eventRemoveDiverFromContest(Convert.ToInt16(contestRow.Cells["Id"].Value), personRow.Cells["ssn"].Value.ToString());
+                log.Debug("Removed diver with ssn: " + personRow.Cells["ssn"].Value + "from contest id " + Convert.ToInt16(contestRow.Cells["Id"].Value));
             }
 
             //force update 

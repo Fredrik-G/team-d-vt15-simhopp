@@ -7,11 +7,6 @@ namespace Simhopp.Model
     /// </summary>
     public interface ISimhopp
     {
-        //void AddParticipant(Diver diver);
-        //void AddJudge(Judge judge);
-        //double GetTrickDifficultyFromTrickHashTable(string trickName);
-        //double GetResultFromParticipant(string ssn);
-        //void CreateHtmlResultFile();
         void CreateContest(string place, string name, string startDate, string endDate);
         void ReadFromFile(string fileName);
         void ReadJudgesFromDatabase();
@@ -25,6 +20,8 @@ namespace Simhopp.Model
 
         BindingList<Judge> GetJudgesInContest(int id);
         BindingList<Diver> GetDiversInContest(int id);
+
+        BindingList<Trick> GetTrickList();
 
         string GetJudgeHash(string ssn);
         string GetJudgeSalt(string ssn);

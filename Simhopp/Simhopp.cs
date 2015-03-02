@@ -187,6 +187,10 @@ namespace Simhopp
             return databaseController.GetJudgeSalt(GetJudgeBySSN(ssn));
         }
 
+        /// <summary>
+        /// Returns trick list.
+        /// </summary>
+        /// <returns></returns>
         public BindingList<Trick> GetTrickList()
         {
             return trickList.GetTrickList();
