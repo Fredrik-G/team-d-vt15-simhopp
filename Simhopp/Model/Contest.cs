@@ -134,7 +134,6 @@ namespace Simhopp.Model
         }
         #endregion
 
-
         #region Getters
 
         public List<Participant> GetParticipants()
@@ -160,9 +159,25 @@ namespace Simhopp.Model
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// Checks if given judge is in judge list.
+        /// </summary>
+        /// <param name="judge"></param>
+        /// <returns></returns>
         public bool IsJudgeInContest(Judge judge)
         {
             return judgeList.Find(x => x.SSN == judge.SSN) != null;
+        }
+
+        /// <summary>
+        /// Checks if given diver is in participants list.
+        /// </summary>
+        /// <param name="diver"></param>
+        /// <returns></returns>
+        public bool IsDiverInContest(Diver diver)
+        {
+            return participantsList.Find(x => x.GetDiverSSN() == diver.SSN) != null;
         }
 
         /// <summary>
@@ -189,7 +204,10 @@ namespace Simhopp.Model
                 {
                     throw new InvalidDataException("diver social security number is not set or invalid.");
                 }
-
+                else if (IsDiverInContest(diver))
+                {
+                    throw new DuplicateNameException("Diver is already in list.");
+                }
                 else
                 {
                     participantsList.Add(new Participant(diver));

@@ -96,6 +96,12 @@
     <Compile Include="JudgeClient.Designer.cs">
       <DependentUpon>JudgeClient.cs</DependentUpon>
     </Compile>
+    <Compile Include="LiveFeed.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LiveFeed.Designer.cs">
+      <DependentUpon>LiveFeed.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -133,6 +139,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="JudgeClient.resx">
       <DependentUpon>JudgeClient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LiveFeed.resx">
+      <DependentUpon>LiveFeed.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>

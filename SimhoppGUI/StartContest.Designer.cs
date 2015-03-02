@@ -46,6 +46,8 @@
             this.CurrentlDiversLabel = new System.Windows.Forms.Label();
             this.EditContestBtn = new System.Windows.Forms.Button();
             this.StartContestBtn = new System.Windows.Forms.Button();
+            this.weirdfix = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.weirddatagridfix = new System.Windows.Forms.DataGridView();
             this.JudgesDiversTabControl.SuspendLayout();
             this.JudgeTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GlobalJudgesDataGridView)).BeginInit();
@@ -54,6 +56,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.CurrentDiversDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GlobalDiversDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ContestsDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.weirddatagridfix)).BeginInit();
             this.SuspendLayout();
             // 
             // JudgesDiversTabControl
@@ -63,7 +66,7 @@
             this.JudgesDiversTabControl.Location = new System.Drawing.Point(12, 203);
             this.JudgesDiversTabControl.Name = "JudgesDiversTabControl";
             this.JudgesDiversTabControl.SelectedIndex = 0;
-            this.JudgesDiversTabControl.Size = new System.Drawing.Size(739, 253);
+            this.JudgesDiversTabControl.Size = new System.Drawing.Size(1040, 253);
             this.JudgesDiversTabControl.TabIndex = 3;
             this.JudgesDiversTabControl.SelectedIndexChanged += new System.EventHandler(this.JudgesDiversTabControl_SelectedIndexChanged);
             // 
@@ -76,7 +79,7 @@
             this.JudgeTabPage.Location = new System.Drawing.Point(4, 22);
             this.JudgeTabPage.Name = "JudgeTabPage";
             this.JudgeTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.JudgeTabPage.Size = new System.Drawing.Size(731, 227);
+            this.JudgeTabPage.Size = new System.Drawing.Size(1032, 227);
             this.JudgeTabPage.TabIndex = 0;
             this.JudgeTabPage.Text = "Judges";
             this.JudgeTabPage.UseVisualStyleBackColor = true;
@@ -107,12 +110,16 @@
             this.GlobalJudgesDataGridView.AllowUserToDeleteRows = false;
             this.GlobalJudgesDataGridView.AllowUserToResizeColumns = false;
             this.GlobalJudgesDataGridView.AllowUserToResizeRows = false;
+            this.GlobalJudgesDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.GlobalJudgesDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.GlobalJudgesDataGridView.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
             this.GlobalJudgesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GlobalJudgesDataGridView.Location = new System.Drawing.Point(-1, 0);
             this.GlobalJudgesDataGridView.Name = "GlobalJudgesDataGridView";
             this.GlobalJudgesDataGridView.ReadOnly = true;
-            this.GlobalJudgesDataGridView.RowHeadersWidth = 20;
+            this.GlobalJudgesDataGridView.RowHeadersWidth = 30;
             this.GlobalJudgesDataGridView.Size = new System.Drawing.Size(340, 227);
             this.GlobalJudgesDataGridView.TabIndex = 5;
             this.GlobalJudgesDataGridView.TabStop = false;
@@ -124,13 +131,17 @@
             this.CurrentJudgesDataGridView.AllowUserToOrderColumns = true;
             this.CurrentJudgesDataGridView.AllowUserToResizeColumns = false;
             this.CurrentJudgesDataGridView.AllowUserToResizeRows = false;
+            this.CurrentJudgesDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.CurrentJudgesDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.CurrentJudgesDataGridView.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
             this.CurrentJudgesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.CurrentJudgesDataGridView.Location = new System.Drawing.Point(389, 0);
             this.CurrentJudgesDataGridView.Name = "CurrentJudgesDataGridView";
             this.CurrentJudgesDataGridView.ReadOnly = true;
-            this.CurrentJudgesDataGridView.RowHeadersWidth = 20;
-            this.CurrentJudgesDataGridView.Size = new System.Drawing.Size(340, 227);
+            this.CurrentJudgesDataGridView.RowHeadersWidth = 30;
+            this.CurrentJudgesDataGridView.Size = new System.Drawing.Size(470, 227);
             this.CurrentJudgesDataGridView.TabIndex = 6;
             this.CurrentJudgesDataGridView.TabStop = false;
             // 
@@ -143,7 +154,7 @@
             this.DiverTabPage.Location = new System.Drawing.Point(4, 22);
             this.DiverTabPage.Name = "DiverTabPage";
             this.DiverTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.DiverTabPage.Size = new System.Drawing.Size(731, 227);
+            this.DiverTabPage.Size = new System.Drawing.Size(1032, 227);
             this.DiverTabPage.TabIndex = 1;
             this.DiverTabPage.Text = "Divers";
             this.DiverTabPage.UseVisualStyleBackColor = true;
@@ -175,13 +186,16 @@
             this.CurrentDiversDataGridView.AllowUserToOrderColumns = true;
             this.CurrentDiversDataGridView.AllowUserToResizeColumns = false;
             this.CurrentDiversDataGridView.AllowUserToResizeRows = false;
+            this.CurrentDiversDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.CurrentDiversDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.CurrentDiversDataGridView.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
             this.CurrentDiversDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.CurrentDiversDataGridView.Location = new System.Drawing.Point(389, 0);
             this.CurrentDiversDataGridView.Name = "CurrentDiversDataGridView";
-            this.CurrentDiversDataGridView.ReadOnly = true;
-            this.CurrentDiversDataGridView.RowHeadersWidth = 20;
-            this.CurrentDiversDataGridView.Size = new System.Drawing.Size(340, 227);
+            this.CurrentDiversDataGridView.RowHeadersWidth = 30;
+            this.CurrentDiversDataGridView.Size = new System.Drawing.Size(670, 227);
             this.CurrentDiversDataGridView.TabIndex = 7;
             this.CurrentDiversDataGridView.TabStop = false;
             // 
@@ -192,12 +206,16 @@
             this.GlobalDiversDataGridView.AllowUserToOrderColumns = true;
             this.GlobalDiversDataGridView.AllowUserToResizeColumns = false;
             this.GlobalDiversDataGridView.AllowUserToResizeRows = false;
+            this.GlobalDiversDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.GlobalDiversDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.GlobalDiversDataGridView.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
             this.GlobalDiversDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GlobalDiversDataGridView.Location = new System.Drawing.Point(-1, 0);
             this.GlobalDiversDataGridView.Name = "GlobalDiversDataGridView";
             this.GlobalDiversDataGridView.ReadOnly = true;
-            this.GlobalDiversDataGridView.RowHeadersWidth = 20;
+            this.GlobalDiversDataGridView.RowHeadersWidth = 30;
             this.GlobalDiversDataGridView.Size = new System.Drawing.Size(340, 227);
             this.GlobalDiversDataGridView.TabIndex = 6;
             this.GlobalDiversDataGridView.TabStop = false;
@@ -208,12 +226,16 @@
             this.ContestsDataGridView.AllowUserToDeleteRows = false;
             this.ContestsDataGridView.AllowUserToResizeColumns = false;
             this.ContestsDataGridView.AllowUserToResizeRows = false;
+            this.ContestsDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ContestsDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.ContestsDataGridView.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
             this.ContestsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ContestsDataGridView.Location = new System.Drawing.Point(12, 12);
             this.ContestsDataGridView.Name = "ContestsDataGridView";
             this.ContestsDataGridView.ReadOnly = true;
-            this.ContestsDataGridView.Size = new System.Drawing.Size(490, 185);
+            this.ContestsDataGridView.Size = new System.Drawing.Size(511, 185);
             this.ContestsDataGridView.TabIndex = 4;
             this.ContestsDataGridView.TabStop = false;
             this.ContestsDataGridView.SelectionChanged += new System.EventHandler(this.ContestsDataGridView_SelectionChanged);
@@ -274,12 +296,29 @@
             this.StartContestBtn.TabIndex = 11;
             this.StartContestBtn.Text = "Start Contest";
             this.StartContestBtn.UseVisualStyleBackColor = true;
+            this.StartContestBtn.Click += new System.EventHandler(this.StartContestBtn_Click);
+            // 
+            // weirdfix
+            // 
+            this.weirdfix.HeaderText = "weirdfix";
+            this.weirdfix.Name = "weirdfix";
+            // 
+            // weirddatagridfix
+            // 
+            this.weirddatagridfix.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.weirddatagridfix.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.weirdfix});
+            this.weirddatagridfix.Location = new System.Drawing.Point(620, 24);
+            this.weirddatagridfix.Name = "weirddatagridfix";
+            this.weirddatagridfix.Size = new System.Drawing.Size(235, 132);
+            this.weirddatagridfix.TabIndex = 12;
             // 
             // StartContest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(762, 466);
+            this.ClientSize = new System.Drawing.Size(1146, 469);
+            this.Controls.Add(this.weirddatagridfix);
             this.Controls.Add(this.StartContestBtn);
             this.Controls.Add(this.EditContestBtn);
             this.Controls.Add(this.GlobalDiversLabel);
@@ -292,6 +331,7 @@
             this.MinimizeBox = false;
             this.Name = "StartContest";
             this.Text = "StartContest";
+            this.Load += new System.EventHandler(this.StartContest_Load);
             this.JudgesDiversTabControl.ResumeLayout(false);
             this.JudgeTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.GlobalJudgesDataGridView)).EndInit();
@@ -300,6 +340,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.CurrentDiversDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GlobalDiversDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ContestsDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.weirddatagridfix)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -325,5 +366,7 @@
         private System.Windows.Forms.Label CurrentlDiversLabel;
         private System.Windows.Forms.Button EditContestBtn;
         private System.Windows.Forms.Button StartContestBtn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn weirdfix;
+        private System.Windows.Forms.DataGridView weirddatagridfix;
     }
 }
