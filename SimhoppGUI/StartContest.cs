@@ -24,6 +24,9 @@ namespace SimhoppGUI
         private DelegateRemoveDiverFromContest eventRemoveDiverFromContest;
         private DelegateUpdateContest eventUpdateContest;
         private DelegateGetTrickList eventGetTrickList;
+        private DelegateGetFirstClientObjectData eventGetFirstClientObjectData;
+        private DelegateHandleMessage eventHandleMessage;
+        private DelegateSendDataToClient eventSendDataToClient;
 
         DataGridViewComboBoxColumn trick1ComboBoxColumn = new DataGridViewComboBoxColumn();
         DataGridViewComboBoxColumn trick2ComboBoxColumn = new DataGridViewComboBoxColumn();
@@ -45,7 +48,10 @@ namespace SimhoppGUI
                 DelegateRemoveJudgeFromContest eventRemoveJudgeFromContest,
                 DelegateRemoveDiverFromContest eventRemoveDiverFromContest,
                 DelegateUpdateContest eventUpdateContest,
-                DelegateGetTrickList eventGetTrickList
+                DelegateGetTrickList eventGetTrickList,
+                DelegateGetFirstClientObjectData eventGetFirstClientObjectData,
+                DelegateHandleMessage eventHandleMessage,
+                DelegateSendDataToClient eventSendDataToClient
             )
         {
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -62,6 +68,9 @@ namespace SimhoppGUI
             this.eventRemoveDiverFromContest = eventRemoveDiverFromContest;
             this.eventUpdateContest = eventUpdateContest;
             this.eventGetTrickList = eventGetTrickList;
+            this.eventGetFirstClientObjectData = eventGetFirstClientObjectData;
+            this.eventHandleMessage = eventHandleMessage;
+            this.eventSendDataToClient = eventSendDataToClient;
         }
         #endregion
 
@@ -438,7 +447,7 @@ namespace SimhoppGUI
         private void StartContestBtn_Click(object sender, EventArgs e)
         {
             using (new DimIt())
-            using (var liveFeed = new LiveFeed())
+            using (var liveFeed = new LiveFeed(eventGetFirstClientObjectData, eventHandleMessage, eventSendDataToClient))
             {
                 if (liveFeed.ShowDialog(this) == DialogResult.OK)
                 {

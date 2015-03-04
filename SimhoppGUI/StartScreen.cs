@@ -126,7 +126,10 @@ namespace SimhoppGUI
                 EventRemoveJudgeFromContest,
                 EventRemoveDiverFromContest,
                 EventUpdateContest,
-                EventGetTrickList
+                EventGetTrickList,
+                EventGetFirstClientObjectData,
+                EventHandleMessage,
+                EventSendDataToClient
                 ))
             {
                 if (startContest.ShowDialog(this) == DialogResult.OK)
@@ -180,14 +183,14 @@ namespace SimhoppGUI
 
         private void LivefeedBtn_Click(object sender, EventArgs e)
         {
-            using (new DimIt())
-            using (var liveFeed = new LiveFeed())
+            //using (new DimIt())
+            /*using (var liveFeed = new LiveFeed())
             {
                 if (liveFeed.ShowDialog(this) == DialogResult.OK)
                 {
 
                 }
-            }
+            }*/
         }
 
         /// <summary>
@@ -238,6 +241,10 @@ namespace SimhoppGUI
         public event DelegateUpdateContest EventUpdateContest = null;
         public event DelegateUpdateJudge EventUpdateJudge = null;
         public event DelegateUpdateDiver EventUpdateDiver = null;
+
+        public event DelegateGetFirstClientObjectData EventGetFirstClientObjectData = null;
+        public event DelegateSendDataToClient EventSendDataToClient = null;
+        public event DelegateHandleMessage EventHandleMessage = null;
 
         #endregion
     }
