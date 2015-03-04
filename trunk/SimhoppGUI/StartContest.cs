@@ -132,6 +132,7 @@ namespace SimhoppGUI
             trick3ComboBoxColumn.ValueMember = "name";
             trick3ComboBoxColumn.Name = "Trick 3";
 
+
             CurrentDiversDataGridView.Columns.Add(trick1ComboBoxColumn);
             CurrentDiversDataGridView.Columns.Add(trick2ComboBoxColumn);
             CurrentDiversDataGridView.Columns.Add(trick3ComboBoxColumn);
@@ -454,6 +455,21 @@ namespace SimhoppGUI
 
                 }
             }
+        }
+
+        private void dataGridView1_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            //dataGridView1.Columns[e.ColumnIndex].
+            //dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells[0];
+            //dataGridView1.BeginEdit(true);
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+            // dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected = true;
+            //dataGridView1.BeginEdit(true);
+            // trick1ComboBoxColumn.display
         }
 
      
