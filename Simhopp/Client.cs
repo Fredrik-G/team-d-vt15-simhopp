@@ -11,10 +11,9 @@ using System.IO;
 
 namespace Simhopp
 {
-    class Client
+    public class Client
     {
         TcpClient clientSocket;
-        bool clientConnected;
         
 
         /// <summary>
@@ -23,19 +22,17 @@ namespace Simhopp
         public Client()
         {
             clientSocket = new TcpClient();
-            clientConnected = false;
         }
         /// <summary>
         /// A function that tries to connect to a server via its IP and port
         /// </summary>
         public void ConnectToServer(string serverIpAddress)
         {
-            if(!clientConnected)
+            if(!clientSocket.Client.Connected)
             {
                 //Should get the server IP from textBox in clientWindow?
                 clientSocket.Connect(serverIpAddress, 9059);
-                clientConnected = true;
-                Thread threadedChat = new Thread(HandleMessages);
+                var threadedChat = new Thread(HandleMessages);
                 threadedChat.Start();
                 threadedChat.IsBackground = true;
             }
@@ -45,52 +42,62 @@ namespace Simhopp
         /// </summary>
         public void SendDataToServer()
         {
-            ClientObjectData message = new ClientObjectData("Xiao Kines", 9.5);//Should get data from testboxes
-            NetworkStream networkStream = clientSocket.GetStream();
+            var message = new ClientObjectData("222222", 9.5);//Should get data from testboxes
+            var networkStream = clientSocket.GetStream();
             string serializedString;
-            ASCIIEncoding asciiEncoder = new ASCIIEncoding();
-            using (MemoryStream stream = new MemoryStream())
+            var asciiEncoder = new ASCIIEncoding();
+            using (var stream = new MemoryStream())
             {
-                XmlSerializer xmlS = new XmlSerializer(typeof(ClientObjectData));
+                var xmlS = new XmlSerializer(typeof(ClientObjectData));
                 xmlS.Serialize(stream, message);
                 serializedString = Encoding.UTF8.GetString(stream.ToArray());
             }
-            byte[] outStream = asciiEncoder.GetBytes(serializedString + "$");
+            var outStream = asciiEncoder.GetBytes(serializedString + "$");
             networkStream.Write(outStream, 0, outStream.Length);
             networkStream.Flush();
+            Thread.Sleep(10);
         }
         /// <summary>
-        /// Handels the messages to and from the server.
+        /// Handles the messages to and from the server.
         /// 
         /// </summary>
         private void HandleMessages()
         {
-             
-            byte[] bytesFrom = new byte[10800];
-            string dataFromServer = null;
-            ServerObjectData message = new ServerObjectData();
-            while(clientConnected)
+            var bytesFrom = new byte[10800];
+            var message = new ServerObjectData();
+            while(clientSocket.Client.Connected)
             {
                 try
                 {
-                    NetworkStream networkStream = clientSocket.GetStream();
+                    string dataFromServer = string.Empty;
+                    var networkStream = clientSocket.GetStream();
                     networkStream.Read(bytesFrom, 0, (int)clientSocket.ReceiveBufferSize);
                     dataFromServer = System.Text.Encoding.ASCII.GetString(bytesFrom);
                     dataFromServer = dataFromServer.Substring(0, dataFromServer.IndexOf("$"));
                     using(TextReader reader = new StringReader(dataFromServer))
                     {
-                        XmlSerializer xmlS = new XmlSerializer(typeof(ServerObjectData));
+                        var xmlS = new XmlSerializer(typeof(ServerObjectData));
                         message = (ServerObjectData)xmlS.Deserialize(reader);
                     }
-                    Console.WriteLine(" >> From Server: " + message.ContestName + " " + message.DiverName + " " + message.TrickName + " " + message.TrickDiff);
+                    //Console.WriteLine(" >> From Server: " + message.ContestName + " " + message.DiverName + " " + message.TrickName + " " + message.TrickDiff);
                 }
                 catch(Exception ex)//Should be better exception for different exceptions
                 {
+                    Disconnect();
                     Thread.CurrentThread.Abort();
                 }
             }
-            Thread.CurrentThread.Abort();
-            
+        }
+
+        /// <summary>
+        /// Function that disconnects the Client from the server
+        /// </summary>
+        public void Disconnect()
+        {
+            if (clientSocket.Client.Connected)
+            {
+                clientSocket.Client.Disconnect(true);
+            }
         }
     }
 }

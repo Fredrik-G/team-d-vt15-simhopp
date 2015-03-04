@@ -14,7 +14,12 @@ namespace Simhopp
     {
         TcpClient clientSocket;
         bool clientConnectedToServer;
+        private Queue<ClientObjectData> messageQueue;
 
+        public HandleClient(ref Queue<ClientObjectData> messageQueue)
+        {
+            this.messageQueue = messageQueue;
+        }
         /// <summary>
         /// Starts a connection to the Client
         /// </summary>
@@ -22,7 +27,7 @@ namespace Simhopp
         public void StartClient(TcpClient inClientSocket)
         {
             this.clientSocket = inClientSocket;
-            Thread clientThread = new Thread(HandleMessages);
+            var clientThread = new Thread(HandleMessages);
             this.clientConnectedToServer = true;
             clientThread.Start();
         }
@@ -30,31 +35,33 @@ namespace Simhopp
         /// <summary>
         /// The client->server thread is running this function
         /// </summary>
-        private void HandleMessages()
+        public void HandleMessages()
         {
-            byte [] bytesFrom = new byte[10800];
-            string dataFromClient = null;
-            ClientObjectData message = new ClientObjectData();
-            Byte[] sendBytes = null;
+            var bytesFrom = new byte[10800];
+            var message = new ClientObjectData();
+            //Byte[] sendBytes = null;
 
             while(clientConnectedToServer)
             {
                 try
                 {
-                    NetworkStream networkStream = clientSocket.GetStream();
+                    var dataFromClient = string.Empty;
+                    var networkStream = clientSocket.GetStream();
                     networkStream.Read(bytesFrom, 0, (int)clientSocket.ReceiveBufferSize);
                     dataFromClient = System.Text.Encoding.ASCII.GetString(bytesFrom);
                     dataFromClient = dataFromClient.Substring(0, dataFromClient.IndexOf("$"));
                     using (TextReader reader = new StringReader(dataFromClient))
                     {
-                        XmlSerializer xmlS = new XmlSerializer(typeof(ClientObjectData));
+                        var xmlS = new XmlSerializer(typeof(ClientObjectData));
                         message = (ClientObjectData)xmlS.Deserialize(reader);
                     }
-                    Console.WriteLine(" >> From client: " + message.JudgeName + " " + message.Point);
+                    //Console.WriteLine(" >> From client: " + message.Ssn + " " + message.Point);
+                    messageQueue.Enqueue(message);
                 }
                 catch(Exception ex)
                 {
                     //Client Disconnecting/Closing Client/Fatal error
+                    //Console.WriteLine(" >> Client Disconnected");
                     clientConnectedToServer = false;
                     Thread.CurrentThread.Abort();
                 }
