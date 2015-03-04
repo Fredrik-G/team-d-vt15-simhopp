@@ -171,8 +171,7 @@ namespace Simhopp
         /// <returns></returns>
         public string GetJudgeHash(string ssn)
         {
-            var judge = GetJudgeBySSN(ssn);
-            return databaseController.GetJudgeHash(judge);
+            return GetJudgeBySSN(ssn).Hash;
         }
 
         /// <summary>
@@ -183,7 +182,7 @@ namespace Simhopp
         /// <returns></returns>
         public string GetJudgeSalt(string ssn)
         {
-            return databaseController.GetJudgeSalt(GetJudgeBySSN(ssn));
+            return GetJudgeBySSN(ssn).Salt;
         }
 
         /// <summary>
