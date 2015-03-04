@@ -33,12 +33,11 @@
             this.StartScreenAddDiverContestBtn = new System.Windows.Forms.Button();
             this.StartScreenAddJudgeBtn = new System.Windows.Forms.Button();
             this.StartScreenViewJudgeClient = new System.Windows.Forms.Button();
-            this.LivefeedBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // StartScreenNewContesttBtn
             // 
-            this.StartScreenNewContesttBtn.Location = new System.Drawing.Point(12, 84);
+            this.StartScreenNewContesttBtn.Location = new System.Drawing.Point(12, 41);
             this.StartScreenNewContesttBtn.Name = "StartScreenNewContesttBtn";
             this.StartScreenNewContesttBtn.Size = new System.Drawing.Size(72, 66);
             this.StartScreenNewContesttBtn.TabIndex = 0;
@@ -48,7 +47,7 @@
             // 
             // StartScreenStartContestBtn
             // 
-            this.StartScreenStartContestBtn.Location = new System.Drawing.Point(129, 84);
+            this.StartScreenStartContestBtn.Location = new System.Drawing.Point(129, 41);
             this.StartScreenStartContestBtn.Name = "StartScreenStartContestBtn";
             this.StartScreenStartContestBtn.Size = new System.Drawing.Size(72, 66);
             this.StartScreenStartContestBtn.TabIndex = 1;
@@ -58,7 +57,7 @@
             // 
             // StartScreenAddDiverContestBtn
             // 
-            this.StartScreenAddDiverContestBtn.Location = new System.Drawing.Point(363, 84);
+            this.StartScreenAddDiverContestBtn.Location = new System.Drawing.Point(245, 41);
             this.StartScreenAddDiverContestBtn.Name = "StartScreenAddDiverContestBtn";
             this.StartScreenAddDiverContestBtn.Size = new System.Drawing.Size(72, 66);
             this.StartScreenAddDiverContestBtn.TabIndex = 3;
@@ -68,7 +67,7 @@
             // 
             // StartScreenAddJudgeBtn
             // 
-            this.StartScreenAddJudgeBtn.Location = new System.Drawing.Point(480, 84);
+            this.StartScreenAddJudgeBtn.Location = new System.Drawing.Point(362, 41);
             this.StartScreenAddJudgeBtn.Name = "StartScreenAddJudgeBtn";
             this.StartScreenAddJudgeBtn.Size = new System.Drawing.Size(72, 66);
             this.StartScreenAddJudgeBtn.TabIndex = 4;
@@ -78,7 +77,7 @@
             // 
             // StartScreenViewJudgeClient
             // 
-            this.StartScreenViewJudgeClient.Location = new System.Drawing.Point(257, 191);
+            this.StartScreenViewJudgeClient.Location = new System.Drawing.Point(147, 140);
             this.StartScreenViewJudgeClient.Name = "StartScreenViewJudgeClient";
             this.StartScreenViewJudgeClient.Size = new System.Drawing.Size(130, 23);
             this.StartScreenViewJudgeClient.TabIndex = 5;
@@ -86,22 +85,11 @@
             this.StartScreenViewJudgeClient.UseVisualStyleBackColor = true;
             this.StartScreenViewJudgeClient.Click += new System.EventHandler(this.StartScreenViewJudgeClient_Click);
             // 
-            // LivefeedBtn
-            // 
-            this.LivefeedBtn.Location = new System.Drawing.Point(230, 80);
-            this.LivefeedBtn.Name = "LivefeedBtn";
-            this.LivefeedBtn.Size = new System.Drawing.Size(117, 74);
-            this.LivefeedBtn.TabIndex = 6;
-            this.LivefeedBtn.Text = "Live Feed";
-            this.LivefeedBtn.UseVisualStyleBackColor = true;
-            this.LivefeedBtn.Click += new System.EventHandler(this.LivefeedBtn_Click);
-            // 
             // StartScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(608, 244);
-            this.Controls.Add(this.LivefeedBtn);
+            this.ClientSize = new System.Drawing.Size(465, 176);
             this.Controls.Add(this.StartScreenViewJudgeClient);
             this.Controls.Add(this.StartScreenAddJudgeBtn);
             this.Controls.Add(this.StartScreenAddDiverContestBtn);
@@ -124,6 +112,5 @@
         private System.Windows.Forms.Button StartScreenAddDiverContestBtn;
         private System.Windows.Forms.Button StartScreenAddJudgeBtn;
         private System.Windows.Forms.Button StartScreenViewJudgeClient;
-        private System.Windows.Forms.Button LivefeedBtn;
     }
 }

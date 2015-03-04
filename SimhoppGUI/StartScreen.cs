@@ -181,18 +181,6 @@ namespace SimhoppGUI
             }
         }
 
-        private void LivefeedBtn_Click(object sender, EventArgs e)
-        {
-            //using (new DimIt())
-            /*using (var liveFeed = new LiveFeed())
-            {
-                if (liveFeed.ShowDialog(this) == DialogResult.OK)
-                {
-
-                }
-            }*/
-        }
-
         /// <summary>
         /// Occurs when the form is closing.
         /// </summary>

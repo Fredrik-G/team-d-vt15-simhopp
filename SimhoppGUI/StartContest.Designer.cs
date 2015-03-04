@@ -192,6 +192,7 @@
             this.CurrentDiversDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.CurrentDiversDataGridView.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
             this.CurrentDiversDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.CurrentDiversDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.CurrentDiversDataGridView.Location = new System.Drawing.Point(389, 0);
             this.CurrentDiversDataGridView.Name = "CurrentDiversDataGridView";
             this.CurrentDiversDataGridView.RowHeadersWidth = 30;
