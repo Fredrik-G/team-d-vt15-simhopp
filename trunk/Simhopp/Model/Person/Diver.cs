@@ -12,10 +12,6 @@
         /// </summary>
         public Diver()
         {
-            this.id = -1;
-            this.name = "";
-            this.nationality = "";
-            this.ssn = "";
         }
 
         /// <summary>
@@ -24,12 +20,9 @@
         /// <param name="name"></param>
         /// <param name="nationality"></param>
         /// <param name="ssn"></param>
-        public Diver(string name, string nationality, string ssn)
+        public Diver(string name, string nationality, string ssn) 
+            : base(name, nationality, ssn)
         {
-            this.id = -1;
-            this.name = name;
-            this.nationality = nationality;
-            this.ssn = ssn;
         }
 
         /// <summary>
@@ -41,11 +34,8 @@
         /// <param name="nationality"></param>
         /// <param name="ssn"></param>
         public Diver(int id, string name, string nationality, string ssn)
+            : base(id, name, nationality, ssn)
         {
-            this.id = id;
-            this.name = name;
-            this.nationality = nationality;
-            this.ssn = ssn;
         }
 
         #endregion
