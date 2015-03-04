@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ namespace Simhopp.View
     public delegate void DelegateReadJudgesFromDatabase();
     public delegate void DelegateReadDiversFromDatabase();
     public delegate void DelegateReadTricksFromDatabase();
+    public delegate void DelegateReadContestsFromDatabase();
 
     public delegate BindingList<Contest> DelegateGetContestsList();
 
@@ -28,7 +30,7 @@ namespace Simhopp.View
     public delegate string DelegateGetJudgeHash(string ssn);
     public delegate string DelegateGetJudgeSalt(string ssn);
 
-    public delegate void DelegateAddJudgeToList(string name, string nationality, string ssn);
+    public delegate void DelegateAddJudgeToList(string name, string nationality, string ssn, string password = "password");
     public delegate void DelegateAddDiverToList(string name, string nationality, string ssn);
 
     public delegate void DelegateAddJudgeToContest(int contestId, string ssn);
@@ -57,6 +59,7 @@ namespace Simhopp.View
         event DelegateReadJudgesFromDatabase EventReadJudgesFromDatabase;
         event DelegateReadDiversFromDatabase EventReadDiversFromDatabase;
         event DelegateReadTricksFromDatabase EventReadTricksFromDatabase;
+        event DelegateReadContestsFromDatabase EventReadContestsFromDatabase;
 
         event DelegateGetContestsList EventGetContestsList;
         event DelegateGetJudgesList EventGetJudgesList;

@@ -68,6 +68,7 @@
             this.PasswordTB.PasswordChar = '*';
             this.PasswordTB.Size = new System.Drawing.Size(119, 20);
             this.PasswordTB.TabIndex = 3;
+            this.PasswordTB.UseSystemPasswordChar = true;
             // 
             // LoginBtn
             // 

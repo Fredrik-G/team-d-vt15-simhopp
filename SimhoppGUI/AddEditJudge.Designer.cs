@@ -49,6 +49,8 @@
             this.UpdateJudgeRemoveBtn = new System.Windows.Forms.Button();
             this.UpdateJudgeClosebtn = new System.Windows.Forms.Button();
             this.tabPageAddJudge = new System.Windows.Forms.TabPage();
+            this.AddJudgePasswordTb = new System.Windows.Forms.TextBox();
+            this.AddJudgePasswordLabel = new System.Windows.Forms.Label();
             this.JudgesDataGridView = new System.Windows.Forms.DataGridView();
             this.NameErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.InputToolTip = new System.Windows.Forms.ToolTip(this.components);
@@ -77,7 +79,7 @@
             // 
             this.AddJudgeSSNLabel.AutoSize = true;
             this.AddJudgeSSNLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AddJudgeSSNLabel.Location = new System.Drawing.Point(6, 96);
+            this.AddJudgeSSNLabel.Location = new System.Drawing.Point(6, 62);
             this.AddJudgeSSNLabel.Name = "AddJudgeSSNLabel";
             this.AddJudgeSSNLabel.Size = new System.Drawing.Size(32, 13);
             this.AddJudgeSSNLabel.TabIndex = 3;
@@ -87,7 +89,7 @@
             // 
             this.AddJudgeNationalityLabel.AutoSize = true;
             this.AddJudgeNationalityLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AddJudgeNationalityLabel.Location = new System.Drawing.Point(6, 53);
+            this.AddJudgeNationalityLabel.Location = new System.Drawing.Point(6, 36);
             this.AddJudgeNationalityLabel.Name = "AddJudgeNationalityLabel";
             this.AddJudgeNationalityLabel.Size = new System.Drawing.Size(67, 13);
             this.AddJudgeNationalityLabel.TabIndex = 4;
@@ -105,7 +107,7 @@
             // 
             // AddJudgeNationaltyTb
             // 
-            this.AddJudgeNationaltyTb.Location = new System.Drawing.Point(98, 53);
+            this.AddJudgeNationaltyTb.Location = new System.Drawing.Point(98, 36);
             this.AddJudgeNationaltyTb.Name = "AddJudgeNationaltyTb";
             this.AddJudgeNationaltyTb.Size = new System.Drawing.Size(148, 20);
             this.AddJudgeNationaltyTb.TabIndex = 7;
@@ -115,7 +117,7 @@
             // 
             // AddJudgeSSNTb
             // 
-            this.AddJudgeSSNTb.Location = new System.Drawing.Point(98, 96);
+            this.AddJudgeSSNTb.Location = new System.Drawing.Point(98, 62);
             this.AddJudgeSSNTb.Name = "AddJudgeSSNTb";
             this.AddJudgeSSNTb.Size = new System.Drawing.Size(148, 20);
             this.AddJudgeSSNTb.TabIndex = 8;
@@ -125,17 +127,17 @@
             // 
             // AddJudgeButton
             // 
-            this.AddJudgeButton.Location = new System.Drawing.Point(98, 150);
+            this.AddJudgeButton.Location = new System.Drawing.Point(98, 127);
             this.AddJudgeButton.Name = "AddJudgeButton";
             this.AddJudgeButton.Size = new System.Drawing.Size(75, 23);
-            this.AddJudgeButton.TabIndex = 9;
+            this.AddJudgeButton.TabIndex = 10;
             this.AddJudgeButton.Text = "Add";
             this.AddJudgeButton.UseVisualStyleBackColor = true;
             this.AddJudgeButton.Click += new System.EventHandler(this.AddJudgeButton_Click);
             // 
             // UpdateJudgeSSNTb
             // 
-            this.UpdateJudgeSSNTb.Location = new System.Drawing.Point(98, 96);
+            this.UpdateJudgeSSNTb.Location = new System.Drawing.Point(98, 62);
             this.UpdateJudgeSSNTb.Name = "UpdateJudgeSSNTb";
             this.UpdateJudgeSSNTb.Size = new System.Drawing.Size(148, 20);
             this.UpdateJudgeSSNTb.TabIndex = 17;
@@ -145,7 +147,7 @@
             // 
             // UpdateJudgeNationalityTb
             // 
-            this.UpdateJudgeNationalityTb.Location = new System.Drawing.Point(98, 53);
+            this.UpdateJudgeNationalityTb.Location = new System.Drawing.Point(98, 36);
             this.UpdateJudgeNationalityTb.Name = "UpdateJudgeNationalityTb";
             this.UpdateJudgeNationalityTb.Size = new System.Drawing.Size(148, 20);
             this.UpdateJudgeNationalityTb.TabIndex = 16;
@@ -167,7 +169,7 @@
             // 
             this.EditJudgeNationalityLabel.AutoSize = true;
             this.EditJudgeNationalityLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EditJudgeNationalityLabel.Location = new System.Drawing.Point(6, 53);
+            this.EditJudgeNationalityLabel.Location = new System.Drawing.Point(6, 36);
             this.EditJudgeNationalityLabel.Name = "EditJudgeNationalityLabel";
             this.EditJudgeNationalityLabel.Size = new System.Drawing.Size(67, 13);
             this.EditJudgeNationalityLabel.TabIndex = 14;
@@ -177,7 +179,7 @@
             // 
             this.EditJudgeSSNLabel.AutoSize = true;
             this.EditJudgeSSNLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EditJudgeSSNLabel.Location = new System.Drawing.Point(6, 96);
+            this.EditJudgeSSNLabel.Location = new System.Drawing.Point(6, 62);
             this.EditJudgeSSNLabel.Name = "EditJudgeSSNLabel";
             this.EditJudgeSSNLabel.Size = new System.Drawing.Size(32, 13);
             this.EditJudgeSSNLabel.TabIndex = 13;
@@ -195,7 +197,7 @@
             // 
             // UpdateJudgeButton
             // 
-            this.UpdateJudgeButton.Location = new System.Drawing.Point(17, 150);
+            this.UpdateJudgeButton.Location = new System.Drawing.Point(17, 127);
             this.UpdateJudgeButton.Name = "UpdateJudgeButton";
             this.UpdateJudgeButton.Size = new System.Drawing.Size(75, 23);
             this.UpdateJudgeButton.TabIndex = 18;
@@ -205,10 +207,10 @@
             // 
             // AddJudgeCloseBtn
             // 
-            this.AddJudgeCloseBtn.Location = new System.Drawing.Point(271, 150);
+            this.AddJudgeCloseBtn.Location = new System.Drawing.Point(271, 127);
             this.AddJudgeCloseBtn.Name = "AddJudgeCloseBtn";
             this.AddJudgeCloseBtn.Size = new System.Drawing.Size(75, 23);
-            this.AddJudgeCloseBtn.TabIndex = 20;
+            this.AddJudgeCloseBtn.TabIndex = 11;
             this.AddJudgeCloseBtn.Text = "Close";
             this.AddJudgeCloseBtn.UseVisualStyleBackColor = true;
             this.AddJudgeCloseBtn.Click += new System.EventHandler(this.AddJudgePreviousBtn_Click);
@@ -245,7 +247,7 @@
             // 
             // UpdateJudgeRemoveBtn
             // 
-            this.UpdateJudgeRemoveBtn.Location = new System.Drawing.Point(98, 150);
+            this.UpdateJudgeRemoveBtn.Location = new System.Drawing.Point(98, 127);
             this.UpdateJudgeRemoveBtn.Name = "UpdateJudgeRemoveBtn";
             this.UpdateJudgeRemoveBtn.Size = new System.Drawing.Size(75, 23);
             this.UpdateJudgeRemoveBtn.TabIndex = 19;
@@ -255,7 +257,7 @@
             // 
             // UpdateJudgeClosebtn
             // 
-            this.UpdateJudgeClosebtn.Location = new System.Drawing.Point(271, 150);
+            this.UpdateJudgeClosebtn.Location = new System.Drawing.Point(271, 127);
             this.UpdateJudgeClosebtn.Name = "UpdateJudgeClosebtn";
             this.UpdateJudgeClosebtn.Size = new System.Drawing.Size(75, 23);
             this.UpdateJudgeClosebtn.TabIndex = 23;
@@ -265,6 +267,8 @@
             // 
             // tabPageAddJudge
             // 
+            this.tabPageAddJudge.Controls.Add(this.AddJudgePasswordTb);
+            this.tabPageAddJudge.Controls.Add(this.AddJudgePasswordLabel);
             this.tabPageAddJudge.Controls.Add(this.AddJudgeNameLabel);
             this.tabPageAddJudge.Controls.Add(this.AddJudgeButton);
             this.tabPageAddJudge.Controls.Add(this.AddJudgeCloseBtn);
@@ -280,6 +284,25 @@
             this.tabPageAddJudge.TabIndex = 0;
             this.tabPageAddJudge.Text = "Add Judge";
             this.tabPageAddJudge.UseVisualStyleBackColor = true;
+            // 
+            // AddJudgePasswordTb
+            // 
+            this.AddJudgePasswordTb.Location = new System.Drawing.Point(98, 88);
+            this.AddJudgePasswordTb.Name = "AddJudgePasswordTb";
+            this.AddJudgePasswordTb.Size = new System.Drawing.Size(148, 20);
+            this.AddJudgePasswordTb.TabIndex = 9;
+            this.InputToolTip.SetToolTip(this.AddJudgePasswordTb, "Judge password.");
+            this.AddJudgePasswordTb.UseSystemPasswordChar = true;
+            // 
+            // AddJudgePasswordLabel
+            // 
+            this.AddJudgePasswordLabel.AutoSize = true;
+            this.AddJudgePasswordLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AddJudgePasswordLabel.Location = new System.Drawing.Point(6, 88);
+            this.AddJudgePasswordLabel.Name = "AddJudgePasswordLabel";
+            this.AddJudgePasswordLabel.Size = new System.Drawing.Size(61, 13);
+            this.AddJudgePasswordLabel.TabIndex = 21;
+            this.AddJudgePasswordLabel.Text = "Password";
             // 
             // JudgesDataGridView
             // 
@@ -370,5 +393,7 @@
         private System.Windows.Forms.ToolTip InputToolTip;
         private System.Windows.Forms.ErrorProvider NationalityErrorProvider;
         private System.Windows.Forms.ErrorProvider SSNErrorProvider;
+        private System.Windows.Forms.TextBox AddJudgePasswordTb;
+        private System.Windows.Forms.Label AddJudgePasswordLabel;
     }
 }

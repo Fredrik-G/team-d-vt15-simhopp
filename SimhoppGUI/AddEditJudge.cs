@@ -51,6 +51,11 @@ namespace SimhoppGUI
             get { return UpdateJudgeSSNTb.Text; }
             set { UpdateJudgeSSNTb.Text = value; }
         }
+        public string AddPassword
+        {
+            get { return AddJudgePasswordTb.Text; }
+            set { AddJudgePasswordTb.Text = value; }
+        }
         #endregion
 
         #region Constructor
@@ -129,7 +134,7 @@ namespace SimhoppGUI
                 if (CheckInput.CheckCorrectPersonInput(NameErrorProvider, NationalityErrorProvider,
                     SSNErrorProvider, AddJudgeNameTb, AddJudgeNationaltyTb, AddJudgeSSNTb))
                 {
-                    eventAddJudgeToList(AddName, AddNationality, AddSSN);
+                    eventAddJudgeToList(AddName, AddNationality, AddSSN, AddPassword);
                     NameErrorProvider.Clear();
 
                     log.Info("Added judge to list (" + AddName + ", " + AddNationality + ", " + AddSSN + ")");

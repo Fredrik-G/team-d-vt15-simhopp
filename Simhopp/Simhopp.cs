@@ -51,8 +51,7 @@ namespace Simhopp
         /// </summary>
         /// <returns></returns>
         public BindingList<Contest> GetContestsList()
-        {
-            contestList = databaseController.GetContestList();
+        {           
             return contestList;
         }
         /// <summary>
@@ -235,7 +234,7 @@ namespace Simhopp
         /// <param name="name">Judge name</param>
         /// <param name="nationality">Judge nationality</param>
         /// <param name="ssn">Judge ssn</param>
-        public void AddJudgeToList(string name, string nationality, string ssn)
+        public void AddJudgeToList(string name, string nationality, string ssn, string password = "password")
         {
             //kollar om judge redan finns i judgelist. 
             if (GetJudgeBySSN(ssn) != null)
@@ -244,8 +243,7 @@ namespace Simhopp
             }
             try
             {
-                judgeList.Add(new Judge(name, nationality, ssn));
-                //TODO: ska man lägga judge till databas här?
+                judgeList.Add(new Judge(name, nationality, ssn, password));
             }
             catch (Exception)
             {
@@ -499,6 +497,7 @@ namespace Simhopp
         #endregion
 
         #region Read from database
+
         /// <summary>
         /// Reads judges from database and adds them to judgelist.
         /// </summary>
@@ -512,6 +511,13 @@ namespace Simhopp
         public void ReadDiversFromDatabase()
         {
             diverList = databaseController.GetDiverList();
+        }
+        /// <summary>
+        /// Reads all contests from database and adds them to contestList.
+        /// </summary>
+        public void ReadContestsFromDatabase()
+        {
+            contestList = databaseController.GetContestList();
         }
 
         /// <summary>
@@ -547,7 +553,7 @@ namespace Simhopp
 
                         if (fileName == "judge.txt")
                         {
-                            var judge = new Judge(temp[0], temp[1], temp[2]);
+                            var judge = new Judge(temp[0], temp[1], temp[2], "password");
                             judgeList.Add(judge);
                         }
                         else if (fileName == "diver.txt")
