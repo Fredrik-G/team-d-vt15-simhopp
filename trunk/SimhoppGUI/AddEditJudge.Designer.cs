@@ -288,6 +288,10 @@
             this.JudgesDataGridView.AllowUserToOrderColumns = true;
             this.JudgesDataGridView.AllowUserToResizeColumns = false;
             this.JudgesDataGridView.AllowUserToResizeRows = false;
+            this.JudgesDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.JudgesDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.JudgesDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.JudgesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.JudgesDataGridView.Location = new System.Drawing.Point(12, 12);
