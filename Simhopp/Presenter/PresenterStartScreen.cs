@@ -45,8 +45,13 @@ namespace Simhopp.Presenter
             this.View.EventReadTricksFromDatabase += ReadTricksFromDatabase;
             this.View.EventGetTrickList += GetTrickList;
             this.View.EventUpdateDiver += UpdateDiver;
+
+            this.View.EventHandleMessage += HandleMessage;
+            this.View.EventSendDataToClient += SendDataToClient;
+            this.View.EventGetFirstClientObjectData += GetFirstClientObjectData;
+
             this.View.EventReadContestsFromDatabase += ReadContestsFromDatabase;
-            ;
+
             //this.View.EventAddParticipant += AddParticipant;
             //this.View.EventAddJudge += AddJudge;
             //this.View.EventGetTrickDifficultyFromTrickHashTable += GetTrickDifficultyFromTrickHashTable;
@@ -193,6 +198,24 @@ namespace Simhopp.Presenter
         {
             this.Model.UpdateDiver(id, name, nationality, ssn);
         }
+        #endregion
+
+        #region Server methods
+
+        public void HandleMessage()
+        {
+            this.Model.HandleMessage();
+        }
+        public void SendDataToClient()
+        {
+            this.Model.SendDataToClient();
+        }
+
+        public ClientObjectData GetFirstClientObjectData()
+        {
+            return this.Model.GetFirstClientObjectData();
+        }
+
         #endregion
 
     }
