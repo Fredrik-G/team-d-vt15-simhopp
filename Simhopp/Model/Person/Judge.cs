@@ -50,11 +50,11 @@ namespace Simhopp.Model
         /// <param name="name"></param>
         /// <param name="nationality"></param>
         /// <param name="ssn"></param>
-        public Judge(string name, string nationality, string ssn)
+        public Judge(string name, string nationality, string ssn, string password)
             : base(name, nationality, ssn)
         {
             CalculateSalt();
-            CalculateHash("password");
+            CalculateHash(password);
         }
 
         /// <summary>
