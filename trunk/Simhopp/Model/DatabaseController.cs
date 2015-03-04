@@ -1178,6 +1178,38 @@ namespace Simhopp.Model
             #endregion
             return null;
         }
+        /// <summary>
+        /// Updates a Contest row in the database.
+        /// </summary>
+        /// <param name="contest">Contest object</param>
+        public void UpdateContest(Contest contest)
+        {
+            log.Debug("Function " + MethodBase.GetCurrentMethod().Name + " run on contest " + contest.Name);
+
+            if (dbConnection == null)
+            {
+                NoConnectionErrorMessage();
+                return;
+            }
+            try
+            {
+                string sql = "UPDATE Contest SET Name = '" + contest.Name + "', Place = '" + contest.Place + "', StartDate = '" + contest.StartDate + "', EndDate = '" + contest.EndDate + "' WHERE ID = '" + contest.Id + "'";
+                SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
+                command.ExecuteNonQuery();
+            }
+            #region Exceptions
+
+            catch (SQLiteException sqliteEx)
+            {
+                MsgBox.CreateErrorBox("Could not update the following Contest in database: \n" + contest.Name + ", " + contest.Place + ", " + contest.StartDate + ", " + contest.EndDate + "\nExeption: " + sqliteEx, MethodBase.GetCurrentMethod().Name);
+            }
+
+            catch (Exception e)
+            {
+                MsgBox.CreateErrorBox("Could not update the following Contest in database: \n" + contest.Name + ", " + contest.Place + ", " + contest.StartDate +  ", " + contest.EndDate + "\nExeption: " + e, MethodBase.GetCurrentMethod().Name);
+            }
+            #endregion
+        }
         #endregion
 
         #region Trick Methods
