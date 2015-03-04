@@ -44,6 +44,7 @@ namespace Simhopp.Presenter
             this.View.EventUpdateContest += UpdateContest;
             this.View.EventReadTricksFromDatabase += ReadTricksFromDatabase;
             this.View.EventGetTrickList += GetTrickList;
+            this.View.EventUpdateDiver += UpdateDiver;
             //this.View.EventAddParticipant += AddParticipant;
             //this.View.EventAddJudge += AddJudge;
             //this.View.EventGetTrickDifficultyFromTrickHashTable += GetTrickDifficultyFromTrickHashTable;
@@ -181,6 +182,10 @@ namespace Simhopp.Presenter
             this.Model.UpdateJudge(id, name, nationality, ssn);
         }
 
+        private void UpdateDiver(int id, string name, string nationality, string ssn)
+        {
+            this.Model.UpdateDiver(id, name, nationality, ssn);
+        }
         #endregion
 
     }

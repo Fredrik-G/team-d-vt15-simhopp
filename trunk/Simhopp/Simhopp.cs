@@ -221,7 +221,9 @@ namespace Simhopp
             }
             else
             {
-                contestList.Add(new Contest(place, name, startDate, endDate));
+                var contest = new Contest(place, name, startDate, endDate);
+                contestList.Add(contest);
+               // databaseController.AddContestToDatabase(contest);
             }
         }
 
@@ -439,7 +441,7 @@ namespace Simhopp
             contest.StartDate = startDate;
             contest.EndDate = endDate;
 
-            //databaseController.UpdateContest();
+            databaseController.UpdateContest(contest);
         }
         /// <summary>
         /// Updates a judge object in judgelist and in database.
@@ -466,6 +468,32 @@ namespace Simhopp
             judge.Nationality = nationality;
             judge.SSN = ssn;
             databaseController.UpdateJudge(judge);
+        }
+        /// <summary>
+        /// Updates a diver object in judgelist and in database.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="nationality"></param>
+        /// <param name="ssn"></param>
+        public void UpdateDiver(int id, string name, string nationality, string ssn)
+        {
+            var tempdiver = GetDiverBySSN(ssn);
+            if (tempdiver != null && tempdiver.Id != id)
+            {//diver med det ssn finns redan
+                throw new DuplicateNameException("diver already exists");
+            }
+
+            var diver = diverList.SingleOrDefault(x => x.Id == id);
+            if (diver == null)
+            {
+                throw new NullReferenceException("diver with id " + id + " not found");
+            }
+
+            diver.Name = name;
+            diver.Nationality = nationality;
+            diver.SSN = ssn;
+            databaseController.UpdateDiver(diver);
         }
 
         #endregion

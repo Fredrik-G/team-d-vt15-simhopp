@@ -235,6 +235,7 @@ namespace SimhoppGUI
 
         public event DelegateUpdateContest EventUpdateContest = null;
         public event DelegateUpdateJudge EventUpdateJudge = null;
+        public event DelegateUpdateDiver EventUpdateDiver = null;
 
         #endregion
     }

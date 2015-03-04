@@ -43,6 +43,8 @@ namespace Simhopp.View
 
     public delegate void DelegateUpdateContest(int id, string name, string place, string startDate, string endDate);
     public delegate void DelegateUpdateJudge(int id, string name, string nationality, string ssn);
+    public delegate void DelegateUpdateDiver(int id, string name, string nationality, string ssn);
+
     //public delegate void DelegateAddParticipant(Diver diver);
     //public delegate void DelegateAddJudge(Judge judge);
     //public delegate double DelegateGetTrickDifficultyFromTrickHashTable(string trickName);
@@ -83,6 +85,7 @@ namespace Simhopp.View
 
         event DelegateUpdateContest EventUpdateContest;
         event DelegateUpdateJudge EventUpdateJudge;
+        event DelegateUpdateDiver EventUpdateDiver;
 
     }
 }
