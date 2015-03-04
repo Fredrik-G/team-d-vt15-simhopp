@@ -51,6 +51,7 @@ namespace SimhoppGUI
             EventReadJudgesFromDatabase();
             EventReadDiversFromDatabase();
             EventReadTricksFromDatabase();
+            EventReadContestsFromDatabase();
         }
 
         /// <summary>
@@ -209,6 +210,7 @@ namespace SimhoppGUI
         public event DelegateReadJudgesFromDatabase EventReadJudgesFromDatabase = null;
         public event DelegateReadDiversFromDatabase EventReadDiversFromDatabase = null;
         public event DelegateReadTricksFromDatabase EventReadTricksFromDatabase = null;
+        public event DelegateReadContestsFromDatabase EventReadContestsFromDatabase = null;
 
         public event DelegateGetContestsList EventGetContestsList = null;
         public event DelegateGetJudgesList EventGetJudgesList = null;

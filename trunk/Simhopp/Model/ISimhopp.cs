@@ -11,6 +11,7 @@ namespace Simhopp.Model
         void ReadFromFile(string fileName);
         void ReadJudgesFromDatabase();
         void ReadDiversFromDatabase();
+        void ReadContestsFromDatabase();
 
         void ReadTricksFromDatabase();
 
@@ -26,7 +27,7 @@ namespace Simhopp.Model
         string GetJudgeHash(string ssn);
         string GetJudgeSalt(string ssn);
 
-        void AddJudgeToList(string name, string nationality, string ssn);
+        void AddJudgeToList(string name, string nationality, string ssn, string password = "password");
         void AddDiverToList(string name, string nationality, string ssn);
         void AddJudgeToContest(int contestId, string ssn);
         void AddDiverToContest(int contestId, string ssn);

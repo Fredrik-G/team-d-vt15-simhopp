@@ -195,7 +195,7 @@
             this.CurrentDiversDataGridView.Location = new System.Drawing.Point(389, 0);
             this.CurrentDiversDataGridView.Name = "CurrentDiversDataGridView";
             this.CurrentDiversDataGridView.RowHeadersWidth = 30;
-            this.CurrentDiversDataGridView.Size = new System.Drawing.Size(670, 227);
+            this.CurrentDiversDataGridView.Size = new System.Drawing.Size(643, 227);
             this.CurrentDiversDataGridView.TabIndex = 7;
             this.CurrentDiversDataGridView.TabStop = false;
             // 

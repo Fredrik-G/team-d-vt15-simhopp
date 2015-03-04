@@ -71,8 +71,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Client.cs" />
     <Compile Include="ConsoleSimhopp.cs" />
     <Compile Include="doxy_txt.cs" />
+    <Compile Include="HandleClient.cs" />
+    <Compile Include="HelpClassesForTcp.cs" />
     <Compile Include="Model\Contest.cs" />
     <Compile Include="Model\DatabaseController.cs" />
     <Compile Include="Model\ISimhopp.cs" />
@@ -87,6 +90,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\Trick.cs" />
     <Compile Include="Model\TrickList.cs" />
+    <Compile Include="Server.cs" />
     <Compile Include="Simhopp.cs" />
     <Compile Include="View\IStartScreen.cs" />
   </ItemGroup>

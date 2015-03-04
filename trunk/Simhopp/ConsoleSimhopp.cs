@@ -255,7 +255,7 @@ namespace Simhopp
 
                         if (fileName == "judge.txt")
                         {
-                            Judge judge = new Judge(temp[0], temp[1], temp[2]);
+                            Judge judge = new Judge(temp[0], temp[1], temp[2], "password");
                             judgeList.Add(judge);
                         }
                         else if (fileName == "diver.txt")

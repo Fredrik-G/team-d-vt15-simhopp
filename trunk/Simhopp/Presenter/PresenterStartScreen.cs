@@ -45,6 +45,8 @@ namespace Simhopp.Presenter
             this.View.EventReadTricksFromDatabase += ReadTricksFromDatabase;
             this.View.EventGetTrickList += GetTrickList;
             this.View.EventUpdateDiver += UpdateDiver;
+            this.View.EventReadContestsFromDatabase += ReadContestsFromDatabase;
+            ;
             //this.View.EventAddParticipant += AddParticipant;
             //this.View.EventAddJudge += AddJudge;
             //this.View.EventGetTrickDifficultyFromTrickHashTable += GetTrickDifficultyFromTrickHashTable;
@@ -115,6 +117,11 @@ namespace Simhopp.Presenter
             this.Model.ReadTricksFromDatabase();
         }
 
+        public void ReadContestsFromDatabase()
+        {
+            this.Model.ReadContestsFromDatabase();
+        }
+
         public BindingList<Trick> GetTrickList()
         {
             return this.Model.GetTrickList();
@@ -124,9 +131,9 @@ namespace Simhopp.Presenter
 
         #region Add methods
 
-        public void AddJudgeToList(string name, string nationality, string ssn)
+        public void AddJudgeToList(string name, string nationality, string ssn, string password = "password")
         {
-            this.Model.AddJudgeToList(name, nationality, ssn);
+            this.Model.AddJudgeToList(name, nationality, ssn, password);
         }
 
         public void AddDiverToList(string name, string nationality, string ssn)
