@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Simhopp
 {
+    [Serializable]
     public class ServerObjectData
     {
         public string ContestName { get; set; }
@@ -21,17 +22,18 @@ namespace Simhopp
             this.TrickDiff = tDiff;
         }
     };
+    [Serializable]
     public class ClientObjectData
     {
-        public string JudgeName { get; set; }
+        public string Ssn { get; set; }
         public double Point { get; set; }
 
         public ClientObjectData() { }
 
-        public ClientObjectData(string JudgeName, double Point)
+        public ClientObjectData(string ssn, double point)
         {
-            this.JudgeName = JudgeName;
-            this.Point = Point;
+            this.Ssn = ssn;
+            this.Point = point;
         }
 
     };

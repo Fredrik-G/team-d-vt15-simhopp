@@ -8,15 +8,17 @@ using System.Net.Sockets;
 using System.Xml.Serialization;
 using System.Threading;
 using System.IO;
+using System.Runtime.ExceptionServices;
+
 namespace Simhopp
 {
-    
-    class Server
+    public class Server
     {
         #region Data
-        TcpClient clientSocket;
-        TcpListener serverSocket;
+        private TcpClient clientSocket;
+        private TcpListener serverSocket;
         int counter;
+        private Queue<ClientObjectData> messageQueue =new Queue<ClientObjectData>(); 
         #endregion
 
         #region constructors
@@ -25,18 +27,25 @@ namespace Simhopp
         /// </summary>
         public Server()
         {
-            counter = 0;
-            serverSocket = new TcpListener(IPAddress.Any, 9059);
-            clientSocket = default(TcpClient);
-            serverSocket.Start();
-            Console.WriteLine(" >> Server Started");
-            Thread listenerLoop = new Thread(ListenerLoop);
-            listenerLoop.Start();
-            listenerLoop.IsBackground = true;
+            this.counter = 0;
         }
         #endregion
 
         #region Member Functions
+
+        /// <summary>
+        /// starts up a new server, that clients will be able to connect to
+        /// </summary>
+        public void StartServer()
+        {
+            serverSocket = new TcpListener(IPAddress.Any, 9059);
+            clientSocket = default(TcpClient);
+            serverSocket.Start();
+            //Console.WriteLine(" >> Server Started");
+            var listenerLoop = new Thread(ListenerLoop);
+            listenerLoop.Start();
+            listenerLoop.IsBackground = true;
+        }
         /// <summary>
         /// Function for listening for connections and accepting them.
         /// </summary>
@@ -46,9 +55,9 @@ namespace Simhopp
             {
                 counter++;
                 clientSocket = serverSocket.AcceptTcpClient();
-                HandleClient handleClient = new HandleClient();
+                var handleClient = new HandleClient(ref messageQueue);
                 handleClient.StartClient(clientSocket);
-                Console.WriteLine(" >> Client " + counter + " connected!");
+                //Console.WriteLine(" >> Client " + counter + " connected!");
                 SendDataToClient();
             }
         }
@@ -57,13 +66,13 @@ namespace Simhopp
         /// </summary>
         public void SendDataToClient()
         {
-            ServerObjectData message = new ServerObjectData("Contest", "Name", "Trick", 9.5);//Should get data from testboxes
-            NetworkStream networkStream = clientSocket.GetStream();
+            var message = new ServerObjectData("Contest", "Name", "Trick", 9.5);//Should get data from testboxes
+            var networkStream = clientSocket.GetStream();
             string serializedString;
-            ASCIIEncoding asciiEncoder = new ASCIIEncoding();
-            using(MemoryStream stream = new MemoryStream())
+            var asciiEncoder = new ASCIIEncoding();
+            using(var stream = new MemoryStream())
             {
-                XmlSerializer xmlS = new XmlSerializer(typeof(ServerObjectData));
+                var xmlS = new XmlSerializer(typeof(ServerObjectData));
                 xmlS.Serialize(stream, message);
                 serializedString = Encoding.UTF8.GetString(stream.ToArray());
             }
@@ -77,11 +86,20 @@ namespace Simhopp
         /// <returns>ipForThis</returns>
         public IPAddress GetIPForServer()
         {
-            string stringIp = string.Empty;
+            var stringIp = string.Empty;
             stringIp = Dns.GetHostName();
-            IPHostEntry ipEntry = Dns.GetHostEntry(stringIp);
+            var ipEntry = Dns.GetHostEntry(stringIp);
             IPAddress[] ipForThis = ipEntry.AddressList;
             return ipForThis[1];
+        }
+
+        public ClientObjectData GetFirstClientObjectData()
+        {
+            if (messageQueue.Count != 0)
+            {
+                return messageQueue.Dequeue();
+            }
+            return null;
         }
         #endregion
     }
