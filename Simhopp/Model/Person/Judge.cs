@@ -40,6 +40,8 @@ namespace Simhopp.Model
         /// </summary>
         public Judge()
         {
+            CalculateSalt();
+            CalculateHash("password");
         }
 
         /// <summary>
@@ -51,6 +53,8 @@ namespace Simhopp.Model
         public Judge(string name, string nationality, string ssn)
             : base(name, nationality, ssn)
         {
+            CalculateSalt();
+            CalculateHash("password");
         }
 
         /// <summary>
@@ -64,6 +68,8 @@ namespace Simhopp.Model
         public Judge(int id, string name, string nationality, string ssn)
             : base(id, name, nationality, ssn)
         {
+            CalculateSalt();
+            CalculateHash("password");
         }
 
         /// <summary>
