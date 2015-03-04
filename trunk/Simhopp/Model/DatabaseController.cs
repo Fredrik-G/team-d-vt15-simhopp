@@ -911,7 +911,7 @@ namespace Simhopp.Model
             //Checks if the given contest already exists in the database.
             if (c.Id != -1)
             {
-                //msgbox här?
+                MsgBox.CreateErrorBox("Competition is already initialized.", MethodBase.GetCurrentMethod().Name);
                 return;
             }
             if (dbConnection == null)
