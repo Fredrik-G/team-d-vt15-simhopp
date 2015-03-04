@@ -25,15 +25,46 @@ namespace Simhopp.Model
         /// <summary>
         /// Default constructor.
         /// </summary>
-        protected Person()
+        public Person()
         {
             this.id = -1;
+            this.name = "";
+            this.nationality = "";
+            this.ssn = "";
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="nationality"></param>
+        /// <param name="ssn"></param>
+        protected Person(string name, string nationality, string ssn)
+        {
+            this.id = -1;
+            this.name = name;
+            this.nationality = nationality;
+            this.ssn = ssn;
+        }
+
+        /// <summary>
+        /// Constructor with parameters.
+        /// Should only be used by databascontroller.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="nationality"></param>
+        /// <param name="ssn"></param>
+        public Person(int id, string name, string nationality, string ssn)
+        {
+            this.id = id;
+            this.name = name;
+            this.nationality = nationality;
+            this.ssn = ssn;
+        }
         #endregion
 
         #region Properties
-
         /// <summary>
         /// Property for person id.
         /// </summary>

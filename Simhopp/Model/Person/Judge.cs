@@ -40,10 +40,6 @@ namespace Simhopp.Model
         /// </summary>
         public Judge()
         {
-            this.id = -1;
-            this.name = "";
-            this.nationality = "";
-            this.ssn = "";
         }
 
         /// <summary>
@@ -53,11 +49,8 @@ namespace Simhopp.Model
         /// <param name="nationality"></param>
         /// <param name="ssn"></param>
         public Judge(string name, string nationality, string ssn)
+            : base(name, nationality, ssn)
         {
-            this.id = -1;
-            this.name = name;
-            this.nationality = nationality;
-            this.ssn = ssn;
         }
 
         /// <summary>
@@ -69,19 +62,21 @@ namespace Simhopp.Model
         /// <param name="nationality"></param>
         /// <param name="ssn"></param>
         public Judge(int id, string name, string nationality, string ssn)
+            : base(id, name, nationality, ssn)
         {
-            this.id = id;
-            this.name = name;
-            this.nationality = nationality;
-            this.ssn = ssn;
         }
 
+        /// <summary>
+        /// Constructor with parameters.
+        /// Should only be used by databascontroller.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="nationality"></param>
+        /// <param name="ssn"></param>
         public Judge(int id, string name, string nationality, string ssn, string hash, string salt)
+            : base(id, name, nationality, ssn)
         {
-            this.id = id;
-            this.name = name;
-            this.nationality = nationality;
-            this.ssn = ssn;
             this.hash = hash;
             this.salt = salt;
         }
