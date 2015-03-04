@@ -551,7 +551,7 @@ namespace Simhopp.Model
             {
                 if (j.Id == -1)
                 {
-                    string sql = "INSERT INTO Judge(Name,SSN,Nationality) VALUES('" + j.Name + "', '" + j.SSN + "','" + j.Nationality + "')";
+                    string sql = "INSERT INTO Judge(Name,SSN,Nationality,Hash,Salt) VALUES('" + j.Name + "', '" + j.SSN + "','" + j.Nationality + "','" + j.Hash + "','" + j.Salt + "')";
                     SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
                     command.ExecuteNonQuery();
                 }
