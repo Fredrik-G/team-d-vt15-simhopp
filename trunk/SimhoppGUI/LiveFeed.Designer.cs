@@ -45,6 +45,7 @@
             this.Judge2PictureBox = new System.Windows.Forms.PictureBox();
             this.Judge2PointsLabel = new System.Windows.Forms.Label();
             this.Judge2Label = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.TrickPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CountryflagPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Judge1PictureBox)).BeginInit();
@@ -55,7 +56,7 @@
             // 
             this.TrickPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("TrickPictureBox.Image")));
             this.TrickPictureBox.Location = new System.Drawing.Point(16, 15);
-            this.TrickPictureBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TrickPictureBox.Margin = new System.Windows.Forms.Padding(4);
             this.TrickPictureBox.Name = "TrickPictureBox";
             this.TrickPictureBox.Size = new System.Drawing.Size(183, 108);
             this.TrickPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -225,11 +226,22 @@
             this.Judge2Label.TabIndex = 13;
             this.Judge2Label.Text = "A. Smith";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(345, 99);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 16;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // LiveFeed
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(581, 478);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.Judge2PictureBox);
             this.Controls.Add(this.Judge2PointsLabel);
             this.Controls.Add(this.Judge2Label);
@@ -247,7 +259,7 @@
             this.Controls.Add(this.NameLabel);
             this.Controls.Add(this.TrickPictureBox);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "LiveFeed";
@@ -279,5 +291,6 @@
         private System.Windows.Forms.PictureBox Judge2PictureBox;
         private System.Windows.Forms.Label Judge2PointsLabel;
         private System.Windows.Forms.Label Judge2Label;
+        private System.Windows.Forms.Button button1;
     }
 }
