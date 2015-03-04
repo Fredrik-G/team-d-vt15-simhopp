@@ -18,7 +18,8 @@ namespace Simhopp
         private TcpClient clientSocket;
         private TcpListener serverSocket;
         int counter;
-        private Queue<ClientObjectData> messageQueue =new Queue<ClientObjectData>(); 
+        private Queue<ClientObjectData> messageQueue =new Queue<ClientObjectData>();
+        private bool serverNotStarted;
         #endregion
 
         #region constructors
@@ -28,6 +29,7 @@ namespace Simhopp
         public Server()
         {
             this.counter = 0;
+            this.serverNotStarted = true;
         }
         #endregion
 
@@ -38,13 +40,17 @@ namespace Simhopp
         /// </summary>
         public void StartServer()
         {
-            serverSocket = new TcpListener(IPAddress.Any, 9059);
-            clientSocket = default(TcpClient);
-            serverSocket.Start();
-            //Console.WriteLine(" >> Server Started");
-            var listenerLoop = new Thread(ListenerLoop);
-            listenerLoop.Start();
-            listenerLoop.IsBackground = true;
+            if (serverNotStarted)
+            {
+                serverSocket = new TcpListener(IPAddress.Any, 9059);
+                clientSocket = default(TcpClient);
+                serverSocket.Start();
+                //Console.WriteLine(" >> Server Started");
+                var listenerLoop = new Thread(ListenerLoop);
+                listenerLoop.Start();
+                listenerLoop.IsBackground = true;
+                serverNotStarted = false;
+            }
         }
         /// <summary>
         /// Function for listening for connections and accepting them.
