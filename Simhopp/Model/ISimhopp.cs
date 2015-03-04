@@ -39,5 +39,6 @@ namespace Simhopp.Model
 
         void UpdateContest(int id, string name, string place, string startDate, string endDate);
         void UpdateJudge(int id, string name, string nationality, string ssn);
+        void UpdateDiver(int id, string name, string nationality, string ssn);
     }
 }
