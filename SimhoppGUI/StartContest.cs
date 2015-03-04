@@ -127,7 +127,7 @@ namespace SimhoppGUI
             CurrentDiversDataGridView.Columns.Add(trick2ComboBoxColumn);
             CurrentDiversDataGridView.Columns.Add(trick3ComboBoxColumn);
 
-            ContestsDataGridView.Select();
+          //  ContestsDataGridView.Select();
         }
 
         /// <summary>

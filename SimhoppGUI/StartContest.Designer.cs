@@ -89,7 +89,7 @@
             this.RemoveJudgeBtn.Location = new System.Drawing.Point(346, 100);
             this.RemoveJudgeBtn.Name = "RemoveJudgeBtn";
             this.RemoveJudgeBtn.Size = new System.Drawing.Size(37, 23);
-            this.RemoveJudgeBtn.TabIndex = 8;
+            this.RemoveJudgeBtn.TabIndex = 5;
             this.RemoveJudgeBtn.Text = "←";
             this.RemoveJudgeBtn.UseVisualStyleBackColor = true;
             this.RemoveJudgeBtn.Click += new System.EventHandler(this.RemoveJudgeBtn_Click);
@@ -99,7 +99,7 @@
             this.AddJudgeBtn.Location = new System.Drawing.Point(346, 71);
             this.AddJudgeBtn.Name = "AddJudgeBtn";
             this.AddJudgeBtn.Size = new System.Drawing.Size(37, 23);
-            this.AddJudgeBtn.TabIndex = 7;
+            this.AddJudgeBtn.TabIndex = 4;
             this.AddJudgeBtn.Text = "→";
             this.AddJudgeBtn.UseVisualStyleBackColor = true;
             this.AddJudgeBtn.Click += new System.EventHandler(this.AddJudgeBtn_Click);
@@ -141,7 +141,7 @@
             this.CurrentJudgesDataGridView.Name = "CurrentJudgesDataGridView";
             this.CurrentJudgesDataGridView.ReadOnly = true;
             this.CurrentJudgesDataGridView.RowHeadersWidth = 30;
-            this.CurrentJudgesDataGridView.Size = new System.Drawing.Size(470, 227);
+            this.CurrentJudgesDataGridView.Size = new System.Drawing.Size(643, 227);
             this.CurrentJudgesDataGridView.TabIndex = 6;
             this.CurrentJudgesDataGridView.TabStop = false;
             // 
@@ -164,7 +164,7 @@
             this.AddDiverBtn.Location = new System.Drawing.Point(346, 71);
             this.AddDiverBtn.Name = "AddDiverBtn";
             this.AddDiverBtn.Size = new System.Drawing.Size(37, 23);
-            this.AddDiverBtn.TabIndex = 10;
+            this.AddDiverBtn.TabIndex = 5;
             this.AddDiverBtn.Text = "→";
             this.AddDiverBtn.UseVisualStyleBackColor = true;
             this.AddDiverBtn.Click += new System.EventHandler(this.AddDiverBtn_Click);
@@ -174,7 +174,7 @@
             this.RemoveDiverBtn.Location = new System.Drawing.Point(346, 100);
             this.RemoveDiverBtn.Name = "RemoveDiverBtn";
             this.RemoveDiverBtn.Size = new System.Drawing.Size(37, 23);
-            this.RemoveDiverBtn.TabIndex = 9;
+            this.RemoveDiverBtn.TabIndex = 5;
             this.RemoveDiverBtn.Text = "←";
             this.RemoveDiverBtn.UseVisualStyleBackColor = true;
             this.RemoveDiverBtn.Click += new System.EventHandler(this.RemoveDiverBtn_Click);
@@ -236,7 +236,7 @@
             this.ContestsDataGridView.Name = "ContestsDataGridView";
             this.ContestsDataGridView.ReadOnly = true;
             this.ContestsDataGridView.Size = new System.Drawing.Size(511, 185);
-            this.ContestsDataGridView.TabIndex = 4;
+            this.ContestsDataGridView.TabIndex = 40;
             this.ContestsDataGridView.TabStop = false;
             this.ContestsDataGridView.SelectionChanged += new System.EventHandler(this.ContestsDataGridView_SelectionChanged);
             // 
@@ -283,7 +283,7 @@
             this.EditContestBtn.Location = new System.Drawing.Point(529, 149);
             this.EditContestBtn.Name = "EditContestBtn";
             this.EditContestBtn.Size = new System.Drawing.Size(75, 23);
-            this.EditContestBtn.TabIndex = 10;
+            this.EditContestBtn.TabIndex = 7;
             this.EditContestBtn.Text = "Edit Contest";
             this.EditContestBtn.UseVisualStyleBackColor = true;
             this.EditContestBtn.Click += new System.EventHandler(this.EditContestBtn_Click);
@@ -293,7 +293,7 @@
             this.StartContestBtn.Location = new System.Drawing.Point(529, 120);
             this.StartContestBtn.Name = "StartContestBtn";
             this.StartContestBtn.Size = new System.Drawing.Size(75, 23);
-            this.StartContestBtn.TabIndex = 11;
+            this.StartContestBtn.TabIndex = 6;
             this.StartContestBtn.Text = "Start Contest";
             this.StartContestBtn.UseVisualStyleBackColor = true;
             this.StartContestBtn.Click += new System.EventHandler(this.StartContestBtn_Click);
@@ -310,8 +310,9 @@
             this.weirdfix});
             this.weirddatagridfix.Location = new System.Drawing.Point(620, 24);
             this.weirddatagridfix.Name = "weirddatagridfix";
-            this.weirddatagridfix.Size = new System.Drawing.Size(235, 132);
+            this.weirddatagridfix.Size = new System.Drawing.Size(10, 10);
             this.weirddatagridfix.TabIndex = 12;
+            this.weirddatagridfix.TabStop = false;
             // 
             // StartContest
             // 
