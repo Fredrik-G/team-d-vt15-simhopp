@@ -37,22 +37,30 @@ namespace SimhoppGUI
         {
             if (Authenticate())
             {
-                MsgBox.CreateErrorBox("asd", "qsagfd");
+                MsgBox.CreateErrorBox("Login successfully", "");
             }
             else
             {
-                MsgBox.CreateErrorBox("123132", "253123");
+                MsgBox.CreateErrorBox("Username or password is wrong.", "");
             }
         }
 
         private bool Authenticate()
         {
-            var correctHash = eventGetJudgeHash(UserNameTB.Text);
-            var salt = eventGetJudgeSalt(UserNameTB.Text);
+            try
+            {
+                var correctHash = eventGetJudgeHash(UserNameTB.Text);
+                var salt = eventGetJudgeSalt(UserNameTB.Text);
 
-            var inputHash = CalculateHash(PasswordTB.Text + salt);
+                var inputHash = CalculateHash(PasswordTB.Text + salt);
 
-            return correctHash == inputHash;
+                return correctHash == inputHash;
+            }
+            catch (NullReferenceException)
+            {
+                InputErrorProvider.SetError(UserNameTB, "Judge was not found.");
+            }
+            return false;
         }
 
         private string CalculateHash(string password)

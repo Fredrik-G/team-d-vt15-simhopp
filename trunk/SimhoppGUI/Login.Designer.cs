@@ -28,12 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.UserNameLabel = new System.Windows.Forms.Label();
             this.PasswordLabel = new System.Windows.Forms.Label();
             this.UserNameTB = new System.Windows.Forms.TextBox();
             this.PasswordTB = new System.Windows.Forms.TextBox();
             this.LoginBtn = new System.Windows.Forms.Button();
             this.LoginScreenCancelBtn = new System.Windows.Forms.Button();
+            this.InputErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.InputErrorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // UserNameLabel
@@ -90,6 +93,10 @@
             this.LoginScreenCancelBtn.UseVisualStyleBackColor = true;
             this.LoginScreenCancelBtn.Click += new System.EventHandler(this.LoginScreenCancelBtn_Click);
             // 
+            // InputErrorProvider
+            // 
+            this.InputErrorProvider.ContainerControl = this;
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -105,6 +112,7 @@
             this.MinimizeBox = false;
             this.Name = "Login";
             this.Text = "Login";
+            ((System.ComponentModel.ISupportInitialize)(this.InputErrorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -118,5 +126,6 @@
         private System.Windows.Forms.TextBox PasswordTB;
         private System.Windows.Forms.Button LoginBtn;
         private System.Windows.Forms.Button LoginScreenCancelBtn;
+        private System.Windows.Forms.ErrorProvider InputErrorProvider;
     }
 }
