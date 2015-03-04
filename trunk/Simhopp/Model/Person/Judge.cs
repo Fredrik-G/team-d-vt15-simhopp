@@ -39,7 +39,7 @@ namespace Simhopp.Model
         /// Default constructor
         /// </summary>
         public Judge()
-        {s
+        {
         }
 
         /// <summary>
