@@ -30,6 +30,7 @@ namespace Simhopp
         private DatabaseController databaseController;
 
         private TrickList trickList = new TrickList();
+        private Server server = new Server();
         #endregion
 
         #region Constructor
@@ -39,7 +40,7 @@ namespace Simhopp
         /// </summary>
         public Simhopp()
         {
-            databaseController = new DatabaseController(@"M:/Desktop/simhoppTestDB.db");
+            databaseController = new DatabaseController(@"m:\My Documents\Visual Studio 2013\Projects\Simhopp\Simhopp\simhoppTestDB.db");
             databaseController.ConnectToDatabase();
         }
 
@@ -574,6 +575,35 @@ namespace Simhopp
         }
 
         #endregion
+
+        #region Server methods
+        public void StartServer()
+        {
+            server.StartServer();
+        }
+
+        public void HandleMessage()
+        {
+            
+        }
+
+        public void SendDataToClient()
+        {
+            var c = new Client();
+            StartServer();
+            c.ConnectToServer("127.0.0.1");
+            c.SendDataToServer();
+            c.SendDataToServer();
+
+            server.SendDataToClient();
+        }
+        public ClientObjectData GetFirstClientObjectData()
+        {
+            return server.GetFirstClientObjectData();
+        }
+
+        #endregion
+
 
         #region IDisposable methods
 
