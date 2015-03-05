@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.JudgesDiversTabControl = new System.Windows.Forms.TabControl();
             this.JudgeTabPage = new System.Windows.Forms.TabPage();
             this.RemoveJudgeBtn = new System.Windows.Forms.Button();
@@ -48,6 +49,8 @@
             this.StartContestBtn = new System.Windows.Forms.Button();
             this.weirdfix = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.weirddatagridfix = new System.Windows.Forms.DataGridView();
+            this.EditContestToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.StartContestToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.JudgesDiversTabControl.SuspendLayout();
             this.JudgeTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GlobalJudgesDataGridView)).BeginInit();
@@ -236,7 +239,7 @@
             this.ContestsDataGridView.Location = new System.Drawing.Point(12, 12);
             this.ContestsDataGridView.Name = "ContestsDataGridView";
             this.ContestsDataGridView.ReadOnly = true;
-            this.ContestsDataGridView.Size = new System.Drawing.Size(682, 185);
+            this.ContestsDataGridView.Size = new System.Drawing.Size(561, 185);
             this.ContestsDataGridView.TabIndex = 40;
             this.ContestsDataGridView.TabStop = false;
             this.ContestsDataGridView.SelectionChanged += new System.EventHandler(this.ContestsDataGridView_SelectionChanged);
@@ -286,6 +289,7 @@
             this.EditContestBtn.Size = new System.Drawing.Size(75, 23);
             this.EditContestBtn.TabIndex = 7;
             this.EditContestBtn.Text = "Edit Contest";
+            this.EditContestToolTip.SetToolTip(this.EditContestBtn, "Ctrl+E");
             this.EditContestBtn.UseVisualStyleBackColor = true;
             this.EditContestBtn.Click += new System.EventHandler(this.EditContestBtn_Click);
             // 
@@ -296,6 +300,7 @@
             this.StartContestBtn.Size = new System.Drawing.Size(75, 23);
             this.StartContestBtn.TabIndex = 6;
             this.StartContestBtn.Text = "Start Contest";
+            this.StartContestToolTip.SetToolTip(this.StartContestBtn, "Ctrl+S");
             this.StartContestBtn.UseVisualStyleBackColor = true;
             this.StartContestBtn.Click += new System.EventHandler(this.StartContestBtn_Click);
             // 
@@ -319,7 +324,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1179, 469);
+            this.ClientSize = new System.Drawing.Size(1058, 469);
             this.Controls.Add(this.weirddatagridfix);
             this.Controls.Add(this.StartContestBtn);
             this.Controls.Add(this.EditContestBtn);
@@ -334,6 +339,7 @@
             this.Name = "StartContest";
             this.Text = "StartContest";
             this.Load += new System.EventHandler(this.StartContest_Load);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.StartContest_KeyUp);
             this.JudgesDiversTabControl.ResumeLayout(false);
             this.JudgeTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.GlobalJudgesDataGridView)).EndInit();
@@ -370,5 +376,7 @@
         private System.Windows.Forms.Button StartContestBtn;
         private System.Windows.Forms.DataGridViewTextBoxColumn weirdfix;
         private System.Windows.Forms.DataGridView weirddatagridfix;
+        private System.Windows.Forms.ToolTip EditContestToolTip;
+        private System.Windows.Forms.ToolTip StartContestToolTip;
     }
 }

@@ -62,6 +62,7 @@
             this.EditViewContestEditEndtDateTp.Name = "EditViewContestEditEndtDateTp";
             this.EditViewContestEditEndtDateTp.Size = new System.Drawing.Size(200, 20);
             this.EditViewContestEditEndtDateTp.TabIndex = 17;
+            this.EditViewContestEditEndtDateTp.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.EditContest_KeyPress);
             // 
             // EditViewContestEditStartDateTp
             // 
@@ -69,6 +70,7 @@
             this.EditViewContestEditStartDateTp.Name = "EditViewContestEditStartDateTp";
             this.EditViewContestEditStartDateTp.Size = new System.Drawing.Size(200, 20);
             this.EditViewContestEditStartDateTp.TabIndex = 16;
+            this.EditViewContestEditStartDateTp.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.EditContest_KeyPress);
             // 
             // label1
             // 
@@ -87,6 +89,7 @@
             this.EditViewContestEditContestPlaceTb.TabIndex = 14;
             this.toolTipEditViewContest.SetToolTip(this.EditViewContestEditContestPlaceTb, "\"Stockholm\", \"Boulogne-Billancourt\"");
             this.EditViewContestEditContestPlaceTb.Click += new System.EventHandler(this.EditViewContestEditContestPlaceTb_Click);
+            this.EditViewContestEditContestPlaceTb.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.EditContest_KeyPress);
             // 
             // EditViewContestEditContestNameTb
             // 
@@ -96,6 +99,7 @@
             this.EditViewContestEditContestNameTb.TabIndex = 13;
             this.toolTipEditViewContest.SetToolTip(this.EditViewContestEditContestNameTb, "\"Jerusalem-VM\", \"He\'Man\", \"Asp.Net\"");
             this.EditViewContestEditContestNameTb.Click += new System.EventHandler(this.EditViewContestEditContestNameTb_Click);
+            this.EditViewContestEditContestNameTb.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.EditContest_KeyPress);
             // 
             // label2
             // 
@@ -161,6 +165,7 @@
             this.MinimizeBox = false;
             this.Name = "EditContest";
             this.Text = "Edit Contest";
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.EditContest_KeyPress);
             ((System.ComponentModel.ISupportInitialize)(this.NameErrorProvider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PlaceErrorProvider)).EndInit();
             this.ResumeLayout(false);

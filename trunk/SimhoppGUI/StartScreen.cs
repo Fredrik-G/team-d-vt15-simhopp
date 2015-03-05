@@ -51,6 +51,7 @@ namespace SimhoppGUI
             EventReadTricksFromDatabase();
             EventReadContestsFromDatabase();
 
+            //enables keyboard usage.
             KeyPreview = true;
         }
 
