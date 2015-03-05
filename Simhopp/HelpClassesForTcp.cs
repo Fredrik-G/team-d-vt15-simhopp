@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Simhopp
 {
+    /// <summary>
+    /// Class that holds "help classes" when communicating via TCP-connection
+    /// </summary>
     [Serializable]
     public class ServerObjectData
     {
