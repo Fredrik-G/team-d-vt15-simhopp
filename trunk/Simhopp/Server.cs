@@ -12,6 +12,9 @@ using System.Runtime.ExceptionServices;
 
 namespace Simhopp
 {
+    /// <summary>
+    /// The class that is running the server and handling connections.
+    /// </summary>
     public class Server
     {
         #region Data

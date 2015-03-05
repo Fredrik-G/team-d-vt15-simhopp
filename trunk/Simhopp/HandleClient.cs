@@ -10,6 +10,9 @@ using System.Threading;
 using System.IO;
 namespace Simhopp
 {
+    /// <summary>
+    /// Class That handles new clients connecting to the server
+    /// </summary>
     class HandleClient
     {
         TcpClient clientSocket;
