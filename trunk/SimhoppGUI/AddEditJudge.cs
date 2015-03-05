@@ -248,30 +248,38 @@ namespace SimhoppGUI
         }
 
         /// <summary>
-        /// Checks if enter was pressed. 
-        /// If so, call event to add judge.
+        /// Checks if enter was pressed and call event to add judge.
+        /// Also checks if escape was pressed and closes this form.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void CheckEnterAdd(object sender, KeyPressEventArgs e)
+        private void AddCheckEnterOrEscape(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)13)
             {
                 AddJudgeButton_Click(null, null);
             }
+            else if (e.KeyChar == (char)27)
+            {
+                Close();
+            }
         }
 
         /// <summary>
-        /// Checks if enter was pressed. 
-        /// If so, call event to update judge.
+        /// Checks if enter was pressed and call event to update judge.
+        /// Also checks if escape was pressed and closes this form.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void CheckEnterUpdate(object sender, KeyPressEventArgs e)
+        private void UpdateCheckEnterOrEscape(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)13)
             {
                 UpdateJudgeButton_Click(null, null);
+            }
+            else if (e.KeyChar == (char)27)
+            {
+                Close();
             }
         }
 

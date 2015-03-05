@@ -1,21 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reflection;
 using System.Windows.Forms;
+using log4net;
 
-using Simhopp.Model;
 namespace SimhoppGUI
 {
     public partial class NewContest : Form
     {
         #region Data
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger
-            (System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly ILog log = LogManager.GetLogger
+            (MethodBase.GetCurrentMethod().DeclaringType);
 
         #endregion
 
@@ -64,11 +59,15 @@ namespace SimhoppGUI
             }
         }
 
-        private void CheckEnter(object sender, KeyPressEventArgs e)
+        private void CheckEnterOrEscape(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)13)
             {
                 newContestCreateBtn_Click(null, null);
+            }
+            else if (e.KeyChar == (char)27)
+            {
+                Close();
             }
         }
 
