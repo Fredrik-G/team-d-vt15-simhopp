@@ -83,6 +83,9 @@ namespace SimhoppGUI
         /// <param name="e"></param>
         private void StartContest_Load(object sender, EventArgs e)
         {
+            //enables keyboard usage.
+            KeyPreview = true;
+
             if (eventGetContestsList != null)
             {
                 ContestsDataGridView.DataSource = this.eventGetContestsList();
@@ -137,7 +140,7 @@ namespace SimhoppGUI
             CurrentDiversDataGridView.Columns.Add(trick2ComboBoxColumn);
             CurrentDiversDataGridView.Columns.Add(trick3ComboBoxColumn);
 
-          //  ContestsDataGridView.Select();
+            //  ContestsDataGridView.Select();
         }
 
         /// <summary>
@@ -160,7 +163,7 @@ namespace SimhoppGUI
 
                 if (JudgesDiversTabControl.SelectedTab == JudgeTabPage)
                 {
-                  //  GlobalJudgesDataGridView.Select();
+                    //  GlobalJudgesDataGridView.Select();
 
                     CurrentJudgesDataGridView.DataSource =
                         eventGetJudgesInContest(Convert.ToInt16(row.Cells["Id"].Value));
@@ -430,6 +433,12 @@ namespace SimhoppGUI
             ContestsDataGridView_SelectionChanged(null, null);
         }
 
+        /// <summary>
+        /// Creates a new EditContest-form and sends the selected contest. 
+        /// Updates the content in Contests data grid after editing.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EditContestBtn_Click(object sender, EventArgs e)
         {
             var selectedContest = ContestsDataGridView.SelectedCells.Cast<DataGridViewCell>().FirstOrDefault();
@@ -442,9 +451,11 @@ namespace SimhoppGUI
                 }
             }
         }
-
-        #endregion
-
+        /// <summary>
+        /// Creates a new LiveFeed-form and shows it.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StartContestBtn_Click(object sender, EventArgs e)
         {
             using (new DimIt())
@@ -457,21 +468,62 @@ namespace SimhoppGUI
             }
         }
 
-        private void dataGridView1_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
+        #endregion
+
+        #region Keyboard events
+
+        /// <summary>
+        /// Occurs when a key is pressed.
+        /// Shows tooltip if controll is pressed.
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <param name="keyData"></param>
+        /// <returns></returns>
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            //dataGridView1.Columns[e.ColumnIndex].
-            //dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells[0];
-            //dataGridView1.BeginEdit(true);
+            if (ModifierKeys != Keys.Control)
+            {
+                return base.ProcessCmdKey(ref msg, keyData);
+            }
+
+            StartContestToolTip.Show("Ctrl+S", StartContestBtn);
+            EditContestToolTip.Show("Ctrl+N", EditContestBtn);
+            //Man ska bara behöva en tooltip, men jag fick inte det att fungera..
+
+            PerformClick(keyData);
+
+            return base.ProcessCmdKey(ref msg, keyData);
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        /// <summary>
+        /// Performs a click on corresponding button based on keyboard shortkeys.
+        /// </summary>
+        /// <param name="keyData"></param>
+        private void PerformClick(Keys keyData)
         {
-            
-            // dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected = true;
-            //dataGridView1.BeginEdit(true);
-            // trick1ComboBoxColumn.display
+            switch (keyData)
+            {
+                case (Keys.Control | Keys.S):
+                    StartContestBtn.PerformClick();
+                    break;
+                case (Keys.Control | Keys.E):
+                    EditContestBtn.PerformClick();
+                    break;
+            }
+        }
+        /// <summary>
+        /// Occurs when a button is released.
+        /// Hides shortcut tooltips.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void StartContest_KeyUp(object sender, KeyEventArgs e)
+        {        
+            StartContestToolTip.RemoveAll();
+            EditContestToolTip.RemoveAll();
         }
 
-     
+        #endregion
+
     }
 }

@@ -132,6 +132,23 @@ namespace SimhoppGUI
             }
         }
 
+        /// <summary>
+        /// Occurs when a key is pressed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void EditContest_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)13)
+            {
+                EditViewContestEditChangesBtn_Click(null, null);
+            }
+            if (e.KeyChar == (char)27)
+            {
+                Close();
+            }
+        }
+
         #endregion
 
         #region Close Button
@@ -154,5 +171,7 @@ namespace SimhoppGUI
             EditViewContestEditContestPlaceTb.SelectionLength = EditViewContestEditContestPlaceTb.Text.Length;
         }
         #endregion
+
+
     }
 }
