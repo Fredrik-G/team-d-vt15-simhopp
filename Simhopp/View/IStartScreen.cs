@@ -29,6 +29,7 @@ namespace Simhopp.View
 
     public delegate string DelegateGetJudgeHash(string ssn);
     public delegate string DelegateGetJudgeSalt(string ssn);
+    public delegate void DelegateConnectToServer(string ip);
 
     public delegate void DelegateAddJudgeToList(string name, string nationality, string ssn, string password = "password");
     public delegate void DelegateAddDiverToList(string name, string nationality, string ssn);
@@ -74,6 +75,7 @@ namespace Simhopp.View
 
         event DelegateGetJudgeHash EventGetJudgeHash;
         event DelegateGetJudgeSalt EventGetJudgeSalt;
+        event DelegateConnectToServer EventConnectToServer;
 
         event DelegateGetTrickList EventGetTrickList;
 
