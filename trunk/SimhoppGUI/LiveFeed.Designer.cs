@@ -51,6 +51,7 @@
             this.judge5Point = new System.Windows.Forms.NumericUpDown();
             this.judge6Point = new System.Windows.Forms.NumericUpDown();
             this.judge7Point = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.TrickPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CountryflagPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Judge1PictureBox)).BeginInit();
@@ -352,11 +353,21 @@
             this.judge7Point.Size = new System.Drawing.Size(67, 26);
             this.judge7Point.TabIndex = 23;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(13, 521);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(40, 20);
+            this.label1.TabIndex = 24;
+            this.label1.Text = "WIP";
+            // 
             // LiveFeed
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(752, 550);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.judge7Point);
             this.Controls.Add(this.judge6Point);
             this.Controls.Add(this.judge5Point);
@@ -425,5 +436,6 @@
         private System.Windows.Forms.NumericUpDown judge5Point;
         private System.Windows.Forms.NumericUpDown judge6Point;
         private System.Windows.Forms.NumericUpDown judge7Point;
+        private System.Windows.Forms.Label label1;
     }
 }

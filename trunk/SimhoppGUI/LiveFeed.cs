@@ -40,7 +40,6 @@ namespace SimhoppGUI
         {
             eventSendDataToClient();
             var asd = eventGetFirstClientObjectData();
-
         }
 
     }
