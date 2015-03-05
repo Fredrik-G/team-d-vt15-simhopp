@@ -39,17 +39,29 @@
             this.CountryflagPictureBox = new System.Windows.Forms.PictureBox();
             this.PointsLabel = new System.Windows.Forms.Label();
             this.PointsValueLabel = new System.Windows.Forms.Label();
-            this.Judge1PointsLabel = new System.Windows.Forms.Label();
             this.Judge1Label = new System.Windows.Forms.Label();
             this.Judge1PictureBox = new System.Windows.Forms.PictureBox();
             this.Judge2PictureBox = new System.Windows.Forms.PictureBox();
-            this.Judge2PointsLabel = new System.Windows.Forms.Label();
             this.Judge2Label = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.judge1Point = new System.Windows.Forms.NumericUpDown();
+            this.judge2Point = new System.Windows.Forms.NumericUpDown();
+            this.judge3Point = new System.Windows.Forms.NumericUpDown();
+            this.judge4Point = new System.Windows.Forms.NumericUpDown();
+            this.judge5Point = new System.Windows.Forms.NumericUpDown();
+            this.judge6Point = new System.Windows.Forms.NumericUpDown();
+            this.judge7Point = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.TrickPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CountryflagPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Judge1PictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Judge2PictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.judge1Point)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.judge2Point)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.judge3Point)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.judge4Point)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.judge5Point)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.judge6Point)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.judge7Point)).BeginInit();
             this.SuspendLayout();
             // 
             // TrickPictureBox
@@ -69,7 +81,7 @@
             this.NameLabel.Location = new System.Drawing.Point(16, 127);
             this.NameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.NameLabel.Name = "NameLabel";
-            this.NameLabel.Size = new System.Drawing.Size(47, 16);
+            this.NameLabel.Size = new System.Drawing.Size(58, 20);
             this.NameLabel.TabIndex = 1;
             this.NameLabel.Text = "Namn:";
             // 
@@ -80,7 +92,7 @@
             this.NameTextLabel.Location = new System.Drawing.Point(16, 155);
             this.NameTextLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.NameTextLabel.Name = "NameTextLabel";
-            this.NameTextLabel.Size = new System.Drawing.Size(78, 16);
+            this.NameTextLabel.Size = new System.Drawing.Size(98, 20);
             this.NameTextLabel.TabIndex = 2;
             this.NameTextLabel.Text = "J. Ping Xiao";
             // 
@@ -90,7 +102,7 @@
             this.TrickLabel.Location = new System.Drawing.Point(16, 208);
             this.TrickLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.TrickLabel.Name = "TrickLabel";
-            this.TrickLabel.Size = new System.Drawing.Size(45, 16);
+            this.TrickLabel.Size = new System.Drawing.Size(54, 20);
             this.TrickLabel.TabIndex = 3;
             this.TrickLabel.Text = "Hopp:";
             // 
@@ -100,7 +112,7 @@
             this.DifficultyLabel.Location = new System.Drawing.Point(96, 208);
             this.DifficultyLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.DifficultyLabel.Name = "DifficultyLabel";
-            this.DifficultyLabel.Size = new System.Drawing.Size(103, 16);
+            this.DifficultyLabel.Size = new System.Drawing.Size(126, 20);
             this.DifficultyLabel.TabIndex = 4;
             this.DifficultyLabel.Text = "Svårighetsgrad:";
             // 
@@ -111,7 +123,7 @@
             this.DifficultyValueLabel.Location = new System.Drawing.Point(96, 238);
             this.DifficultyValueLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.DifficultyValueLabel.Name = "DifficultyValueLabel";
-            this.DifficultyValueLabel.Size = new System.Drawing.Size(25, 16);
+            this.DifficultyValueLabel.Size = new System.Drawing.Size(31, 20);
             this.DifficultyValueLabel.TabIndex = 5;
             this.DifficultyValueLabel.Text = "2.4";
             // 
@@ -122,7 +134,7 @@
             this.TrickNameLabel.Location = new System.Drawing.Point(16, 238);
             this.TrickNameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.TrickNameLabel.Name = "TrickNameLabel";
-            this.TrickNameLabel.Size = new System.Drawing.Size(42, 16);
+            this.TrickNameLabel.Size = new System.Drawing.Size(50, 20);
             this.TrickNameLabel.TabIndex = 6;
             this.TrickNameLabel.Text = "räkan";
             // 
@@ -130,7 +142,7 @@
             // 
             this.CountryflagPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("CountryflagPictureBox.Image")));
             this.CountryflagPictureBox.InitialImage = null;
-            this.CountryflagPictureBox.Location = new System.Drawing.Point(102, 139);
+            this.CountryflagPictureBox.Location = new System.Drawing.Point(122, 143);
             this.CountryflagPictureBox.Margin = new System.Windows.Forms.Padding(4);
             this.CountryflagPictureBox.Name = "CountryflagPictureBox";
             this.CountryflagPictureBox.Size = new System.Drawing.Size(51, 32);
@@ -145,7 +157,7 @@
             this.PointsLabel.Location = new System.Drawing.Point(13, 319);
             this.PointsLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.PointsLabel.Name = "PointsLabel";
-            this.PointsLabel.Size = new System.Drawing.Size(80, 25);
+            this.PointsLabel.Size = new System.Drawing.Size(100, 31);
             this.PointsLabel.TabIndex = 9;
             this.PointsLabel.Text = "Poäng:";
             // 
@@ -156,20 +168,9 @@
             this.PointsValueLabel.Location = new System.Drawing.Point(94, 319);
             this.PointsValueLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.PointsValueLabel.Name = "PointsValueLabel";
-            this.PointsValueLabel.Size = new System.Drawing.Size(54, 25);
+            this.PointsValueLabel.Size = new System.Drawing.Size(67, 31);
             this.PointsValueLabel.TabIndex = 8;
             this.PointsValueLabel.Text = "73.8";
-            // 
-            // Judge1PointsLabel
-            // 
-            this.Judge1PointsLabel.AutoSize = true;
-            this.Judge1PointsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Judge1PointsLabel.Location = new System.Drawing.Point(13, 413);
-            this.Judge1PointsLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.Judge1PointsLabel.Name = "Judge1PointsLabel";
-            this.Judge1PointsLabel.Size = new System.Drawing.Size(25, 16);
-            this.Judge1PointsLabel.TabIndex = 11;
-            this.Judge1PointsLabel.Text = "5.0";
             // 
             // Judge1Label
             // 
@@ -177,7 +178,7 @@
             this.Judge1Label.Location = new System.Drawing.Point(7, 359);
             this.Judge1Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Judge1Label.Name = "Judge1Label";
-            this.Judge1Label.Size = new System.Drawing.Size(56, 16);
+            this.Judge1Label.Size = new System.Drawing.Size(69, 20);
             this.Judge1Label.TabIndex = 10;
             this.Judge1Label.Text = "M. Saku";
             // 
@@ -197,7 +198,7 @@
             // 
             this.Judge2PictureBox.Image = ((System.Drawing.Image)(resources.GetObject("Judge2PictureBox.Image")));
             this.Judge2PictureBox.InitialImage = null;
-            this.Judge2PictureBox.Location = new System.Drawing.Point(70, 379);
+            this.Judge2PictureBox.Location = new System.Drawing.Point(84, 379);
             this.Judge2PictureBox.Margin = new System.Windows.Forms.Padding(4);
             this.Judge2PictureBox.Name = "Judge2PictureBox";
             this.Judge2PictureBox.Size = new System.Drawing.Size(51, 32);
@@ -205,48 +206,168 @@
             this.Judge2PictureBox.TabIndex = 15;
             this.Judge2PictureBox.TabStop = false;
             // 
-            // Judge2PointsLabel
-            // 
-            this.Judge2PointsLabel.AutoSize = true;
-            this.Judge2PointsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Judge2PointsLabel.Location = new System.Drawing.Point(76, 413);
-            this.Judge2PointsLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.Judge2PointsLabel.Name = "Judge2PointsLabel";
-            this.Judge2PointsLabel.Size = new System.Drawing.Size(25, 16);
-            this.Judge2PointsLabel.TabIndex = 14;
-            this.Judge2PointsLabel.Text = "2.0";
-            // 
             // Judge2Label
             // 
             this.Judge2Label.AutoSize = true;
             this.Judge2Label.Location = new System.Drawing.Point(71, 359);
             this.Judge2Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Judge2Label.Name = "Judge2Label";
-            this.Judge2Label.Size = new System.Drawing.Size(56, 16);
+            this.Judge2Label.Size = new System.Drawing.Size(72, 20);
             this.Judge2Label.TabIndex = 13;
             this.Judge2Label.Text = "A. Smith";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(345, 99);
+            this.button1.Location = new System.Drawing.Point(449, 12);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(120, 33);
             this.button1.TabIndex = 16;
-            this.button1.Text = "button1";
+            this.button1.Text = "Test Client";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // judge1Point
+            // 
+            this.judge1Point.DecimalPlaces = 1;
+            this.judge1Point.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
+            this.judge1Point.Location = new System.Drawing.Point(7, 419);
+            this.judge1Point.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.judge1Point.Name = "judge1Point";
+            this.judge1Point.Size = new System.Drawing.Size(67, 26);
+            this.judge1Point.TabIndex = 17;
+            // 
+            // judge2Point
+            // 
+            this.judge2Point.DecimalPlaces = 1;
+            this.judge2Point.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
+            this.judge2Point.Location = new System.Drawing.Point(94, 419);
+            this.judge2Point.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.judge2Point.Name = "judge2Point";
+            this.judge2Point.Size = new System.Drawing.Size(67, 26);
+            this.judge2Point.TabIndex = 18;
+            // 
+            // judge3Point
+            // 
+            this.judge3Point.DecimalPlaces = 1;
+            this.judge3Point.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
+            this.judge3Point.Location = new System.Drawing.Point(183, 419);
+            this.judge3Point.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.judge3Point.Name = "judge3Point";
+            this.judge3Point.Size = new System.Drawing.Size(67, 26);
+            this.judge3Point.TabIndex = 19;
+            // 
+            // judge4Point
+            // 
+            this.judge4Point.DecimalPlaces = 1;
+            this.judge4Point.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
+            this.judge4Point.Location = new System.Drawing.Point(274, 419);
+            this.judge4Point.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.judge4Point.Name = "judge4Point";
+            this.judge4Point.Size = new System.Drawing.Size(67, 26);
+            this.judge4Point.TabIndex = 20;
+            // 
+            // judge5Point
+            // 
+            this.judge5Point.DecimalPlaces = 1;
+            this.judge5Point.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
+            this.judge5Point.Location = new System.Drawing.Point(367, 419);
+            this.judge5Point.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.judge5Point.Name = "judge5Point";
+            this.judge5Point.Size = new System.Drawing.Size(67, 26);
+            this.judge5Point.TabIndex = 21;
+            // 
+            // judge6Point
+            // 
+            this.judge6Point.DecimalPlaces = 1;
+            this.judge6Point.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
+            this.judge6Point.Location = new System.Drawing.Point(458, 419);
+            this.judge6Point.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.judge6Point.Name = "judge6Point";
+            this.judge6Point.Size = new System.Drawing.Size(67, 26);
+            this.judge6Point.TabIndex = 22;
+            // 
+            // judge7Point
+            // 
+            this.judge7Point.DecimalPlaces = 1;
+            this.judge7Point.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
+            this.judge7Point.Location = new System.Drawing.Point(549, 419);
+            this.judge7Point.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.judge7Point.Name = "judge7Point";
+            this.judge7Point.Size = new System.Drawing.Size(67, 26);
+            this.judge7Point.TabIndex = 23;
+            // 
             // LiveFeed
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(581, 478);
+            this.ClientSize = new System.Drawing.Size(752, 550);
+            this.Controls.Add(this.judge7Point);
+            this.Controls.Add(this.judge6Point);
+            this.Controls.Add(this.judge5Point);
+            this.Controls.Add(this.judge4Point);
+            this.Controls.Add(this.judge3Point);
+            this.Controls.Add(this.judge2Point);
+            this.Controls.Add(this.judge1Point);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.Judge2PictureBox);
-            this.Controls.Add(this.Judge2PointsLabel);
             this.Controls.Add(this.Judge2Label);
             this.Controls.Add(this.Judge1PictureBox);
-            this.Controls.Add(this.Judge1PointsLabel);
             this.Controls.Add(this.Judge1Label);
             this.Controls.Add(this.PointsLabel);
             this.Controls.Add(this.PointsValueLabel);
@@ -268,6 +389,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.CountryflagPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Judge1PictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Judge2PictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.judge1Point)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.judge2Point)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.judge3Point)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.judge4Point)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.judge5Point)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.judge6Point)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.judge7Point)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -285,12 +413,17 @@
         private System.Windows.Forms.PictureBox CountryflagPictureBox;
         private System.Windows.Forms.Label PointsLabel;
         private System.Windows.Forms.Label PointsValueLabel;
-        private System.Windows.Forms.Label Judge1PointsLabel;
         private System.Windows.Forms.Label Judge1Label;
         private System.Windows.Forms.PictureBox Judge1PictureBox;
         private System.Windows.Forms.PictureBox Judge2PictureBox;
-        private System.Windows.Forms.Label Judge2PointsLabel;
         private System.Windows.Forms.Label Judge2Label;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.NumericUpDown judge1Point;
+        private System.Windows.Forms.NumericUpDown judge2Point;
+        private System.Windows.Forms.NumericUpDown judge3Point;
+        private System.Windows.Forms.NumericUpDown judge4Point;
+        private System.Windows.Forms.NumericUpDown judge5Point;
+        private System.Windows.Forms.NumericUpDown judge6Point;
+        private System.Windows.Forms.NumericUpDown judge7Point;
     }
 }
