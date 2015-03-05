@@ -11,18 +11,21 @@ namespace SimhoppGUI
 
         private DelegateGetJudgeHash eventGetJudgeHash;
         private DelegateGetJudgeSalt eventGetJudgeSalt;
+        private DelegateConnectToServer eventConnectToServer;
 
         #endregion
 
         #region Constructor
 
-        public JudgeClient(DelegateGetJudgeHash eventGetJudgeHash, DelegateGetJudgeSalt eventGetJudgeSalt)
+        public JudgeClient(DelegateGetJudgeHash eventGetJudgeHash, DelegateGetJudgeSalt eventGetJudgeSalt, 
+            DelegateConnectToServer eventConnectToServer)
         {
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             InitializeComponent();
 
             this.eventGetJudgeHash= eventGetJudgeHash;
             this.eventGetJudgeSalt = eventGetJudgeSalt;
+            this.eventConnectToServer = eventConnectToServer;
         }
 
         #endregion
@@ -42,6 +45,13 @@ namespace SimhoppGUI
         }
 
         #endregion
+
+        private void connectToServerButton_Click(object sender, EventArgs e)
+        {
+            //TODO checks for correct IP-input
+            var ip = connectToServerButton.Text;
+            eventConnectToServer(ip);
+        }
 
     }
 }
