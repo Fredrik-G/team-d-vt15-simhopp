@@ -64,7 +64,7 @@
             this.newContestNameTB.TabIndex = 1;
             this.toolTipNewContest.SetToolTip(this.newContestNameTB, "\"Jerusalem-VM\", \"He\'Man\", \"Asp.Net\"");
             this.newContestNameTB.Click += new System.EventHandler(this.newContestNameTB_Click);
-            this.newContestNameTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckEnter);
+            this.newContestNameTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckEnterOrEscape);
             // 
             // label2
             // 
@@ -83,7 +83,7 @@
             this.newContestCityTB.TabIndex = 2;
             this.toolTipNewContest.SetToolTip(this.newContestCityTB, "\"Stockholm\", \"Boulogne-Billancourt\"");
             this.newContestCityTB.Click += new System.EventHandler(this.newContestCityTB_Click);
-            this.newContestCityTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckEnter);
+            this.newContestCityTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckEnterOrEscape);
             // 
             // NewContestStartDateLabel
             // 

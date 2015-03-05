@@ -25,8 +25,6 @@ namespace SimhoppGUI
 
         #endregion
 
-
-
         /// <summary>
         /// Creates a correct date string from DateTimePicker.
         /// dd/mm/yyyy
@@ -52,7 +50,13 @@ namespace SimhoppGUI
             EventReadDiversFromDatabase();
             EventReadTricksFromDatabase();
             EventReadContestsFromDatabase();
+
+            KeyPreview = true;
         }
+
+        #endregion
+
+        #region Button clicks
 
         /// <summary>
         /// Creates a NewContest-form and attemps to create a new contest with the input from NewContest.
@@ -82,7 +86,7 @@ namespace SimhoppGUI
                         var endDate = CreateDateString(newContest.NewContestEndDateDTP);
 
                         EventCreateContest(newContest.City, newContest.ContestName, startDate, endDate);
-                        log.Info("Created new contest(" + newContest.City +", " +
+                        log.Info("Created new contest(" + newContest.City + ", " +
                             newContest.ContestName + ", " + startDate + ", " + endDate + ").");
                     }
                 }
@@ -192,6 +196,71 @@ namespace SimhoppGUI
         }
 
         #endregion
+
+        #region Keyboard events
+        /// <summary>
+        /// Occurs when a key is pressed.
+        /// Shows tooltip if controll is pressed.
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <param name="keyData"></param>
+        /// <returns></returns>
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (ModifierKeys != Keys.Control)
+            {
+                return base.ProcessCmdKey(ref msg, keyData);
+            }
+         
+            NewContestToolTip.Show("Ctrl+N", StartScreenNewContesttBtn);
+            StartContestToolTip.Show("Ctrl+S", StartScreenStartContestBtn);
+            AddDiverToolTip.Show("Ctrl+D", StartScreenAddDiverContestBtn);
+            AddJudgeToolTip.Show("Ctrl+J", StartScreenAddJudgeBtn);
+            //Man ska bara behöva en tooltip, men jag fick inte det att fungera..
+
+            PerformClick(keyData);
+   
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        /// <summary>
+        /// Performs a click on corresponding button based on keyboard shortkeys.
+        /// </summary>
+        /// <param name="keyData"></param>
+        private void PerformClick(Keys keyData)
+        {
+            switch (keyData)
+            {
+                case (Keys.Control | Keys.N):
+                    StartScreenNewContesttBtn.PerformClick();
+                    break;
+                case (Keys.Control | Keys.S):
+                    StartScreenStartContestBtn.PerformClick();
+                    break;
+                case (Keys.Control | Keys.D):
+                    StartScreenAddDiverContestBtn.PerformClick();
+                    break;
+                case (Keys.Control | Keys.J):
+                    StartScreenAddJudgeBtn.PerformClick();
+                    break;
+            }
+        }
+        /// <summary>
+        /// Occurs when a button is released.
+        /// Hides shortcut tooltips.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void StartScreen_KeyUp(object sender, KeyEventArgs e)
+        {
+            NewContestToolTip.RemoveAll();
+            StartContestToolTip.RemoveAll();
+            AddJudgeToolTip.RemoveAll();
+            AddDiverToolTip.RemoveAll();
+        }
+
+        #endregion
+
 
         #region ISimhopp Methods
 

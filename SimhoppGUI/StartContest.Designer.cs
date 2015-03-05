@@ -236,7 +236,7 @@
             this.ContestsDataGridView.Location = new System.Drawing.Point(12, 12);
             this.ContestsDataGridView.Name = "ContestsDataGridView";
             this.ContestsDataGridView.ReadOnly = true;
-            this.ContestsDataGridView.Size = new System.Drawing.Size(511, 185);
+            this.ContestsDataGridView.Size = new System.Drawing.Size(682, 185);
             this.ContestsDataGridView.TabIndex = 40;
             this.ContestsDataGridView.TabStop = false;
             this.ContestsDataGridView.SelectionChanged += new System.EventHandler(this.ContestsDataGridView_SelectionChanged);
@@ -281,7 +281,7 @@
             // 
             // EditContestBtn
             // 
-            this.EditContestBtn.Location = new System.Drawing.Point(529, 149);
+            this.EditContestBtn.Location = new System.Drawing.Point(588, 166);
             this.EditContestBtn.Name = "EditContestBtn";
             this.EditContestBtn.Size = new System.Drawing.Size(75, 23);
             this.EditContestBtn.TabIndex = 7;
@@ -291,7 +291,7 @@
             // 
             // StartContestBtn
             // 
-            this.StartContestBtn.Location = new System.Drawing.Point(529, 120);
+            this.StartContestBtn.Location = new System.Drawing.Point(588, 137);
             this.StartContestBtn.Name = "StartContestBtn";
             this.StartContestBtn.Size = new System.Drawing.Size(75, 23);
             this.StartContestBtn.TabIndex = 6;
@@ -309,7 +309,7 @@
             this.weirddatagridfix.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.weirddatagridfix.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.weirdfix});
-            this.weirddatagridfix.Location = new System.Drawing.Point(620, 24);
+            this.weirddatagridfix.Location = new System.Drawing.Point(1134, 203);
             this.weirddatagridfix.Name = "weirddatagridfix";
             this.weirddatagridfix.Size = new System.Drawing.Size(10, 10);
             this.weirddatagridfix.TabIndex = 12;
@@ -319,7 +319,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1146, 469);
+            this.ClientSize = new System.Drawing.Size(1179, 469);
             this.Controls.Add(this.weirddatagridfix);
             this.Controls.Add(this.StartContestBtn);
             this.Controls.Add(this.EditContestBtn);

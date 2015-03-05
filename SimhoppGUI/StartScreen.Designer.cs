@@ -28,56 +28,65 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.StartScreenNewContesttBtn = new System.Windows.Forms.Button();
             this.StartScreenStartContestBtn = new System.Windows.Forms.Button();
             this.StartScreenAddDiverContestBtn = new System.Windows.Forms.Button();
             this.StartScreenAddJudgeBtn = new System.Windows.Forms.Button();
             this.StartScreenViewJudgeClient = new System.Windows.Forms.Button();
+            this.NewContestToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.StartContestToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.AddDiverToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.AddJudgeToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // StartScreenNewContesttBtn
             // 
-            this.StartScreenNewContesttBtn.Location = new System.Drawing.Point(12, 41);
+            this.StartScreenNewContesttBtn.Location = new System.Drawing.Point(15, 27);
             this.StartScreenNewContesttBtn.Name = "StartScreenNewContesttBtn";
             this.StartScreenNewContesttBtn.Size = new System.Drawing.Size(72, 66);
             this.StartScreenNewContesttBtn.TabIndex = 0;
             this.StartScreenNewContesttBtn.Text = "New Contest";
+            this.NewContestToolTip.SetToolTip(this.StartScreenNewContesttBtn, "Ctrl+N");
             this.StartScreenNewContesttBtn.UseVisualStyleBackColor = true;
             this.StartScreenNewContesttBtn.Click += new System.EventHandler(this.StartScreenNewContesttBtn_Click);
             // 
             // StartScreenStartContestBtn
             // 
-            this.StartScreenStartContestBtn.Location = new System.Drawing.Point(129, 41);
+            this.StartScreenStartContestBtn.Location = new System.Drawing.Point(132, 27);
             this.StartScreenStartContestBtn.Name = "StartScreenStartContestBtn";
             this.StartScreenStartContestBtn.Size = new System.Drawing.Size(72, 66);
             this.StartScreenStartContestBtn.TabIndex = 1;
             this.StartScreenStartContestBtn.Text = "Start Contest";
+            this.StartContestToolTip.SetToolTip(this.StartScreenStartContestBtn, "Ctrl+S");
             this.StartScreenStartContestBtn.UseVisualStyleBackColor = true;
             this.StartScreenStartContestBtn.Click += new System.EventHandler(this.StartScreenStartContestBtn_Click);
             // 
             // StartScreenAddDiverContestBtn
             // 
-            this.StartScreenAddDiverContestBtn.Location = new System.Drawing.Point(245, 41);
+            this.StartScreenAddDiverContestBtn.Location = new System.Drawing.Point(248, 27);
             this.StartScreenAddDiverContestBtn.Name = "StartScreenAddDiverContestBtn";
             this.StartScreenAddDiverContestBtn.Size = new System.Drawing.Size(72, 66);
             this.StartScreenAddDiverContestBtn.TabIndex = 3;
             this.StartScreenAddDiverContestBtn.Text = "Add/Edit Diver";
+            this.AddDiverToolTip.SetToolTip(this.StartScreenAddDiverContestBtn, "Ctrl+D");
             this.StartScreenAddDiverContestBtn.UseVisualStyleBackColor = true;
             this.StartScreenAddDiverContestBtn.Click += new System.EventHandler(this.StartScreenAddDiverContestBtn_Click);
             // 
             // StartScreenAddJudgeBtn
             // 
-            this.StartScreenAddJudgeBtn.Location = new System.Drawing.Point(362, 41);
+            this.StartScreenAddJudgeBtn.Location = new System.Drawing.Point(365, 27);
             this.StartScreenAddJudgeBtn.Name = "StartScreenAddJudgeBtn";
             this.StartScreenAddJudgeBtn.Size = new System.Drawing.Size(72, 66);
             this.StartScreenAddJudgeBtn.TabIndex = 4;
             this.StartScreenAddJudgeBtn.Text = "Add/View Judge";
+            this.AddDiverToolTip.SetToolTip(this.StartScreenAddJudgeBtn, "Ctrl+J");
             this.StartScreenAddJudgeBtn.UseVisualStyleBackColor = true;
             this.StartScreenAddJudgeBtn.Click += new System.EventHandler(this.StartScreenAddJudgeBtn_Click);
             // 
             // StartScreenViewJudgeClient
             // 
-            this.StartScreenViewJudgeClient.Location = new System.Drawing.Point(147, 140);
+            this.StartScreenViewJudgeClient.Location = new System.Drawing.Point(172, 120);
             this.StartScreenViewJudgeClient.Name = "StartScreenViewJudgeClient";
             this.StartScreenViewJudgeClient.Size = new System.Drawing.Size(130, 23);
             this.StartScreenViewJudgeClient.TabIndex = 5;
@@ -89,7 +98,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(465, 176);
+            this.ClientSize = new System.Drawing.Size(465, 155);
             this.Controls.Add(this.StartScreenViewJudgeClient);
             this.Controls.Add(this.StartScreenAddJudgeBtn);
             this.Controls.Add(this.StartScreenAddDiverContestBtn);
@@ -101,6 +110,7 @@
             this.Text = "StartScreen";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.StartScreen_FormClosing);
             this.Load += new System.EventHandler(this.StartScreen_Load);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.StartScreen_KeyUp);
             this.ResumeLayout(false);
 
         }
@@ -112,5 +122,9 @@
         private System.Windows.Forms.Button StartScreenAddDiverContestBtn;
         private System.Windows.Forms.Button StartScreenAddJudgeBtn;
         private System.Windows.Forms.Button StartScreenViewJudgeClient;
+        private System.Windows.Forms.ToolTip NewContestToolTip;
+        private System.Windows.Forms.ToolTip StartContestToolTip;
+        private System.Windows.Forms.ToolTip AddDiverToolTip;
+        private System.Windows.Forms.ToolTip AddJudgeToolTip;
     }
 }
