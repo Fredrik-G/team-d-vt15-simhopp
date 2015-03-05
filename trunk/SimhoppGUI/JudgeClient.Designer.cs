@@ -30,8 +30,9 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.connectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.connectToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.chooseContestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.activeContestsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.connectToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,7 +49,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.activeContestsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label6 = new System.Windows.Forms.Label();
             this.JudgeClientChosenContestTb = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
@@ -77,13 +77,6 @@
             this.connectToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.connectToolStripMenuItem.Text = "File";
             // 
-            // connectToolStripMenuItem1
-            // 
-            this.connectToolStripMenuItem1.Name = "connectToolStripMenuItem1";
-            this.connectToolStripMenuItem1.Size = new System.Drawing.Size(158, 22);
-            this.connectToolStripMenuItem1.Text = "Connect";
-            this.connectToolStripMenuItem1.Click += new System.EventHandler(this.connectToolStripMenuItem1_Click);
-            // 
             // chooseContestToolStripMenuItem
             // 
             this.chooseContestToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -91,6 +84,19 @@
             this.chooseContestToolStripMenuItem.Name = "chooseContestToolStripMenuItem";
             this.chooseContestToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.chooseContestToolStripMenuItem.Text = "Choose Contest";
+            // 
+            // activeContestsToolStripMenuItem
+            // 
+            this.activeContestsToolStripMenuItem.Name = "activeContestsToolStripMenuItem";
+            this.activeContestsToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.activeContestsToolStripMenuItem.Text = "Active contests";
+            // 
+            // connectToolStripMenuItem1
+            // 
+            this.connectToolStripMenuItem1.Name = "connectToolStripMenuItem1";
+            this.connectToolStripMenuItem1.Size = new System.Drawing.Size(158, 22);
+            this.connectToolStripMenuItem1.Text = "Connect";
+            this.connectToolStripMenuItem1.Click += new System.EventHandler(this.connectToolStripMenuItem1_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -138,7 +144,7 @@
             0});
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(92, 31);
-            this.numericUpDown1.TabIndex = 42;
+            this.numericUpDown1.TabIndex = 5;
             // 
             // label5
             // 
@@ -154,7 +160,7 @@
             this.button1.Location = new System.Drawing.Point(155, 583);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(92, 23);
-            this.button1.TabIndex = 40;
+            this.button1.TabIndex = 6;
             this.button1.Text = "SEND";
             this.button1.UseVisualStyleBackColor = true;
             // 
@@ -164,7 +170,7 @@
             this.textBox4.Name = "textBox4";
             this.textBox4.ReadOnly = true;
             this.textBox4.Size = new System.Drawing.Size(157, 20);
-            this.textBox4.TabIndex = 39;
+            this.textBox4.TabIndex = 3;
             // 
             // textBox3
             // 
@@ -172,7 +178,7 @@
             this.textBox3.Name = "textBox3";
             this.textBox3.ReadOnly = true;
             this.textBox3.Size = new System.Drawing.Size(157, 20);
-            this.textBox3.TabIndex = 38;
+            this.textBox3.TabIndex = 2;
             // 
             // textBox2
             // 
@@ -189,7 +195,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(157, 20);
-            this.textBox1.TabIndex = 36;
+            this.textBox1.TabIndex = 4;
             // 
             // label4
             // 
@@ -235,12 +241,6 @@
             this.label1.TabIndex = 30;
             this.label1.Text = "Judge name";
             // 
-            // activeContestsToolStripMenuItem
-            // 
-            this.activeContestsToolStripMenuItem.Name = "activeContestsToolStripMenuItem";
-            this.activeContestsToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
-            this.activeContestsToolStripMenuItem.Text = "Active contests";
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -257,7 +257,7 @@
             this.JudgeClientChosenContestTb.Name = "JudgeClientChosenContestTb";
             this.JudgeClientChosenContestTb.ReadOnly = true;
             this.JudgeClientChosenContestTb.Size = new System.Drawing.Size(186, 20);
-            this.JudgeClientChosenContestTb.TabIndex = 44;
+            this.JudgeClientChosenContestTb.TabIndex = 1;
             // 
             // JudgeClient
             // 
