@@ -11,6 +11,9 @@ using System.IO;
 
 namespace Simhopp
 {
+    /// <summary>
+    /// Class that is able to connect to a server and communicate with it.
+    /// </summary>
     public class Client
     {
         TcpClient clientSocket;
