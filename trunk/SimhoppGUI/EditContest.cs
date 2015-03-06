@@ -49,9 +49,10 @@ namespace SimhoppGUI
         #region Constructor
         public EditContest(DataGridViewCell cell, DelegateUpdateContest eventUpdateContest)
         {
+            
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             InitializeComponent();
-
+            
             this.eventUpdateContest = eventUpdateContest;
 
             try
@@ -61,8 +62,8 @@ namespace SimhoppGUI
                 contestId = Convert.ToInt16(contestRow.Cells["Id"].Value);
                 ContestName = contestRow.Cells["Name"].Value.ToString();
                 Place = contestRow.Cells["Place"].Value.ToString();
-                StartDate = contestRow.Cells["StartDate"].Value.ToString();
-                EndDate = contestRow.Cells["EndDate"].Value.ToString();
+                StartDate = StartScreen.CreateDateString(contestRow.Cells["StartDate"].Value.ToString());
+                EndDate = StartScreen.CreateDateString(contestRow.Cells["EndDate"].Value.ToString());
             }
             catch (ArgumentOutOfRangeException outOfRangeException)
             {
