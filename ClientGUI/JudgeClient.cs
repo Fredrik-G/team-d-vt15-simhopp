@@ -1,31 +1,29 @@
 ﻿using System;
 using System.Windows.Forms;
+using ClientGUI.View;
 
 namespace ClientGUI
 {
-    public partial class JudgeClient : Form
+    public partial class JudgeClient : Form, IJudgeClient
     {
-
-        #region Data
-
-        //private DelegateGetJudgeHash eventGetJudgeHash;
-        //private DelegateGetJudgeSalt eventGetJudgeSalt;
-        //private DelegateConnectToServer eventConnectToServer;
-
-        #endregion
 
         #region Constructor
 
-        /*public JudgeClient(DelegateGetJudgeHash eventGetJudgeHash, DelegateGetJudgeSalt eventGetJudgeSalt, 
-            DelegateConnectToServer eventConnectToServer)
+     
+        public JudgeClient(DelegateConnectToServer eventConnectToServer, DelegateSendDataToServer eventSendDataToServer, DelegateDisconnect eventDisconnect)
         {
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             InitializeComponent();
+            this.EventSendDataToServer = eventSendDataToServer;
+            this.EventConnectToServer = eventConnectToServer;
+            this.EventDisconnect = eventDisconnect;
+        }
 
-            this.eventGetJudgeHash= eventGetJudgeHash;
-            this.eventGetJudgeSalt = eventGetJudgeSalt;
-            this.eventConnectToServer = eventConnectToServer;
-        }*/
+        public JudgeClient()
+        {
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            InitializeComponent();
+        }
 
         #endregion
 
@@ -33,24 +31,42 @@ namespace ClientGUI
 
         private void connectToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            /*using (new DimIt())
-            using (var loginScreen = new Login(eventGetJudgeHash, eventGetJudgeSalt))
+            using(new DimIt())
+            using (var login = new Login(EventConnectToServer, EventSendDataToServer, EventDisconnect))
             {
-                if (loginScreen.ShowDialog(this) == DialogResult.OK)
+                if (login.ShowDialog(this) == DialogResult.OK)
                 {
-                    loginScreen.Show();
+                    login.Show();
                 }
-            }*/
+            }
+
+            
         }
 
         #endregion
 
-        private void connectToServerButton_Click(object sender, EventArgs e)
+        #region Member methods
+
+
+        #endregion
+
+        #region IJudgeClient methods
+        public event DelegateConnectToServer EventConnectToServer = null;
+        public event DelegateSendDataToServer EventSendDataToServer = null;
+        public event DelegateDisconnect EventDisconnect = null;
+        #endregion
+
+        private void sendPointButton_Click(object sender, EventArgs e)
         {
-            //TODO checks for correct IP-input
-            var ip = connectToServerButton.Text;
-            //eventConnectToServer(ip);
+            var point = Convert.ToDouble(numericUpDown1.Text);
+            var ssn = "heppa";
+            using (var judgeClient = new JudgeClient(EventConnectToServer, EventSendDataToServer, EventDisconnect))
+            {
+                EventSendDataToServer(ssn, point);
+            }
         }
+
+      
 
 
     }

@@ -8,13 +8,14 @@ using System.Net.Sockets;
 using System.Xml.Serialization;
 using System.Threading;
 using System.IO;
+using ClientGUI.Model;
 
 namespace ClientGUI
 {
     /// <summary>
     /// Class that is able to connect to a server and communicate with it.
     /// </summary>
-    public class Client : IDisposable
+    public class Client : IClient, IDisposable
     {
         TcpClient clientSocket;
         
