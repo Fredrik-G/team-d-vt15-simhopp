@@ -14,7 +14,7 @@ namespace Simhopp
     /// <summary>
     /// Class that is able to connect to a server and communicate with it.
     /// </summary>
-    public class Client
+    public class Client : IDisposable
     {
         TcpClient clientSocket;
         
@@ -102,5 +102,26 @@ namespace Simhopp
                 clientSocket.Client.Disconnect(true);
             }
         }
+
+
+        #region IDisposable methods
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                Disconnect();
+            }
+
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        #endregion
+
     }
 }
