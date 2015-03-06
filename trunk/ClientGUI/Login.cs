@@ -3,10 +3,9 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
-using Simhopp;
-using Simhopp.View;
+using ClientGUI.View;
 
-namespace SimhoppGUI
+namespace ClientGUI
 {
     /// <summary>
     /// Allows a judge to log in. Authentication uses SHA256-encryption.
@@ -16,16 +15,26 @@ namespace SimhoppGUI
     /// </summary>
     public partial class Login : Form
     {
-        private DelegateGetJudgeHash eventGetJudgeHash;
-        private DelegateGetJudgeSalt eventGetJudgeSalt;
+        private DelegateConnectToServer eventConnectToServer;
+        private DelegateSendDataToServer eventSendDataToServer;
+        private DelegateDisconnect eventDisconnect;
+        
 
-        public Login(DelegateGetJudgeHash eventGetJudgeHash, DelegateGetJudgeSalt eventGetJudgeSalt)
+        public Login()
         {
-            this.FormBorderStyle = FormBorderStyle.FixedSingle; 
-            InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.InitializeComponent();
+        }
 
-            this.eventGetJudgeHash = eventGetJudgeHash;
-            this.eventGetJudgeSalt = eventGetJudgeSalt;
+        public Login(DelegateConnectToServer eventConnectToServer,
+            DelegateSendDataToServer eventSendDataToServer,
+            DelegateDisconnect eventDisconnect)
+        {
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            InitializeComponent();
+            this.eventConnectToServer = eventConnectToServer;
+            this.eventSendDataToServer = eventSendDataToServer;
+            this.eventDisconnect = eventDisconnect;
         }
 
         private void LoginScreenCancelBtn_Click(object sender, EventArgs e)
@@ -35,31 +44,26 @@ namespace SimhoppGUI
 
         private void LoginBtn_Click(object sender, EventArgs e)
         {
-            if (Authenticate())
+            using (var login = new Login(eventConnectToServer, eventSendDataToServer, eventDisconnect))
             {
-                MsgBox.CreateErrorBox("Login successfully", "");
-            }
-            else
-            {
-                MsgBox.CreateErrorBox("Username or password is wrong.", "");
+                try
+                {
+                    var ip = IPConnectionTB.Text;
+                    eventConnectToServer(ip);
+                    
+                    Close();
+                }
+                catch (Exception ex)
+                {
+                    
+                }
             }
         }
+        
 
         private bool Authenticate()
         {
-            try
-            {
-                var correctHash = eventGetJudgeHash(UserNameTB.Text);
-                var salt = eventGetJudgeSalt(UserNameTB.Text);
-
-                var inputHash = CalculateHash(PasswordTB.Text + salt);
-
-                return correctHash == inputHash;
-            }
-            catch (NullReferenceException)
-            {
-                InputErrorProvider.SetError(UserNameTB, "Judge was not found.");
-            }
+            
             return false;
         }
 

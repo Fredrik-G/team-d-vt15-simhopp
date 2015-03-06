@@ -26,12 +26,10 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
+        public void InitializeComponent()
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.connectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.chooseContestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.activeContestsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.connectToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -39,9 +37,9 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.sendPointButton = new System.Windows.Forms.Button();
             this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.JudgeSSNTB = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -51,8 +49,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.JudgeClientChosenContestTb = new System.Windows.Forms.TextBox();
-            this.connectionIpTB = new System.Windows.Forms.TextBox();
-            this.connectToServerButton = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -67,37 +63,22 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(396, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(358, 24);
             this.menuStrip1.TabIndex = 12;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // connectToolStripMenuItem
             // 
             this.connectToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.chooseContestToolStripMenuItem,
             this.connectToolStripMenuItem1});
             this.connectToolStripMenuItem.Name = "connectToolStripMenuItem";
             this.connectToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.connectToolStripMenuItem.Text = "File";
             // 
-            // chooseContestToolStripMenuItem
-            // 
-            this.chooseContestToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.activeContestsToolStripMenuItem});
-            this.chooseContestToolStripMenuItem.Name = "chooseContestToolStripMenuItem";
-            this.chooseContestToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
-            this.chooseContestToolStripMenuItem.Text = "Choose Contest";
-            // 
-            // activeContestsToolStripMenuItem
-            // 
-            this.activeContestsToolStripMenuItem.Name = "activeContestsToolStripMenuItem";
-            this.activeContestsToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
-            this.activeContestsToolStripMenuItem.Text = "Active contests";
-            // 
             // connectToolStripMenuItem1
             // 
             this.connectToolStripMenuItem1.Name = "connectToolStripMenuItem1";
-            this.connectToolStripMenuItem1.Size = new System.Drawing.Size(158, 22);
+            this.connectToolStripMenuItem1.Size = new System.Drawing.Size(119, 22);
             this.connectToolStripMenuItem1.Text = "Connect";
             this.connectToolStripMenuItem1.Click += new System.EventHandler(this.connectToolStripMenuItem1_Click);
             // 
@@ -152,20 +133,21 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(30, 556);
+            this.label5.Location = new System.Drawing.Point(29, 464);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(144, 13);
             this.label5.TabIndex = 41;
             this.label5.Text = "Connected/Not connected...";
             // 
-            // button1
+            // sendPointButton
             // 
-            this.button1.Location = new System.Drawing.Point(32, 438);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(92, 23);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "SEND";
-            this.button1.UseVisualStyleBackColor = true;
+            this.sendPointButton.Location = new System.Drawing.Point(32, 438);
+            this.sendPointButton.Name = "sendPointButton";
+            this.sendPointButton.Size = new System.Drawing.Size(92, 23);
+            this.sendPointButton.TabIndex = 6;
+            this.sendPointButton.Text = "SEND";
+            this.sendPointButton.UseVisualStyleBackColor = true;
+            this.sendPointButton.Click += new System.EventHandler(this.sendPointButton_Click);
             // 
             // textBox4
             // 
@@ -175,13 +157,13 @@
             this.textBox4.Size = new System.Drawing.Size(157, 20);
             this.textBox4.TabIndex = 3;
             // 
-            // textBox3
+            // JudgeSSNTB
             // 
-            this.textBox3.Location = new System.Drawing.Point(32, 137);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(157, 20);
-            this.textBox3.TabIndex = 2;
+            this.JudgeSSNTB.Location = new System.Drawing.Point(32, 137);
+            this.JudgeSSNTB.Name = "JudgeSSNTB";
+            this.JudgeSSNTB.ReadOnly = true;
+            this.JudgeSSNTB.Size = new System.Drawing.Size(157, 20);
+            this.JudgeSSNTB.TabIndex = 2;
             // 
             // textBox2
             // 
@@ -238,11 +220,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(29, 108);
+            this.label1.Location = new System.Drawing.Point(29, 107);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 13);
+            this.label1.Size = new System.Drawing.Size(61, 13);
             this.label1.TabIndex = 30;
-            this.label1.Text = "Judge name";
+            this.label1.Text = "Judge SSN";
             // 
             // label6
             // 
@@ -262,30 +244,10 @@
             this.JudgeClientChosenContestTb.Size = new System.Drawing.Size(186, 20);
             this.JudgeClientChosenContestTb.TabIndex = 1;
             // 
-            // connectionIpTB
-            // 
-            this.connectionIpTB.Location = new System.Drawing.Point(28, 583);
-            this.connectionIpTB.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.connectionIpTB.Name = "connectionIpTB";
-            this.connectionIpTB.Size = new System.Drawing.Size(76, 20);
-            this.connectionIpTB.TabIndex = 45;
-            this.connectionIpTB.Text = "127.0.0.1";
-            // 
-            // connectToServerButton
-            // 
-            this.connectToServerButton.Location = new System.Drawing.Point(28, 606);
-            this.connectToServerButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.connectToServerButton.Name = "connectToServerButton";
-            this.connectToServerButton.Size = new System.Drawing.Size(75, 23);
-            this.connectToServerButton.TabIndex = 46;
-            this.connectToServerButton.Text = "Connect";
-            this.connectToServerButton.UseVisualStyleBackColor = true;
-            this.connectToServerButton.Click += new System.EventHandler(this.connectToServerButton_Click);
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(342, 626);
+            this.label7.Location = new System.Drawing.Point(313, 464);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(28, 13);
@@ -296,18 +258,16 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(396, 655);
+            this.ClientSize = new System.Drawing.Size(358, 497);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.connectToServerButton);
-            this.Controls.Add(this.connectionIpTB);
             this.Controls.Add(this.JudgeClientChosenContestTb);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.sendPointButton);
             this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.JudgeSSNTB);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label4);
@@ -340,9 +300,8 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button sendPointButton;
         private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label4;
@@ -350,13 +309,10 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ToolStripMenuItem chooseContestToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem activeContestsToolStripMenuItem;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox JudgeClientChosenContestTb;
-        private System.Windows.Forms.TextBox connectionIpTB;
-        private System.Windows.Forms.Button connectToServerButton;
         private System.Windows.Forms.Label label7;
+        public System.Windows.Forms.TextBox JudgeSSNTB;
     }
 }
 

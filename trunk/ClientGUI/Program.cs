@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ClientGUI.View;
+using ClientGUI.Presenter;
 
 namespace ClientGUI
 {
-    static class Program
+    public class Program
     {
         /// <summary>
         /// The main entry point for the application.
@@ -16,7 +18,11 @@ namespace ClientGUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new JudgeClient());
+            var judgeClient = new JudgeClient();
+            var client = new Client();
+            PresenterJudgeClient presenterJudgeClient = new PresenterJudgeClient(judgeClient, client);
+
+            Application.Run(judgeClient);
         }
     }
 }
