@@ -1,5 +1,12 @@
-﻿using log4net.Config;
+﻿using System;
+using log4net.Config;
 using Simhopp.Model;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using log4net.Appender;
 
 [assembly: XmlConfigurator(Watch = true)]
 
@@ -7,7 +14,7 @@ namespace Simhopp
 {
     class Program
     {
-        private static void FillDatabase()
+        /*private static void FillDatabase()
         {
             var database = new DatabaseController(@"M:/Desktop/simhoppTestDB.db");
             database.ConnectToDatabase();
@@ -31,7 +38,7 @@ namespace Simhopp
 
                 database.AddDiverToDatabase(new Diver("kalle", "finland", "123-22-123" + i));
             }
-        }
+        }*/
         static void Main(string[] args)
         {
             //FillDatabase();
@@ -39,8 +46,20 @@ namespace Simhopp
            // var simhopp = new Simhopp();
            // simhopp.ReadTricksFroMDatabase();
 
-            var console = new SimhoppConsole();
-            console.Meny();
+            //var console = new SimhoppConsole();
+            
+            //console.Meny();
+            /*Server server = new Server();
+            server.StartServer();
+
+            server.GetIPForServer();
+            
+            ClientObjectData cd = server.GetFirstClientObjectData();
+            server.SendDataToClient();*/
+            Console.Read();
+            
         }
+       
+
     }
 }

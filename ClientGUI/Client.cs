@@ -9,7 +9,7 @@ using System.Xml.Serialization;
 using System.Threading;
 using System.IO;
 
-namespace Simhopp
+namespace ClientGUI
 {
     /// <summary>
     /// Class that is able to connect to a server and communicate with it.

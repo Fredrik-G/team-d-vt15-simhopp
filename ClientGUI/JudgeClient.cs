@@ -1,23 +1,22 @@
 ﻿using System;
 using System.Windows.Forms;
-using Simhopp.View;
 
-namespace SimhoppGUI
+namespace ClientGUI
 {
     public partial class JudgeClient : Form
     {
 
         #region Data
 
-        private DelegateGetJudgeHash eventGetJudgeHash;
-        private DelegateGetJudgeSalt eventGetJudgeSalt;
-        private DelegateConnectToServer eventConnectToServer;
+        //private DelegateGetJudgeHash eventGetJudgeHash;
+        //private DelegateGetJudgeSalt eventGetJudgeSalt;
+        //private DelegateConnectToServer eventConnectToServer;
 
         #endregion
 
         #region Constructor
 
-        public JudgeClient(DelegateGetJudgeHash eventGetJudgeHash, DelegateGetJudgeSalt eventGetJudgeSalt, 
+        /*public JudgeClient(DelegateGetJudgeHash eventGetJudgeHash, DelegateGetJudgeSalt eventGetJudgeSalt, 
             DelegateConnectToServer eventConnectToServer)
         {
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -26,7 +25,7 @@ namespace SimhoppGUI
             this.eventGetJudgeHash= eventGetJudgeHash;
             this.eventGetJudgeSalt = eventGetJudgeSalt;
             this.eventConnectToServer = eventConnectToServer;
-        }
+        }*/
 
         #endregion
 
@@ -34,14 +33,14 @@ namespace SimhoppGUI
 
         private void connectToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            using (new DimIt())
+            /*using (new DimIt())
             using (var loginScreen = new Login(eventGetJudgeHash, eventGetJudgeSalt))
             {
                 if (loginScreen.ShowDialog(this) == DialogResult.OK)
                 {
                     loginScreen.Show();
                 }
-            }
+            }*/
         }
 
         #endregion
@@ -50,8 +49,9 @@ namespace SimhoppGUI
         {
             //TODO checks for correct IP-input
             var ip = connectToServerButton.Text;
-            eventConnectToServer(ip);
+            //eventConnectToServer(ip);
         }
+
 
     }
 }
