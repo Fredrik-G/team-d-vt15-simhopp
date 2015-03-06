@@ -38,6 +38,18 @@ namespace SimhoppGUI
                            "/" + date.Value.Year.ToString();
         }
 
+        /// <summary>
+        /// Creates a correct date string from DateTimePicker.
+        /// dd/mm/yyyy
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public static string CreateDateString(string date)
+        {
+            var dateArray = date.Split('/');
+            return date = dateArray[1].ToString() + "-" + dateArray[0].ToString() + "-" + dateArray[2].ToString();
+        }
+
         #region Events
         /// <summary>
         /// Occurs on form load.
