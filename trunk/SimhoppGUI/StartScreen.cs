@@ -172,19 +172,8 @@ namespace SimhoppGUI
                 }
             }
         }
-
-        private void StartScreenViewJudgeClient_Click(object sender, EventArgs e)
-        {
-            //Dims the background form and makes it non-interactive.
-            using (new DimIt())
-            using (var judgeClient = new JudgeClient(EventGetJudgeHash, EventGetJudgeSalt, EventConnectToServer))
-            {
-                if (judgeClient.ShowDialog(this) == DialogResult.OK)
-                {
-                    judgeClient.Show();
-                }
-            }
-        }
+        
+        
 
         /// <summary>
         /// Occurs when the form is closing.
