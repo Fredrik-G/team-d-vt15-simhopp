@@ -177,7 +177,7 @@ namespace SimhoppGUI
         {
             //Dims the background form and makes it non-interactive.
             using (new DimIt())
-            using (var judgeClient = new JudgeClient(EventGetJudgeHash, EventGetJudgeSalt))
+            using (var judgeClient = new JudgeClient(EventGetJudgeHash, EventGetJudgeSalt, EventConnectToServer))
             {
                 if (judgeClient.ShowDialog(this) == DialogResult.OK)
                 {
@@ -282,6 +282,7 @@ namespace SimhoppGUI
 
         public event DelegateGetJudgeHash EventGetJudgeHash = null;
         public event DelegateGetJudgeSalt EventGetJudgeSalt = null;
+        public event DelegateConnectToServer EventConnectToServer = null;
 
         public event DelegateAddJudgeToList EventAddJudgeToList = null;
         public event DelegateAddDiverToList EventAddDiverToList = null;

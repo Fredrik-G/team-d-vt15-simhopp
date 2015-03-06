@@ -589,13 +589,7 @@ namespace Simhopp
 
         public void SendDataToClient()
         {
-            var c = new Client();
-            StartServer();
-            c.ConnectToServer("127.0.0.1");
-            c.SendDataToServer();
-            c.SendDataToServer();
-
-            server.SendDataToClient();
+             server.SendDataToClient();
         }
         public ClientObjectData GetFirstClientObjectData()
         {
