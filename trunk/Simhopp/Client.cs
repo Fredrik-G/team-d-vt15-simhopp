@@ -43,9 +43,9 @@ namespace Simhopp
         /// <summary>
         /// Serializes the data into XML-code and sends it to the server
         /// </summary>
-        public void SendDataToServer()
+        public void SendDataToServer(string ssn, double point)
         {
-            var message = new ClientObjectData("222222", 9.5);//Should get data from testboxes
+            var message = new ClientObjectData(ssn, point);//Should get data from testboxes
             var networkStream = clientSocket.GetStream();
             string serializedString;
             var asciiEncoder = new ASCIIEncoding();
