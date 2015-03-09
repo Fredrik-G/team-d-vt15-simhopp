@@ -47,8 +47,6 @@
             this.CurrentlDiversLabel = new System.Windows.Forms.Label();
             this.EditContestBtn = new System.Windows.Forms.Button();
             this.StartContestBtn = new System.Windows.Forms.Button();
-            this.weirdfix = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.weirddatagridfix = new System.Windows.Forms.DataGridView();
             this.EditContestToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.StartContestToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.JudgesDiversTabControl.SuspendLayout();
@@ -59,7 +57,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.CurrentDiversDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GlobalDiversDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ContestsDataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.weirddatagridfix)).BeginInit();
             this.SuspendLayout();
             // 
             // JudgesDiversTabControl
@@ -239,7 +236,7 @@
             this.ContestsDataGridView.Location = new System.Drawing.Point(12, 12);
             this.ContestsDataGridView.Name = "ContestsDataGridView";
             this.ContestsDataGridView.ReadOnly = true;
-            this.ContestsDataGridView.Size = new System.Drawing.Size(561, 185);
+            this.ContestsDataGridView.Size = new System.Drawing.Size(563, 179);
             this.ContestsDataGridView.TabIndex = 40;
             this.ContestsDataGridView.TabStop = false;
             this.ContestsDataGridView.SelectionChanged += new System.EventHandler(this.ContestsDataGridView_SelectionChanged);
@@ -304,28 +301,11 @@
             this.StartContestBtn.UseVisualStyleBackColor = true;
             this.StartContestBtn.Click += new System.EventHandler(this.StartContestBtn_Click);
             // 
-            // weirdfix
-            // 
-            this.weirdfix.HeaderText = "weirdfix";
-            this.weirdfix.Name = "weirdfix";
-            // 
-            // weirddatagridfix
-            // 
-            this.weirddatagridfix.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.weirddatagridfix.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.weirdfix});
-            this.weirddatagridfix.Location = new System.Drawing.Point(1134, 203);
-            this.weirddatagridfix.Name = "weirddatagridfix";
-            this.weirddatagridfix.Size = new System.Drawing.Size(10, 10);
-            this.weirddatagridfix.TabIndex = 12;
-            this.weirddatagridfix.TabStop = false;
-            // 
             // StartContest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1058, 469);
-            this.Controls.Add(this.weirddatagridfix);
+            this.ClientSize = new System.Drawing.Size(1060, 463);
             this.Controls.Add(this.StartContestBtn);
             this.Controls.Add(this.EditContestBtn);
             this.Controls.Add(this.GlobalDiversLabel);
@@ -348,7 +328,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.CurrentDiversDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GlobalDiversDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ContestsDataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.weirddatagridfix)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -374,8 +353,6 @@
         private System.Windows.Forms.Label CurrentlDiversLabel;
         private System.Windows.Forms.Button EditContestBtn;
         private System.Windows.Forms.Button StartContestBtn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn weirdfix;
-        private System.Windows.Forms.DataGridView weirddatagridfix;
         private System.Windows.Forms.ToolTip EditContestToolTip;
         private System.Windows.Forms.ToolTip StartContestToolTip;
     }

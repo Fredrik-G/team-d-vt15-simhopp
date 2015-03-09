@@ -40,7 +40,8 @@ namespace Simhopp
         /// </summary>
         public Simhopp()
         {
-            databaseController = new DatabaseController(@"m:\My Documents\Visual Studio 2013\Projects\Simhopp\Simhopp\simhoppTestDB.db");
+           // databaseController = new DatabaseController(@"m:\My Documents\Visual Studio 2013\Projects\Simhopp\Simhopp\simhoppTestDB.db");
+            databaseController = new DatabaseController(@"m:\desktop\simhopptestdb.db");
             databaseController.ConnectToDatabase();
         }
 
@@ -109,7 +110,7 @@ namespace Simhopp
         /// <summary>
         /// Returns list of divers in a given contest.
         /// </summary>
-        /// <param name="contestName"></param>
+        /// <param name="id">Contest id</param>
         /// <returns></returns>
         public BindingList<Diver> GetDiversInContest(int id)
         {
@@ -143,6 +144,31 @@ namespace Simhopp
             return new BindingList<Diver>();
         }
 
+        public string GetDiversTrick(int contestId, int trickNo, string ssn)
+        {
+            try
+            {
+                var selectedContest = contestList.SingleOrDefault(x => x.Id == contestId);
+
+                var selectedParticipant = selectedContest.GetParticipants().SingleOrDefault(x => x.GetDiverSSN() == ssn);
+
+                return selectedParticipant.GetTrick(trickNo);
+            }
+            catch (NullReferenceException)
+            {
+
+            }
+            catch (ArgumentNullException nullException)
+            {
+                MsgBox.CreateErrorBox(nullException.ToString(), MethodBase.GetCurrentMethod().ToString());
+            }
+            catch (Exception exception)
+            {
+                MsgBox.CreateErrorBox(exception.ToString(), MethodBase.GetCurrentMethod().ToString());
+            }
+
+            return "";
+        }
         /// <summary>
         /// A function that gets a judge by its ssn.
         /// Throws NullReferenceException if judge is not found.
@@ -194,7 +220,28 @@ namespace Simhopp
         {
             return trickList.GetTrickList();
         }
-        
+
+        /// <summary>
+        /// Returns a given trick to a given contest/participant.
+        /// </summary>
+        /// <param name="contestId"></param>
+        /// <param name="trickNo"></param>
+        /// <param name="ssn"></param>
+        public string GetTrickFromParticipant(int contestId, int trickNo, string ssn)
+        {
+            try
+            {
+                var selectedContest = contestList.SingleOrDefault(x => x.Id == contestId);
+                return selectedContest.GetNumberOfParticipants() > 0 ? selectedContest.GetTrick(trickNo, ssn) : "";
+            }
+
+            catch (NullReferenceException nullReferenceException)
+            {
+                MsgBox.CreateErrorBox(nullReferenceException.ToString(), MethodBase.GetCurrentMethod().Name);
+            }
+            return "";
+        }
+
         #endregion
 
         /// <summary>
@@ -222,7 +269,7 @@ namespace Simhopp
             {
                 var contest = new Contest(place, name, startDate, endDate);
                 contestList.Add(contest);
-               // databaseController.AddContestToDatabase(contest);
+                databaseController.AddContestToDatabase(contest);
             }
         }
 
@@ -234,6 +281,7 @@ namespace Simhopp
         /// <param name="name">Judge name</param>
         /// <param name="nationality">Judge nationality</param>
         /// <param name="ssn">Judge ssn</param>
+        /// <param name="password">Judge password. Default = "password".</param>
         public void AddJudgeToList(string name, string nationality, string ssn, string password = "password")
         {
             //kollar om judge redan finns i judgelist. 
@@ -324,6 +372,27 @@ namespace Simhopp
             catch (Exception exception)
             {
                 MsgBox.CreateErrorBox(exception.ToString(), MethodBase.GetCurrentMethod().ToString());
+            }
+        }
+
+        /// <summary>
+        /// Adds a given trick to a given contest/participant.
+        /// </summary>
+        /// <param name="contestId"></param>
+        /// <param name="trickNo"></param>
+        /// <param name="trickName"></param>
+        /// <param name="ssn"></param>
+        public void AddTrickToParticipant(int contestId, int trickNo, string trickName, string ssn)
+        {
+            try
+            {
+                var selectedContest = contestList.SingleOrDefault(x => x.Id == contestId);
+                selectedContest.SetTrick(trickNo, trickName, ssn);
+            }
+
+            catch (NullReferenceException nullReferenceException)
+            {
+                MsgBox.CreateErrorBox(nullReferenceException.ToString(), MethodBase.GetCurrentMethod().Name);
             }
         }
 

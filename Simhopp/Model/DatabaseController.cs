@@ -919,11 +919,6 @@ namespace Simhopp.Model
                 NoConnectionErrorMessage();
                 return;
             }
-            if (!c.IsFinished)
-            {
-                MsgBox.CreateErrorBox("Contest is not finished and can not be saved to database.", MethodBase.GetCurrentMethod().Name);
-                return;
-            }
             try
             {
                 //Add the contest info to contest database.
@@ -931,58 +926,8 @@ namespace Simhopp.Model
                 SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
                 command.ExecuteNonQuery();
 
-                int lastInsertedContestId = GetLastId();
+                c.Id = GetLastId();
 
-                //Add all new judges to the database and update their id.
-                foreach (var judges in c.GetJudgesList())
-                {
-                    if (judges.Id == -1)
-                    {
-                        //Checks if judge exicts in database already.
-                        int judgeId = GetJudgeId(judges.SSN);
-                        if (judgeId != -1)
-                        {
-                            judges.Id = judgeId;
-                        }
-                        else
-                        {
-                            AddJudgeToDatabase(judges);
-                            judges.Id = GetLastId();
-                        }
-                    }
-                }
-
-
-                foreach (var participant in c.GetParticipants())
-                {
-                    //Add participant to database if not already initialized and update divers id.
-                    if (participant.GetDiverId() == -1)
-                    {
-                        int diverId = GetDiverId(participant.GetDiverSSN());
-                        if (diverId != -1)
-                        {
-                            participant.SetDiverId(diverId);
-                        }
-                        else
-                        {
-                            AddDiverToDatabase(participant.GetDiver());
-                            participant.SetDiverId(GetLastId());
-                        }
-                    }
-
-                    foreach (var jumpResult in participant.GetJumpResults())
-                    {
-                        //Add Jump to database.
-                        AddJumpToDatabase(jumpResult.SumJudgePoints, participant.GetDiverId(), lastInsertedContestId, GetTrickIdByName(jumpResult.TrickName));
-                        int latestJumpId = GetLastId();
-                        int pointNumber = 0;
-                        foreach (var judges in c.GetJudgesList())
-                        {
-                            //Add evaluation to database.
-                            AddEvaluationToDatabase(latestJumpId, judges.Id, jumpResult.GetJudgePoint(pointNumber++));
-                        }
-                    }
-                }
             }
                 #region Exceptions
             catch (SQLiteException sqliteEx)
@@ -1191,11 +1136,67 @@ namespace Simhopp.Model
                 NoConnectionErrorMessage();
                 return;
             }
+            if (!contest.IsFinished)
+            {
+                MsgBox.CreateErrorBox("Contest is not finished and can not be saved to database.", MethodBase.GetCurrentMethod().Name);
+                return;
+            }
             try
             {
                 string sql = "UPDATE Contest SET Name = '" + contest.Name + "', Place = '" + contest.Place + "', StartDate = '" + contest.StartDate + "', EndDate = '" + contest.EndDate + "' WHERE ID = '" + contest.Id + "'";
                 SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
                 command.ExecuteNonQuery();
+
+                //Add all new judges to the database and update their id.
+                foreach (var judges in contest.GetJudgesList())
+                {
+                    if (judges.Id == -1)
+                    {
+                        //Checks if judge exicts in database already.
+                        int judgeId = GetJudgeId(judges.SSN);
+                        if (judgeId != -1)
+                        {
+                            judges.Id = judgeId;
+                        }
+                        else
+                        {
+                            AddJudgeToDatabase(judges);
+                            judges.Id = GetLastId();
+                        }
+                    }
+                }
+
+
+                foreach (var participant in contest.GetParticipants())
+                {
+                    //Add participant to database if not already initialized and update divers id.
+                    if (participant.GetDiverId() == -1)
+                    {
+                        int diverId = GetDiverId(participant.GetDiverSSN());
+                        if (diverId != -1)
+                        {
+                            participant.SetDiverId(diverId);
+                        }
+                        else
+                        {
+                            AddDiverToDatabase(participant.GetDiver());
+                            participant.SetDiverId(GetLastId());
+                        }
+                    }
+
+                    foreach (var jumpResult in participant.GetJumpResults())
+                    {
+                        //Add Jump to database.
+                        AddJumpToDatabase(jumpResult.SumJudgePoints, participant.GetDiverId(), contest.Id, GetTrickIdByName(jumpResult.TrickName));
+                        int latestJumpId = GetLastId();
+                        int pointNumber = 0;
+                        foreach (var judges in contest.GetJudgesList())
+                        {
+                            //Add evaluation to database.
+                            AddEvaluationToDatabase(latestJumpId, judges.Id, jumpResult.GetJudgePoint(pointNumber++));
+                        }
+                    }
+                }
             }
             #region Exceptions
 

@@ -8,12 +8,18 @@ namespace Simhopp.Model
     public interface ISimhopp
     {
         void CreateContest(string place, string name, string startDate, string endDate);
+
+        #region Read methods
+
         void ReadFromFile(string fileName);
         void ReadJudgesFromDatabase();
         void ReadDiversFromDatabase();
         void ReadContestsFromDatabase();
-
         void ReadTricksFromDatabase();
+
+        #endregion
+
+        #region Getters
 
         BindingList<Contest> GetContestsList();
         BindingList<Judge> GetJudgesList();
@@ -23,14 +29,24 @@ namespace Simhopp.Model
         BindingList<Diver> GetDiversInContest(int id);
 
         BindingList<Trick> GetTrickList();
+        string GetTrickFromParticipant(int contestId, int trickNo, string ssn);
 
         string GetJudgeHash(string ssn);
         string GetJudgeSalt(string ssn);
+
+        #endregion
+
+        #region Add methods
 
         void AddJudgeToList(string name, string nationality, string ssn, string password = "password");
         void AddDiverToList(string name, string nationality, string ssn);
         void AddJudgeToContest(int contestId, string ssn);
         void AddDiverToContest(int contestId, string ssn);
+        void AddTrickToParticipant(int contestId, int trickNo, string trickName, string ssn);
+
+        #endregion
+
+        #region Remove methods
 
         void RemoveJudgeFromList(string ssn);
         void RemoveDiverFromList(string ssn);
@@ -38,12 +54,23 @@ namespace Simhopp.Model
         void RemoveJudgeFromContest(int contestId, string ssn);
         void RemoveDiverFromContest(int contestId, string ssn);
 
+        #endregion
+
+        #region Update methods
+
         void UpdateContest(int id, string name, string place, string startDate, string endDate);
         void UpdateJudge(int id, string name, string nationality, string ssn);
         void UpdateDiver(int id, string name, string nationality, string ssn);
 
+        #endregion
+
+        #region Server methods
+
         void HandleMessage();
         void SendDataToClient();
         ClientObjectData GetFirstClientObjectData();
+
+        #endregion
+
     }
 }

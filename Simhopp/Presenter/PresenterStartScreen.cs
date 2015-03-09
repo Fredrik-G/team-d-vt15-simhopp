@@ -51,6 +51,8 @@ namespace Simhopp.Presenter
             this.View.EventGetFirstClientObjectData += GetFirstClientObjectData;
 
             this.View.EventReadContestsFromDatabase += ReadContestsFromDatabase;
+            this.View.EventAddTrickToParticipant += AddTrickToParticipant;
+            this.View.EventGetTrickFromParticipant += GetTrickFromParticipant;
 
             //this.View.EventAddParticipant += AddParticipant;
             //this.View.EventAddJudge += AddJudge;
@@ -92,6 +94,11 @@ namespace Simhopp.Presenter
         public string GetJudgeSalt(string ssn)
         {
             return this.Model.GetJudgeSalt(ssn);
+        }
+
+        public string GetTrickFromParticipant(int contestId, int trickNo, string ssn)
+        {
+            return this.Model.GetTrickFromParticipant(contestId, trickNo, ssn);
         }
         #endregion
 
@@ -154,6 +161,11 @@ namespace Simhopp.Presenter
         public void AddDiverToContest(int contestId, string ssn)
         {
             this.Model.AddDiverToContest(contestId, ssn);
+        }
+
+        public void AddTrickToParticipant(int contestId, int trickNo, string trickName, string ssn)
+        {
+            this.Model.AddTrickToParticipant(contestId, trickNo, trickName, ssn);
         }
 
         #endregion
