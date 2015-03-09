@@ -17,6 +17,19 @@
         private JumpResult[] jumpResults = new JumpResult[3];
         #endregion
 
+        #region Properties
+
+        /// <summary>
+        /// Property for TotalPoints
+        /// </summary>
+        public double TotalPoints
+        {
+            get { return this.totalPoints; }
+            set { this.totalPoints = value; }
+        }
+
+        #endregion
+
         #region Constructor
 
         /// <summary>
@@ -132,10 +145,19 @@
             return jumpResults;
         }
 
+        /// <summary>
+        /// A function that returns a trick for a certain jump.
+        /// </summary>
+        /// <param name="jumpNo"></param>
+        /// <param name="name"></param>
+        public string GetTrick(int jumpNo)
+        {
+            return jumpResults[jumpNo].TrickName;
+        }
+
         #endregion
 
         #region Methods
-
 
         /// <summary>
         /// Calculates points for every jump result.
@@ -158,21 +180,6 @@
             foreach (var jumpResult in jumpResults)
             {
                 totalPoints += jumpResult.SumJudgePoints * jumpDifficulty;
-            }
-        }
-
-        /// <summary>
-        /// Property for TotalPoints
-        /// </summary>
-        public double TotalPoints
-        {
-            get
-            {
-                return this.totalPoints;
-            }
-            set
-            {
-                this.totalPoints = value;
             }
         }
 

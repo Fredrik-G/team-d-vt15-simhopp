@@ -47,7 +47,7 @@ namespace SimhoppGUI
         public static string CreateDateString(string date)
         {
             var dateArray = date.Split('/');
-            return date = dateArray[1].ToString() + "-" + dateArray[0].ToString() + "-" + dateArray[2].ToString();
+            return dateArray[1].ToString() + "-" + dateArray[0].ToString() + "-" + dateArray[2].ToString();
         }
 
         #region Events
@@ -146,7 +146,9 @@ namespace SimhoppGUI
                 EventGetTrickList,
                 EventGetFirstClientObjectData,
                 EventHandleMessage,
-                EventSendDataToClient
+                EventSendDataToClient,
+                EventAddTrickToParticipant,
+                EventGetTrickFromParticipant
                 ))
             {
                 if (startContest.ShowDialog(this) == DialogResult.OK)
@@ -184,8 +186,7 @@ namespace SimhoppGUI
                 }
             }
         }
-        
-        
+
 
         /// <summary>
         /// Occurs when the form is closing.
@@ -213,15 +214,15 @@ namespace SimhoppGUI
             {
                 return base.ProcessCmdKey(ref msg, keyData);
             }
-         
-            NewContestToolTip.Show("Ctrl+N", StartScreenNewContesttBtn);
-            StartContestToolTip.Show("Ctrl+S", StartScreenStartContestBtn);
-            AddDiverToolTip.Show("Ctrl+D", StartScreenAddDiverContestBtn);
-            AddJudgeToolTip.Show("Ctrl+J", StartScreenAddJudgeBtn);
+
+            NewContestToolTip.Show("Ctrl+1", StartScreenNewContesttBtn);
+            StartContestToolTip.Show("Ctrl+2", StartScreenStartContestBtn);
+            AddDiverToolTip.Show("Ctrl+3", StartScreenAddDiverContestBtn);
+            AddJudgeToolTip.Show("Ctrl+4", StartScreenAddJudgeBtn);
             //Man ska bara behöva en tooltip, men jag fick inte det att fungera..
 
             PerformClick(keyData);
-   
+
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
@@ -233,20 +234,21 @@ namespace SimhoppGUI
         {
             switch (keyData)
             {
-                case (Keys.Control | Keys.N):
+                case (Keys.Control | Keys.D1):
                     StartScreenNewContesttBtn.PerformClick();
                     break;
-                case (Keys.Control | Keys.S):
+                case (Keys.Control | Keys.D2):
                     StartScreenStartContestBtn.PerformClick();
                     break;
-                case (Keys.Control | Keys.D):
+                case (Keys.Control | Keys.D3):
                     StartScreenAddDiverContestBtn.PerformClick();
                     break;
-                case (Keys.Control | Keys.J):
+                case (Keys.Control | Keys.D4):
                     StartScreenAddJudgeBtn.PerformClick();
                     break;
             }
         }
+
         /// <summary>
         /// Occurs when a button is released.
         /// Hides shortcut tooltips.
@@ -268,11 +270,17 @@ namespace SimhoppGUI
 
         public event DelegateCreateContest EventCreateContest = null;
 
+        #region Read methods
+
         public event DelegateReadFromFile EventReadFromFile = null;
         public event DelegateReadJudgesFromDatabase EventReadJudgesFromDatabase = null;
         public event DelegateReadDiversFromDatabase EventReadDiversFromDatabase = null;
         public event DelegateReadTricksFromDatabase EventReadTricksFromDatabase = null;
         public event DelegateReadContestsFromDatabase EventReadContestsFromDatabase = null;
+
+        #endregion
+
+        #region Getters
 
         public event DelegateGetContestsList EventGetContestsList = null;
         public event DelegateGetJudgesList EventGetJudgesList = null;
@@ -284,6 +292,11 @@ namespace SimhoppGUI
         public event DelegateGetJudgeHash EventGetJudgeHash = null;
         public event DelegateGetJudgeSalt EventGetJudgeSalt = null;
         public event DelegateConnectToServer EventConnectToServer = null;
+        public event DelegateGetTrickFromParticipant EventGetTrickFromParticipant = null;
+
+        #endregion
+
+        #region Add methods
 
         public event DelegateAddJudgeToList EventAddJudgeToList = null;
         public event DelegateAddDiverToList EventAddDiverToList = null;
@@ -291,20 +304,35 @@ namespace SimhoppGUI
         public event DelegateAddJudgeToContest EventAddJudgeToContest = null;
         public event DelegateAddDiverToContest EventAddDiverToContest = null;
 
+        public event DelegateAddTrickToParticipant EventAddTrickToParticipant = null;
+
+        #endregion
+
+        #region Remove methods
+
         public event DelegateRemoveJudgeFromList EventRemoveJudgeFromList = null;
         public event DelegateRemoveDiverFromList EventRemoveDiverFromList = null;
 
         public event DelegateRemoveJudgeFromContest EventRemoveJudgeFromContest = null;
         public event DelegateRemoveDiverFromContest EventRemoveDiverFromContest = null;
 
+        #endregion
+
+        #region Update methods
 
         public event DelegateUpdateContest EventUpdateContest = null;
         public event DelegateUpdateJudge EventUpdateJudge = null;
         public event DelegateUpdateDiver EventUpdateDiver = null;
 
+        #endregion
+
+        #region Server methods
+
         public event DelegateGetFirstClientObjectData EventGetFirstClientObjectData = null;
         public event DelegateSendDataToClient EventSendDataToClient = null;
         public event DelegateHandleMessage EventHandleMessage = null;
+
+        #endregion
 
         #endregion
     }

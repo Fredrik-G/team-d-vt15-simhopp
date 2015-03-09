@@ -90,7 +90,7 @@ namespace Simhopp.Model
         public string Name
         {
             get
-            {               
+            {
                 return this.name;
             }
             set
@@ -278,7 +278,7 @@ namespace Simhopp.Model
                 else if (IsJudgeInContest(judge))
                 {
                     throw new DuplicateNameException("Judge is already in list.");
-                }               
+                }
                 else if (judgeList.Count >= 7)
                 {
                     throw new IndexOutOfRangeException("All 7 judges are already set in the list.");
@@ -293,6 +293,13 @@ namespace Simhopp.Model
                 Console.WriteLine(e.Message);
             }
         }
+
+        public void SetTrick(int trickNo, string trickName, string ssn)
+        {
+            var participant = participantsList.SingleOrDefault(x => x.GetDiverSSN() == ssn);
+            participant.SetTrick(trickNo, trickName);
+        }
+
         /// <summary>
         /// Removes a given judge from judge list.
         /// </summary>
@@ -308,7 +315,7 @@ namespace Simhopp.Model
         /// </summary>
         /// <param name="ssn"></param>
         public void RemoveDiverFromList(string ssn)
-        {           
+        {
             foreach (var participant in participantsList.Where(participant => participant.GetDiverSSN() == ssn))
             {
                 participantsList.Remove(participant);
@@ -357,6 +364,12 @@ namespace Simhopp.Model
                 }
             }
             throw new InstanceNotFoundException("Person with " + ssn + " not found.");
+        }
+
+        public string GetTrick(int trickNo, string ssn)
+        {
+            var participant = participantsList.SingleOrDefault(x => x.GetDiverSSN() == ssn);
+            return participant.GetTrick(trickNo);
         }
 
         /// <summary>
@@ -425,7 +438,7 @@ namespace Simhopp.Model
         {
             var resultList = new List<string>();
             for (var i = participantsList.Count - 1; i >= 0; i--)
-            {               
+            {
                 resultList.Add(participantsList[i].GetDiverInfo());
             }
             return resultList;
@@ -490,7 +503,7 @@ namespace Simhopp.Model
             Console.Clear();
             Console.WriteLine("Round: " + (jumpNo + 1));
             int i = 1;
-            
+
             SortParticipants(ref liveResultList, true);
             foreach (var participant in liveResultList)
             {
@@ -535,7 +548,7 @@ namespace Simhopp.Model
             Regex patternName = new Regex(@"^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$");
             return patternName.IsMatch(date);
         }
-        #endregion     
+        #endregion
     }
 }
 

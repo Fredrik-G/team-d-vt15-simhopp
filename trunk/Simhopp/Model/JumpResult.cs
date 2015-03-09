@@ -113,6 +113,7 @@ namespace Simhopp.Model
         {
             this.sumJudgePoints = judgePoints.Sum() - judgePoints.Max() - judgePoints.Min();
         }
+
         #endregion
     }
 }
