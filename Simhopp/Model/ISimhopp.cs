@@ -22,6 +22,8 @@ namespace Simhopp.Model
         #region Getters
 
         BindingList<Contest> GetContestsList();
+        Contest GetContest(int id);
+
         BindingList<Judge> GetJudgesList();
         BindingList<Diver> GetDiversList();
 
