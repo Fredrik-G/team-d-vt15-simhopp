@@ -425,6 +425,7 @@
             this.MinimizeBox = false;
             this.Name = "LiveFeed";
             this.Text = "LiveFeed";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LiveFeed_FormClosing);
             this.Load += new System.EventHandler(this.LiveFeed_Load);
             ((System.ComponentModel.ISupportInitialize)(this.TrickPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.judge1Point)).EndInit();

@@ -294,10 +294,32 @@ namespace Simhopp.Model
             }
         }
 
+        /// <summary>
+        /// Sets a given trick for a given participant
+        /// </summary>
+        /// <param name="trickNo"></param>
+        /// <param name="trickName"></param>
+        /// <param name="ssn"></param>
         public void SetTrick(int trickNo, string trickName, string ssn)
         {
             var participant = participantsList.SingleOrDefault(x => x.GetDiverSSN() == ssn);
             participant.SetTrick(trickNo, trickName);
+        }
+
+        /// <summary>
+        /// Sets trick result for given participant.
+        /// </summary>
+        /// <param name="judgeSsn"></param>
+        /// <param name="diverSsn"></param>
+        /// <param name="point"></param>
+        /// <param name="jumpNo"></param>
+        public void SetJudgePoint(string judgeSsn, string diverSsn, double point, int jumpNo)
+        {
+            var participant = participantsList.SingleOrDefault(x => x.GetDiverSSN() == diverSsn);
+            var judge = judgeList.SingleOrDefault(x => x.SSN == judgeSsn);
+
+            participant.SetJudgePoint(jumpNo, judgeList.IndexOf(judge), point);
+
         }
 
         /// <summary>

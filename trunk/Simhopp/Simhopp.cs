@@ -657,6 +657,7 @@ namespace Simhopp
         #endregion
 
         #region Server methods
+
         public void StartServer()
         {
             server.StartServer();
@@ -674,6 +675,12 @@ namespace Simhopp
         public ClientObjectData GetFirstClientObjectData()
         {
             return server.GetFirstClientObjectData();
+        }
+
+        public void SetJudgePoint(int contestId, string judgeSsn, string diverSsn, double point, int jumpNo)
+        {
+            var selectedContest = contestList.FirstOrDefault(x => x.Id == contestId);
+            selectedContest.SetJudgePoint(judgeSsn, diverSsn, point, jumpNo);
         }
 
         #endregion
