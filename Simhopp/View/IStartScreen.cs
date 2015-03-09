@@ -28,6 +28,7 @@ namespace Simhopp.View
     #region Getters
 
     public delegate BindingList<Contest> DelegateGetContestsList();
+    public delegate Contest DelegateGetContest(int id);
     public delegate BindingList<Judge> DelegateGetJudgesList();
     public delegate BindingList<Diver> DelegateGetDiversList();
     public delegate BindingList<Judge> DelegateGetJudgesInContest(int id);
@@ -92,6 +93,7 @@ namespace Simhopp.View
         #region Getters
 
         event DelegateGetContestsList EventGetContestsList;
+        event DelegateGetContest EventGetContest;
         event DelegateGetJudgesList EventGetJudgesList;
         event DelegateGetDiversList EventGetDiversList;
 

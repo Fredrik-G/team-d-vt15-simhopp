@@ -23,6 +23,7 @@ namespace Simhopp.Presenter
             this.View = view;
             this.View.EventCreateContest += CreateContest;
             this.View.EventGetContestsList += GetContestsList;
+            this.View.EventGetContest += GetContest;
             this.View.EventGetJudgesList += GetJudgesList;
             this.View.EventGetDiversList += GetDiversList;
             this.View.EventReadFromFile += ReadFromFile;
@@ -64,6 +65,11 @@ namespace Simhopp.Presenter
         public BindingList<Contest> GetContestsList()
         {
             return this.Model.GetContestsList();
+        }
+
+        public Contest GetContest(int id)
+        {
+            return this.Model.GetContest(id);
         }
 
         public BindingList<Judge> GetJudgesList()
