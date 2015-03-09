@@ -11,5 +11,7 @@ namespace ClientGUI.Model
         void ConnectToServer(string ip);
         void SendDataToServer(string ssn, double point);
         void Disconnect();
+
+        void SendMessageToGUI(ServerObjectData message);
     }
 }

@@ -31,6 +31,7 @@ namespace ClientGUI
 
         private void connectToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            
             using(new DimIt())
             using (var login = new Login(EventConnectToServer, EventSendDataToServer, EventDisconnect))
             {
@@ -38,6 +39,7 @@ namespace ClientGUI
                 {
                     login.Show();
                 }
+                JudgeSSNTB.Text = login.UserSSNTB.Text;
             }
 
             
@@ -59,14 +61,14 @@ namespace ClientGUI
         private void sendPointButton_Click(object sender, EventArgs e)
         {
             var point = Convert.ToDouble(numericUpDown1.Text);
-            var ssn = "heppa";
-            using (var judgeClient = new JudgeClient(EventConnectToServer, EventSendDataToServer, EventDisconnect))
-            {
-                EventSendDataToServer(ssn, point);
-            }
+            var ssn = JudgeSSNTB.Text;
+            EventSendDataToServer(ssn, point);
+           
         }
 
-      
+        private void SendMessageToGUI(ServerObjectData message);
+
+
 
 
     }

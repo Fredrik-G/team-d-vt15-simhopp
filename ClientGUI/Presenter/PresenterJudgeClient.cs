@@ -36,6 +36,10 @@ namespace ClientGUI.Presenter
             this.Model.SendDataToServer(ssn, point);
         }
 
+        public void SendMessageToGUI(ServerObjectData message)
+        {
+            this.View.
+        }
         public void Disconnect()
         {
             this.Model.Disconnect();
