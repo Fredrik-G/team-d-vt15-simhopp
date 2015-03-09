@@ -69,8 +69,12 @@ namespace Simhopp.Model
         void HandleMessage();
         void SendDataToClient();
         ClientObjectData GetFirstClientObjectData();
+<<<<<<< .mine
+        void StartServer();
+=======
 
         #endregion
 
+>>>>>>> .r287
     }
 }
