@@ -38,7 +38,7 @@ namespace ClientGUI.Presenter
 
         public void SendMessageToGUI(ServerObjectData message)
         {
-            this.View.
+            //this.View.
         }
         public void Disconnect()
         {
