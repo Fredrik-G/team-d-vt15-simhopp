@@ -146,12 +146,12 @@ namespace ClientGUI
 
         private System.Windows.Forms.Label UserNameLabel;
         private System.Windows.Forms.Label PasswordLabel;
-        private System.Windows.Forms.TextBox UserSSNTB;
         private System.Windows.Forms.TextBox PasswordTB;
         private System.Windows.Forms.Button LoginBtn;
         private System.Windows.Forms.Button LoginScreenCancelBtn;
         private System.Windows.Forms.ErrorProvider InputErrorProvider;
         private System.Windows.Forms.TextBox IPConnectionTB;
         private System.Windows.Forms.Label IPAddressLabel;
+        public System.Windows.Forms.TextBox UserSSNTB;
     }
 }

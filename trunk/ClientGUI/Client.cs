@@ -84,6 +84,7 @@ namespace ClientGUI
                         message = (ServerObjectData)xmlS.Deserialize(reader);
                     }
                     //Console.WriteLine(" >> From Server: " + message.ContestName + " " + message.DiverName + " " + message.TrickName + " " + message.TrickDiff);
+                    SendMessageToGUI(message);
                 }
                 catch(Exception ex)//Should be better exception for different exceptions
                 {
