@@ -14,6 +14,7 @@ namespace SimhoppGUI
     {
         #region Data
         private DelegateGetContestsList eventGetContestsList;
+        private DelegateGetContest eventGetContest;
         private DelegateGetJudgesList eventGetJudgesList;
         private DelegateGetDiversList eventGetDiversList;
         private DelegateGetJudgesInContest eventGetJudgesInContest;
@@ -29,6 +30,7 @@ namespace SimhoppGUI
         private DelegateSendDataToClient eventSendDataToClient;
         private DelegateAddTrickToParticipant eventAddTrickToParticipant;
         private DelegateGetTrickFromParticipant eventGetTrickFromParticipant;
+        private DelegateStartServer eventStartServer;
 
         DataGridViewComboBoxColumn trick1ComboBoxColumn = new DataGridViewComboBoxColumn();
         DataGridViewComboBoxColumn trick2ComboBoxColumn = new DataGridViewComboBoxColumn();
@@ -41,6 +43,7 @@ namespace SimhoppGUI
         public StartContest
             (
                 DelegateGetContestsList eventGetContestsList,
+                DelegateGetContest eventGetContest,
                 DelegateGetJudgesList eventGetJudgesList,
                 DelegateGetDiversList eventGetDiversList,
                 DelegateGetJudgesInContest eventGetJudgesInContest,
@@ -55,13 +58,15 @@ namespace SimhoppGUI
                 DelegateHandleMessage eventHandleMessage,
                 DelegateSendDataToClient eventSendDataToClient,
                 DelegateAddTrickToParticipant eventAddTrickToParticipant,
-                DelegateGetTrickFromParticipant eventGetTrickFromParticipant
+                DelegateGetTrickFromParticipant eventGetTrickFromParticipant,
+                DelegateStartServer eventStartServer
             )
         {
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             InitializeComponent();
 
             this.eventGetContestsList = eventGetContestsList;
+            this.eventGetContest = eventGetContest;
             this.eventGetJudgesList = eventGetJudgesList;
             this.eventGetDiversList = eventGetDiversList;
             this.eventGetJudgesInContest = eventGetJudgesInContest;
@@ -77,6 +82,7 @@ namespace SimhoppGUI
             this.eventSendDataToClient = eventSendDataToClient;
             this.eventAddTrickToParticipant = eventAddTrickToParticipant;
             this.eventGetTrickFromParticipant = eventGetTrickFromParticipant;
+            this.eventStartServer = eventStartServer;
         }
         #endregion
 
@@ -510,8 +516,16 @@ namespace SimhoppGUI
         /// <param name="e"></param>
         private void StartContestBtn_Click(object sender, EventArgs e)
         {
+            var selectedContest = ContestsDataGridView.SelectedCells.Cast<DataGridViewCell>().FirstOrDefault();
+            var contestRow = selectedContest.OwningRow;
             using (new DimIt())
-            using (var liveFeed = new LiveFeed(eventGetFirstClientObjectData, eventHandleMessage, eventSendDataToClient))
+
+            using (var liveFeed = new LiveFeed(eventGetFirstClientObjectData, 
+                                                eventHandleMessage, 
+                                                eventSendDataToClient, 
+                                                eventGetContest, 
+                                                Convert.ToInt16(contestRow.Cells["Id"].Value),
+                                                eventStartServer))
             {
                 if (liveFeed.ShowDialog(this) == DialogResult.OK)
                 {

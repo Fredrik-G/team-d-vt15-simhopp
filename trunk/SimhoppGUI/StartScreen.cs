@@ -134,6 +134,7 @@ namespace SimhoppGUI
             using (new DimIt())
             using (var startContest = new StartContest(
                 EventGetContestsList,
+                EventGetContest,
                 EventGetJudgesList,
                 EventGetDiversList,
                 EventGetJudgesInContest,
@@ -148,7 +149,8 @@ namespace SimhoppGUI
                 EventHandleMessage,
                 EventSendDataToClient,
                 EventAddTrickToParticipant,
-                EventGetTrickFromParticipant
+                EventGetTrickFromParticipant,
+                EventStartServer
                 ))
             {
                 if (startContest.ShowDialog(this) == DialogResult.OK)
@@ -283,6 +285,7 @@ namespace SimhoppGUI
         #region Getters
 
         public event DelegateGetContestsList EventGetContestsList = null;
+        public event DelegateGetContest EventGetContest = null;
         public event DelegateGetJudgesList EventGetJudgesList = null;
         public event DelegateGetDiversList EventGetDiversList = null;
         public event DelegateGetJudgesInContest EventGetJudgesInContest = null;
@@ -331,6 +334,7 @@ namespace SimhoppGUI
         public event DelegateGetFirstClientObjectData EventGetFirstClientObjectData = null;
         public event DelegateSendDataToClient EventSendDataToClient = null;
         public event DelegateHandleMessage EventHandleMessage = null;
+        public event DelegateStartServer EventStartServer = null;
 
         #endregion
 

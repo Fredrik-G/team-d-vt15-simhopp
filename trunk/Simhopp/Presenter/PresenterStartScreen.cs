@@ -55,6 +55,8 @@ namespace Simhopp.Presenter
             this.View.EventAddTrickToParticipant += AddTrickToParticipant;
             this.View.EventGetTrickFromParticipant += GetTrickFromParticipant;
 
+            this.View.EventStartServer += StartServer;
+
             //this.View.EventAddParticipant += AddParticipant;
             //this.View.EventAddJudge += AddJudge;
             //this.View.EventGetTrickDifficultyFromTrickHashTable += GetTrickDifficultyFromTrickHashTable;
@@ -232,6 +234,11 @@ namespace Simhopp.Presenter
         public ClientObjectData GetFirstClientObjectData()
         {
             return this.Model.GetFirstClientObjectData();
+        }
+
+        public void StartServer()
+        {
+            this.Model.StartServer();
         }
 
         #endregion
