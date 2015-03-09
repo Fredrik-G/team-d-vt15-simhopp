@@ -73,6 +73,7 @@ namespace Simhopp.View
     public delegate void DelegateHandleMessage();
     public delegate void DelegateSendDataToClient();
     public delegate ClientObjectData DelegateGetFirstClientObjectData();
+    public delegate void DelegateStartServer();
 
     #endregion
 
@@ -106,6 +107,7 @@ namespace Simhopp.View
 
         event DelegateGetTrickList EventGetTrickList;
         event DelegateGetTrickFromParticipant EventGetTrickFromParticipant;
+
         #endregion
 
         #region Add methods
@@ -142,6 +144,7 @@ namespace Simhopp.View
         event DelegateHandleMessage EventHandleMessage;
         event DelegateSendDataToClient EventSendDataToClient;
         event DelegateGetFirstClientObjectData EventGetFirstClientObjectData;
+        event DelegateStartServer EventStartServer;
 
         #endregion
 

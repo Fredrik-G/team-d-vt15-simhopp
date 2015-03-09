@@ -56,6 +56,17 @@ namespace Simhopp
         {           
             return contestList;
         }
+
+        /// <summary>
+        /// Returns a contest based on id.
+        /// </summary>
+        /// <param name="id">Contest id</param>
+        /// <returns>Contest object.</returns>
+        public Contest GetContest(int id)
+        {
+            return contestList.SingleOrDefault(x => x.Id == id);
+        }
+
         /// <summary>
         /// Returns judges list.
         /// </summary>
@@ -653,7 +664,7 @@ namespace Simhopp
 
         public void HandleMessage()
         {
-            
+
         }
 
         public void SendDataToClient()
