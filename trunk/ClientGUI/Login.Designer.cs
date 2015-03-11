@@ -68,6 +68,7 @@ namespace ClientGUI
             this.UserSSNTB.Name = "UserSSNTB";
             this.UserSSNTB.Size = new System.Drawing.Size(125, 20);
             this.UserSSNTB.TabIndex = 2;
+            this.UserSSNTB.Text = "111-22-1566";
             // 
             // PasswordTB
             // 

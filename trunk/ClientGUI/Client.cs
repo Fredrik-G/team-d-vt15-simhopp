@@ -65,7 +65,6 @@ namespace ClientGUI
                 var outStream = asciiEncoder.GetBytes(serializedString + "$");
                 networkStream.Write(outStream, 0, outStream.Length);
                 networkStream.Flush();
-                Thread.Sleep(10);
             }
         }
         /// <summary>
@@ -115,7 +114,7 @@ namespace ClientGUI
         /// <summary>
         /// returns the first Object in the messagequeue
         /// </summary>
-        /// <returns></returns>
+        /// <returns>ServerObjectData</returns>
         public ServerObjectData GetFirstServerObjectData()
         {
             if (messageQueue.Count != 0)
@@ -123,6 +122,15 @@ namespace ClientGUI
                 return messageQueue.Dequeue();
             }
             return null;
+        }
+
+        /// <summary>
+        /// Returns the size of the messageQueue
+        /// </summary>
+        /// <returns>int</returns>
+        public int GetSizeOfQueue()
+        {
+            return messageQueue.Count;
         }
 
 

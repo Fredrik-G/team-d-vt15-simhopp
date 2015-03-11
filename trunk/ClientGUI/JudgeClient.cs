@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using ClientGUI.Model;
 using ClientGUI.View;
-
+using System.Threading;
 namespace ClientGUI
 {
     public partial class JudgeClient : Form, IJudgeClient
@@ -10,8 +10,7 @@ namespace ClientGUI
 
         #region Constructor
 
-
-        public JudgeClient(DelegateConnectToServer eventConnectToServer, DelegateSendDataToServer eventSendDataToServer, DelegateDisconnect eventDisconnect, DelegateGetFirstServerObjectData eventGetFirstServerObjectData)
+        public JudgeClient(DelegateConnectToServer eventConnectToServer, DelegateSendDataToServer eventSendDataToServer, DelegateDisconnect eventDisconnect, DelegateGetFirstServerObjectData eventGetFirstServerObjectData, DelegateGetSizeOfQueue eventGetSizeOfQueue)
         {
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             InitializeComponent();
@@ -19,13 +18,16 @@ namespace ClientGUI
             this.EventConnectToServer = eventConnectToServer;
             this.EventDisconnect = eventDisconnect;
             this.EventGetFirstServerObjectData = eventGetFirstServerObjectData;
-
+            this.EventGetSizeOfQueue = eventGetSizeOfQueue;
         }
 
         public JudgeClient()
         {
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             InitializeComponent();
+            Thread messageListener = new Thread(ListenForNewMessage);
+            messageListener.Start();
+            messageListener.IsBackground = true;
         }
 
         #endregion
@@ -50,16 +52,8 @@ namespace ClientGUI
             var point = Convert.ToDouble(numericUpDown1.Text);
             var ssn = JudgeSSNTB.Text;
             EventSendDataToServer(ssn, point);
+            sendPointButton.Enabled = false;
 
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            ServerObjectData heh = EventGetFirstServerObjectData();
-            JudgeClientChosenContestTb.Text = heh.ContestName;
-            DiverNameTB.Text = heh.DiverName;
-            TrickNameTB.Text = heh.TrickName;
-            TrickDiffTB.Text = heh.TrickDiff.ToString();
         }
 
         private void disconnectToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -67,11 +61,46 @@ namespace ClientGUI
             EventDisconnect();
         }
 
-
         #endregion
 
         #region Member methods
 
+        /// <summary>
+        /// Thread-method that is listening for new messages from the server
+        /// </summary>
+        private void ListenForNewMessage()
+        {
+            while (true)
+            {
+                using (new JudgeClient(EventConnectToServer, EventSendDataToServer, EventDisconnect,
+                EventGetFirstServerObjectData, EventGetSizeOfQueue))
+                {
+                    int heh = EventGetSizeOfQueue();
+                    if (heh > 0)
+                    {
+                        ServerObjectData oD = EventGetFirstServerObjectData();
+                        if (!object.ReferenceEquals(null, oD))
+                        {
+                            UpdateTextBoxes(oD);
+                            sendPointButton.Enabled = true;
+                        }
+                    }
+                }
+                Thread.Sleep(200);
+            }
+        }
+
+        /// <summary>
+        /// Invokes an update on the textBoxes with new data.
+        /// </summary>
+        /// <param name="oD"></param>
+        private void UpdateTextBoxes(ServerObjectData oD)
+        {
+            Invoke((MethodInvoker)delegate { JudgeClientChosenContestTb.Text = oD.ContestName; });
+            Invoke((MethodInvoker)delegate { DiverNameTB.Text = oD.DiverName; });
+            Invoke((MethodInvoker)delegate { TrickNameTB.Text = oD.TrickName; });
+            Invoke((MethodInvoker)delegate { TrickDiffTB.Text = oD.TrickDiff.ToString(); });
+        }
 
         #endregion
 
@@ -80,9 +109,10 @@ namespace ClientGUI
         public event DelegateSendDataToServer EventSendDataToServer = null;
         public event DelegateDisconnect EventDisconnect = null;
         public event DelegateGetFirstServerObjectData EventGetFirstServerObjectData = null;
+        public event DelegateGetSizeOfQueue EventGetSizeOfQueue = null;
 
         #endregion
 
-        
+
     }
 }
