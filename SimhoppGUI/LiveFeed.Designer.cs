@@ -57,7 +57,6 @@
             this.CommitBtn = new System.Windows.Forms.Button();
             this.JudgePointsPanel = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.TrickPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.judge1Point)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.judge2Point)).BeginInit();
@@ -389,6 +388,10 @@
             // 
             // ResultDataGridView
             // 
+            this.ResultDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ResultDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.ResultDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ResultDataGridView.Location = new System.Drawing.Point(490, 15);
             this.ResultDataGridView.Name = "ResultDataGridView";
@@ -440,25 +443,14 @@
             this.panel1.Controls.Add(this.TrickNameLabel);
             this.panel1.Location = new System.Drawing.Point(172, 15);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(171, 96);
+            this.panel1.Size = new System.Drawing.Size(248, 97);
             this.panel1.TabIndex = 32;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(677, 171);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(78, 154);
-            this.button2.TabIndex = 33;
-            this.button2.Text = "asd";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // LiveFeed
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(776, 349);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.JudgePointsPanel);
             this.Controls.Add(this.CommitBtn);
@@ -520,6 +512,5 @@
         private System.Windows.Forms.Button CommitBtn;
         private System.Windows.Forms.Panel JudgePointsPanel;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button button2;
     }
 }

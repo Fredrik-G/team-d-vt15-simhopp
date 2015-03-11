@@ -1,4 +1,6 @@
-﻿namespace Simhopp.Model
+﻿using System.Linq;
+
+namespace Simhopp.Model
 {
     /// <summary>
     /// Class the hold a diver object, three jumpResult objects and one result.
@@ -26,6 +28,11 @@
         {
             get { return this.totalPoints; }
             set { this.totalPoints = value; }
+        }
+
+        public string DiverName
+        {
+            get { return this.diver.Name; }
         }
 
         #endregion
@@ -177,7 +184,7 @@
         /// <param name="jumpDifficulty"></param>
         public void UpdateTotalPoints(double jumpDifficulty)
         {
-            foreach (var jumpResult in jumpResults)
+            foreach (var jumpResult in jumpResults.Where(x => x.SumJudgePoints >= 0.0))
             {
                 totalPoints += jumpResult.SumJudgePoints * jumpDifficulty;
             }
