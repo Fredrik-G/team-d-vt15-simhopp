@@ -14,11 +14,14 @@ namespace ClientGUI.View
 
     public delegate ServerObjectData DelegateGetFirstServerObjectData();
 
+    public delegate int DelegateGetSizeOfQueue();
+
     public interface IJudgeClient
     {
         event DelegateConnectToServer EventConnectToServer;
         event DelegateSendDataToServer EventSendDataToServer;
         event DelegateDisconnect EventDisconnect;
         event DelegateGetFirstServerObjectData EventGetFirstServerObjectData;
+        event DelegateGetSizeOfQueue EventGetSizeOfQueue;
     }
 }

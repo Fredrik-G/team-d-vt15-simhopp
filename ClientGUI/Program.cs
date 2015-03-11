@@ -18,8 +18,8 @@ namespace ClientGUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            var judgeClient = new JudgeClient();
             var client = new Client();
+            var judgeClient = new JudgeClient();
             PresenterJudgeClient presenterJudgeClient = new PresenterJudgeClient(judgeClient, client);
 
             Application.Run(judgeClient);

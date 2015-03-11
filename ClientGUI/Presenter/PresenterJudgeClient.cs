@@ -23,6 +23,7 @@ namespace ClientGUI.Presenter
             this.View.EventSendDataToServer += SendDataToServer;
             this.View.EventDisconnect += Disconnect;
             this.View.EventGetFirstServerObjectData += GetFirstServerObjectData;
+            this.View.EventGetSizeOfQueue += GetSizeOfQueue;
 
         }
         #region Client methods
@@ -45,6 +46,11 @@ namespace ClientGUI.Presenter
         public ServerObjectData GetFirstServerObjectData()
         {
             return this.Model.GetFirstServerObjectData();
+        }
+
+        public int GetSizeOfQueue()
+        {
+            return this.Model.GetSizeOfQueue();
         }
         #endregion
     }

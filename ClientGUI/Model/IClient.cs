@@ -12,5 +12,6 @@ namespace ClientGUI.Model
         void SendDataToServer(string ssn, double point);
         void Disconnect();
         ServerObjectData GetFirstServerObjectData();
+        int GetSizeOfQueue();
     }
 }

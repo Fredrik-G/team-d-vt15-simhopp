@@ -49,8 +49,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.JudgeClientChosenContestTb = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.disconnectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -247,26 +245,6 @@
             this.JudgeClientChosenContestTb.Size = new System.Drawing.Size(186, 20);
             this.JudgeClientChosenContestTb.TabIndex = 1;
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(313, 464);
-            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(28, 13);
-            this.label7.TabIndex = 47;
-            this.label7.Text = "WIP";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(257, 409);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 48;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // disconnectToolStripMenuItem
             // 
             this.disconnectToolStripMenuItem.Name = "disconnectToolStripMenuItem";
@@ -279,8 +257,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(358, 497);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.label7);
             this.Controls.Add(this.JudgeClientChosenContestTb);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.pictureBox2);
@@ -332,9 +308,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox JudgeClientChosenContestTb;
-        private System.Windows.Forms.Label label7;
         public System.Windows.Forms.TextBox JudgeSSNTB;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ToolStripMenuItem disconnectToolStripMenuItem;
     }
 }
