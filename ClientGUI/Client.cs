@@ -9,6 +9,7 @@ using System.Xml.Serialization;
 using System.Threading;
 using System.IO;
 using ClientGUI.Model;
+using ClientGUI.View;
 
 namespace ClientGUI
 {
@@ -18,7 +19,6 @@ namespace ClientGUI
     public class Client : IClient, IDisposable
     {
         TcpClient clientSocket;
-        
 
         /// <summary>
         /// Constructor for a client
@@ -27,6 +27,7 @@ namespace ClientGUI
         {
             clientSocket = new TcpClient();
         }
+
         /// <summary>
         /// A function that tries to connect to a server via its IP and port
         /// </summary>
@@ -84,7 +85,7 @@ namespace ClientGUI
                         message = (ServerObjectData)xmlS.Deserialize(reader);
                     }
                     //Console.WriteLine(" >> From Server: " + message.ContestName + " " + message.DiverName + " " + message.TrickName + " " + message.TrickDiff);
-                    SendMessageToGUI(message);
+                    //Send message here!
                 }
                 catch(Exception ex)//Should be better exception for different exceptions
                 {
@@ -101,7 +102,8 @@ namespace ClientGUI
         {
             if (clientSocket.Client.Connected)
             {
-                clientSocket.Client.Disconnect(true);
+                clientSocket.GetStream().Close();
+                clientSocket.Close();
             }
         }
 
