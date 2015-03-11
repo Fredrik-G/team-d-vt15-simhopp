@@ -691,8 +691,20 @@ namespace Simhopp
             selectedContest.SetJudgePoint(judgeSsn, diverSsn, point, jumpNo);
         }
 
-        #endregion
+        /// <summary>
+        /// Checks if all judges are done for a given participant in a given contest.
+        /// </summary>
+        /// <param name="contestId"></param>
+        /// <param name="diverSsn"></param>
+        /// <param name="jumpNo"></param>
+        /// <returns></returns>
+        public bool IsAllJudgePointSet(int contestId, string diverSsn, int jumpNo)
+        {
+            var selectedContest = contestList.SingleOrDefault(x => x.Id == contestId);
+            return selectedContest.IsAllJudgePointSet(diverSsn, jumpNo);
+        }
 
+        #endregion
 
         #region IDisposable methods
 

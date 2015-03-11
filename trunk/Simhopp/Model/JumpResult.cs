@@ -51,7 +51,7 @@ namespace Simhopp.Model
             judgePoints = new double[7]; 
             for (var i = 0; i < judgePoints.Length; i++)
             {
-                judgePoints[i] = 0;
+                judgePoints[i] = -1;
             }
             CalculateResult();
         }
@@ -111,7 +111,42 @@ namespace Simhopp.Model
         /// </summary>
         public void CalculateResult()
         {
-            this.sumJudgePoints = judgePoints.Sum() - judgePoints.Max() - judgePoints.Min();
+            //this.sumJudgePoints = judgePoints.Sum() - judgePoints.Max() - judgePoints.Min();
+            var sumPoints = 0.0;
+            var min = 15.0;
+            var max = 0.0;
+            foreach (var point in judgePoints.Where(point => point >= 0.0))
+            {
+                if (point > max)
+                {
+                    max = point;
+                }
+                else if (point < min)
+                {
+                    min = point;
+                }
+
+                sumPoints += point;
+            }
+
+            sumJudgePoints = sumPoints - max - min;
+        }
+
+        /// <summary>
+        /// Checks if all judges are done.
+        /// </summary>
+        /// <param name="numberOfJudges"></param>
+        /// <returns></returns>
+        public bool IsAllJudgePointSet(int numberOfJudges)
+        {
+            for (var i = 0; i < numberOfJudges; i++)
+            {
+                if (judgePoints[i] < 0)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         #endregion
