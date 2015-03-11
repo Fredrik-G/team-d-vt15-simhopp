@@ -50,12 +50,13 @@ namespace Simhopp.Presenter
             this.View.EventHandleMessage += HandleMessage;
             this.View.EventSendDataToClient += SendDataToClient;
             this.View.EventGetFirstClientObjectData += GetFirstClientObjectData;
+            this.View.EventStartServer += StartServer;
 
             this.View.EventReadContestsFromDatabase += ReadContestsFromDatabase;
             this.View.EventAddTrickToParticipant += AddTrickToParticipant;
             this.View.EventGetTrickFromParticipant += GetTrickFromParticipant;
+            this.View.EventSetJudgePoint += SetJudgePoint;
 
-            this.View.EventStartServer += StartServer;
 
             //this.View.EventAddParticipant += AddParticipant;
             //this.View.EventAddJudge += AddJudge;
@@ -113,6 +114,11 @@ namespace Simhopp.Presenter
         public void CreateContest(string place, string name, string startDate, string endDate)
         {
             this.Model.CreateContest(place, name, startDate, endDate);
+        }
+
+        public void SetJudgePoint(int contestId, string judgeSsn, string diverSsn, double point, int jumpNo)
+        {
+            this.Model.SetJudgePoint(contestId, judgeSsn, diverSsn, point, jumpNo);
         }
 
         #region Read methods

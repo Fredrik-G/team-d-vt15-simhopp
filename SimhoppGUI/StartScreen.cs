@@ -150,7 +150,8 @@ namespace SimhoppGUI
                 EventSendDataToClient,
                 EventAddTrickToParticipant,
                 EventGetTrickFromParticipant,
-                EventStartServer
+                EventStartServer,
+                EventSetJudgePoint
                 ))
             {
                 if (startContest.ShowDialog(this) == DialogResult.OK)
@@ -271,6 +272,8 @@ namespace SimhoppGUI
         #region ISimhopp Methods
 
         public event DelegateCreateContest EventCreateContest = null;
+        public event DelegateSetJudgePoint EventSetJudgePoint = null;
+
 
         #region Read methods
 

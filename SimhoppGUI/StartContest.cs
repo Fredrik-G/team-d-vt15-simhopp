@@ -31,6 +31,7 @@ namespace SimhoppGUI
         private DelegateAddTrickToParticipant eventAddTrickToParticipant;
         private DelegateGetTrickFromParticipant eventGetTrickFromParticipant;
         private DelegateStartServer eventStartServer;
+        private DelegateSetJudgePoint eventSetJudgePoint;
 
         DataGridViewComboBoxColumn trick1ComboBoxColumn = new DataGridViewComboBoxColumn();
         DataGridViewComboBoxColumn trick2ComboBoxColumn = new DataGridViewComboBoxColumn();
@@ -59,7 +60,8 @@ namespace SimhoppGUI
                 DelegateSendDataToClient eventSendDataToClient,
                 DelegateAddTrickToParticipant eventAddTrickToParticipant,
                 DelegateGetTrickFromParticipant eventGetTrickFromParticipant,
-                DelegateStartServer eventStartServer
+                DelegateStartServer eventStartServer,
+                DelegateSetJudgePoint eventSetJudgePoint
             )
         {
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -83,6 +85,7 @@ namespace SimhoppGUI
             this.eventAddTrickToParticipant = eventAddTrickToParticipant;
             this.eventGetTrickFromParticipant = eventGetTrickFromParticipant;
             this.eventStartServer = eventStartServer;
+            this.eventSetJudgePoint = eventSetJudgePoint;
         }
         #endregion
 
@@ -525,7 +528,8 @@ namespace SimhoppGUI
                                                 eventSendDataToClient, 
                                                 eventGetContest, 
                                                 Convert.ToInt16(contestRow.Cells["Id"].Value),
-                                                eventStartServer))
+                                                eventStartServer,
+                                                eventSetJudgePoint))
             {
                 if (liveFeed.ShowDialog(this) == DialogResult.OK)
                 {

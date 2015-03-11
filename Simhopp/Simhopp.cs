@@ -677,6 +677,14 @@ namespace Simhopp
             return server.GetFirstClientObjectData();
         }
 
+        /// <summary>
+        /// Sets a judge point for a given diver in a given contest.
+        /// </summary>
+        /// <param name="contestId"></param>
+        /// <param name="judgeSsn"></param>
+        /// <param name="diverSsn"></param>
+        /// <param name="point"></param>
+        /// <param name="jumpNo"></param>
         public void SetJudgePoint(int contestId, string judgeSsn, string diverSsn, double point, int jumpNo)
         {
             var selectedContest = contestList.FirstOrDefault(x => x.Id == contestId);

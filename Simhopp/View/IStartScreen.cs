@@ -10,6 +10,7 @@ using Simhopp.Model;
 namespace Simhopp.View
 {
     public delegate void DelegateCreateContest(string place, string name, string startDate, string endDate);
+    public delegate void DelegateSetJudgePoint(int contestId, string judgeSsn, string diverSsn, double point, int jumpNo);
 
     #region Read methods
 
@@ -80,6 +81,7 @@ namespace Simhopp.View
     public interface IStartScreen
     {
         event DelegateCreateContest EventCreateContest;
+        event DelegateSetJudgePoint EventSetJudgePoint;
 
         #region Read methods
 
