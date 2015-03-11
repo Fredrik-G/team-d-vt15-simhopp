@@ -319,7 +319,6 @@ namespace Simhopp.Model
             var judge = judgeList.SingleOrDefault(x => x.SSN == judgeSsn);
 
             participant.SetJudgePoint(jumpNo, judgeList.IndexOf(judge), point);
-
         }
 
         /// <summary>
@@ -505,7 +504,7 @@ namespace Simhopp.Model
         /// <param name="highestToLowest">Sort totalpoints highest to lowest</param>
         /// </summary>
         public void SortParticipants(ref List<Participant> list, bool highestToLowest)
-        {                           //referens?
+        {
             if (!highestToLowest)
             {
                 list.Sort((x, y) => x.TotalPoints.CompareTo(y.TotalPoints));
@@ -535,7 +534,18 @@ namespace Simhopp.Model
         }
         #endregion
 
+        public bool IsAllJudgePointSet(string diverSsn, int jumpNo)
+        {
+            var selectedParticipant = participantsList.SingleOrDefault(x => x.GetDiverSSN() == diverSsn);
+            var judgePoints = selectedParticipant.GetJumpResults();
 
+            return judgePoints[jumpNo].IsAllJudgePointSet(judgeList.Count);
+        }
+
+        public Participant GetParticipant(int participantNo)
+        {
+            return participantsList[participantNo];
+        }
 
         #region Check correct input
         /// <summary>
