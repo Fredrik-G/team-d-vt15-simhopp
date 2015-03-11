@@ -23,6 +23,8 @@ namespace SimhoppGUI
         private DelegateSendDataToClient eventSendDataToClient;
         private DelegateGetContest eventGetContest;
         private DelegateStartServer eventStartServer;
+        private DelegateSetJudgePoint eventSetJudgePoint;
+
         private readonly int contestId;
         private Contest contest;
         private Thread listenerThread;
@@ -36,7 +38,8 @@ namespace SimhoppGUI
             DelegateSendDataToClient eventSendDataToClient,
             DelegateGetContest eventGetContest, 
             int contestId,
-            DelegateStartServer eventStartServer)
+            DelegateStartServer eventStartServer,
+            DelegateSetJudgePoint eventSetJudgePoint)
         {
             InitializeComponent();
 
@@ -45,10 +48,11 @@ namespace SimhoppGUI
             this.eventSendDataToClient = eventSendDataToClient;
             this.eventGetContest = eventGetContest;
             this.eventStartServer = eventStartServer;
+            this.eventSetJudgePoint = eventSetJudgePoint;
+            
             this.contestId = contestId;
             this.contest = eventGetContest(contestId);
             
-
         }
 
         #endregion
@@ -149,7 +153,7 @@ namespace SimhoppGUI
 
                     UpdateJudgePointField((judgeIndex + 1), judgeMessage.Point);
 
-                    //TODO: Simhopp.SetJudgePoint
+                    eventSetJudgePoint(contest.Id, judgeMessage.Ssn, "123-34-9832", judgeMessage.Point, 0);
                 }
 
                 Thread.Sleep(300);
