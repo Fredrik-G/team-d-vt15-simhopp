@@ -38,10 +38,10 @@
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
             this.sendPointButton = new System.Windows.Forms.Button();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.DiverNameTB = new System.Windows.Forms.TextBox();
             this.JudgeSSNTB = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.TrickDiffTB = new System.Windows.Forms.TextBox();
+            this.TrickNameTB = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -50,6 +50,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.JudgeClientChosenContestTb = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.disconnectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -70,7 +72,8 @@
             // connectToolStripMenuItem
             // 
             this.connectToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.connectToolStripMenuItem1});
+            this.connectToolStripMenuItem1,
+            this.disconnectToolStripMenuItem});
             this.connectToolStripMenuItem.Name = "connectToolStripMenuItem";
             this.connectToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.connectToolStripMenuItem.Text = "File";
@@ -149,13 +152,13 @@
             this.sendPointButton.UseVisualStyleBackColor = true;
             this.sendPointButton.Click += new System.EventHandler(this.sendPointButton_Click);
             // 
-            // textBox4
+            // DiverNameTB
             // 
-            this.textBox4.Location = new System.Drawing.Point(32, 248);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.ReadOnly = true;
-            this.textBox4.Size = new System.Drawing.Size(157, 20);
-            this.textBox4.TabIndex = 3;
+            this.DiverNameTB.Location = new System.Drawing.Point(32, 248);
+            this.DiverNameTB.Name = "DiverNameTB";
+            this.DiverNameTB.ReadOnly = true;
+            this.DiverNameTB.Size = new System.Drawing.Size(157, 20);
+            this.DiverNameTB.TabIndex = 3;
             // 
             // JudgeSSNTB
             // 
@@ -165,22 +168,22 @@
             this.JudgeSSNTB.Size = new System.Drawing.Size(157, 20);
             this.JudgeSSNTB.TabIndex = 2;
             // 
-            // textBox2
+            // TrickDiffTB
             // 
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(257, 334);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(60, 49);
-            this.textBox2.TabIndex = 37;
+            this.TrickDiffTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TrickDiffTB.Location = new System.Drawing.Point(257, 334);
+            this.TrickDiffTB.Name = "TrickDiffTB";
+            this.TrickDiffTB.ReadOnly = true;
+            this.TrickDiffTB.Size = new System.Drawing.Size(60, 49);
+            this.TrickDiffTB.TabIndex = 37;
             // 
-            // textBox1
+            // TrickNameTB
             // 
-            this.textBox1.Location = new System.Drawing.Point(32, 363);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(157, 20);
-            this.textBox1.TabIndex = 4;
+            this.TrickNameTB.Location = new System.Drawing.Point(32, 363);
+            this.TrickNameTB.Name = "TrickNameTB";
+            this.TrickNameTB.ReadOnly = true;
+            this.TrickNameTB.Size = new System.Drawing.Size(157, 20);
+            this.TrickNameTB.TabIndex = 4;
             // 
             // label4
             // 
@@ -254,11 +257,29 @@
             this.label7.TabIndex = 47;
             this.label7.Text = "WIP";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(257, 409);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 48;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // disconnectToolStripMenuItem
+            // 
+            this.disconnectToolStripMenuItem.Name = "disconnectToolStripMenuItem";
+            this.disconnectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.disconnectToolStripMenuItem.Text = "Disconnect";
+            this.disconnectToolStripMenuItem.Click += new System.EventHandler(this.disconnectToolStripMenuItem1_Click);
+            // 
             // JudgeClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(358, 497);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.JudgeClientChosenContestTb);
             this.Controls.Add(this.label6);
@@ -266,10 +287,10 @@
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.sendPointButton);
-            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.DiverNameTB);
             this.Controls.Add(this.JudgeSSNTB);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.TrickDiffTB);
+            this.Controls.Add(this.TrickNameTB);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -301,9 +322,9 @@
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button sendPointButton;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox DiverNameTB;
+        private System.Windows.Forms.TextBox TrickDiffTB;
+        private System.Windows.Forms.TextBox TrickNameTB;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
@@ -313,6 +334,8 @@
         private System.Windows.Forms.TextBox JudgeClientChosenContestTb;
         private System.Windows.Forms.Label label7;
         public System.Windows.Forms.TextBox JudgeSSNTB;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ToolStripMenuItem disconnectToolStripMenuItem;
     }
 }
 

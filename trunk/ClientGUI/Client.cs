@@ -11,6 +11,7 @@ using System.IO;
 using ClientGUI.Model;
 using ClientGUI.View;
 
+
 namespace ClientGUI
 {
     /// <summary>
@@ -18,7 +19,9 @@ namespace ClientGUI
     /// </summary>
     public class Client : IClient, IDisposable
     {
-        TcpClient clientSocket;
+        private TcpClient clientSocket;
+        private Queue<ServerObjectData> messageQueue = new Queue<ServerObjectData>();
+
 
         /// <summary>
         /// Constructor for a client
@@ -35,7 +38,7 @@ namespace ClientGUI
         {
             if(!clientSocket.Client.Connected)
             {
-                //Should get the server IP from textBox in clientWindow?
+                clientSocket = new TcpClient();
                 clientSocket.Connect(serverIpAddress, 9059);
                 var threadedChat = new Thread(HandleMessages);
                 threadedChat.Start();
@@ -47,20 +50,23 @@ namespace ClientGUI
         /// </summary>
         public void SendDataToServer(string ssn, double point)
         {
-            var message = new ClientObjectData(ssn, point);//Should get data from testboxes
-            var networkStream = clientSocket.GetStream();
-            string serializedString;
-            var asciiEncoder = new ASCIIEncoding();
-            using (var stream = new MemoryStream())
+            if (clientSocket.Client.Connected)
             {
-                var xmlS = new XmlSerializer(typeof(ClientObjectData));
-                xmlS.Serialize(stream, message);
-                serializedString = Encoding.UTF8.GetString(stream.ToArray());
+                var message = new ClientObjectData(ssn, point);
+                var networkStream = clientSocket.GetStream();
+                string serializedString;
+                var asciiEncoder = new ASCIIEncoding();
+                using (var stream = new MemoryStream())
+                {
+                    var xmlS = new XmlSerializer(typeof(ClientObjectData));
+                    xmlS.Serialize(stream, message);
+                    serializedString = Encoding.UTF8.GetString(stream.ToArray());
+                }
+                var outStream = asciiEncoder.GetBytes(serializedString + "$");
+                networkStream.Write(outStream, 0, outStream.Length);
+                networkStream.Flush();
+                Thread.Sleep(10);
             }
-            var outStream = asciiEncoder.GetBytes(serializedString + "$");
-            networkStream.Write(outStream, 0, outStream.Length);
-            networkStream.Flush();
-            Thread.Sleep(10);
         }
         /// <summary>
         /// Handles the messages to and from the server.
@@ -76,16 +82,15 @@ namespace ClientGUI
                 {
                     string dataFromServer = string.Empty;
                     var networkStream = clientSocket.GetStream();
-                    networkStream.Read(bytesFrom, 0, (int)clientSocket.ReceiveBufferSize);
-                    dataFromServer = System.Text.Encoding.ASCII.GetString(bytesFrom);
+                    networkStream.Read(bytesFrom, 0, clientSocket.ReceiveBufferSize);
+                    dataFromServer = Encoding.ASCII.GetString(bytesFrom);
                     dataFromServer = dataFromServer.Substring(0, dataFromServer.IndexOf("$"));
                     using(TextReader reader = new StringReader(dataFromServer))
                     {
                         var xmlS = new XmlSerializer(typeof(ServerObjectData));
                         message = (ServerObjectData)xmlS.Deserialize(reader);
                     }
-                    //Console.WriteLine(" >> From Server: " + message.ContestName + " " + message.DiverName + " " + message.TrickName + " " + message.TrickDiff);
-                    //Send message here!
+                    messageQueue.Enqueue(message);
                 }
                 catch(Exception ex)//Should be better exception for different exceptions
                 {
@@ -107,6 +112,19 @@ namespace ClientGUI
             }
         }
 
+        /// <summary>
+        /// returns the first Object in the messagequeue
+        /// </summary>
+        /// <returns></returns>
+        public ServerObjectData GetFirstServerObjectData()
+        {
+            if (messageQueue.Count != 0)
+            {
+                return messageQueue.Dequeue();
+            }
+            return null;
+        }
+
 
         #region IDisposable methods
 
@@ -116,7 +134,6 @@ namespace ClientGUI
             {
                 Disconnect();
             }
-
         }
 
         public void Dispose()

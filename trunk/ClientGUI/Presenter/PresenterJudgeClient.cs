@@ -22,6 +22,7 @@ namespace ClientGUI.Presenter
             this.View.EventConnectToServer += ConnectToServer;
             this.View.EventSendDataToServer += SendDataToServer;
             this.View.EventDisconnect += Disconnect;
+            this.View.EventGetFirstServerObjectData += GetFirstServerObjectData;
 
         }
         #region Client methods
@@ -36,13 +37,14 @@ namespace ClientGUI.Presenter
             this.Model.SendDataToServer(ssn, point);
         }
 
-        public void SendMessageToGUI(ServerObjectData message)
-        {
-            //this.View.
-        }
         public void Disconnect()
         {
             this.Model.Disconnect();
+        }
+
+        public ServerObjectData GetFirstServerObjectData()
+        {
+            return this.Model.GetFirstServerObjectData();
         }
         #endregion
     }
