@@ -115,13 +115,13 @@ namespace Simhopp.Model
             var sumPoints = 0.0;
             var min = 15.0;
             var max = 0.0;
-            foreach (var point in judgePoints.Where(point => point >= 0.0))
+            foreach (var point in judgePoints.Where(point => point >= -0.5))
             {
                 if (point > max)
                 {
                     max = point;
                 }
-                else if (point < min)
+                if (point < min)
                 {
                     min = point;
                 }

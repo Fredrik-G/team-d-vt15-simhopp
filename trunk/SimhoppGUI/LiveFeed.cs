@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
@@ -23,6 +25,7 @@ namespace SimhoppGUI
         private readonly Contest contest;
         private int jumpNo = 0;
         private int participantNo = 0;
+        private BindingList<Participant> liveResultList = new BindingList<Participant>();
 
         private Thread listenerThread;
 
@@ -89,6 +92,9 @@ namespace SimhoppGUI
         private void LiveFeed_Load(object sender, EventArgs e)
         {
             UpdateDiverInformation();
+
+            UpdateLiveResultList();
+            ResultDataGridView.DataSource = liveResultList;
 
             eventStartServer();
 
@@ -285,6 +291,7 @@ namespace SimhoppGUI
                 //Checks if all participants are done for this jump set.
                 if (contest.GetNumberOfParticipants() == (participantNo + 1))
                 {
+                    CalculateAndUpdatePoints();
                     jumpNo++;
                     participantNo = 0;
                 }
@@ -295,9 +302,10 @@ namespace SimhoppGUI
                 }
                 else
                 {
+                    CalculateAndUpdatePoints();
                     participantNo++;
                 }
-
+                UpdateLiveResultList();
                 ResetJudgePointField();
                 UpdateDiverInformation();
             }
@@ -307,16 +315,22 @@ namespace SimhoppGUI
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void UpdateLiveResultList()
         {
-            contest.GetParticipant(participantNo).CalculatePoints();
-            DiverPoints = contest.GetParticipant(participantNo).TotalPoints.ToString();
-
-
-            var participants = contest.GetParticipants();
-            contest.SortParticipants(ref participants, false);
-            ResultDataGridView.DataSource = contest.GetLiveResultList();
+            liveResultList.Clear();
+            var tempLiveResultList = contest.GetParticipants().ToList();
+            contest.SortParticipants(ref tempLiveResultList, true);
+            foreach (var participant in tempLiveResultList)
+            {
+                liveResultList.Add(participant);
+            }
         }
 
+        private void CalculateAndUpdatePoints()
+        {
+            contest.GetParticipant(participantNo).CalculatePoints();
+            contest.GetParticipant(participantNo).UpdateTotalPoints(contest.GetTrickDifficultyFromTrickHashTable(DiverTrickName));
+            DiverPoints = contest.GetParticipant(participantNo).TotalPoints.ToString();
+        }
     }
 }
