@@ -155,6 +155,13 @@ namespace Simhopp
             return new BindingList<Diver>();
         }
 
+        /// <summary>
+        /// Gets a divers trick based on trick number and contest id.
+        /// </summary>
+        /// <param name="contestId"></param>
+        /// <param name="trickNo"></param>
+        /// <param name="ssn"></param>
+        /// <returns></returns>
         public string GetDiversTrick(int contestId, int trickNo, string ssn)
         {
             try
@@ -671,6 +678,7 @@ namespace Simhopp
         public void StartServer()
         {
             server.StartServer();
+            server.SetJudges(ref judgeList);
         }
 
         public void HandleMessage()

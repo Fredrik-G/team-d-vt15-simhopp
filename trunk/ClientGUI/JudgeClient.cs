@@ -14,7 +14,6 @@ namespace ClientGUI
 
         #endregion
 
-
         #region Constructor
 
         public JudgeClient(DelegateConnectToServer eventConnectToServer,
