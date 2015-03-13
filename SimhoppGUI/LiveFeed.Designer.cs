@@ -40,7 +40,6 @@
             this.PointsValueLabel = new System.Windows.Forms.Label();
             this.Judge1Label = new System.Windows.Forms.Label();
             this.Judge2Label = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.judge1Point = new System.Windows.Forms.NumericUpDown();
             this.judge2Point = new System.Windows.Forms.NumericUpDown();
             this.judge3Point = new System.Windows.Forms.NumericUpDown();
@@ -187,16 +186,6 @@
             this.Judge2Label.TabIndex = 13;
             this.Judge2Label.Text = "A. Smith";
             this.Judge2Label.Visible = false;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(265, 189);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(120, 33);
-            this.button1.TabIndex = 16;
-            this.button1.Text = "Test Client";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // judge1Point
             // 
@@ -455,7 +444,6 @@
             this.Controls.Add(this.JudgePointsPanel);
             this.Controls.Add(this.CommitBtn);
             this.Controls.Add(this.ResultDataGridView);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.TrickPictureBox);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -495,7 +483,6 @@
         private System.Windows.Forms.Label PointsValueLabel;
         private System.Windows.Forms.Label Judge1Label;
         private System.Windows.Forms.Label Judge2Label;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.NumericUpDown judge1Point;
         private System.Windows.Forms.NumericUpDown judge2Point;
         private System.Windows.Forms.NumericUpDown judge3Point;

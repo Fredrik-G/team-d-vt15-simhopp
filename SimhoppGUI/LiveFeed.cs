@@ -77,6 +77,14 @@ namespace SimhoppGUI
 
             this.contestId = contestId;
             this.contest = eventGetContest(contestId);
+            if (listenerThread != null)
+            {
+                return;
+            }
+
+            listenerThread = new Thread(ReadPointsFromJudges);
+            listenerThread.Start();
+            listenerThread.IsBackground = true;
 
         }
 
@@ -89,13 +97,31 @@ namespace SimhoppGUI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void LiveFeed_Load(object sender, EventArgs e)
+        /*private void LiveFeed_Load(object sender, EventArgs e)
         {
             UpdateDiverInformation();
 
             UpdateLiveResultList();
             ResultDataGridView.DataSource = liveResultList;
 
+            eventStartServer();
+
+
+            //ResultDataGridView.DataSource = resultList;
+
+            //ResultDataGridView.DataSource = contest.GetDiversList();
+
+            //eventHandleMessage();
+            //eventSendDataToClient();          
+            //var asd = eventGetFirstClientObjectData();
+            listenerThread = new Thread(ReadPointsFromJudges);
+            listenerThread.Start();
+            listenerThread.IsBackground = true;
+            eventSendDataToClient();
+        }*/
+
+        private void LiveFeed_Load(object sender, EventArgs e)
+        {
             eventStartServer();
 
             var judgesList = contest.GetJudgesList();
@@ -192,18 +218,6 @@ namespace SimhoppGUI
             DiverName = contest.GetParticipant(participantNo).GetDiverName();
             DiverTrickName = contest.GetParticipant(participantNo).GetJumpResults()[jumpNo].TrickName;
             DiverTrickDifficulty = contest.GetTrickDifficultyFromTrickHashTable(TrickNameLabel.Text).ToString();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (listenerThread != null)
-            {
-                return;
-            }
-
-            listenerThread = new Thread(ReadPointsFromJudges);
-            listenerThread.Start();
-            listenerThread.IsBackground = true;
         }
 
         #region Point methods
