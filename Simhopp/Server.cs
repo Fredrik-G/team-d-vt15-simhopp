@@ -57,14 +57,41 @@ namespace Simhopp
         /// </summary>
         private void ListenerLoop()
         {
+            var bytesFrom = new byte[10800];
+            string ssn;
+            string password;
             while (true)
             {
                 clientSocket = serverSocket.AcceptTcpClient();
-                var handleClient = new HandleClient(ref messageQueue);
-                handleClientsList.Add(handleClient);
-                handleClient.StartClient(clientSocket);
-                SendDataToNewClient();
+                var dataFromClient = string.Empty;
+                var networkStream = clientSocket.GetStream();
+                networkStream.Read(bytesFrom, 0, (int) clientSocket.ReceiveBufferSize);
+                dataFromClient = Encoding.ASCII.GetString(bytesFrom);
+                //dataFromClient = dataFromClient.Substring(0, dataFromClient.IndexOf("$"));
+                dataFromClient = dataFromClient.Substring(dataFromClient.IndexOf("$") + 1, dataFromClient.IndexOf("#") - dataFromClient.IndexOf("$") - 1);
+                if (dataFromClient.Equals("Password"))
+                {
+                    SendConnectionAnswer("Accepted");
+                    var handleClient = new HandleClient(ref messageQueue);
+                    handleClientsList.Add(handleClient);
+                    handleClient.StartClient(clientSocket);
+                    SendDataToNewClient();
+                }
+                else
+                {
+                    SendConnectionAnswer("NotAccepted");
+                    clientSocket.Close();
+                }
             }
+        }
+
+        void SendConnectionAnswer(string answer)
+        {
+            var data = string.Empty;
+            var networkstream = clientSocket.GetStream();
+            var outStream = Encoding.ASCII.GetBytes(answer + "$");
+            networkstream.Write(outStream, 0, outStream.Length);
+            networkstream.Flush();
         }
 
         /// <summary>
