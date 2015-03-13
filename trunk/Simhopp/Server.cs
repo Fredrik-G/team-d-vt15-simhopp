@@ -59,6 +59,8 @@ namespace Simhopp
                 listenerLoop.Start();
                 listenerLoop.IsBackground = true;
                 isServerStarted = true;
+
+                log.Info("New server started");
             }
         }
 
@@ -77,8 +79,6 @@ namespace Simhopp
         private void ListenerLoop()
         {
             var bytesFrom = new byte[10800];
-            string ssn;
-            string password;
             while (true)
             {
                 clientSocket = serverSocket.AcceptTcpClient();
@@ -86,11 +86,10 @@ namespace Simhopp
                 var networkStream = clientSocket.GetStream();
                 networkStream.Read(bytesFrom, 0, clientSocket.ReceiveBufferSize);
                 dataFromClient = Encoding.ASCII.GetString(bytesFrom);
-                ssn = dataFromClient.Substring(0, dataFromClient.IndexOf("$"));
-                password = dataFromClient.Substring(dataFromClient.IndexOf("$") + 1, dataFromClient.IndexOf("#") - dataFromClient.IndexOf("$") - 1);
+                var ssn = dataFromClient.Substring(0, dataFromClient.IndexOf("$"));
+                var password = dataFromClient.Substring(dataFromClient.IndexOf("$") + 1, dataFromClient.IndexOf("#") - dataFromClient.IndexOf("$") - 1);
 
                 var judge = judgeList.SingleOrDefault(x => x.SSN == ssn);
-
 
                 if (judge != null && judge.CalculateHashAndReturn(password) == judge.Hash)
                 {
@@ -117,6 +116,8 @@ namespace Simhopp
             var outStream = Encoding.ASCII.GetBytes(answer + "$");
             networkstream.Write(outStream, 0, outStream.Length);
             networkstream.Flush();
+
+            log.Debug("Server sent client message " + answer);
         }
 
         /// <summary>
