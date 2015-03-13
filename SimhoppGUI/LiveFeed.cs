@@ -22,6 +22,7 @@ namespace SimhoppGUI
         private DelegateSetJudgePoint eventSetJudgePoint;
         private DelegateSetDiverMessage eventSetDiverMessage;
         private DelegateGetIPForServer eventGetIPForServer;
+        private DelegateGetTrickDifficultyFromTrickHashTable eventGetTrickDifficultyFromTrickHashTable;
 
         private readonly int contestId;
         private readonly Contest contest;
@@ -68,7 +69,8 @@ namespace SimhoppGUI
             DelegateStartServer eventStartServer,
             DelegateSetJudgePoint eventSetJudgePoint,
             DelegateSetDiverMessage eventSetDiverMessage,
-            DelegateGetIPForServer eventGetIPForServer)
+            DelegateGetIPForServer eventGetIPForServer,
+            DelegateGetTrickDifficultyFromTrickHashTable eventGetTrickDifficultyFromTrickHashTable)
         {
             InitializeComponent();
 
@@ -80,6 +82,7 @@ namespace SimhoppGUI
             this.eventSetJudgePoint = eventSetJudgePoint;
             this.eventSetDiverMessage = eventSetDiverMessage;
             this.eventGetIPForServer = eventGetIPForServer;
+            this.eventGetTrickDifficultyFromTrickHashTable = eventGetTrickDifficultyFromTrickHashTable;
 
             this.contestId = contestId;
             this.contest = eventGetContest(contestId);
@@ -209,7 +212,7 @@ namespace SimhoppGUI
         {
             DiverName = contest.GetParticipant(participantNo).GetDiverName();
             DiverTrickName = contest.GetParticipant(participantNo).GetJumpResults()[jumpNo].TrickName;
-            DiverTrickDifficulty = contest.GetTrickDifficultyFromTrickHashTable(TrickNameLabel.Text).ToString();
+            DiverTrickDifficulty = eventGetTrickDifficultyFromTrickHashTable(DiverTrickName).ToString();
         }
 
         #region Point methods
@@ -340,7 +343,7 @@ namespace SimhoppGUI
         private void CalculateAndUpdatePoints()
         {
             contest.GetParticipant(participantNo).CalculatePoints();
-            contest.GetParticipant(participantNo).UpdateTotalPoints(contest.GetTrickDifficultyFromTrickHashTable(DiverTrickName));
+            contest.GetParticipant(participantNo).UpdateTotalPoints(eventGetTrickDifficultyFromTrickHashTable(DiverTrickName));
             DiverPoints = contest.GetParticipant(participantNo).TotalPoints.ToString();
         }
 

@@ -35,6 +35,7 @@ namespace SimhoppGUI
         private DelegateSetJudgePoint eventSetJudgePoint;
         private DelegateSetDiverMessage eventSetDiverMessage;
         private DelegateGetIPForServer eventGetIPForServer;
+        private DelegateGetTrickDifficultyFromTrickHashTable eventGetTrickDifficultyFromTrickHashTable;
 
         DataGridViewComboBoxColumn trick1ComboBoxColumn = new DataGridViewComboBoxColumn();
         DataGridViewComboBoxColumn trick2ComboBoxColumn = new DataGridViewComboBoxColumn();
@@ -66,7 +67,8 @@ namespace SimhoppGUI
                 DelegateStartServer eventStartServer,
                 DelegateSetJudgePoint eventSetJudgePoint,
                 DelegateSetDiverMessage eventSetDiverMessage,
-                DelegateGetIPForServer eventGetIPForServer
+                DelegateGetIPForServer eventGetIPForServer,
+                DelegateGetTrickDifficultyFromTrickHashTable eventGetTrickDifficultyFromTrickHashTable
             )
         {
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -93,6 +95,7 @@ namespace SimhoppGUI
             this.eventSetJudgePoint = eventSetJudgePoint;
             this.eventSetDiverMessage = eventSetDiverMessage;
             this.eventGetIPForServer = eventGetIPForServer;
+            this.eventGetTrickDifficultyFromTrickHashTable = eventGetTrickDifficultyFromTrickHashTable;
         }
         #endregion
 
@@ -111,6 +114,7 @@ namespace SimhoppGUI
             if (eventGetContestsList != null)
             {
                 ContestsDataGridView.DataSource = this.eventGetContestsList();
+                ShowFinishedContestState();
             }
             if (eventGetJudgesList != null)
             {
@@ -166,7 +170,7 @@ namespace SimhoppGUI
             CurrentDiversDataGridView.CurrentCellDirtyStateChanged += CurrentDiversDataGridView_CurrentCellDirtyStateChanged;
 
 
-            ShowFinishedContestState();
+            
         }
 
         /// <summary>
@@ -541,7 +545,8 @@ namespace SimhoppGUI
                                                 eventStartServer,
                                                 eventSetJudgePoint,
                                                 eventSetDiverMessage,
-                                                eventGetIPForServer))
+                                                eventGetIPForServer,
+                                                eventGetTrickDifficultyFromTrickHashTable))
             {
                 if (liveFeed.ShowDialog(this) == DialogResult.OK)
                 {
@@ -640,11 +645,12 @@ namespace SimhoppGUI
         private void ShowFinishedContestState()
         {
            // foreach (DataGridViewRow row in ContestsDataGridView.Rows.Cast<DataGridViewRow>().Where(row => row.Cells["isFinished"].Value.Equals("true")))
-            foreach(DataGridViewRow row in ContestsDataGridView.Rows)
-               
+            foreach(DataGridViewRow row in ContestsDataGridView.Rows)             
             {
-                //if(row.Cells["isFinish"])
-                row.DefaultCellStyle.BackColor = Color.DarkSeaGreen;
+                if (row.Cells["IsFinished"].Value.Equals(true))
+                {
+                    row.DefaultCellStyle.BackColor = Color.DarkSeaGreen;
+                }                
             }
         }
 

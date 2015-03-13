@@ -28,9 +28,9 @@ namespace ClientGUI.Presenter
         }
         #region Client methods
 
-        public void ConnectToServer(string ip, string ssn, string password)
+        public bool ConnectToServer(string ip, string ssn, string password)
         {
-            this.Model.ConnectToServer(ip, ssn, password);
+            return this.Model.ConnectToServer(ip, ssn, password);
         }
 
         public void SendDataToServer(string ssn, double point)

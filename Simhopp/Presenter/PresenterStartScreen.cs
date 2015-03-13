@@ -58,12 +58,8 @@ namespace Simhopp.Presenter
             this.View.EventAddTrickToParticipant += AddTrickToParticipant;
             this.View.EventGetTrickFromParticipant += GetTrickFromParticipant;
             this.View.EventSetJudgePoint += SetJudgePoint;
+            this.View.EventGetTrickDifficultyFromTrickHashTable += GetTrickDifficultyFromTrickHashTable;
 
-
-            //this.View.EventAddParticipant += AddParticipant;
-            //this.View.EventAddJudge += AddJudge;
-            //this.View.EventGetTrickDifficultyFromTrickHashTable += GetTrickDifficultyFromTrickHashTable;
-            //this.View.EventGetResultFromParticipant += GetResultFromParticipant;
         }
 
         #region Getters
@@ -111,6 +107,12 @@ namespace Simhopp.Presenter
         {
             return this.Model.GetTrickFromParticipant(contestId, trickNo, ssn);
         }
+
+        public double GetTrickDifficultyFromTrickHashTable(string trickName)
+        {
+            return this.Model.GetTrickDifficultyFromTrickHashTable(trickName);
+        }
+
         #endregion
 
         public void CreateContest(string place, string name, string startDate, string endDate)

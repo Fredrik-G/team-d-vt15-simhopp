@@ -69,6 +69,7 @@ namespace ClientGUI
             this.UserSSNTB.Size = new System.Drawing.Size(125, 20);
             this.UserSSNTB.TabIndex = 2;
             this.UserSSNTB.Text = "111-22-1566";
+            this.UserSSNTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckEnterOrEscape);
             // 
             // PasswordTB
             // 
@@ -79,6 +80,7 @@ namespace ClientGUI
             this.PasswordTB.TabIndex = 3;
             this.PasswordTB.Text = "Password";
             this.PasswordTB.UseSystemPasswordChar = true;
+            this.PasswordTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckEnterOrEscape);
             // 
             // LoginBtn
             // 
@@ -120,12 +122,13 @@ namespace ClientGUI
             this.IPConnectionTB.Size = new System.Drawing.Size(125, 20);
             this.IPConnectionTB.TabIndex = 7;
             this.IPConnectionTB.Text = "127.0.0.1";
+            this.IPConnectionTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckEnterOrEscape);
             // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(287, 148);
+            this.ClientSize = new System.Drawing.Size(304, 148);
             this.Controls.Add(this.IPConnectionTB);
             this.Controls.Add(this.IPAddressLabel);
             this.Controls.Add(this.LoginScreenCancelBtn);

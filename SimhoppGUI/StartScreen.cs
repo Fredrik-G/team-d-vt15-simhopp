@@ -153,7 +153,8 @@ namespace SimhoppGUI
                 EventStartServer,
                 EventSetJudgePoint,
                 EventSetDiverMessage,
-                EventGetIPForServer
+                EventGetIPForServer,
+                EventGetTrickDifficultyFromTrickHashTable
                 ))
             {
                 if (startContest.ShowDialog(this) == DialogResult.OK)
@@ -301,6 +302,7 @@ namespace SimhoppGUI
         public event DelegateGetJudgeSalt EventGetJudgeSalt = null;
         public event DelegateConnectToServer EventConnectToServer = null;
         public event DelegateGetTrickFromParticipant EventGetTrickFromParticipant = null;
+        public event DelegateGetTrickDifficultyFromTrickHashTable EventGetTrickDifficultyFromTrickHashTable = null;
 
         #endregion
 

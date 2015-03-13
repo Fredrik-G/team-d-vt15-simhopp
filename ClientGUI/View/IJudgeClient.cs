@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClientGUI.View
 {
-    public delegate void DelegateConnectToServer(string ip, string ssn, string password);
+    public delegate bool DelegateConnectToServer(string ip, string ssn, string password);
 
     public delegate void DelegateSendDataToServer(string ssn, double point);
 
