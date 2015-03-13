@@ -23,21 +23,21 @@ namespace SimhoppUnitTest
             string s = jr.TrickName;
             Assert.That(s, Is.StringMatching(""));
             double point = jr.GetJudgePoint(0);
-            Assert.That(point, Is.EqualTo(0));
+            Assert.That(point, Is.EqualTo(-1.0d));
             point = jr.GetJudgePoint(1);
-            Assert.That(point, Is.EqualTo(0));
+            Assert.That(point, Is.EqualTo(-1.0d));
             point = jr.GetJudgePoint(2);
-            Assert.That(point, Is.EqualTo(0));
+            Assert.That(point, Is.EqualTo(-1.0d));
             point = jr.GetJudgePoint(3);
-            Assert.That(point, Is.EqualTo(0));
+            Assert.That(point, Is.EqualTo(-1.0d));
             point = jr.GetJudgePoint(4);
-            Assert.That(point, Is.EqualTo(0));
+            Assert.That(point, Is.EqualTo(-1.0d));
             point = jr.GetJudgePoint(5);
-            Assert.That(point, Is.EqualTo(0));
+            Assert.That(point, Is.EqualTo(-1.0d));
             point = jr.GetJudgePoint(6);
-            Assert.That(point, Is.EqualTo(0));
+            Assert.That(point, Is.EqualTo(-1.0d));
             double res = jr.SumJudgePoints;
-            Assert.That(res, Is.EqualTo(0));
+            Assert.That(res, Is.EqualTo(-15.0d));
         }
 
         /// <summary>
