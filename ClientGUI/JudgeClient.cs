@@ -118,7 +118,8 @@ namespace ClientGUI
                         if (!ReferenceEquals(null, serverObjectData))
                         {
                             UpdateTextBoxes(serverObjectData);
-                            sendPointButton.Enabled = true;
+                            Invoke((MethodInvoker) delegate { sendPointButton.Enabled = true; });
+                           // sendPointButton.Enabled = true;
                         }
                     }
                 }
