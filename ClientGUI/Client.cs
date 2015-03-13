@@ -34,16 +34,58 @@ namespace ClientGUI
         /// <summary>
         /// A function that tries to connect to a server via its IP and port
         /// </summary>
-        public void ConnectToServer(string serverIpAddress)
+        public void ConnectToServer(string serverIpAddress, string ssn, string password)
         {
             if(!clientSocket.Client.Connected)
             {
+                
                 clientSocket = new TcpClient();
                 clientSocket.Connect(serverIpAddress, 9059);
-                var threadedChat = new Thread(HandleMessages);
-                threadedChat.Start();
-                threadedChat.IsBackground = true;
+                var networkStream = clientSocket.GetStream();
+                var asciiEncoder = new ASCIIEncoding();
+                var outStream = asciiEncoder.GetBytes(ssn + "$" + password + "#");
+                networkStream.Write(outStream, 0, outStream.Length);
+                networkStream.Flush();
+
+                if (IsConnected())
+                {
+                    var threadedChat = new Thread(HandleMessages);
+                    threadedChat.Start();
+                    threadedChat.IsBackground = true;
+                }
+                else
+                {
+                    Disconnect();
+                }
+                
             }
+        }
+        private bool IsConnected()
+        {
+            bool hasServerAnswered = false;
+            var bytesFrom = new byte[10800];
+            while(!hasServerAnswered)
+            {
+                try
+                {
+                    var data = string.Empty;
+                    var networkStream = clientSocket.GetStream();
+                    networkStream.Read(bytesFrom, 0, clientSocket.ReceiveBufferSize);
+                    data = Encoding.ASCII.GetString(bytesFrom);
+                    data = data.Substring(0, data.IndexOf("$"));
+                    hasServerAnswered = true;
+                    if (data.Equals("Accepted"))
+                    {
+                        return true;
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw new Exception(e.Message);
+                }
+                
+            }
+            return false;
         }
         /// <summary>
         /// Serializes the data into XML-code and sends it to the server
@@ -68,7 +110,7 @@ namespace ClientGUI
             }
         }
         /// <summary>
-        /// Handles the messages to and from the server.
+        /// Handles the messages from the server.
         /// 
         /// </summary>
         private void HandleMessages()
