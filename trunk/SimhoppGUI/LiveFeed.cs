@@ -101,6 +101,7 @@ namespace SimhoppGUI
         {
             UpdateDiverInformation();
             UpdateLiveResultList();
+            ResultDataGridView.DefaultCellStyle.Format = "0.00##";
             ResultDataGridView.DataSource = liveResultList;
 
             eventStartServer();
