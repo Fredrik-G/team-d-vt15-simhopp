@@ -126,7 +126,27 @@ namespace Simhopp.Model
             // Same as foreach(var bit in crypto) tempstring += bit.ToString("x2));
              
         }
+        /// <summary>
+        /// Calculates a SHA256 hash from judge password + his salt. 
+        /// Judge.CalculateSalt has to be run before this function.
+        /// </summary>
+        /// <param name="password"></param>
+        public string CalculateHashAndReturn(string password)
+        {
+            if (string.IsNullOrEmpty(salt))
+            {
+                throw new Exception("Salt is not set. Run Judge.CalculateSalt first.");
+            }
 
+            var stringToHash = password + salt;
+            var crypt = new SHA256Managed();
+            var tempString = String.Empty;
+            var crypto = crypt.ComputeHash(Encoding.UTF8.GetBytes(stringToHash), 0,
+                Encoding.UTF8.GetByteCount(stringToHash));
+
+            return crypto.Aggregate(tempString, (current, bit) => current + bit.ToString("x2"));
+            // Same as foreach(var bit in crypto) tempstring += bit.ToString("x2));
+        }
         #endregion
     }
 }
