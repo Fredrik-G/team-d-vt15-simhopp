@@ -66,16 +66,15 @@ namespace Simhopp
                 clientSocket = serverSocket.AcceptTcpClient();
                 var handleClient = new HandleClient(ref messageQueue);
                 handleClient.StartClient(clientSocket);
-                //Console.WriteLine(" >> Client " + counter + " connected!");
-                SendDataToClient();
+                //SendDataToClient();
             }
         }
         /// <summary>
         /// Serializes the data into XML-code and sends it to client.
         /// </summary>
-        public void SendDataToClient()
+        public void SendDataToClient(string contestName, string diverName, string trickName, double trickDifficulty)
         {
-            var message = new ServerObjectData("Contest", "Name", "Trick", 9.5);//Should get data from testboxes
+            var message = new ServerObjectData(contestName, diverName, trickName, trickDifficulty);
             var networkStream = clientSocket.GetStream();
             string serializedString;
             var asciiEncoder = new ASCIIEncoding();
