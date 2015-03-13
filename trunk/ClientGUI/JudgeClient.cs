@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using System.Windows.Forms;
 using ClientGUI.Model;
 using ClientGUI.View;
@@ -7,13 +8,24 @@ namespace ClientGUI
 {
     public partial class JudgeClient : Form, IJudgeClient
     {
+        #region Data
+
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
+        #endregion
+
 
         #region Constructor
 
-        public JudgeClient(DelegateConnectToServer eventConnectToServer, DelegateSendDataToServer eventSendDataToServer, DelegateDisconnect eventDisconnect, DelegateGetFirstServerObjectData eventGetFirstServerObjectData, DelegateGetSizeOfQueue eventGetSizeOfQueue)
+        public JudgeClient(DelegateConnectToServer eventConnectToServer,
+            DelegateSendDataToServer eventSendDataToServer,
+            DelegateDisconnect eventDisconnect,
+            DelegateGetFirstServerObjectData eventGetFirstServerObjectData,
+            DelegateGetSizeOfQueue eventGetSizeOfQueue)
         {
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             InitializeComponent();
+
             this.EventSendDataToServer = eventSendDataToServer;
             this.EventConnectToServer = eventConnectToServer;
             this.EventDisconnect = eventDisconnect;
@@ -21,11 +33,15 @@ namespace ClientGUI
             this.EventGetSizeOfQueue = eventGetSizeOfQueue;
         }
 
+        /// <summary>
+        /// Default constructor. Starts a new thread that listens for new messages.
+        /// </summary>
         public JudgeClient()
         {
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             InitializeComponent();
-            Thread messageListener = new Thread(ListenForNewMessage);
+
+            var messageListener = new Thread(ListenForNewMessage);
             messageListener.Start();
             messageListener.IsBackground = true;
         }
@@ -34,28 +50,48 @@ namespace ClientGUI
 
         #region Events
 
+        /// <summary>
+        /// Occurs when the Connect item is clicked.
+        /// Opens a new Login form.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void connectToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            
-            using(new DimIt())
+            using (new DimIt())
             using (var login = new Login(EventConnectToServer, EventSendDataToServer, EventDisconnect))
             {
                 if (login.ShowDialog(this) == DialogResult.OK)
                 {
-                    login.Show();
+                    JudgeSSNTB.Text = login.UserSSNTB.Text;
+                    ConnectionStatusLabel.Text = "Connected";
                 }
-                JudgeSSNTB.Text = login.UserSSNTB.Text;
+                else
+                {
+                    ConnectionStatusLabel.Text = "Disconnected";
+                }
             }
         }
+
+        /// <summary>
+        /// Occurs when the Send button is clicked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void sendPointButton_Click(object sender, EventArgs e)
         {
             var point = Convert.ToDouble(numericUpDown1.Text);
             var ssn = JudgeSSNTB.Text;
             EventSendDataToServer(ssn, point);
             sendPointButton.Enabled = false;
-
         }
 
+        /// <summary>
+        /// Occurs when the disconnect item is clicked.
+        /// Calls event to disconnect.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void disconnectToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             EventDisconnect();
@@ -66,22 +102,22 @@ namespace ClientGUI
         #region Member methods
 
         /// <summary>
-        /// Thread-method that is listening for new messages from the server
+        /// Thread-method that is listening for new messages from the server.
         /// </summary>
         private void ListenForNewMessage()
         {
             while (true)
             {
                 using (new JudgeClient(EventConnectToServer, EventSendDataToServer, EventDisconnect,
-                EventGetFirstServerObjectData, EventGetSizeOfQueue))
+                        EventGetFirstServerObjectData, EventGetSizeOfQueue))
                 {
-                    int heh = EventGetSizeOfQueue();
-                    if (heh > 0)
+                    var sizeOfQueue = EventGetSizeOfQueue();
+                    if (sizeOfQueue > 0)
                     {
-                        ServerObjectData oD = EventGetFirstServerObjectData();
-                        if (!object.ReferenceEquals(null, oD))
+                        var serverObjectData = EventGetFirstServerObjectData();
+                        if (!ReferenceEquals(null, serverObjectData))
                         {
-                            UpdateTextBoxes(oD);
+                            UpdateTextBoxes(serverObjectData);
                             sendPointButton.Enabled = true;
                         }
                     }
@@ -112,7 +148,6 @@ namespace ClientGUI
         public event DelegateGetSizeOfQueue EventGetSizeOfQueue = null;
 
         #endregion
-
 
     }
 }

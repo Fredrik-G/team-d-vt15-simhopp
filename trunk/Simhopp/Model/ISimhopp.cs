@@ -33,6 +33,7 @@ namespace Simhopp.Model
 
         BindingList<Trick> GetTrickList();
         string GetTrickFromParticipant(int contestId, int trickNo, string ssn);
+        double GetTrickDifficultyFromTrickHashTable(string trickName);
 
         string GetJudgeHash(string ssn);
         string GetJudgeSalt(string ssn);

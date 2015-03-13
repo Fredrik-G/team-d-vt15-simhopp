@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
@@ -15,15 +16,23 @@ namespace ClientGUI
     /// </summary>
     public partial class Login : Form
     {
+        #region Data
+
         private DelegateConnectToServer eventConnectToServer;
         private DelegateSendDataToServer eventSendDataToServer;
         private DelegateDisconnect eventDisconnect;
-        
+
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
+        #endregion
+
+        #region Constructors
 
         public Login()
         {
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.InitializeComponent();
+            log.Debug("New login window open.");
         }
 
         public Login(DelegateConnectToServer eventConnectToServer,
@@ -37,32 +46,59 @@ namespace ClientGUI
             this.eventDisconnect = eventDisconnect;
         }
 
+        #endregion
+
+        #region Events
+
         private void LoginScreenCancelBtn_Click(object sender, EventArgs e)
         {
-            Close();
+            log.Debug("Login window closed.");
+            DialogResult = DialogResult.Cancel;
+            Close();            
         }
 
         private void LoginBtn_Click(object sender, EventArgs e)
         {
-            using (var login = new Login(eventConnectToServer, eventSendDataToServer, eventDisconnect))
+            try
             {
-                try
+                if (eventConnectToServer(IPConnectionTB.Text, UserSSNTB.Text, PasswordTB.Text))
                 {
-                    eventConnectToServer(IPConnectionTB.Text, UserSSNTB.Text, PasswordTB.Text);
-                    
+                    DialogResult = DialogResult.OK;
                     Close();
                 }
-                catch (Exception ex)
-                {
-                    
-                }
+                InputErrorProvider.SetError(PasswordTB, "Username or password is incorrect.");
+            }
+            catch (Exception ex)
+            {
+                InputErrorProvider.SetError(IPConnectionTB, ex.Message);
             }
         }
-        
+
+        #endregion
+
+        /// <summary>
+        /// Checks if enter was pressed and call event to login.
+        /// Also checks if escape was pressed and closes this form.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CheckEnterOrEscape(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)13)
+            {
+                LoginBtn_Click(sender, e);
+            }
+            else if (e.KeyChar == (char)27)
+            {
+                DialogResult = DialogResult.Cancel;
+                Close();
+            }
+        }
+
+        #region Hash
 
         private bool Authenticate()
         {
-            
             return false;
         }
 
@@ -74,5 +110,8 @@ namespace ClientGUI
 
             return crypto.Aggregate(tempString, (current, bit) => current + bit.ToString("x2"));
         }
+
+        #endregion
+
     }
 }

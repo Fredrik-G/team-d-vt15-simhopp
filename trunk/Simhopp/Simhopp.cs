@@ -253,6 +253,16 @@ namespace Simhopp
             return "";
         }
 
+        /// <summary>
+        /// Returns the difficulty of a given trick name.
+        /// </summary>
+        /// <param name="trickName"></param>
+        /// <returns></returns>
+        public double GetTrickDifficultyFromTrickHashTable(string trickName)
+        {
+            return trickList.GetDifficultyByName(trickName);
+        }
+
         #endregion
 
         /// <summary>

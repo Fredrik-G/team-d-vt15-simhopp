@@ -349,6 +349,7 @@ namespace Simhopp.Model
         {
             return participantsList.Count;
         }
+
         /// <summary>
         /// Gets the number of participants in participants list.
         /// </summary>
@@ -356,15 +357,6 @@ namespace Simhopp.Model
         public int GetNumberOfJudges()
         {
             return judgeList.Count;
-        }
-        /// <summary>
-        /// Returns the difficulty of a given trick name.
-        /// </summary>
-        /// <param name="trickName"></param>
-        /// <returns></returns>
-        public double GetTrickDifficultyFromTrickHashTable(string trickName)
-        {
-            return trickList.GetDifficultyByName(trickName);
         }
 
         /// <summary>

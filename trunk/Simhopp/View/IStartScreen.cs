@@ -39,6 +39,7 @@ namespace Simhopp.View
     public delegate string DelegateGetJudgeSalt(string ssn);
     public delegate void DelegateConnectToServer(string ip);
     public delegate string DelegateGetTrickFromParticipant(int contestId, int trickNo, string ssn);
+    public delegate double DelegateGetTrickDifficultyFromTrickHashTable(string trickName);
 
     #endregion
 
@@ -111,6 +112,7 @@ namespace Simhopp.View
 
         event DelegateGetTrickList EventGetTrickList;
         event DelegateGetTrickFromParticipant EventGetTrickFromParticipant;
+        event DelegateGetTrickDifficultyFromTrickHashTable EventGetTrickDifficultyFromTrickHashTable;
 
         #endregion
 

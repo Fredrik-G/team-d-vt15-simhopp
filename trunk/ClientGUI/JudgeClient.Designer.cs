@@ -31,12 +31,13 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.connectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.connectToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.disconnectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.label5 = new System.Windows.Forms.Label();
+            this.ConnectionStatusLabel = new System.Windows.Forms.Label();
             this.sendPointButton = new System.Windows.Forms.Button();
             this.DiverNameTB = new System.Windows.Forms.TextBox();
             this.JudgeSSNTB = new System.Windows.Forms.TextBox();
@@ -49,7 +50,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.JudgeClientChosenContestTb = new System.Windows.Forms.TextBox();
-            this.disconnectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -79,9 +79,16 @@
             // connectToolStripMenuItem1
             // 
             this.connectToolStripMenuItem1.Name = "connectToolStripMenuItem1";
-            this.connectToolStripMenuItem1.Size = new System.Drawing.Size(119, 22);
+            this.connectToolStripMenuItem1.Size = new System.Drawing.Size(133, 22);
             this.connectToolStripMenuItem1.Text = "Connect";
             this.connectToolStripMenuItem1.Click += new System.EventHandler(this.connectToolStripMenuItem1_Click);
+            // 
+            // disconnectToolStripMenuItem
+            // 
+            this.disconnectToolStripMenuItem.Name = "disconnectToolStripMenuItem";
+            this.disconnectToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.disconnectToolStripMenuItem.Text = "Disconnect";
+            this.disconnectToolStripMenuItem.Click += new System.EventHandler(this.disconnectToolStripMenuItem1_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -131,14 +138,14 @@
             this.numericUpDown1.Size = new System.Drawing.Size(92, 31);
             this.numericUpDown1.TabIndex = 5;
             // 
-            // label5
+            // ConnectionStatusLabel
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(29, 464);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(144, 13);
-            this.label5.TabIndex = 41;
-            this.label5.Text = "Connected/Not connected...";
+            this.ConnectionStatusLabel.AutoSize = true;
+            this.ConnectionStatusLabel.Location = new System.Drawing.Point(29, 464);
+            this.ConnectionStatusLabel.Name = "ConnectionStatusLabel";
+            this.ConnectionStatusLabel.Size = new System.Drawing.Size(73, 13);
+            this.ConnectionStatusLabel.TabIndex = 41;
+            this.ConnectionStatusLabel.Text = "Disconnected";
             // 
             // sendPointButton
             // 
@@ -245,13 +252,6 @@
             this.JudgeClientChosenContestTb.Size = new System.Drawing.Size(186, 20);
             this.JudgeClientChosenContestTb.TabIndex = 1;
             // 
-            // disconnectToolStripMenuItem
-            // 
-            this.disconnectToolStripMenuItem.Name = "disconnectToolStripMenuItem";
-            this.disconnectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.disconnectToolStripMenuItem.Text = "Disconnect";
-            this.disconnectToolStripMenuItem.Click += new System.EventHandler(this.disconnectToolStripMenuItem1_Click);
-            // 
             // JudgeClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -261,7 +261,7 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.numericUpDown1);
-            this.Controls.Add(this.label5);
+            this.Controls.Add(this.ConnectionStatusLabel);
             this.Controls.Add(this.sendPointButton);
             this.Controls.Add(this.DiverNameTB);
             this.Controls.Add(this.JudgeSSNTB);
@@ -296,7 +296,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label ConnectionStatusLabel;
         private System.Windows.Forms.Button sendPointButton;
         private System.Windows.Forms.TextBox DiverNameTB;
         private System.Windows.Forms.TextBox TrickDiffTB;
