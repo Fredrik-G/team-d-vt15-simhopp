@@ -151,7 +151,9 @@ namespace SimhoppGUI
                 EventAddTrickToParticipant,
                 EventGetTrickFromParticipant,
                 EventStartServer,
-                EventSetJudgePoint
+                EventSetJudgePoint,
+                EventSetDiverMessage,
+                EventGetIPForServer
                 ))
             {
                 if (startContest.ShowDialog(this) == DialogResult.OK)
@@ -335,9 +337,11 @@ namespace SimhoppGUI
         #region Server methods
 
         public event DelegateGetFirstClientObjectData EventGetFirstClientObjectData = null;
+        public event DelegateSetDiverMessage EventSetDiverMessage = null;
         public event DelegateSendDataToClient EventSendDataToClient = null;
         public event DelegateHandleMessage EventHandleMessage = null;
         public event DelegateStartServer EventStartServer = null;
+        public event DelegateGetIPForServer EventGetIPForServer = null;
 
         #endregion
 

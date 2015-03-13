@@ -20,6 +20,8 @@ namespace SimhoppGUI
         private DelegateGetContest eventGetContest;
         private DelegateStartServer eventStartServer;
         private DelegateSetJudgePoint eventSetJudgePoint;
+        private DelegateSetDiverMessage eventSetDiverMessage;
+        private DelegateGetIPForServer eventGetIPForServer;
 
         private readonly int contestId;
         private readonly Contest contest;
@@ -64,7 +66,9 @@ namespace SimhoppGUI
             DelegateGetContest eventGetContest,
             int contestId,
             DelegateStartServer eventStartServer,
-            DelegateSetJudgePoint eventSetJudgePoint)
+            DelegateSetJudgePoint eventSetJudgePoint,
+            DelegateSetDiverMessage eventSetDiverMessage,
+            DelegateGetIPForServer eventGetIPForServer)
         {
             InitializeComponent();
 
@@ -74,6 +78,8 @@ namespace SimhoppGUI
             this.eventGetContest = eventGetContest;
             this.eventStartServer = eventStartServer;
             this.eventSetJudgePoint = eventSetJudgePoint;
+            this.eventSetDiverMessage = eventSetDiverMessage;
+            this.eventGetIPForServer = eventGetIPForServer;
 
             this.contestId = contestId;
             this.contest = eventGetContest(contestId);
@@ -95,6 +101,20 @@ namespace SimhoppGUI
             ResultDataGridView.DataSource = liveResultList;
 
             eventStartServer();
+
+            if (listenerThread != null)
+            {
+                return;
+            }
+
+            listenerThread = new Thread(ReadPointsFromJudges);
+            listenerThread.Start();
+            listenerThread.IsBackground = true;
+
+            eventSetDiverMessage(contest.Name, contest.GetParticipant(participantNo).DiverName,
+                TrickNameLabel.Text, Convert.ToDouble(DifficultyValueLabel.Text));
+
+            IPValueLabel.Text = eventGetIPForServer();
 
             var judgesList = contest.GetJudgesList();
             foreach (var judge in judgesList)
@@ -291,9 +311,14 @@ namespace SimhoppGUI
                     CalculateAndUpdatePoints();
                     participantNo++;
                 }
+
                 UpdateLiveResultList();
                 ResetJudgePointField();
                 UpdateDiverInformation();
+
+                eventSetDiverMessage(contest.Name, contest.GetParticipant(participantNo).DiverName,
+                    TrickNameLabel.Text, Convert.ToDouble(DifficultyValueLabel.Text));
+                eventSendDataToClient();
             }
             else
             {
@@ -317,6 +342,11 @@ namespace SimhoppGUI
             contest.GetParticipant(participantNo).CalculatePoints();
             contest.GetParticipant(participantNo).UpdateTotalPoints(contest.GetTrickDifficultyFromTrickHashTable(DiverTrickName));
             DiverPoints = contest.GetParticipant(participantNo).TotalPoints.ToString();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

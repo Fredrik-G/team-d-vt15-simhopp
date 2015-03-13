@@ -70,12 +70,13 @@ namespace Simhopp.Model
         #region Server methods
 
         void HandleMessage();
+        void SetDiverMessage(string contestName, string diverName, string trickName, double trickDifficulty);
         void SendDataToClient();
         ClientObjectData GetFirstClientObjectData();
+        string GetIPForServer();
 
         void StartServer();
+
         #endregion
-
-
     }
 }

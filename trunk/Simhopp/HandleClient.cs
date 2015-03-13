@@ -15,14 +15,35 @@ namespace Simhopp
     /// </summary>
     class HandleClient
     {
-        TcpClient clientSocket;
-        bool clientConnectedToServer;
+        #region Data
+
+        private TcpClient clientSocket;
+        private bool clientConnectedToServer;
         private Queue<ClientObjectData> messageQueue;
+
+        #endregion
+
+        #region Properties
+
+        public TcpClient ClientSocket
+        {
+            get { return clientSocket; }
+        }
+
+        #endregion
+
+
+        #region Constructor
 
         public HandleClient(ref Queue<ClientObjectData> messageQueue)
         {
             this.messageQueue = messageQueue;
         }
+
+        #endregion
+
+        #region Methods
+
         /// <summary>
         /// Starts a connection to the Client
         /// </summary>
@@ -31,6 +52,7 @@ namespace Simhopp
         {
             this.clientSocket = inClientSocket;
             var clientThread = new Thread(HandleMessages);
+            clientThread.IsBackground = true;
             this.clientConnectedToServer = true;
             clientThread.Start();
         }
@@ -44,24 +66,24 @@ namespace Simhopp
             var message = new ClientObjectData();
             //Byte[] sendBytes = null;
 
-            while(clientConnectedToServer)
+            while (clientConnectedToServer)
             {
                 try
                 {
                     var dataFromClient = string.Empty;
                     var networkStream = clientSocket.GetStream();
-                    networkStream.Read(bytesFrom, 0, (int)clientSocket.ReceiveBufferSize);
-                    dataFromClient = System.Text.Encoding.ASCII.GetString(bytesFrom);
+                    networkStream.Read(bytesFrom, 0, (int) clientSocket.ReceiveBufferSize);
+                    dataFromClient = Encoding.ASCII.GetString(bytesFrom);
                     dataFromClient = dataFromClient.Substring(0, dataFromClient.IndexOf("$"));
                     using (TextReader reader = new StringReader(dataFromClient))
                     {
-                        var xmlS = new XmlSerializer(typeof(ClientObjectData));
-                        message = (ClientObjectData)xmlS.Deserialize(reader);
+                        var xmlS = new XmlSerializer(typeof (ClientObjectData));
+                        message = (ClientObjectData) xmlS.Deserialize(reader);
                     }
                     //Console.WriteLine(" >> From client: " + message.Ssn + " " + message.Point);
                     messageQueue.Enqueue(message);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     //Client Disconnecting/Closing Client/Fatal error
                     //Console.WriteLine(" >> Client Disconnected");
@@ -70,5 +92,8 @@ namespace Simhopp
                 }
             }
         }
+
+        #endregion
+
     }
 }

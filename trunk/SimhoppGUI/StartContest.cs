@@ -32,6 +32,8 @@ namespace SimhoppGUI
         private DelegateGetTrickFromParticipant eventGetTrickFromParticipant;
         private DelegateStartServer eventStartServer;
         private DelegateSetJudgePoint eventSetJudgePoint;
+        private DelegateSetDiverMessage eventSetDiverMessage;
+        private DelegateGetIPForServer eventGetIPForServer;
 
         DataGridViewComboBoxColumn trick1ComboBoxColumn = new DataGridViewComboBoxColumn();
         DataGridViewComboBoxColumn trick2ComboBoxColumn = new DataGridViewComboBoxColumn();
@@ -61,7 +63,9 @@ namespace SimhoppGUI
                 DelegateAddTrickToParticipant eventAddTrickToParticipant,
                 DelegateGetTrickFromParticipant eventGetTrickFromParticipant,
                 DelegateStartServer eventStartServer,
-                DelegateSetJudgePoint eventSetJudgePoint
+                DelegateSetJudgePoint eventSetJudgePoint,
+                DelegateSetDiverMessage eventSetDiverMessage,
+                DelegateGetIPForServer eventGetIPForServer
             )
         {
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -86,6 +90,8 @@ namespace SimhoppGUI
             this.eventGetTrickFromParticipant = eventGetTrickFromParticipant;
             this.eventStartServer = eventStartServer;
             this.eventSetJudgePoint = eventSetJudgePoint;
+            this.eventSetDiverMessage = eventSetDiverMessage;
+            this.eventGetIPForServer = eventGetIPForServer;
         }
         #endregion
 
@@ -529,7 +535,9 @@ namespace SimhoppGUI
                                                 eventGetContest, 
                                                 Convert.ToInt16(contestRow.Cells["Id"].Value),
                                                 eventStartServer,
-                                                eventSetJudgePoint))
+                                                eventSetJudgePoint,
+                                                eventSetDiverMessage,
+                                                eventGetIPForServer))
             {
                 if (liveFeed.ShowDialog(this) == DialogResult.OK)
                 {
