@@ -15,5 +15,16 @@ namespace Simhopp
                 MessageBoxDefaultButton.Button1
             );
         }
+        public static void CreateInfoBox(string message)
+        {
+            MessageBox.Show
+            (
+                message,//text
+                "Information",//title
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning,
+                MessageBoxDefaultButton.Button1
+            );
+        }
     }
 }
