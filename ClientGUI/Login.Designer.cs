@@ -78,7 +78,7 @@ namespace ClientGUI
             this.PasswordTB.PasswordChar = '*';
             this.PasswordTB.Size = new System.Drawing.Size(119, 20);
             this.PasswordTB.TabIndex = 3;
-            this.PasswordTB.Text = "Password";
+            this.PasswordTB.Text = "password";
             this.PasswordTB.UseSystemPasswordChar = true;
             this.PasswordTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckEnterOrEscape);
             // 

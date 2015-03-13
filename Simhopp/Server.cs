@@ -1,10 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Reflection;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Xml.Serialization;
+using Simhopp.Model;
 
 namespace Simhopp
 {
@@ -18,8 +24,12 @@ namespace Simhopp
         private TcpListener serverSocket;
         private Queue<ClientObjectData> messageQueue = new Queue<ClientObjectData>();
         private ServerObjectData latestMessage;
-        List<HandleClient> handleClientsList = new List<HandleClient>();
+        private List<HandleClient> handleClientsList = new List<HandleClient>();
+        private BindingList<Judge> judgeList = new BindingList<Judge>();
         private bool isServerStarted;
+
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         #endregion
 
         #region constructors
@@ -53,6 +63,15 @@ namespace Simhopp
         }
 
         /// <summary>
+        /// Set judges.
+        /// </summary>
+        /// <param name="judgeList"></param>
+        public void SetJudges(ref BindingList<Judge> judgeList)
+        {
+            this.judgeList = judgeList;
+        }
+
+        /// <summary>
         /// Function for listening for connections and accepting them.
         /// </summary>
         private void ListenerLoop()
@@ -65,11 +84,15 @@ namespace Simhopp
                 clientSocket = serverSocket.AcceptTcpClient();
                 var dataFromClient = string.Empty;
                 var networkStream = clientSocket.GetStream();
-                networkStream.Read(bytesFrom, 0, (int) clientSocket.ReceiveBufferSize);
+                networkStream.Read(bytesFrom, 0, clientSocket.ReceiveBufferSize);
                 dataFromClient = Encoding.ASCII.GetString(bytesFrom);
-                //dataFromClient = dataFromClient.Substring(0, dataFromClient.IndexOf("$"));
-                dataFromClient = dataFromClient.Substring(dataFromClient.IndexOf("$") + 1, dataFromClient.IndexOf("#") - dataFromClient.IndexOf("$") - 1);
-                if (dataFromClient.Equals("Password"))
+                ssn = dataFromClient.Substring(0, dataFromClient.IndexOf("$"));
+                password = dataFromClient.Substring(dataFromClient.IndexOf("$") + 1, dataFromClient.IndexOf("#") - dataFromClient.IndexOf("$") - 1);
+
+                var judge = judgeList.SingleOrDefault(x => x.SSN == ssn);
+
+
+                if (judge != null && judge.CalculateHashAndReturn(password) == judge.Hash)
                 {
                     SendConnectionAnswer("Accepted");
                     var handleClient = new HandleClient(ref messageQueue);
@@ -77,11 +100,13 @@ namespace Simhopp
                     handleClient.StartClient(clientSocket);
                     SendDataToNewClient();
                 }
+
                 else
                 {
-                    SendConnectionAnswer("NotAccepted");
+                    SendConnectionAnswer("Not Accepted");
                     clientSocket.Close();
                 }
+
             }
         }
 
@@ -121,12 +146,14 @@ namespace Simhopp
                 var networkStream = client.ClientSocket.GetStream();
                 string serializedString;
                 var asciiEncoder = new ASCIIEncoding();
+
                 using (var stream = new MemoryStream())
                 {
                     var xmlS = new XmlSerializer(typeof(ServerObjectData));
                     xmlS.Serialize(stream, latestMessage);
                     serializedString = Encoding.UTF8.GetString(stream.ToArray());
                 }
+
                 var outStream = asciiEncoder.GetBytes(serializedString + "$");
                 networkStream.Write(outStream, 0, outStream.Length);
                 networkStream.Flush();
