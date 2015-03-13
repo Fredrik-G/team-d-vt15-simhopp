@@ -40,7 +40,7 @@ namespace Simhopp
         /// </summary>
         public Simhopp()
         {
-           // databaseController = new DatabaseController(@"m:\My Documents\Visual Studio 2013\Projects\Simhopp\Simhopp\simhoppTestDB.db");
+            // databaseController = new DatabaseController(@"m:\My Documents\Visual Studio 2013\Projects\Simhopp\Simhopp\simhoppTestDB.db");
             databaseController = new DatabaseController(@"m:\desktop\simhopptestdb.db");
             databaseController.ConnectToDatabase();
         }
@@ -53,7 +53,7 @@ namespace Simhopp
         /// </summary>
         /// <returns></returns>
         public BindingList<Contest> GetContestsList()
-        {           
+        {
             return contestList;
         }
 
@@ -668,14 +668,26 @@ namespace Simhopp
 
         }
 
+        public void SetDiverMessage(string contestName, string diverName, string trickName, double trickDifficulty)
+        {
+            server.SetDiverMessage(contestName, diverName, trickName, trickDifficulty);
+        }
+
         public void SendDataToClient()
         {
-             server.SendDataToClient();
+            server.SendDataToClient();
         }
+
         public ClientObjectData GetFirstClientObjectData()
         {
             return server.GetFirstClientObjectData();
         }
+
+        public string GetIPForServer()
+        {
+            return server.GetIPForServer();
+        }
+        #endregion
 
         /// <summary>
         /// Sets a judge point for a given diver in a given contest.
@@ -704,7 +716,7 @@ namespace Simhopp
             return selectedContest.IsAllJudgePointSet(diverSsn, jumpNo);
         }
 
-        #endregion
+
 
         #region IDisposable methods
 

@@ -48,9 +48,11 @@ namespace Simhopp.Presenter
             this.View.EventUpdateDiver += UpdateDiver;
 
             this.View.EventHandleMessage += HandleMessage;
-            this.View.EventSendDataToClient += SendDataToClient;
             this.View.EventGetFirstClientObjectData += GetFirstClientObjectData;
             this.View.EventStartServer += StartServer;
+            this.View.EventSendDataToClient += SendDataToClient;
+            this.View.EventSetDiverMessage += SetDiverMessage;
+            this.View.EventGetIPForServer += GetIPForServer;
 
             this.View.EventReadContestsFromDatabase += ReadContestsFromDatabase;
             this.View.EventAddTrickToParticipant += AddTrickToParticipant;
@@ -232,10 +234,6 @@ namespace Simhopp.Presenter
         {
             this.Model.HandleMessage();
         }
-        public void SendDataToClient()
-        {
-            this.Model.SendDataToClient();
-        }
 
         public ClientObjectData GetFirstClientObjectData()
         {
@@ -245,6 +243,21 @@ namespace Simhopp.Presenter
         public void StartServer()
         {
             this.Model.StartServer();
+        }
+
+        public void SetDiverMessage(string contestName, string diverName, string trickName, double trickDifficulty)
+        {
+            this.Model.SetDiverMessage(contestName, diverName, trickName, trickDifficulty);
+        }
+
+        public void SendDataToClient()
+        {
+            this.Model.SendDataToClient();
+        }
+
+        public string GetIPForServer()
+        {
+            return this.Model.GetIPForServer();
         }
 
         #endregion

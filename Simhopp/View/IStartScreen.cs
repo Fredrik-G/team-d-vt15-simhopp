@@ -72,9 +72,11 @@ namespace Simhopp.View
 
     #region Server methods
     public delegate void DelegateHandleMessage();
+    public delegate void DelegateSetDiverMessage(string contestName, string diverName, string trickName, double trickDifficulty);
     public delegate void DelegateSendDataToClient();
     public delegate ClientObjectData DelegateGetFirstClientObjectData();
     public delegate void DelegateStartServer();
+    public delegate string DelegateGetIPForServer();
 
     #endregion
 
@@ -144,9 +146,11 @@ namespace Simhopp.View
         #region Server methods
 
         event DelegateHandleMessage EventHandleMessage;
+        event DelegateSetDiverMessage EventSetDiverMessage;
         event DelegateSendDataToClient EventSendDataToClient;
         event DelegateGetFirstClientObjectData EventGetFirstClientObjectData;
         event DelegateStartServer EventStartServer;
+        event DelegateGetIPForServer EventGetIPForServer;
 
         #endregion
 
