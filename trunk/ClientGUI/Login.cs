@@ -48,8 +48,7 @@ namespace ClientGUI
             {
                 try
                 {
-                    var ip = IPConnectionTB.Text;
-                    eventConnectToServer(ip);
+                    eventConnectToServer(IPConnectionTB.Text, UserSSNTB.Text, PasswordTB.Text);
                     
                     Close();
                 }

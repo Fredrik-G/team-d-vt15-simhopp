@@ -8,7 +8,7 @@ namespace ClientGUI.Model
 {
     public interface IClient
     {
-        void ConnectToServer(string ip);
+        void ConnectToServer(string ip, string ssn, string password);
         void SendDataToServer(string ssn, double point);
         void Disconnect();
         ServerObjectData GetFirstServerObjectData();
