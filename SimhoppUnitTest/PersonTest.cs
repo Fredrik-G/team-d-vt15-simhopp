@@ -24,7 +24,7 @@ namespace SimhoppUnitTest
         {
             Diver p1 = new Diver("Jimmy Makkonen", "Sweden", "20050101-1337");
             Diver p2 = new Diver("Fredrik-Gummus", "USA", "123-20-5555");
-            Judge p3 = new Judge("Judge Judy", "USA", "123-20-5555");
+            Judge p3 = new Judge("Judge Judy", "USA", "123-20-5555", "password");
 
             Assert.AreEqual(p1.Name, "Jimmy Makkonen");
             Assert.AreNotEqual(p1.Name, "Fredrik-Gummus");
@@ -41,7 +41,7 @@ namespace SimhoppUnitTest
         {
             Diver p1 = new Diver("Jimmy Makkonen", "Sweden", "20050101-1337");
             Diver p2 = new Diver("Fredrik-Gummus", "USA", "123-20-5555");
-            Judge p3 = new Judge("Judge Judy", "USA", "123-20-5555");
+            Judge p3 = new Judge("Judge Judy", "USA", "123-20-5555", "password");
 
             Diver n1 = new Diver("J..Makkonen", "Swe.den", "20050101-137");
             Diver n2 = new Diver("-Gummus", "US--A", "123205555");

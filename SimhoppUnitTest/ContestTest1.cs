@@ -71,7 +71,7 @@ namespace SimhoppUnitTest
             Diver d1 = new Diver("Sven", "USA", "123-20-5555");
             c1.AddParticipant(d1);
             Assert.AreEqual(1, c1.GetNumberOfParticipants());
-            Diver d2 = new Diver("Svente", "Fin", "123-20-5555");
+            Diver d2 = new Diver("Svente", "Fin", "123-20-5559");
             c1.AddParticipant(d2);
             Assert.AreEqual(2, c1.GetNumberOfParticipants());
 
@@ -86,17 +86,15 @@ namespace SimhoppUnitTest
         public void AddJudgeToList()
         {
             Contest c1 = new Contest("Jerusalem", "JVM", "05/04/2015", "05/04/2015");
-            Judge j1 = new Judge("heppa", "Bor", "123-20-5551");
-            Judge j2 = new Judge("heppa", "Bor", "123-20-5552");
-            Judge j3 = new Judge("heppa", "Bor", "123-20-5553");
-            Judge j4 = new Judge("heppa", "Bor", "123-20-5554");
-            Judge j5 = new Judge("heppa", "Bor", "123-20-5555");
-            Judge j6 = new Judge("heppa", "Bor", "123-20-5556");
-            Judge j7 = new Judge("heppa", "Bor", "123-20-5557");
-            Judge j8 = new Judge("heppa", "Bor", "123-20-5558");
-            Judge j9 = new Judge("", "Bor", "123-20-5559");
-            Judge j10 = new Judge("heppa", "", "123-20-5550");
-            Judge j11 = new Judge("heppa", "Bor", "");
+            Judge j1 = new Judge("heppa", "Bor", "123-20-5551", "password");
+            Judge j2 = new Judge("heppa", "Bor", "123-20-5552", "password");
+            Judge j3 = new Judge("heppa", "Bor", "123-20-5553", "password");
+            Judge j4 = new Judge("heppa", "Bor", "123-20-5554", "password");
+            Judge j5 = new Judge("heppa", "Bor", "123-20-5555", "password");
+            Judge j6 = new Judge("heppa", "Bor", "123-20-5556", "password");
+            Judge j7 = new Judge("heppa", "Bor", "123-20-5557", "password");
+            Judge j8 = new Judge("heppa", "Bor", "123-20-5558", "password");
+            Judge j9 = new Judge("heppa", "Bor", "123-20-5558", "password");
 
             c1.AddJudge(j8);
             Assert.AreEqual(1, c1.GetNumberOfJudges());
@@ -104,7 +102,7 @@ namespace SimhoppUnitTest
             c1.AddJudge(j9);
             Assert.AreEqual(1, c1.GetNumberOfJudges());
 
-        //    Assert.DoesNotThrow(() => c1.AddJudge(j9));
+            //    Assert.DoesNotThrow(() => c1.AddJudge(j9));
 
             //!!!!!!!!!!! AddJudge fångar alla exception, så testen nedanför funkar inte.!!!!!!!!!!!!!!!!!!!!
 
@@ -142,7 +140,7 @@ namespace SimhoppUnitTest
             for (var i = 0; i < 7; i++)
             {
                 string asd = Convert.ToString("123-20-555" + i);
-                Judge j1 = new Judge("heppa", "Bor", asd);
+                Judge j1 = new Judge("heppa", "Bor", asd, "password");
                 c1.AddJudge(j1);
                 c2.AddJudge(j1);
             }
@@ -159,23 +157,20 @@ namespace SimhoppUnitTest
 
             Assert.AreEqual(3, c1.GetNumberOfParticipants());
 
-            for (int i = 0; i < 15; i++)
-            {
-                c1.AddParticipant(d3);
-                c1.GetParticipants()[i].TotalPoints = i;
-                c1.GetParticipants()[i].TotalPoints = i;
-            }
-            
-            Assert.AreEqual(0, c1.GetParticipants()[0].TotalPoints);
-            Assert.AreEqual(2, c1.GetParticipants()[2].TotalPoints);
 
+            c1.GetParticipants()[0].TotalPoints = 4;
+            c1.GetParticipants()[1].TotalPoints = 5;
+            c1.GetParticipants()[2].TotalPoints = 3;
+
+            Assert.AreEqual(4, c1.GetParticipants()[0].TotalPoints);
+            Assert.AreEqual(3, c1.GetParticipants()[2].TotalPoints);
 
             var participants = c1.GetParticipants();
             c1.SortParticipants(ref participants, true);
 
-            Assert.AreEqual(14, c1.GetParticipants()[0].TotalPoints);
-            Assert.AreEqual(13, c1.GetParticipants()[1].TotalPoints);
-            Assert.AreEqual(12, c1.GetParticipants()[2].TotalPoints);
+            Assert.AreEqual(5, c1.GetParticipants()[0].TotalPoints);
+            Assert.AreEqual(4, c1.GetParticipants()[1].TotalPoints);
+            Assert.AreEqual(3, c1.GetParticipants()[2].TotalPoints);
         }
 
         [Test]
@@ -185,7 +180,7 @@ namespace SimhoppUnitTest
             for (var i = 0; i < 7; i++)
             {
                 string asd = Convert.ToString("123-20-555" + i);
-                Judge j1 = new Judge("heppa", "Bor", asd);
+                Judge j1 = new Judge("heppa", "Bor", asd, "password");
                 c1.AddJudge(j1);
             }
 
