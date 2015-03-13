@@ -77,15 +77,6 @@ namespace SimhoppGUI
 
             this.contestId = contestId;
             this.contest = eventGetContest(contestId);
-            if (listenerThread != null)
-            {
-                return;
-            }
-
-            listenerThread = new Thread(ReadPointsFromJudges);
-            listenerThread.Start();
-            listenerThread.IsBackground = true;
-
         }
 
         #endregion
@@ -97,31 +88,12 @@ namespace SimhoppGUI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        /*private void LiveFeed_Load(object sender, EventArgs e)
+        private void LiveFeed_Load(object sender, EventArgs e)
         {
             UpdateDiverInformation();
-
             UpdateLiveResultList();
             ResultDataGridView.DataSource = liveResultList;
 
-            eventStartServer();
-
-
-            //ResultDataGridView.DataSource = resultList;
-
-            //ResultDataGridView.DataSource = contest.GetDiversList();
-
-            //eventHandleMessage();
-            //eventSendDataToClient();          
-            //var asd = eventGetFirstClientObjectData();
-            listenerThread = new Thread(ReadPointsFromJudges);
-            listenerThread.Start();
-            listenerThread.IsBackground = true;
-            eventSendDataToClient();
-        }*/
-
-        private void LiveFeed_Load(object sender, EventArgs e)
-        {
             eventStartServer();
 
             var judgesList = contest.GetJudgesList();
