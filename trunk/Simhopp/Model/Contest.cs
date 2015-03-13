@@ -37,7 +37,6 @@ namespace Simhopp.Model
             this.name = "";
             this.startDate = "";
             this.EndDate = "";
-            trickList.ReadFromFile("tricklist.txt");
         }
 
         public Contest(string place, string name, string startDate, string endDate)
@@ -47,7 +46,6 @@ namespace Simhopp.Model
             this.name = name;
             this.startDate = startDate;
             this.endDate = endDate;
-            trickList.ReadFromFile("tricklist.txt");
         }
 
         public Contest(int id, string place, string name, string startDate, string endDate)
@@ -57,7 +55,6 @@ namespace Simhopp.Model
             this.name = name;
             this.startDate = startDate;
             this.endDate = endDate;
-            trickList.ReadFromFile("tricklist.txt");
         }
         #endregion
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
@@ -146,6 +147,7 @@ namespace SimhoppGUI
             trick1ComboBoxColumn.ValueMember = "name";
             trick1ComboBoxColumn.Name = "Trick 1";
 
+
             trick2ComboBoxColumn.DataSource = eventGetTrickList();
             trick2ComboBoxColumn.DisplayMember = "name";
             trick2ComboBoxColumn.ValueMember = "name";
@@ -160,15 +162,11 @@ namespace SimhoppGUI
             CurrentDiversDataGridView.Columns.Add(trick2ComboBoxColumn);
             CurrentDiversDataGridView.Columns.Add(trick3ComboBoxColumn);
 
-            //dataGridView1.Columns.Add(trick1ComboBoxColumn);
-            //dataGridView1.Columns.Add(trick2ComboBoxColumn);
-            //dataGridView1.Columns.Add(trick3ComboBoxColumn);
-
-            //dataGridView1.CellValueChanged += CurrentDiversDataGridView_CellValueChanged;
-            //dataGridView1.CurrentCellDirtyStateChanged += CurrentDiversDataGridView_CurrentCellDirtyStateChanged;
-
             CurrentDiversDataGridView.CellValueChanged += CurrentDiversDataGridView_CellValueChanged;
             CurrentDiversDataGridView.CurrentCellDirtyStateChanged += CurrentDiversDataGridView_CurrentCellDirtyStateChanged;
+
+
+            ShowFinishedContestState();
         }
 
         /// <summary>
@@ -221,14 +219,14 @@ namespace SimhoppGUI
                     var personRow = personCell.OwningRow;
 
                     foreach (DataGridViewRow row in CurrentDiversDataGridView.Rows)
-                    {                       
+                    {
                         row.Cells["Trick 1"].Value = eventGetTrickFromParticipant(Convert.ToInt16(contestRow.Cells["Id"].Value), 0, row.Cells["SSN"].Value.ToString());
                         row.Cells["Trick 2"].Value = eventGetTrickFromParticipant(Convert.ToInt16(contestRow.Cells["Id"].Value), 1, row.Cells["SSN"].Value.ToString());
                         row.Cells["Trick 3"].Value = eventGetTrickFromParticipant(Convert.ToInt16(contestRow.Cells["Id"].Value), 2, row.Cells["SSN"].Value.ToString());
-                   }
+                    }
 
 
-                  //  personRow.Cells["Trick 1"].Value = (Trick)(personRow.Cells[trick1ComboBoxColumn.Name] as DataGridViewComboBoxCell).Items[0];
+                    //  personRow.Cells["Trick 1"].Value = (Trick)(personRow.Cells[trick1ComboBoxColumn.Name] as DataGridViewComboBoxCell).Items[0];
 
                     //trick1ComboBoxColumn.DefaultCellStyle.NullValue = eventGetTrickFromParticipant(
                     //        Convert.ToInt16(contestRow.Cells["Id"].Value), 0, personRow.Cells["SSN"].Value.ToString());
@@ -327,7 +325,7 @@ namespace SimhoppGUI
         /// <param name="e"></param>
         private void AddJudgeBtn_Click(object sender, EventArgs e)
         {
-            
+
             try
             {
                 AddPersonToContest(true);
@@ -525,14 +523,20 @@ namespace SimhoppGUI
         /// <param name="e"></param>
         private void StartContestBtn_Click(object sender, EventArgs e)
         {
+            if (!IsAllTricksSet())
+            {
+                MsgBox.CreateInfoBox("All tricks have to be set for all participants.");
+                return;
+            }
+
             var selectedContest = ContestsDataGridView.SelectedCells.Cast<DataGridViewCell>().FirstOrDefault();
             var contestRow = selectedContest.OwningRow;
-            using (new DimIt())
 
-            using (var liveFeed = new LiveFeed(eventGetFirstClientObjectData, 
-                                                eventHandleMessage, 
-                                                eventSendDataToClient, 
-                                                eventGetContest, 
+            using (new DimIt())
+            using (var liveFeed = new LiveFeed(eventGetFirstClientObjectData,
+                                                eventHandleMessage,
+                                                eventSendDataToClient,
+                                                eventGetContest,
                                                 Convert.ToInt16(contestRow.Cells["Id"].Value),
                                                 eventStartServer,
                                                 eventSetJudgePoint,
@@ -603,6 +607,53 @@ namespace SimhoppGUI
 
         #endregion
 
+        /// <summary>
+        /// Checks if all tricks are set for every participant in the selected contest.
+        /// </summary>
+        /// <returns></returns>
+        private bool IsAllTricksSet()
+        {
+            var contestCell = ContestsDataGridView.SelectedCells.Cast<DataGridViewCell>().FirstOrDefault();
+
+            if (contestCell == null)
+            {
+                throw new NullReferenceException("cell is null");
+            }
+
+            foreach (DataGridViewRow row in CurrentDiversDataGridView.Rows)
+            {
+                var contestRow = contestCell.OwningRow;
+
+                for (var trickNo = 0; trickNo < 3; trickNo++)
+                {
+                    var trick = eventGetTrickFromParticipant(Convert.ToInt16(contestRow.Cells["Id"].Value), trickNo,
+                        row.Cells["ssn"].Value.ToString());
+                    if (trick.Equals(""))
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        private void ShowFinishedContestState()
+        {
+           // foreach (DataGridViewRow row in ContestsDataGridView.Rows.Cast<DataGridViewRow>().Where(row => row.Cells["isFinished"].Value.Equals("true")))
+            foreach(DataGridViewRow row in ContestsDataGridView.Rows)
+               
+            {
+                //if(row.Cells["isFinish"])
+                row.DefaultCellStyle.BackColor = Color.DarkSeaGreen;
+            }
+        }
+
+        #region Trick selection
+        /// <summary>
+        /// Adds a trick for a given participant in the selected contest.
+        /// </summary>
+        /// <param name="trickName"></param>
+        /// <param name="trickNo"></param>
         private void AddTrick(string trickName, int trickNo)
         {
             var personCell = CurrentDiversDataGridView.SelectedCells.Cast<DataGridViewCell>().FirstOrDefault();
@@ -622,7 +673,12 @@ namespace SimhoppGUI
                 " for person ssn " + personRow.Cells["ssn"].Value);
         }
 
-        void CurrentDiversDataGridView_CurrentCellDirtyStateChanged(object sender, EventArgs e)
+        /// <summary>
+        /// It's dirty.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CurrentDiversDataGridView_CurrentCellDirtyStateChanged(object sender, EventArgs e)
         {
             if (CurrentDiversDataGridView.IsCurrentCellDirty)
             {
@@ -630,10 +686,14 @@ namespace SimhoppGUI
             }
         }
 
+        /// <summary>
+        /// Occurs when a value in trick combobox is changed.
+        /// Adds the selected trick to the participant.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CurrentDiversDataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {           
-           // if(e.GetType() == System.EventArgs.Empty)
-            // var comboBox = (DataGridViewComboBoxCell)CurrentDiversDataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex];
+        {
             var comboBox = (DataGridViewComboBoxCell)CurrentDiversDataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex];
 
             if (comboBox.Value != null)
@@ -641,5 +701,8 @@ namespace SimhoppGUI
                 AddTrick(comboBox.Value.ToString(), e.ColumnIndex);
             }
         }
+
+        #endregion
+
     }
 }

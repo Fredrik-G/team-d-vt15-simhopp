@@ -984,6 +984,8 @@ namespace Simhopp.Model
                 while (reader.Read())
                 {
                     Contest c = new Contest(Convert.ToInt32(reader["ID"]), Convert.ToString(reader["Place"]), Convert.ToString(reader["Name"]), Convert.ToString(reader["StartDate"]), Convert.ToString(reader["EndDate"]));
+                    c.IsFinished = Convert.ToBoolean(reader["Finished"]); 
+
                     cl.Add(c);
                 }
                 return cl;
