@@ -11,6 +11,7 @@ namespace Simhopp.View
 {
     public delegate void DelegateCreateContest(string place, string name, string startDate, string endDate);
     public delegate void DelegateSetJudgePoint(int contestId, string judgeSsn, string diverSsn, double point, int jumpNo);
+    public delegate void DelegateSaveContestToDatabase(Contest contest);
 
     #region Read methods
 
@@ -79,12 +80,19 @@ namespace Simhopp.View
     public delegate void DelegateStartServer();
     public delegate string DelegateGetIPForServer();
 
+
+    //public delegate void DelegateAddParticipant(Diver diver);
+    //public delegate void DelegateAddJudge(Judge judge);
+    //public delegate double DelegateGetTrickDifficultyFromTrickHashTable(string trickName);
+    //public delegate double DelegateGetResultFromParticipant(string ssn);
+
     #endregion
 
     public interface IStartScreen
     {
         event DelegateCreateContest EventCreateContest;
         event DelegateSetJudgePoint EventSetJudgePoint;
+        event DelegateSaveContestToDatabase EventSaveContestToDatabase;
 
         #region Read methods
 
@@ -143,9 +151,13 @@ namespace Simhopp.View
         event DelegateUpdateJudge EventUpdateJudge;
         event DelegateUpdateDiver EventUpdateDiver;
 
+
+        
+
         #endregion
 
         #region Server methods
+
 
         event DelegateHandleMessage EventHandleMessage;
         event DelegateSetDiverMessage EventSetDiverMessage;

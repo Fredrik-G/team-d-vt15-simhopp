@@ -30,7 +30,7 @@ namespace Simhopp.Model
         {
             try
             {
-                dbConnection = new SQLiteConnection("Data Source=C:/Users/Anders/Database/simhopp.db; Version=3; FailIfMissing=True");
+                dbConnection = new SQLiteConnection(@"Data Source=C:/temp/Simhopp/Simhopp/simhoppTestDB.db; Version=3; FailIfMissing=True");
             }
             #region Exceptions
             catch (SQLiteException sqliteEx)
@@ -1145,7 +1145,7 @@ namespace Simhopp.Model
             }
             try
             {
-                string sql = "UPDATE Contest SET Name = '" + contest.Name + "', Place = '" + contest.Place + "', StartDate = '" + contest.StartDate + "', EndDate = '" + contest.EndDate + "' WHERE ID = '" + contest.Id + "'";
+                string sql = "UPDATE Contest SET Name = '" + contest.Name + "', Place = '" + contest.Place + "', StartDate = '" + contest.StartDate + "', EndDate = '" + contest.EndDate + "', Finished = '" + contest.IsFinished + "' WHERE ID = '" + contest.Id + "'";
                 SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
                 command.ExecuteNonQuery();
 
