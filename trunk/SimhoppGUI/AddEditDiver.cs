@@ -68,18 +68,29 @@ namespace SimhoppGUI
             this.eventRemoveDiverFromList = eventRemoveDiverFromList;
             this.eventGetDiversList = eventGetDiversList;
             this.eventUpdateDiver = eventUpdateDiver;
+        }
 
+        #endregion
+
+        #region Events
+
+        /// <summary>
+        /// Occurs when the form is loaded.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AddEditDiver_Load(object sender, EventArgs e)
+        {
             if (eventGetDiversList != null)
             {
                 DiverDataGridView.DataSource = eventGetDiversList();
                 DiverDataGridView.ReadOnly = true;
                 DiverDataGridView.Columns["Id"].Visible = false;
             }
+
+            //enables keyboard usage.
+            KeyPreview = true;
         }
-
-        #endregion
-
-        #region Events
 
         /// <summary>
         /// Shows the selected diver in the textboxes below.
@@ -280,6 +291,124 @@ namespace SimhoppGUI
 
         #endregion
 
+
+
+        #region Keyboard events
+        /// <summary>
+        /// Occurs when a key is pressed.
+        /// Shows tooltip if controll is pressed.
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <param name="keyData"></param>
+        /// <returns></returns>
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (ModifierKeys != Keys.Control)
+            {
+                return base.ProcessCmdKey(ref msg, keyData);
+            }
+
+            DiversDataGridToolTip.Show("Ctrl+1", DiverDataGridHiddenLabel);
+            EditDiverToolTip.Show("Ctrl+2", EditDiverHiddenLabel);
+            AddDiverToolTip.Show("Ctrl+3", AddDiverHiddenLabel);
+
+            //Man ska bara behöva en tooltip, men jag fick inte det att fungera..
+
+            PerformClick(keyData);
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        /// <summary>
+        /// Performs a click on corresponding button based on keyboard shortkeys.
+        /// </summary>
+        /// <param name="keyData"></param>
+        private void PerformClick(Keys keyData)
+        {
+            switch (keyData)
+            {
+                case (Keys.Control | Keys.D1):
+                    DiverDataGridView.Focus();
+                    break;
+                case (Keys.Control | Keys.D2):
+                    tabControlAddEdit.SelectTab(tabPageEditDiver);
+                    UpdateDiverNameTb.Focus();
+                    break;
+                case (Keys.Control | Keys.D3):
+                    tabControlAddEdit.SelectTab(tabPageAddDiver);
+                    AddDiverNameTb.Focus();
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Occurs when a key is released.
+        /// Resets all tooltips.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AddEditDiver_KeyUp(object sender, KeyEventArgs e)
+        {
+            DiversDataGridToolTip.RemoveAll();
+            EditDiverToolTip.RemoveAll();
+            AddDiverToolTip.RemoveAll();
+        }
+
+        /// <summary>
+        /// Occurs when a key is pressed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AddEditDiver_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (tabControlAddEdit.SelectedTab == tabPageEditDiver)
+            {
+                UpdateCheckEnterOrEscape(e.KeyData);
+            }
+            else if (tabControlAddEdit.SelectedTab == tabPageAddDiver)
+            {
+                AddCheckEnterOrEscape(e.KeyData);
+            }
+        }
+
+        /// <summary>
+        /// Checks if enter was pressed and call event to add a diver.
+        /// Also checks if escape was pressed and closes this form.
+        /// </summary>
+        /// <param name="key"></param>
+        private void AddCheckEnterOrEscape(Keys key)
+        {
+            switch (key)
+            {
+                case Keys.Enter:
+                    AddDiverButton_Click(null, null);
+                    break;
+                case Keys.Escape:
+                    Close();
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Checks if enter was pressed and call event to update diver.
+        /// Also checks if escape was pressed and closes this form.
+        /// </summary>
+        /// <param name="key"></param>
+        private void UpdateCheckEnterOrEscape(Keys key)
+        {
+            switch (key)
+            {
+                case Keys.Enter:
+                    UpdateDiverButton_Click(null, null);
+                    break;
+                case Keys.Escape:
+                    Close();
+                    break;
+            }
+        }
+
+        #endregion
+
         #region Click Textboxes
 
         private void UpdateDiverNameTb_Click(object sender, EventArgs e)
@@ -335,5 +464,6 @@ namespace SimhoppGUI
         }
         #endregion
 
+        
     }
 }

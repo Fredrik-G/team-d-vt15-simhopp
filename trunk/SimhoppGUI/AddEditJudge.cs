@@ -15,6 +15,7 @@ namespace SimhoppGUI
         #region Data
         private DelegateAddJudgeToList eventAddJudgeToList;
         private DelegateRemoveJudgeFromList eventRemoveJudgeFromList;
+        private DelegateGetJudgesList eventGetJudgesList;
         private DelegateUpdateJudge eventUpdateJudge;
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
@@ -69,8 +70,21 @@ namespace SimhoppGUI
 
             this.eventAddJudgeToList = eventAddJudgeToList;
             this.eventRemoveJudgeFromList = eventRemoveJudgeFromList;
+            this.eventGetJudgesList = eventGetJudgesList;
             this.eventUpdateJudge = eventUpdateJudge;
+        }
 
+        #endregion
+
+        #region Events
+
+        /// <summary>
+        /// Occurs once the form is loaded.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AddEditJudge_Load(object sender, EventArgs e)
+        {
             if (eventGetJudgesList != null)
             {
                 JudgesDataGridView.DataSource = eventGetJudgesList();
@@ -78,13 +92,11 @@ namespace SimhoppGUI
                 JudgesDataGridView.Columns["Id"].Visible = false;
                 JudgesDataGridView.Columns["Salt"].Visible = false;
                 JudgesDataGridView.Columns["Hash"].Visible = false;
-
             }
+
+            //enables keyboard usage.
+            KeyPreview = true;
         }
-
-        #endregion
-
-        #region Events
 
         /// <summary>
         /// Shows the selected judge in the textboxes below.
@@ -246,22 +258,102 @@ namespace SimhoppGUI
             NameErrorProvider.Clear();
             JudgesDataGridView_SelectionChanged(null, null);
         }
+  
+        #endregion
+
+        #region Keyboard events
+        /// <summary>
+        /// Occurs when a key is pressed.
+        /// Shows tooltip if controll is pressed.
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <param name="keyData"></param>
+        /// <returns></returns>
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (ModifierKeys != Keys.Control)
+            {
+                return base.ProcessCmdKey(ref msg, keyData);
+            }
+
+            JudgesDataGridToolTip.Show("Ctrl+1", JudgesDataGridHiddenLabel);
+            EditJudgeToolTip.Show("Ctrl+2", EditJudgeHiddenLabel);
+            AddJudgeToolTip.Show("Ctrl+3", AddJudgeHiddenLabel);
+            
+            //Man ska bara behöva en tooltip, men jag fick inte det att fungera..
+
+            PerformClick(keyData);
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        /// <summary>
+        /// Performs a click on corresponding button based on keyboard shortkeys.
+        /// </summary>
+        /// <param name="keyData"></param>
+        private void PerformClick(Keys keyData)
+        {
+            switch (keyData)
+            {
+                case (Keys.Control | Keys.D1):
+                    JudgesDataGridView.Focus();
+                    break;
+                case (Keys.Control | Keys.D2):
+                    tabControlAddEdit.SelectTab(tabPageEditJudge);
+                    UpdateJudgeNameTb.Focus();
+                    break;
+                case (Keys.Control | Keys.D3):
+                    tabControlAddEdit.SelectTab(tabPageAddJudge);
+                    AddJudgeNameTb.Focus();
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Occurs when a key is released.
+        /// Resets all tooltips.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AddEditJudge_KeyUp(object sender, KeyEventArgs e)
+        {
+            JudgesDataGridToolTip.RemoveAll();
+            EditJudgeToolTip.RemoveAll();
+            AddJudgeToolTip.RemoveAll();
+        }
+
+        /// <summary>
+        /// Occurs when a key is pressed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AddEditJudge_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (tabControlAddEdit.SelectedTab == tabPageEditJudge)
+            {
+                UpdateCheckEnterOrEscape(e.KeyData);
+            }
+            else if (tabControlAddEdit.SelectedTab == tabPageAddJudge)
+            {
+                AddCheckEnterOrEscape(e.KeyData);
+            }
+        }
 
         /// <summary>
         /// Checks if enter was pressed and call event to add judge.
         /// Also checks if escape was pressed and closes this form.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void AddCheckEnterOrEscape(object sender, KeyPressEventArgs e)
+        /// <param name="key"></param>
+        private void AddCheckEnterOrEscape(Keys key)
         {
-            if (e.KeyChar == (char)13)
+            switch (key)
             {
-                AddJudgeButton_Click(null, null);
-            }
-            else if (e.KeyChar == (char)27)
-            {
-                Close();
+                case Keys.Enter:
+                    AddJudgeButton_Click(null, null);
+                    break;
+                case Keys.Escape:
+                    Close();
+                    break;
             }
         }
 
@@ -269,17 +361,17 @@ namespace SimhoppGUI
         /// Checks if enter was pressed and call event to update judge.
         /// Also checks if escape was pressed and closes this form.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void UpdateCheckEnterOrEscape(object sender, KeyPressEventArgs e)
+        /// <param name="key"></param>
+        private void UpdateCheckEnterOrEscape(Keys key)
         {
-            if (e.KeyChar == (char)13)
+            switch (key)
             {
-                UpdateJudgeButton_Click(null, null);
-            }
-            else if (e.KeyChar == (char)27)
-            {
-                Close();
+                case Keys.Enter:
+                    UpdateJudgeButton_Click(null, null);
+                    break;
+                case Keys.Escape:
+                    Close();
+                    break;
             }
         }
 
@@ -339,6 +431,5 @@ namespace SimhoppGUI
             Close();
         }
         #endregion
-
     }
 }
