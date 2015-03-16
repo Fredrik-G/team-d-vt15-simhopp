@@ -49,6 +49,7 @@
             this.StartContestBtn = new System.Windows.Forms.Button();
             this.EditContestToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.StartContestToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.viewResultButton = new System.Windows.Forms.Button();
             this.JudgesDiversTabControl.SuspendLayout();
             this.JudgeTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GlobalJudgesDataGridView)).BeginInit();
@@ -121,7 +122,7 @@
             this.GlobalJudgesDataGridView.ReadOnly = true;
             this.GlobalJudgesDataGridView.RowHeadersWidth = 30;
             this.GlobalJudgesDataGridView.Size = new System.Drawing.Size(340, 227);
-            this.GlobalJudgesDataGridView.TabIndex = 5;
+            this.GlobalJudgesDataGridView.TabIndex = 4;
             this.GlobalJudgesDataGridView.TabStop = false;
             // 
             // CurrentJudgesDataGridView
@@ -292,20 +293,31 @@
             // 
             // StartContestBtn
             // 
-            this.StartContestBtn.Location = new System.Drawing.Point(588, 137);
+            this.StartContestBtn.Location = new System.Drawing.Point(588, 108);
             this.StartContestBtn.Name = "StartContestBtn";
             this.StartContestBtn.Size = new System.Drawing.Size(75, 23);
-            this.StartContestBtn.TabIndex = 6;
+            this.StartContestBtn.TabIndex = 5;
             this.StartContestBtn.Text = "Start Contest";
             this.StartContestToolTip.SetToolTip(this.StartContestBtn, "Ctrl+S");
             this.StartContestBtn.UseVisualStyleBackColor = true;
             this.StartContestBtn.Click += new System.EventHandler(this.StartContestBtn_Click);
+            // 
+            // viewResultButton
+            // 
+            this.viewResultButton.Location = new System.Drawing.Point(588, 137);
+            this.viewResultButton.Name = "viewResultButton";
+            this.viewResultButton.Size = new System.Drawing.Size(75, 23);
+            this.viewResultButton.TabIndex = 6;
+            this.viewResultButton.Text = "View Result";
+            this.viewResultButton.UseVisualStyleBackColor = true;
+            this.viewResultButton.Click += new System.EventHandler(this.viewResultButton_Click);
             // 
             // StartContest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1060, 463);
+            this.Controls.Add(this.viewResultButton);
             this.Controls.Add(this.StartContestBtn);
             this.Controls.Add(this.EditContestBtn);
             this.Controls.Add(this.GlobalDiversLabel);
@@ -355,5 +367,6 @@
         private System.Windows.Forms.Button StartContestBtn;
         private System.Windows.Forms.ToolTip EditContestToolTip;
         private System.Windows.Forms.ToolTip StartContestToolTip;
+        private System.Windows.Forms.Button viewResultButton;
     }
 }
