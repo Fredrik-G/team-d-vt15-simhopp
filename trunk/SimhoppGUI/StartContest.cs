@@ -36,6 +36,7 @@ namespace SimhoppGUI
         private DelegateSetDiverMessage eventSetDiverMessage;
         private DelegateGetIPForServer eventGetIPForServer;
         private DelegateGetTrickDifficultyFromTrickHashTable eventGetTrickDifficultyFromTrickHashTable;
+        private DelegateSaveContestToDatabase eventSaveContestToDatabase;
 
         DataGridViewComboBoxColumn trick1ComboBoxColumn = new DataGridViewComboBoxColumn();
         DataGridViewComboBoxColumn trick2ComboBoxColumn = new DataGridViewComboBoxColumn();
@@ -68,7 +69,8 @@ namespace SimhoppGUI
                 DelegateSetJudgePoint eventSetJudgePoint,
                 DelegateSetDiverMessage eventSetDiverMessage,
                 DelegateGetIPForServer eventGetIPForServer,
-                DelegateGetTrickDifficultyFromTrickHashTable eventGetTrickDifficultyFromTrickHashTable
+                DelegateGetTrickDifficultyFromTrickHashTable eventGetTrickDifficultyFromTrickHashTable,
+                DelegateSaveContestToDatabase eventSaveContestToDatabase
             )
         {
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -96,6 +98,7 @@ namespace SimhoppGUI
             this.eventSetDiverMessage = eventSetDiverMessage;
             this.eventGetIPForServer = eventGetIPForServer;
             this.eventGetTrickDifficultyFromTrickHashTable = eventGetTrickDifficultyFromTrickHashTable;
+            this.eventSaveContestToDatabase = eventSaveContestToDatabase;
         }
         #endregion
 
@@ -546,7 +549,8 @@ namespace SimhoppGUI
                                                 eventSetJudgePoint,
                                                 eventSetDiverMessage,
                                                 eventGetIPForServer,
-                                                eventGetTrickDifficultyFromTrickHashTable))
+                                                eventGetTrickDifficultyFromTrickHashTable,
+                                                eventSaveContestToDatabase))
             {
                 if (liveFeed.ShowDialog(this) == DialogResult.OK)
                 {

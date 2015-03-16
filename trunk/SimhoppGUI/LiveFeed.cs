@@ -23,6 +23,7 @@ namespace SimhoppGUI
         private DelegateSetDiverMessage eventSetDiverMessage;
         private DelegateGetIPForServer eventGetIPForServer;
         private DelegateGetTrickDifficultyFromTrickHashTable eventGetTrickDifficultyFromTrickHashTable;
+        private DelegateSaveContestToDatabase eventSaveContestToDatabase;
 
         private readonly int contestId;
         private readonly Contest contest;
@@ -70,7 +71,8 @@ namespace SimhoppGUI
             DelegateSetJudgePoint eventSetJudgePoint,
             DelegateSetDiverMessage eventSetDiverMessage,
             DelegateGetIPForServer eventGetIPForServer,
-            DelegateGetTrickDifficultyFromTrickHashTable eventGetTrickDifficultyFromTrickHashTable)
+            DelegateGetTrickDifficultyFromTrickHashTable eventGetTrickDifficultyFromTrickHashTable,
+            DelegateSaveContestToDatabase eventSaveContestToDatabase)
         {
             InitializeComponent();
 
@@ -83,6 +85,7 @@ namespace SimhoppGUI
             this.eventSetDiverMessage = eventSetDiverMessage;
             this.eventGetIPForServer = eventGetIPForServer;
             this.eventGetTrickDifficultyFromTrickHashTable = eventGetTrickDifficultyFromTrickHashTable;
+            this.eventSaveContestToDatabase = eventSaveContestToDatabase;
 
             this.contestId = contestId;
             this.contest = eventGetContest(contestId);
@@ -239,6 +242,7 @@ namespace SimhoppGUI
 
                 Thread.Sleep(300);
             }
+            eventSaveContestToDatabase(contest);
             MsgBox.CreateErrorBox("contest is finished", "asd");
         }
 
@@ -282,7 +286,7 @@ namespace SimhoppGUI
         {
             foreach (var point in JudgePointsPanel.Controls.OfType<NumericUpDown>())
             {
-                point.Text = "0.0";
+                point.Text = "0,0";
             }
         }
 
@@ -305,24 +309,28 @@ namespace SimhoppGUI
                     jumpNo++;
                     participantNo = 0;
                 }
-                //Checks if every participant is done and there's been three jump sets. 
-                else if ((jumpNo == 3) && (contest.GetNumberOfParticipants() == (participantNo + 1)))
-                {
-                    contest.IsFinished = true;
-                }
                 else
                 {
                     CalculateAndUpdatePoints();
                     participantNo++;
                 }
+                //Checks if every participant is done and there's been three jump sets. 
+                if ((jumpNo == 3) && (contest.GetNumberOfParticipants() == (participantNo + 1)))
+                {
+                    contest.IsFinished = true;
+                    
+                }
+                
 
-                UpdateLiveResultList();
-                ResetJudgePointField();
-                UpdateDiverInformation();
-
+                if (!contest.IsFinished)
+                {
+                    UpdateLiveResultList();
+                    UpdateDiverInformation();
+                }
                 eventSetDiverMessage(contest.Name, contest.GetParticipant(participantNo).DiverName,
                     TrickNameLabel.Text, Convert.ToDouble(DifficultyValueLabel.Text));
                 eventSendDataToClient();
+                ResetJudgePointField();
             }
             else
             {
@@ -346,11 +354,6 @@ namespace SimhoppGUI
             contest.GetParticipant(participantNo).CalculatePoints();
             contest.GetParticipant(participantNo).UpdateTotalPoints(eventGetTrickDifficultyFromTrickHashTable(DiverTrickName));
             DiverPoints = contest.GetParticipant(participantNo).TotalPoints.ToString();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -154,7 +154,8 @@ namespace SimhoppGUI
                 EventSetJudgePoint,
                 EventSetDiverMessage,
                 EventGetIPForServer,
-                EventGetTrickDifficultyFromTrickHashTable
+                EventGetTrickDifficultyFromTrickHashTable,
+                EventSaveContestToDatabase
                 ))
             {
                 if (startContest.ShowDialog(this) == DialogResult.OK)
