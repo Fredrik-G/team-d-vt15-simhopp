@@ -12,6 +12,7 @@ namespace ClientGUI
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
+        private bool isConnected;
         #endregion
 
         #region Constructor
@@ -43,11 +44,32 @@ namespace ClientGUI
             var messageListener = new Thread(ListenForNewMessage);
             messageListener.Start();
             messageListener.IsBackground = true;
+
+            //enables keyboard usage.
+            KeyPreview = true;
         }
 
         #endregion
 
         #region Events
+
+        /// <summary>
+        /// Occurs when a key is pressed.
+        /// Shows tooltip if controll is pressed.
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <param name="keyData"></param>
+        /// <returns></returns>
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (ModifierKeys == Keys.Alt)
+            {
+                FileToolStripMenuItem.ShowDropDown();
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
 
         /// <summary>
         /// Occurs when the Connect item is clicked.
@@ -64,10 +86,12 @@ namespace ClientGUI
                 {
                     JudgeSSNTB.Text = login.UserSSNTB.Text;
                     ConnectionStatusLabel.Text = "Connected";
+                    isConnected = true;
                 }
                 else
                 {
                     ConnectionStatusLabel.Text = "Disconnected";
+                    isConnected = false;
                 }
             }
         }
@@ -79,10 +103,17 @@ namespace ClientGUI
         /// <param name="e"></param>
         private void sendPointButton_Click(object sender, EventArgs e)
         {
-            var point = Convert.ToDouble(numericUpDown1.Text);
-            var ssn = JudgeSSNTB.Text;
-            EventSendDataToServer(ssn, point);
-            sendPointButton.Enabled = false;
+            if (isConnected)
+            {
+                var point = Convert.ToDouble(numericUpDown1.Text);
+                var ssn = JudgeSSNTB.Text;
+                EventSendDataToServer(ssn, point);
+                sendPointButton.Enabled = false;
+            }
+            else
+            {
+                MessageBox.Show("Not connected");
+            }
         }
 
         /// <summary>
@@ -117,8 +148,8 @@ namespace ClientGUI
                         if (!ReferenceEquals(null, serverObjectData))
                         {
                             UpdateTextBoxes(serverObjectData);
-                            Invoke((MethodInvoker) delegate { sendPointButton.Enabled = true; });
-                           // sendPointButton.Enabled = true;
+                            Invoke((MethodInvoker)delegate { sendPointButton.Enabled = true; });
+                            // sendPointButton.Enabled = true;
                         }
                     }
                 }
@@ -149,5 +180,12 @@ namespace ClientGUI
 
         #endregion
 
+        private void JudgeClient_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                sendPointButton_Click(sender, e);
+            }
+        }
     }
 }
