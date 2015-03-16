@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
@@ -38,6 +37,7 @@ namespace SimhoppGUI
         private DelegateGetIPForServer eventGetIPForServer;
         private DelegateGetTrickDifficultyFromTrickHashTable eventGetTrickDifficultyFromTrickHashTable;
         private DelegateSaveContestToDatabase eventSaveContestToDatabase;
+        private DelegateGetContestFromDatabase eventGetContestFromDatabase;
 
         DataGridViewComboBoxColumn trick1ComboBoxColumn = new DataGridViewComboBoxColumn();
         DataGridViewComboBoxColumn trick2ComboBoxColumn = new DataGridViewComboBoxColumn();
@@ -71,7 +71,8 @@ namespace SimhoppGUI
                 DelegateSetDiverMessage eventSetDiverMessage,
                 DelegateGetIPForServer eventGetIPForServer,
                 DelegateGetTrickDifficultyFromTrickHashTable eventGetTrickDifficultyFromTrickHashTable,
-                DelegateSaveContestToDatabase eventSaveContestToDatabase
+                DelegateSaveContestToDatabase eventSaveContestToDatabase,
+                DelegateGetContestFromDatabase eventGetContestFromDatabase
             )
         {
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -100,6 +101,7 @@ namespace SimhoppGUI
             this.eventGetIPForServer = eventGetIPForServer;
             this.eventGetTrickDifficultyFromTrickHashTable = eventGetTrickDifficultyFromTrickHashTable;
             this.eventSaveContestToDatabase = eventSaveContestToDatabase;
+            this.eventGetContestFromDatabase = eventGetContestFromDatabase;
         }
         #endregion
 
@@ -117,16 +119,16 @@ namespace SimhoppGUI
 
             if (eventGetContestsList != null)
             {
-                ContestsDataGridView.DataSource = eventGetContestsList();
+                ContestsDataGridView.DataSource = this.eventGetContestsList();
                 ShowFinishedContestState();
             }
             if (eventGetJudgesList != null)
             {
-                GlobalJudgesDataGridView.DataSource = eventGetJudgesList();
+                GlobalJudgesDataGridView.DataSource = this.eventGetJudgesList();
             }
             if (eventGetDiversList != null)
             {
-                GlobalDiversDataGridView.DataSource = eventGetDiversList();
+                GlobalDiversDataGridView.DataSource = this.eventGetDiversList();
             }
 
             try
@@ -174,7 +176,7 @@ namespace SimhoppGUI
             CurrentDiversDataGridView.CurrentCellDirtyStateChanged += CurrentDiversDataGridView_CurrentCellDirtyStateChanged;
 
 
-            GlobalJudgesDataGridView.Select();
+            
         }
 
         /// <summary>
@@ -211,6 +213,41 @@ namespace SimhoppGUI
                 {
                     CurrentDiversDataGridView.DataSource = eventGetDiversInContest(Convert.ToInt16(contestRow.Cells["Id"].Value));
 
+                    //foreach (DataGridViewRow row in CurrentDiversDataGridView.Rows)
+                    //{
+                    //    trick1ComboBoxColumn.DefaultCellStyle.NullValue = eventGetTrickFromParticipant(
+                    //        Convert.ToInt16(contestRow.Cells["Id"].Value), 0, row.Cells["SSN"].Value.ToString());
+                    //    trick1ComboBoxColumn.DefaultCellStyle.DataSourceNullValue = eventGetTrickFromParticipant(
+                    //        Convert.ToInt16(contestRow.Cells["Id"].Value), 0, row.Cells["SSN"].Value.ToString());
+                    //    trick2ComboBoxColumn.DefaultCellStyle.NullValue = eventGetTrickFromParticipant(
+                    //        Convert.ToInt16(contestRow.Cells["Id"].Value), 1, row.Cells["SSN"].Value.ToString());
+                    //    trick3ComboBoxColumn.DefaultCellStyle.NullValue = eventGetTrickFromParticipant(
+                    //        Convert.ToInt16(contestRow.Cells["Id"].Value), 2, row.Cells["SSN"].Value.ToString());
+                    //}
+
+                    var personCell = CurrentDiversDataGridView.SelectedCells.Cast<DataGridViewCell>().FirstOrDefault();
+                    var personRow = personCell.OwningRow;
+
+                    foreach (DataGridViewRow row in CurrentDiversDataGridView.Rows)
+                    {
+                        row.Cells["Trick 1"].Value = eventGetTrickFromParticipant(Convert.ToInt16(contestRow.Cells["Id"].Value), 0, row.Cells["SSN"].Value.ToString());
+                        row.Cells["Trick 2"].Value = eventGetTrickFromParticipant(Convert.ToInt16(contestRow.Cells["Id"].Value), 1, row.Cells["SSN"].Value.ToString());
+                        row.Cells["Trick 3"].Value = eventGetTrickFromParticipant(Convert.ToInt16(contestRow.Cells["Id"].Value), 2, row.Cells["SSN"].Value.ToString());
+                    }
+
+
+                    //  personRow.Cells["Trick 1"].Value = (Trick)(personRow.Cells[trick1ComboBoxColumn.Name] as DataGridViewComboBoxCell).Items[0];
+
+                    //trick1ComboBoxColumn.DefaultCellStyle.NullValue = eventGetTrickFromParticipant(
+                    //        Convert.ToInt16(contestRow.Cells["Id"].Value), 0, personRow.Cells["SSN"].Value.ToString());
+                    //trick1ComboBoxColumn.DefaultCellStyle.DataSourceNullValue = eventGetTrickFromParticipant(
+                    //    Convert.ToInt16(contestRow.Cells["Id"].Value), 0, personRow.Cells["SSN"].Value.ToString());
+                    //trick2ComboBoxColumn.DefaultCellStyle.NullValue = eventGetTrickFromParticipant(
+                    //    Convert.ToInt16(contestRow.Cells["Id"].Value), 1, personRow.Cells["SSN"].Value.ToString());
+                    //trick3ComboBoxColumn.DefaultCellStyle.NullValue = eventGetTrickFromParticipant(
+                    //    Convert.ToInt16(contestRow.Cells["Id"].Value), 2, personRow.Cells["SSN"].Value.ToString());
+
+
                     CurrentDiversDataGridView.Columns["Id"].Visible = false;
                     CurrentJudgesDataGridView.Columns["Salt"].Visible = false;
                     CurrentJudgesDataGridView.Columns["Hash"].Visible = false;
@@ -221,27 +258,13 @@ namespace SimhoppGUI
                     CurrentDiversDataGridView.Columns["Trick 2"].DisplayIndex = 5;
                     CurrentDiversDataGridView.Columns["Trick 3"].DisplayIndex = 6;
 
-                    //Check if there's any current divers.
-                    if (CurrentDiversDataGridView.Rows.Count == 0)
-                    {
-                        return;
-                    }
-
-                    foreach (DataGridViewRow row in CurrentDiversDataGridView.Rows)
-                    {
-                        row.Cells["Trick 1"].Value = eventGetTrickFromParticipant(Convert.ToInt16(contestRow.Cells["Id"].Value), 0, row.Cells["SSN"].Value.ToString());
-                        row.Cells["Trick 2"].Value = eventGetTrickFromParticipant(Convert.ToInt16(contestRow.Cells["Id"].Value), 1, row.Cells["SSN"].Value.ToString());
-                        row.Cells["Trick 3"].Value = eventGetTrickFromParticipant(Convert.ToInt16(contestRow.Cells["Id"].Value), 2, row.Cells["SSN"].Value.ToString());
-                    }
                 }
             }
 
-            #region Exceptions
-
             catch (NullReferenceException nullReferenceException)
             {
-                log.Warn("Null reference exception when trying to show judges/divers in a contest",
-                    nullReferenceException);
+                //do nothing
+                log.Warn("Null reference exception when trying to show judges/divers in a contest", nullReferenceException);
             }
 
             catch (OverflowException overflowException)
@@ -275,9 +298,6 @@ namespace SimhoppGUI
                 MsgBox.CreateErrorBox(exception.ToString(), MethodBase.GetCurrentMethod().Name);
                 log.Error("Overflow exception when trying to show judges/divers in a contest", exception);
             }
-
-            #endregion
-
         }
 
         /// <summary>
@@ -287,16 +307,13 @@ namespace SimhoppGUI
         /// <param name="e"></param>
         private void JudgesDiversTabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ContestsDataGridView_SelectionChanged(sender, e);
-
+            ContestsDataGridView_SelectionChanged(null, null);
             if (JudgesDiversTabControl.SelectedTab == JudgeTabPage)
             {
                 GlobalJudgesLabel.Visible = true;
                 CurrentJudgesLabel.Visible = true;
                 GlobalDiversLabel.Visible = false;
                 CurrentlDiversLabel.Visible = false;
-
-                GlobalJudgesDataGridView.Focus();
             }
             else if (JudgesDiversTabControl.SelectedTab == DiverTabPage)
             {
@@ -304,8 +321,6 @@ namespace SimhoppGUI
                 CurrentlDiversLabel.Visible = true;
                 GlobalJudgesLabel.Visible = false;
                 CurrentJudgesLabel.Visible = false;
-
-                GlobalDiversDataGridView.Focus();
             }
         }
 
@@ -320,11 +335,11 @@ namespace SimhoppGUI
         /// <param name="e"></param>
         private void AddJudgeBtn_Click(object sender, EventArgs e)
         {
+
             try
             {
                 AddPersonToContest(true);
             }
-
             catch (NullReferenceException nullReferenceException)
             {
                 MsgBox.CreateErrorBox(nullReferenceException.ToString(), MethodBase.GetCurrentMethod().Name);
@@ -337,6 +352,8 @@ namespace SimhoppGUI
             {
                 MsgBox.CreateErrorBox(exception.ToString(), MethodBase.GetCurrentMethod().Name);
             }
+
+
         }
 
         /// <summary>
@@ -347,12 +364,10 @@ namespace SimhoppGUI
         private void AddDiverBtn_Click(object sender, EventArgs e)
         {
             CurrentDiversDataGridView.CellValueChanged -= CurrentDiversDataGridView_CellValueChanged;
-
             try
             {
                 AddPersonToContest(false);
             }
-
             catch (NullReferenceException nullReferenceException)
             {
                 MsgBox.CreateErrorBox(nullReferenceException.ToString(), MethodBase.GetCurrentMethod().Name);
@@ -391,32 +406,15 @@ namespace SimhoppGUI
             var personRow = personCell.OwningRow;
             var contestRow = contestCell.OwningRow;
 
-            try
+            if (isJudge)
             {
-                if (isJudge)
-                {
-                    eventAddJudgeToContest(Convert.ToInt16(contestRow.Cells["Id"].Value),
-                        personRow.Cells["ssn"].Value.ToString());
-                    log.Debug("Added judge with ssn: " + personRow.Cells["ssn"].Value + "to contest id " +
-                              Convert.ToInt16(contestRow.Cells["Id"].Value));
-                }
-                else
-                {
-                    eventAddDiverToContest(Convert.ToInt16(contestRow.Cells["Id"].Value),
-                        personRow.Cells["ssn"].Value.ToString());
-                    log.Debug("Added diver with ssn: " + personRow.Cells["ssn"].Value + "to contest id " +
-                              Convert.ToInt16(contestRow.Cells["Id"].Value));
-                }
-                ErrorProvider.Clear();
+                eventAddJudgeToContest(Convert.ToInt16(contestRow.Cells["Id"].Value), personRow.Cells["ssn"].Value.ToString());
+                log.Debug("Added judge with ssn: " + personRow.Cells["ssn"].Value + "to contest id " + Convert.ToInt16(contestRow.Cells["Id"].Value));
             }
-
-            catch (DuplicateNameException duplicateNameException)
+            else
             {
-                ErrorProvider.SetError(isJudge ? AddJudgeBtn : AddDiverBtn, duplicateNameException.Message);
-            }
-            catch (IndexOutOfRangeException indexOutOfRangeException)
-            {
-                ErrorProvider.SetError(isJudge ? AddJudgeBtn : AddDiverBtn, indexOutOfRangeException.Message);
+                eventAddDiverToContest(Convert.ToInt16(contestRow.Cells["Id"].Value), personRow.Cells["ssn"].Value.ToString());
+                log.Debug("Added diver with ssn: " + personRow.Cells["ssn"].Value + "to contest id " + Convert.ToInt16(contestRow.Cells["Id"].Value));
             }
 
             //force update 
@@ -555,30 +553,14 @@ namespace SimhoppGUI
                                                 eventSetDiverMessage,
                                                 eventGetIPForServer,
                                                 eventGetTrickDifficultyFromTrickHashTable,
-                                                eventSaveContestToDatabase))
+                                                eventSaveContestToDatabase,
+                                                eventGetContestFromDatabase))
             {
                 if (liveFeed.ShowDialog(this) == DialogResult.OK)
                 {
 
                 }
             }
-        }
-
-        /// <summary>
-        /// Opens a new Contest Result form.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void viewResultButton_Click(object sender, EventArgs e)
-        {
-            //using(DimIt d = new DimIt())
-            //using (var contestResult = new ContestResult())
-            //{
-            //    if (contestResult.ShowDialog(this) == DialogResult.OK)
-            //    {
-
-            //    }
-            //}
         }
 
         #endregion
@@ -599,13 +581,8 @@ namespace SimhoppGUI
                 return base.ProcessCmdKey(ref msg, keyData);
             }
 
-            ContestsDataGridToolTip.Show("Ctrl+1", ContestsDataGridHiddenLabel);
-            JudgesToolTip.Show("Ctrl+2", JudgesHiddenLabel);
-            DiversToolTip.Show("Ctrl+3", DiversHiddenLabel);
-
             StartContestToolTip.Show("Ctrl+S", StartContestBtn);
-            EditContestToolTip.Show("Ctrl+E", EditContestBtn);
-            ViewResultToolTip.Show("Ctrl+R", viewResultButton);
+            EditContestToolTip.Show("Ctrl+N", EditContestBtn);
             //Man ska bara behöva en tooltip, men jag fick inte det att fungera..
 
             PerformClick(keyData);
@@ -627,23 +604,8 @@ namespace SimhoppGUI
                 case (Keys.Control | Keys.E):
                     EditContestBtn.PerformClick();
                     break;
-                case (Keys.Control | Keys.R):
-                    viewResultButton.PerformClick();
-                    break;
-                case (Keys.Control | Keys.D1):
-                    ContestsDataGridView.Focus();
-                    break;
-                case (Keys.Control | Keys.D2):
-                    JudgesDiversTabControl.SelectTab(JudgeTabPage);
-                    GlobalJudgesDataGridView.Focus();
-                    break;
-                case (Keys.Control | Keys.D3):
-                    JudgesDiversTabControl.SelectTab(DiverTabPage);
-                    GlobalDiversDataGridView.Focus();
-                    break;
             }
         }
-
         /// <summary>
         /// Occurs when a button is released.
         /// Hides shortcut tooltips.
@@ -652,116 +614,16 @@ namespace SimhoppGUI
         /// <param name="e"></param>
         private void StartContest_KeyUp(object sender, KeyEventArgs e)
         {
-            ContestsDataGridToolTip.RemoveAll();
-            JudgesToolTip.RemoveAll();
-            DiversToolTip.RemoveAll();
             StartContestToolTip.RemoveAll();
             EditContestToolTip.RemoveAll();
-            ViewResultToolTip.RemoveAll();
         }
 
-        /// <summary>
-        /// Checks if enter or backspace was pressed.
-        /// </summary>
-        /// <param name="key"></param>
-        private void CheckEnterAndBackspace(Keys key)
-        {
-            switch (key)
-            {
-                case Keys.Enter:
-                    if (JudgesDiversTabControl.SelectedTab == JudgeTabPage)
-                    {
-                        AddJudgeBtn_Click(null, null);
-                    }
-                    else if (JudgesDiversTabControl.SelectedTab == DiverTabPage)
-                    {
-                        AddPersonToContest(false);
-                    }
-                    break;
-                case Keys.Back:
-                    if (JudgesDiversTabControl.SelectedTab == JudgeTabPage)
-                    {
-                        RemovePersonFromContest(true);
-                    }
-                    else if (JudgesDiversTabControl.SelectedTab == DiverTabPage)
-                    {
-                        RemovePersonFromContest(false);
-                    }
-                    break;
-
-                case (Keys.Right):
-                    if (JudgesDiversTabControl.SelectedTab == JudgeTabPage)
-                    {
-                        GlobalJudgesDataGridView.ClearSelection();
-                        CurrentJudgesDataGridView.Select();
-                    }
-                    else if (JudgesDiversTabControl.SelectedTab == DiverTabPage)
-                    {
-                        GlobalDiversDataGridView.ClearSelection();
-                        CurrentDiversDataGridView.Select();
-                    }
-                    break;
-
-                case (Keys.Left):
-                    if (JudgesDiversTabControl.SelectedTab == JudgeTabPage)
-                    {
-                        CurrentJudgesDataGridView.ClearSelection();
-                        GlobalJudgesDataGridView.Select();
-                    }
-                    else if (JudgesDiversTabControl.SelectedTab == DiverTabPage)
-                    {
-                        CurrentDiversDataGridView.ClearSelection();
-                        GlobalDiversDataGridView.Select();
-                    }
-
-                    break;
-            }
-        }
-        /// <summary>
-        /// Occurs when a key is pressed inside GlobalDiversDataGridView.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void GlobalDiversDataGridView_KeyDown(object sender, KeyEventArgs e)
-        {
-            CheckEnterAndBackspace(e.KeyCode);
-        }
-
-        /// <summary>
-        /// Occurs when a key is pressed inside GlobalJudgesDataGridView.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void GlobalJudgesDataGridView_KeyDown(object sender, KeyEventArgs e)
-        {
-            CheckEnterAndBackspace(e.KeyCode);
-        }
-
-        /// <summary>
-        /// Occurs when a key is pressed inside CurrentJudgesDataGridView.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void CurrentJudgesDataGridView_KeyDown(object sender, KeyEventArgs e)
-        {
-            CheckEnterAndBackspace(e.KeyCode);
-        }
-
-        /// <summary>
-        /// Occurs when a key is pressed inside CurrentDiversDataGridView.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void CurrentDiversDataGridView_KeyDown(object sender, KeyEventArgs e)
-        {
-            CheckEnterAndBackspace(e.KeyCode);
-        }
         #endregion
 
         /// <summary>
         /// Checks if all tricks are set for every participant in the selected contest.
         /// </summary>
-        /// <returns>Returns true if all tricks are set.</returns>
+        /// <returns></returns>
         private bool IsAllTricksSet()
         {
             var contestCell = ContestsDataGridView.SelectedCells.Cast<DataGridViewCell>().FirstOrDefault();
@@ -790,13 +652,13 @@ namespace SimhoppGUI
 
         private void ShowFinishedContestState()
         {
-            // foreach (DataGridViewRow row in ContestsDataGridView.Rows.Cast<DataGridViewRow>().Where(row => row.Cells["isFinished"].Value.Equals("true")))
-            foreach (DataGridViewRow row in ContestsDataGridView.Rows)
+           // foreach (DataGridViewRow row in ContestsDataGridView.Rows.Cast<DataGridViewRow>().Where(row => row.Cells["isFinished"].Value.Equals("true")))
+            foreach(DataGridViewRow row in ContestsDataGridView.Rows)             
             {
                 if (row.Cells["IsFinished"].Value.Equals(true))
                 {
                     row.DefaultCellStyle.BackColor = Color.DarkSeaGreen;
-                }
+                }                
             }
         }
 
@@ -855,6 +717,20 @@ namespace SimhoppGUI
         }
 
         #endregion
+
+        private void viewResultButton_Click(object sender, EventArgs e)
+        {
+            var selectedContest = ContestsDataGridView.SelectedCells.Cast<DataGridViewCell>().FirstOrDefault();
+            var contestRow = selectedContest.OwningRow;
+            using(new DimIt())
+            using (var contestResult = new ContestResult(eventGetContestFromDatabase, eventGetContest(Convert.ToInt16(contestRow.Cells["Id"].Value))))
+            {
+                if (contestResult.ShowDialog(this) == DialogResult.OK)
+                {
+                    
+                }
+            }
+        }
 
     }
 }
