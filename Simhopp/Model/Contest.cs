@@ -183,69 +183,58 @@ namespace Simhopp.Model
         /// <param name="diver"></param>
         public void AddParticipant(Diver diver)
         {
-            try
+            if (diver == null)
             {
-                if (diver == null)
-                {
-                    throw new NullReferenceException("diver is null");
-                }
-                else if (!Person.CheckCorrectName(diver.Name))
-                {
-                    throw new InvalidDataException("diver name is not set or invalid.");
-                }
-                else if (!Person.CheckCorrectNationality(diver.Nationality))
-                {
-                    throw new InvalidDataException("diver nationality is not set or invalid.");
-                }
-                else if (!Person.CheckCorrectSSN(diver.SSN, diver.Nationality))
-                {
-                    throw new InvalidDataException("diver social security number is not set or invalid.");
-                }
-                else if (IsDiverInContest(diver))
-                {
-                    throw new DuplicateNameException("Diver is already in list.");
-                }
-                else
-                {
-                    participantsList.Add(new Participant(diver));
-                }
+                throw new NullReferenceException("diver is null");
             }
-            catch (Exception e)
+            else if (!Person.CheckCorrectName(diver.Name))
             {
-                Console.WriteLine(e.Message);
+                throw new InvalidDataException("diver name is not set or invalid.");
             }
+            else if (!Person.CheckCorrectNationality(diver.Nationality))
+            {
+                throw new InvalidDataException("diver nationality is not set or invalid.");
+            }
+            else if (!Person.CheckCorrectSSN(diver.SSN, diver.Nationality))
+            {
+                throw new InvalidDataException("diver social security number is not set or invalid.");
+            }
+            else if (IsDiverInContest(diver))
+            {
+                throw new DuplicateNameException("Diver is already in list.");
+            }
+            else
+            {
+                participantsList.Add(new Participant(diver));
+            }
+
         }
 
         public void AddParticipant(Participant participant)
         {
-            try
+            if (participant == null)
             {
-                if (participant == null)
-                {
-                    throw new NullReferenceException("participant is null");
-                }
-                /*else if (!Person.CheckCorrectName(diver.Name))
-                {
-                    throw new InvalidDataException("diver name is not set or invalid.");
-                }
-                else if (!Person.CheckCorrectNationality(diver.Nationality))
-                {
-                    throw new InvalidDataException("diver nationality is not set or invalid.");
-                }
-                else if (!Person.CheckCorrectSSN(diver.SSN, diver.Nationality))
-                {
-                    throw new InvalidDataException("diver social security number is not set or invalid.");
-                }*/
+                throw new NullReferenceException("participant is null");
+            }
+            /*else if (!Person.CheckCorrectName(diver.Name))
+            {
+                throw new InvalidDataException("diver name is not set or invalid.");
+            }
+            else if (!Person.CheckCorrectNationality(diver.Nationality))
+            {
+                throw new InvalidDataException("diver nationality is not set or invalid.");
+            }
+            else if (!Person.CheckCorrectSSN(diver.SSN, diver.Nationality))
+            {
+                throw new InvalidDataException("diver social security number is not set or invalid.");
+            }*/
 
-                else
-                {
-                    participantsList.Add(participant);
-                }
-            }
-            catch (Exception e)
+            else
             {
-                Console.WriteLine(e.Message);
+                participantsList.Add(participant);
             }
+
+
         }
 
         /// <summary>
@@ -254,40 +243,33 @@ namespace Simhopp.Model
         /// <param name="judge"></param>
         public void AddJudge(Judge judge)
         {
-            try
+            if (judge == null)
             {
-                if (judge == null)
-                {
-                    throw new NullReferenceException("Judge is null");
-                }
-                else if (!Person.CheckCorrectName(judge.Name))
-                {
-                    throw new InvalidDataException("Judge name is not set or invalid.");
-                }
-                else if (!Person.CheckCorrectNationality(judge.Nationality))
-                {
-                    throw new InvalidDataException("Judge nationality is not set or invalid.");
-                }
-                else if (!Person.CheckCorrectSSN(judge.SSN, judge.Nationality))
-                {
-                    throw new InvalidDataException("Judge social security number is not set or invalid.");
-                }
-                else if (IsJudgeInContest(judge))
-                {
-                    throw new DuplicateNameException("Judge is already in list.");
-                }
-                else if (judgeList.Count >= 7)
-                {
-                    throw new IndexOutOfRangeException("All 7 judges are already set in the list.");
-                }
-                else
-                {
-                    judgeList.Add(judge);
-                }
+                throw new NullReferenceException("Judge is null");
             }
-            catch (Exception e)
+            else if (!Person.CheckCorrectName(judge.Name))
             {
-                Console.WriteLine(e.Message);
+                throw new InvalidDataException("Judge name is not set or invalid.");
+            }
+            else if (!Person.CheckCorrectNationality(judge.Nationality))
+            {
+                throw new InvalidDataException("Judge nationality is not set or invalid.");
+            }
+            else if (!Person.CheckCorrectSSN(judge.SSN, judge.Nationality))
+            {
+                throw new InvalidDataException("Judge social security number is not set or invalid.");
+            }
+            else if (IsJudgeInContest(judge))
+            {
+                throw new DuplicateNameException("Judge is already in list.");
+            }
+            else if (judgeList.Count >= 7)
+            {
+                throw new IndexOutOfRangeException("All 7 judges are already set in the list.");
+            }
+            else
+            {
+                judgeList.Add(judge);
             }
         }
 
