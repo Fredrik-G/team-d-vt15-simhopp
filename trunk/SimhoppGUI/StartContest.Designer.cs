@@ -57,6 +57,7 @@
             this.JudgesToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.DiversToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.ViewResultToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.ErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.JudgesDiversTabControl.SuspendLayout();
             this.JudgeTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GlobalJudgesDataGridView)).BeginInit();
@@ -65,6 +66,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.CurrentDiversDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GlobalDiversDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ContestsDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // JudgesDiversTabControl
@@ -131,6 +133,7 @@
             this.GlobalJudgesDataGridView.Size = new System.Drawing.Size(340, 227);
             this.GlobalJudgesDataGridView.TabIndex = 4;
             this.GlobalJudgesDataGridView.TabStop = false;
+            this.GlobalJudgesDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GlobalJudgesDataGridView_KeyDown);
             // 
             // CurrentJudgesDataGridView
             // 
@@ -152,6 +155,7 @@
             this.CurrentJudgesDataGridView.Size = new System.Drawing.Size(643, 227);
             this.CurrentJudgesDataGridView.TabIndex = 6;
             this.CurrentJudgesDataGridView.TabStop = false;
+            this.CurrentJudgesDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CurrentJudgesDataGridView_KeyDown);
             // 
             // DiverTabPage
             // 
@@ -203,10 +207,12 @@
             this.CurrentDiversDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.CurrentDiversDataGridView.Location = new System.Drawing.Point(389, 0);
             this.CurrentDiversDataGridView.Name = "CurrentDiversDataGridView";
+            this.CurrentDiversDataGridView.ReadOnly = true;
             this.CurrentDiversDataGridView.RowHeadersWidth = 30;
             this.CurrentDiversDataGridView.Size = new System.Drawing.Size(643, 227);
             this.CurrentDiversDataGridView.TabIndex = 7;
             this.CurrentDiversDataGridView.TabStop = false;
+            this.CurrentDiversDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CurrentDiversDataGridView_KeyDown);
             // 
             // GlobalDiversDataGridView
             // 
@@ -228,6 +234,7 @@
             this.GlobalDiversDataGridView.Size = new System.Drawing.Size(340, 227);
             this.GlobalDiversDataGridView.TabIndex = 6;
             this.GlobalDiversDataGridView.TabStop = false;
+            this.GlobalDiversDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GlobalDiversDataGridView_KeyDown);
             // 
             // ContestsDataGridView
             // 
@@ -353,6 +360,10 @@
             this.JudgesHiddenLabel.Text = "Hidden label";
             this.JudgesHiddenLabel.Visible = false;
             // 
+            // ErrorProvider
+            // 
+            this.ErrorProvider.ContainerControl = this;
+            // 
             // StartContest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -384,6 +395,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.CurrentDiversDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GlobalDiversDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ContestsDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -419,5 +431,6 @@
         private System.Windows.Forms.ToolTip JudgesToolTip;
         private System.Windows.Forms.ToolTip DiversToolTip;
         private System.Windows.Forms.ToolTip ViewResultToolTip;
+        private System.Windows.Forms.ErrorProvider ErrorProvider;
     }
 }
