@@ -47,6 +47,7 @@ namespace Simhopp.Presenter
             this.View.EventGetTrickList += GetTrickList;
             this.View.EventUpdateDiver += UpdateDiver;
             this.View.EventSaveContestToDatabase += SaveContestToDatabase;
+            this.View.EventGetContestFromDatabase += GetContestFromDatabase;
 
             this.View.EventHandleMessage += HandleMessage;
             this.View.EventGetFirstClientObjectData += GetFirstClientObjectData;
@@ -84,6 +85,11 @@ namespace Simhopp.Presenter
         public BindingList<Diver> GetDiversList()
         {
             return this.Model.GetDiversList();
+        }
+
+        public Contest GetContestFromDatabase(Contest contest)
+        {
+            return this.Model.GetContestFromDatabase(contest);
         }
 
         public BindingList<Judge> GetJudgesInContest(int id)

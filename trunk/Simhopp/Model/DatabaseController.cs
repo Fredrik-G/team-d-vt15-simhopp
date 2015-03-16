@@ -1145,7 +1145,7 @@ namespace Simhopp.Model
             }
             try
             {
-                string sql = "UPDATE Contest SET Name = '" + contest.Name + "', Place = '" + contest.Place + "', StartDate = '" + contest.StartDate + "', EndDate = '" + contest.EndDate + "', Finished = '" + contest.IsFinished + "' WHERE ID = '" + contest.Id + "'";
+                string sql = "UPDATE Contest SET Name = '" + contest.Name + "', Place = '" + contest.Place + "', StartDate = '" + contest.StartDate + "', EndDate = '" + contest.EndDate + "', Finished = '" + Convert.ToInt32(contest.IsFinished) + "' WHERE ID = '" + contest.Id + "'";
                 SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
                 command.ExecuteNonQuery();
 

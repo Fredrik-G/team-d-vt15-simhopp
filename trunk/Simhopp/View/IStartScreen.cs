@@ -31,6 +31,7 @@ namespace Simhopp.View
 
     public delegate BindingList<Contest> DelegateGetContestsList();
     public delegate Contest DelegateGetContest(int id);
+    public delegate Contest DelegateGetContestFromDatabase(Contest contest);
     public delegate BindingList<Judge> DelegateGetJudgesList();
     public delegate BindingList<Diver> DelegateGetDiversList();
     public delegate BindingList<Judge> DelegateGetJudgesInContest(int id);
@@ -93,6 +94,7 @@ namespace Simhopp.View
         event DelegateCreateContest EventCreateContest;
         event DelegateSetJudgePoint EventSetJudgePoint;
         event DelegateSaveContestToDatabase EventSaveContestToDatabase;
+        
 
         #region Read methods
 
@@ -128,7 +130,7 @@ namespace Simhopp.View
 
         event DelegateAddJudgeToList EventAddJudgeToList;
         event DelegateAddDiverToList EventAddDiverToList;
-
+        event DelegateGetContestFromDatabase EventGetContestFromDatabase;
         event DelegateAddJudgeToContest EventAddJudgeToContest;
         event DelegateAddDiverToContest EventAddDiverToContest;
         event DelegateAddTrickToParticipant EventAddTrickToParticipant;

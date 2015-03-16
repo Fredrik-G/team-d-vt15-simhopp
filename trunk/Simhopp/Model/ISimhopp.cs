@@ -25,6 +25,7 @@ namespace Simhopp.Model
 
         BindingList<Contest> GetContestsList();
         Contest GetContest(int id);
+        Contest GetContestFromDatabase(Contest contest);
 
         BindingList<Judge> GetJudgesList();
         BindingList<Diver> GetDiversList();
