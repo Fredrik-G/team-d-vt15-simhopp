@@ -714,5 +714,17 @@ namespace SimhoppGUI
 
         #endregion
 
+        private void viewResultButton_Click(object sender, EventArgs e)
+        {
+            using(DimIt d = new DimIt())
+            using (var contestResult = new ContestResult())
+            {
+                if (contestResult.ShowDialog(this) == DialogResult.OK)
+                {
+                    
+                }
+            }
+        }
+
     }
 }
