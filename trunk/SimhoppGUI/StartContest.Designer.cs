@@ -50,6 +50,13 @@
             this.EditContestToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.StartContestToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.viewResultButton = new System.Windows.Forms.Button();
+            this.ContestsDataGridHiddenLabel = new System.Windows.Forms.Label();
+            this.DiversHiddenLabel = new System.Windows.Forms.Label();
+            this.JudgesHiddenLabel = new System.Windows.Forms.Label();
+            this.ContestsDataGridToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.JudgesToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.DiversToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.ViewResultToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.JudgesDiversTabControl.SuspendLayout();
             this.JudgeTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GlobalJudgesDataGridView)).BeginInit();
@@ -309,14 +316,51 @@
             this.viewResultButton.Size = new System.Drawing.Size(75, 23);
             this.viewResultButton.TabIndex = 6;
             this.viewResultButton.Text = "View Result";
+            this.ViewResultToolTip.SetToolTip(this.viewResultButton, "Ctrl+R");
             this.viewResultButton.UseVisualStyleBackColor = true;
             this.viewResultButton.Click += new System.EventHandler(this.viewResultButton_Click);
+            // 
+            // ContestsDataGridHiddenLabel
+            // 
+            this.ContestsDataGridHiddenLabel.AutoSize = true;
+            this.ContestsDataGridHiddenLabel.Enabled = false;
+            this.ContestsDataGridHiddenLabel.Location = new System.Drawing.Point(13, 12);
+            this.ContestsDataGridHiddenLabel.Name = "ContestsDataGridHiddenLabel";
+            this.ContestsDataGridHiddenLabel.Size = new System.Drawing.Size(66, 13);
+            this.ContestsDataGridHiddenLabel.TabIndex = 43;
+            this.ContestsDataGridHiddenLabel.Text = "Hidden label";
+            this.ContestsDataGridHiddenLabel.Visible = false;
+            // 
+            // DiversHiddenLabel
+            // 
+            this.DiversHiddenLabel.AutoSize = true;
+            this.DiversHiddenLabel.Enabled = false;
+            this.DiversHiddenLabel.Location = new System.Drawing.Point(83, 187);
+            this.DiversHiddenLabel.Name = "DiversHiddenLabel";
+            this.DiversHiddenLabel.Size = new System.Drawing.Size(66, 13);
+            this.DiversHiddenLabel.TabIndex = 41;
+            this.DiversHiddenLabel.Text = "Hidden label";
+            this.DiversHiddenLabel.Visible = false;
+            // 
+            // JudgesHiddenLabel
+            // 
+            this.JudgesHiddenLabel.AutoSize = true;
+            this.JudgesHiddenLabel.Enabled = false;
+            this.JudgesHiddenLabel.Location = new System.Drawing.Point(13, 187);
+            this.JudgesHiddenLabel.Name = "JudgesHiddenLabel";
+            this.JudgesHiddenLabel.Size = new System.Drawing.Size(66, 13);
+            this.JudgesHiddenLabel.TabIndex = 42;
+            this.JudgesHiddenLabel.Text = "Hidden label";
+            this.JudgesHiddenLabel.Visible = false;
             // 
             // StartContest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1060, 463);
+            this.Controls.Add(this.ContestsDataGridHiddenLabel);
+            this.Controls.Add(this.DiversHiddenLabel);
+            this.Controls.Add(this.JudgesHiddenLabel);
             this.Controls.Add(this.viewResultButton);
             this.Controls.Add(this.StartContestBtn);
             this.Controls.Add(this.EditContestBtn);
@@ -368,5 +412,12 @@
         private System.Windows.Forms.ToolTip EditContestToolTip;
         private System.Windows.Forms.ToolTip StartContestToolTip;
         private System.Windows.Forms.Button viewResultButton;
+        private System.Windows.Forms.Label ContestsDataGridHiddenLabel;
+        private System.Windows.Forms.Label DiversHiddenLabel;
+        private System.Windows.Forms.Label JudgesHiddenLabel;
+        private System.Windows.Forms.ToolTip ContestsDataGridToolTip;
+        private System.Windows.Forms.ToolTip JudgesToolTip;
+        private System.Windows.Forms.ToolTip DiversToolTip;
+        private System.Windows.Forms.ToolTip ViewResultToolTip;
     }
 }
