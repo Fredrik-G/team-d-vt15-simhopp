@@ -279,6 +279,7 @@ namespace SimhoppGUI
 
         public event DelegateCreateContest EventCreateContest = null;
         public event DelegateSetJudgePoint EventSetJudgePoint = null;
+        public event DelegateSaveContestToDatabase EventSaveContestToDatabase = null;
 
 
         #region Read methods
