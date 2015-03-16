@@ -168,7 +168,10 @@ namespace SimhoppGUI
         {
             //Dims the background form and makes it non-interactive.
             using (new DimIt())
-            using (var addDiver = new AddEditDiver(EventAddDiverToList, EventGetDiversList, EventReadFromFile))
+            using (var addDiver = new AddEditDiver(EventAddDiverToList,
+                            EventRemoveDiverFromList,
+                            EventGetDiversList,
+                            EventUpdateDiver))
             {
                 if (addDiver.ShowDialog(this) == DialogResult.OK)
                 {

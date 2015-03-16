@@ -1,38 +1,88 @@
 ﻿using System;
+using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 using System.Windows.Forms;
 using Simhopp;
-using Simhopp.Model;
 using Simhopp.View;
 
 namespace SimhoppGUI
 {
     public partial class AddEditDiver : Form
     {
+        #region Data
         private DelegateAddDiverToList eventAddDiverToList;
+        private DelegateRemoveDiverFromList eventRemoveDiverFromList;
+        private DelegateGetDiversList eventGetDiversList;
+        private DelegateUpdateDiver eventUpdateDiver;
+
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        #endregion
+
+        #region Properties
+        public string AddName
+        {
+            get { return AddDiverNameTb.Text; }
+            set { AddDiverNameTb.Text = value; }
+        }
+        public string UpdateName
+        {
+            get { return UpdateDiverNameTb.Text; }
+            set { UpdateDiverNameTb.Text = value; }
+        }
+        public string AddNationality
+        {
+            get { return AddDiverNationaltyTb.Text; }
+            set { AddDiverNationaltyTb.Text = value; }
+        }
+        public string UpdateNationality
+        {
+            get { return UpdateDiverNationalityTb.Text; }
+            set { UpdateDiverNationalityTb.Text = value; }
+        }
+        public string AddSSN
+        {
+            get { return AddDiverSSNTb.Text; }
+            set { AddDiverSSNTb.Text = value; }
+        }
+        public string UpdateSSN
+        {
+            get { return UpdateDiverSSNTb.Text; }
+            set { UpdateDiverSSNTb.Text = value; }
+        }
+
+        #endregion
+
         #region Constructor
-        public AddEditDiver(DelegateAddDiverToList eventAddDiverToList, DelegateGetDiversList eventGetDiversList, DelegateReadFromFile eventReadFromFile)
+        public AddEditDiver(DelegateAddDiverToList eventAddDiverToList,
+            DelegateRemoveDiverFromList eventRemoveDiverFromList,
+            DelegateGetDiversList eventGetDiversList,
+            DelegateUpdateDiver eventUpdateDiver)
         {
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             InitializeComponent();
 
             this.eventAddDiverToList = eventAddDiverToList;
+            this.eventRemoveDiverFromList = eventRemoveDiverFromList;
+            this.eventGetDiversList = eventGetDiversList;
+            this.eventUpdateDiver = eventUpdateDiver;
 
             if (eventGetDiversList != null)
             {
-                //OBS TA BORT READ FILE
-                eventReadFromFile("diver.txt");
-                //OBS TA BORT READ FILE
-                DiversDiverDataGridView.DataSource = eventGetDiversList();
-                DiversDiverDataGridView.ReadOnly = true;
+                DiverDataGridView.DataSource = eventGetDiversList();
+                DiverDataGridView.ReadOnly = true;
+                DiverDataGridView.Columns["Id"].Visible = false;
             }
         }
+
         #endregion
 
+        #region Events
+
         /// <summary>
-        /// Shows the selected judge in the textboxes below.
+        /// Shows the selected diver in the textboxes below.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -40,7 +90,7 @@ namespace SimhoppGUI
         {
             try
             {
-                var cell = DiversDiverDataGridView.SelectedCells.Cast<DataGridViewCell>().FirstOrDefault();
+                var cell = DiverDataGridView.SelectedCells.Cast<DataGridViewCell>().FirstOrDefault();
 
                 if (cell == null)
                 {
@@ -48,7 +98,9 @@ namespace SimhoppGUI
                 }
                 var row = cell.OwningRow;
 
-                UpdateTextBoxes(row);
+                UpdateName = row.Cells["Name"].Value.ToString();
+                UpdateNationality = row.Cells["Nationality"].Value.ToString();
+                UpdateSSN = row.Cells["SSN"].Value.ToString();
 
             }
             catch (ArgumentNullException nullException)
@@ -64,24 +116,39 @@ namespace SimhoppGUI
                 MsgBox.CreateErrorBox(exception.ToString(), MethodBase.GetCurrentMethod().Name);
             }
         }
-
-        private void UpdateTextBoxes(DataGridViewRow row)
+        /// <summary>
+        /// Attempts to add a diver to list.
+        /// Also checks if the input is correct.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AddDiverButton_Click(object sender, EventArgs e)
         {
-            if (tabControlAddEdit.SelectedTab == tabPageAddDiver)
+            try
             {
-                AddDiverNameTb.Text = row.Cells["Name"].Value.ToString();
-                AddDiverNationaltyTb.Text = row.Cells["Nationality"].Value.ToString();
-                AddDiverSSNTb.Text = row.Cells["SSN"].Value.ToString();
+                if (CheckInput.CheckCorrectPersonInput(NameErrorProvider, NationalityErrorProvider,
+                    SSNErrorProvider, AddDiverNameTb, AddDiverNationaltyTb, AddDiverSSNTb))
+                {
+                    eventAddDiverToList(AddName, AddNationality, AddSSN);
+                    NameErrorProvider.Clear();
+
+                    log.Info("Added diver to list (" + AddName + ", " + AddNationality + ", " + AddSSN + ")");
+                }
             }
-            else
+            catch (DuplicateNameException)
+            {//diver already exists            
+                NameErrorProvider.SetError(AddDiverSSNTb, "Error: Diver already exists");
+                log.Debug("Attempted to add a diver which was already in list.");
+            }
+            catch (Exception exception)
             {
-                UpdateDiverNameTb.Text = row.Cells["Name"].Value.ToString();
-                UpdateDiverNationalityTb.Text = row.Cells["Nationality"].Value.ToString();
-                UpdateDiverSSNTb.Text = row.Cells["SSN"].Value.ToString();
+                MsgBox.CreateErrorBox(exception.ToString(), MethodBase.GetCurrentMethod().Name);
+                log.Warn("Exception when adding a new diver", exception);
             }
         }
+
         /// <summary>
-        /// Updates the selected judge with the input from the textboxes. 
+        /// Updates the selected diver with the input from the textboxes. 
         /// Also checks if the input is correct.
         /// </summary>
         /// <param name="sender"></param>
@@ -90,7 +157,7 @@ namespace SimhoppGUI
         {
             try
             {
-                var cell = DiversDiverDataGridView.SelectedCells.Cast<DataGridViewCell>().FirstOrDefault();
+                var cell = DiverDataGridView.SelectedCells.Cast<DataGridViewCell>().FirstOrDefault();
 
                 if (cell == null)
                 {
@@ -99,24 +166,67 @@ namespace SimhoppGUI
 
                 var row = cell.OwningRow;
 
-                //if (CheckInput.CheckCorrectPersonInput(UpdateDiverNameTb, UpdateDiverNationalityTb, UpdateDiverSSNTb))
-                //{
-                //    row.Cells["Name"].Value = UpdateDiverNameTb.Text;
-                //    row.Cells["Nationality"].Value = UpdateDiverNationalityTb.Text;
-                //    row.Cells["SSN"].Value = UpdateDiverSSNTb.Text;
-                //}
+                if (CheckInput.CheckCorrectPersonInput(NameErrorProvider, NationalityErrorProvider,
+                     SSNErrorProvider, UpdateDiverNameTb, UpdateDiverNationalityTb, UpdateDiverSSNTb))
+                {
+                    eventUpdateDiver(Convert.ToInt16(row.Cells["Id"].Value), UpdateName, UpdateNationality, UpdateSSN);
+
+                    //force refresh to show changes. 
+                    DiverDataGridView.Refresh();
+
+                    NameErrorProvider.Clear();
+
+                    log.Info("Updated diver (" + UpdateName + ", " + UpdateNationality + ", " + UpdateSSN + ")");
+                }
+            }
+            catch (DuplicateNameException)
+            {//diver med det ssn finns redan
+                NameErrorProvider.SetError(UpdateDiverSSNTb, "Error: Diver ssn already in use");
+                log.Debug("Attempted to add a diver which was already in list.");
             }
             catch (ArgumentNullException nullException)
             {
                 MsgBox.CreateErrorBox(nullException.ToString(), MethodBase.GetCurrentMethod().Name);
+                log.Warn("Argument null exception when trying to select diver cells", nullException);
             }
             catch (ArgumentOutOfRangeException outOfRangeException)
             {
                 MsgBox.CreateErrorBox(outOfRangeException.ToString(), MethodBase.GetCurrentMethod().Name);
+                log.Warn("Argument out of range exception when updating a diver", outOfRangeException);
             }
             catch (Exception exception)
             {
                 MsgBox.CreateErrorBox(exception.ToString(), MethodBase.GetCurrentMethod().Name);
+                log.Warn("Exception when updating a diver", exception);
+            }
+        }
+
+        /// <summary>
+        /// Removes the selected diver from the divers list.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UpdateDiverRemoveBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                eventRemoveDiverFromList(UpdateSSN);
+                log.Info("Removed diver from list (" + UpdateName + ", " + UpdateNationality + ", " + UpdateSSN + ")");
+            }
+
+            //Occurs if there is no diver to remove.
+            catch (NullReferenceException)
+            {
+                //do nothing? warn user?
+                NameErrorProvider.SetError(UpdateDiverRemoveBtn, "Error: No Diver to remove.");
+            }
+
+            //Resets the textboxes if list is empty.
+            if (DiverDataGridView.Rows.Count == 0)
+            {
+                UpdateName = "";
+                UpdateNationality = "";
+                UpdateSSN = "";
             }
         }
 
@@ -128,28 +238,93 @@ namespace SimhoppGUI
         /// <param name="e"></param>
         private void tabControlAddEdit_SelectedIndexChanged(object sender, EventArgs e)
         {
+            NameErrorProvider.Clear();
             DiversDataGridView_SelectionChanged(null, null);
         }
 
+        /// <summary>
+        /// Checks if enter was pressed and call event to add diver.
+        /// Also checks if escape was pressed and closes this form.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AddCheckEnterOrEscape(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)13)
+            {
+                AddDiverButton_Click(null, null);
+            }
+            else if (e.KeyChar == (char)27)
+            {
+                Close();
+            }
+        }
+
+        /// <summary>
+        /// Checks if enter was pressed and call event to update diver.
+        /// Also checks if escape was pressed and closes this form.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UpdateCheckEnterOrEscape(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)13)
+            {
+                UpdateDiverButton_Click(null, null);
+            }
+            else if (e.KeyChar == (char)27)
+            {
+                Close();
+            }
+        }
+
+        #endregion
+
         #region Click Textboxes
-        private void AddDiverNameTb_Click(object sender, EventArgs e)
+
+        private void UpdateDiverNameTb_Click(object sender, EventArgs e)
         {
             UpdateDiverNameTb.BackColor = SystemColors.Window;
-            UpdateDiverNameTb.Text = "";
+            UpdateDiverNameTb.SelectionStart = 0;
+            UpdateDiverNameTb.SelectionLength = UpdateDiverNameTb.Text.Length;
         }
         private void UpdateDiverNationalityTb_Click(object sender, EventArgs e)
         {
             UpdateDiverNationalityTb.BackColor = SystemColors.Window;
-            UpdateDiverNationalityTb.Text = "";
+            UpdateDiverNationalityTb.SelectionStart = 0;
+            UpdateDiverNationalityTb.SelectionLength = UpdateDiverNationalityTb.Text.Length;
         }
 
         private void UpdateDiverSSNTb_Click(object sender, EventArgs e)
         {
             UpdateDiverSSNTb.BackColor = SystemColors.Window;
-            UpdateDiverSSNTb.Text = "";
+            UpdateDiverSSNTb.SelectionStart = 0;
+            UpdateDiverSSNTb.SelectionLength = UpdateDiverSSNTb.Text.Length;
         }
+
+        private void AddDiverNameTb_Click(object sender, EventArgs e)
+        {
+            AddDiverNameTb.BackColor = SystemColors.Window;
+            AddDiverNameTb.SelectionStart = 0;
+            AddDiverNameTb.SelectionLength = AddDiverNameTb.Text.Length;
+        }
+        private void AddDiverNationaltyTb_Click(object sender, EventArgs e)
+        {
+            AddDiverNationaltyTb.BackColor = SystemColors.Window;
+            AddDiverNationaltyTb.SelectionStart = 0;
+            AddDiverNationaltyTb.SelectionLength = AddDiverNationaltyTb.Text.Length;
+        }
+
+        private void AddDiverSSNTb_Click(object sender, EventArgs e)
+        {
+            AddDiverSSNTb.BackColor = SystemColors.Window;
+            AddDiverSSNTb.SelectionStart = 0;
+            AddDiverSSNTb.SelectionLength = AddDiverSSNTb.Text.Length;
+        }
+
         #endregion
-        #region Close Button
+
+        #region Close Buttons
         private void AddDiverPreviousBtn_Click(object sender, EventArgs e)
         {
             Close();
@@ -160,20 +335,5 @@ namespace SimhoppGUI
         }
         #endregion
 
-        private void AddDiverButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                //if (CheckInput.CheckCorrectPersonInput(AddDiverNameTb, AddDiverNationaltyTb, AddDiverSSNTb))
-                //{
-                //    eventAddDiverToList(AddDiverNameTb.Text, AddDiverNationaltyTb.Text, AddDiverSSNTb.Text);
-                //}
-            }
-            catch (Exception exception)
-            {
-                MsgBox.CreateErrorBox(exception.ToString(), MethodBase.GetCurrentMethod().Name);
-            }
-
-        }
     }
 }
