@@ -56,7 +56,6 @@
             this.CommitBtn = new System.Windows.Forms.Button();
             this.JudgePointsPanel = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
             this.IPValueLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.TrickPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.judge1Point)).BeginInit();
@@ -204,6 +203,7 @@
             0,
             0});
             this.judge1Point.Name = "judge1Point";
+            this.judge1Point.ReadOnly = true;
             this.judge1Point.Size = new System.Drawing.Size(67, 22);
             this.judge1Point.TabIndex = 17;
             this.judge1Point.Visible = false;
@@ -223,6 +223,7 @@
             0,
             0});
             this.judge2Point.Name = "judge2Point";
+            this.judge2Point.ReadOnly = true;
             this.judge2Point.Size = new System.Drawing.Size(67, 22);
             this.judge2Point.TabIndex = 18;
             this.judge2Point.Visible = false;
@@ -242,6 +243,7 @@
             0,
             0});
             this.judge3Point.Name = "judge3Point";
+            this.judge3Point.ReadOnly = true;
             this.judge3Point.Size = new System.Drawing.Size(67, 22);
             this.judge3Point.TabIndex = 19;
             this.judge3Point.Visible = false;
@@ -261,6 +263,7 @@
             0,
             0});
             this.judge4Point.Name = "judge4Point";
+            this.judge4Point.ReadOnly = true;
             this.judge4Point.Size = new System.Drawing.Size(67, 22);
             this.judge4Point.TabIndex = 20;
             this.judge4Point.Visible = false;
@@ -280,6 +283,7 @@
             0,
             0});
             this.judge5Point.Name = "judge5Point";
+            this.judge5Point.ReadOnly = true;
             this.judge5Point.Size = new System.Drawing.Size(67, 22);
             this.judge5Point.TabIndex = 21;
             this.judge5Point.Visible = false;
@@ -299,6 +303,7 @@
             0,
             0});
             this.judge6Point.Name = "judge6Point";
+            this.judge6Point.ReadOnly = true;
             this.judge6Point.Size = new System.Drawing.Size(67, 22);
             this.judge6Point.TabIndex = 22;
             this.judge6Point.Visible = false;
@@ -318,6 +323,7 @@
             0,
             0});
             this.judge7Point.Name = "judge7Point";
+            this.judge7Point.ReadOnly = true;
             this.judge7Point.Size = new System.Drawing.Size(67, 22);
             this.judge7Point.TabIndex = 23;
             this.judge7Point.Visible = false;
@@ -437,16 +443,6 @@
             this.panel1.Size = new System.Drawing.Size(248, 97);
             this.panel1.TabIndex = 32;
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(236, 141);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 33;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // IPValueLabel
             // 
             this.IPValueLabel.AutoSize = true;
@@ -456,7 +452,7 @@
             this.IPValueLabel.Name = "IPValueLabel";
             this.IPValueLabel.Size = new System.Drawing.Size(101, 16);
             this.IPValueLabel.TabIndex = 29;
-            this.IPValueLabel.Text = "500.500.500.500";
+            this.IPValueLabel.Text = "255.255.255.255";
             // 
             // LiveFeed
             // 
@@ -464,7 +460,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(776, 349);
             this.Controls.Add(this.IPValueLabel);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.JudgePointsPanel);
             this.Controls.Add(this.CommitBtn);
@@ -525,7 +520,6 @@
         private System.Windows.Forms.Button CommitBtn;
         private System.Windows.Forms.Panel JudgePointsPanel;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label IPValueLabel;
     }
 }
