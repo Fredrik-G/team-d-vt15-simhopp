@@ -56,6 +56,12 @@
             this.SSNErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.weirddatagridfix = new System.Windows.Forms.DataGridView();
             this.weirdfix = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DiverDataGridHiddenLabel = new System.Windows.Forms.Label();
+            this.AddDiverHiddenLabel = new System.Windows.Forms.Label();
+            this.EditDiverHiddenLabel = new System.Windows.Forms.Label();
+            this.AddDiverToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.DiversDataGridToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.EditDiverToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.tabControlAddEdit.SuspendLayout();
             this.tabPageEditDiver.SuspendLayout();
             this.tabPageAddDiver.SuspendLayout();
@@ -337,11 +343,47 @@
             this.weirdfix.HeaderText = "weirdfix";
             this.weirdfix.Name = "weirdfix";
             // 
+            // DiverDataGridHiddenLabel
+            // 
+            this.DiverDataGridHiddenLabel.AutoSize = true;
+            this.DiverDataGridHiddenLabel.Enabled = false;
+            this.DiverDataGridHiddenLabel.Location = new System.Drawing.Point(3, 12);
+            this.DiverDataGridHiddenLabel.Name = "DiverDataGridHiddenLabel";
+            this.DiverDataGridHiddenLabel.Size = new System.Drawing.Size(66, 13);
+            this.DiverDataGridHiddenLabel.TabIndex = 27;
+            this.DiverDataGridHiddenLabel.Text = "Hidden label";
+            this.DiverDataGridHiddenLabel.Visible = false;
+            // 
+            // AddDiverHiddenLabel
+            // 
+            this.AddDiverHiddenLabel.AutoSize = true;
+            this.AddDiverHiddenLabel.Enabled = false;
+            this.AddDiverHiddenLabel.Location = new System.Drawing.Point(87, 240);
+            this.AddDiverHiddenLabel.Name = "AddDiverHiddenLabel";
+            this.AddDiverHiddenLabel.Size = new System.Drawing.Size(66, 13);
+            this.AddDiverHiddenLabel.TabIndex = 25;
+            this.AddDiverHiddenLabel.Text = "Hidden label";
+            this.AddDiverHiddenLabel.Visible = false;
+            // 
+            // EditDiverHiddenLabel
+            // 
+            this.EditDiverHiddenLabel.AutoSize = true;
+            this.EditDiverHiddenLabel.Enabled = false;
+            this.EditDiverHiddenLabel.Location = new System.Drawing.Point(17, 240);
+            this.EditDiverHiddenLabel.Name = "EditDiverHiddenLabel";
+            this.EditDiverHiddenLabel.Size = new System.Drawing.Size(66, 13);
+            this.EditDiverHiddenLabel.TabIndex = 26;
+            this.EditDiverHiddenLabel.Text = "Hidden label";
+            this.EditDiverHiddenLabel.Visible = false;
+            // 
             // AddEditDiver
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(376, 480);
+            this.Controls.Add(this.DiverDataGridHiddenLabel);
+            this.Controls.Add(this.AddDiverHiddenLabel);
+            this.Controls.Add(this.EditDiverHiddenLabel);
             this.Controls.Add(this.weirddatagridfix);
             this.Controls.Add(this.DiverDataGridView);
             this.Controls.Add(this.tabControlAddEdit);
@@ -349,7 +391,9 @@
             this.MinimizeBox = false;
             this.Name = "AddEditDiver";
             this.Text = "Add/Edit Diver";
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AddCheckEnterOrEscape);
+            this.Load += new System.EventHandler(this.AddEditDiver_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AddEditDiver_KeyDown);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.AddEditDiver_KeyUp);
             this.tabControlAddEdit.ResumeLayout(false);
             this.tabPageEditDiver.ResumeLayout(false);
             this.tabPageEditDiver.PerformLayout();
@@ -361,6 +405,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.SSNErrorProvider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.weirddatagridfix)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -393,5 +438,11 @@
         private System.Windows.Forms.ErrorProvider SSNErrorProvider;
         private System.Windows.Forms.DataGridView weirddatagridfix;
         private System.Windows.Forms.DataGridViewTextBoxColumn weirdfix;
+        private System.Windows.Forms.Label DiverDataGridHiddenLabel;
+        private System.Windows.Forms.Label AddDiverHiddenLabel;
+        private System.Windows.Forms.Label EditDiverHiddenLabel;
+        private System.Windows.Forms.ToolTip AddDiverToolTip;
+        private System.Windows.Forms.ToolTip DiversDataGridToolTip;
+        private System.Windows.Forms.ToolTip EditDiverToolTip;
     }
 }
