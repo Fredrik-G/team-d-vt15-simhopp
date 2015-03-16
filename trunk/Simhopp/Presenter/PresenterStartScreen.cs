@@ -46,6 +46,7 @@ namespace Simhopp.Presenter
             this.View.EventReadTricksFromDatabase += ReadTricksFromDatabase;
             this.View.EventGetTrickList += GetTrickList;
             this.View.EventUpdateDiver += UpdateDiver;
+            this.View.EventSaveContestToDatabase += SaveContestToDatabase;
 
             this.View.EventHandleMessage += HandleMessage;
             this.View.EventGetFirstClientObjectData += GetFirstClientObjectData;
@@ -53,6 +54,7 @@ namespace Simhopp.Presenter
             this.View.EventSendDataToClient += SendDataToClient;
             this.View.EventSetDiverMessage += SetDiverMessage;
             this.View.EventGetIPForServer += GetIPForServer;
+            this.View.EventStartServer += StartServer;
 
             this.View.EventReadContestsFromDatabase += ReadContestsFromDatabase;
             this.View.EventAddTrickToParticipant += AddTrickToParticipant;
@@ -123,6 +125,11 @@ namespace Simhopp.Presenter
         public void SetJudgePoint(int contestId, string judgeSsn, string diverSsn, double point, int jumpNo)
         {
             this.Model.SetJudgePoint(contestId, judgeSsn, diverSsn, point, jumpNo);
+        }
+
+        public void SaveContestToDatabase(Contest contest)
+        {
+            this.Model.SaveContestToDatabase(contest);
         }
 
         #region Read methods

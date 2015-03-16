@@ -40,8 +40,8 @@ namespace Simhopp
         /// </summary>
         public Simhopp()
         {
-            // databaseController = new DatabaseController(@"m:\My Documents\Visual Studio 2013\Projects\Simhopp\Simhopp\simhoppTestDB.db");
-            databaseController = new DatabaseController(@"m:\desktop\simhopptestdb.db");
+            databaseController = new DatabaseController(@"C:\temp\Simhopp\Simhopp\simhoppTestDB.db");
+           // databaseController = new DatabaseController(@"m:\desktop\simhopptestdb.db");
             databaseController.ConnectToDatabase();
         }
 
@@ -593,7 +593,7 @@ namespace Simhopp
 
         #endregion
 
-        #region Read from database
+        #region Read/Write from/to database
 
         /// <summary>
         /// Reads judges from database and adds them to judgelist.
@@ -623,6 +623,11 @@ namespace Simhopp
         public void ReadTricksFromDatabase()
         {
             trickList.ReadFromDatabase(databaseController);
+        }
+
+        public void SaveContestToDatabase(Contest contest)
+        {
+            databaseController.UpdateContest(contest);
         }
 
         #endregion

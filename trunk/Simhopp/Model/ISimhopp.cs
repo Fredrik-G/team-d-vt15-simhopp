@@ -9,6 +9,7 @@ namespace Simhopp.Model
     {
         void CreateContest(string place, string name, string startDate, string endDate);
         void SetJudgePoint(int contestId, string judgeSsn, string diverSsn, double point, int jumpNo);
+        void SaveContestToDatabase(Contest contest);
 
         #region Read methods
 
