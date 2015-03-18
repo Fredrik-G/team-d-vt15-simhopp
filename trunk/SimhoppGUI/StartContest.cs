@@ -125,6 +125,11 @@ namespace SimhoppGUI
             {
                 ContestsDataGridView.DataSource = this.eventGetContestsList();
                 ShowFinishedContestState();
+
+                if (ContestsDataGridView.Rows.Count > 0)
+                {
+                  ContestsDataGridView.CurrentCell = ContestsDataGridView.Rows[0].Cells["Name"];  
+                }               
             }
             if (eventGetJudgesList != null)
             {
