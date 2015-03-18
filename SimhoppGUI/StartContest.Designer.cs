@@ -58,6 +58,7 @@
             this.DiversToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.ViewResultToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.ErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.JudgesDiversTabControl.SuspendLayout();
             this.JudgeTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GlobalJudgesDataGridView)).BeginInit();
@@ -67,6 +68,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.GlobalDiversDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ContestsDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // JudgesDiversTabControl
@@ -207,7 +209,6 @@
             this.CurrentDiversDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.CurrentDiversDataGridView.Location = new System.Drawing.Point(389, 0);
             this.CurrentDiversDataGridView.Name = "CurrentDiversDataGridView";
-            this.CurrentDiversDataGridView.ReadOnly = true;
             this.CurrentDiversDataGridView.RowHeadersWidth = 30;
             this.CurrentDiversDataGridView.Size = new System.Drawing.Size(643, 227);
             this.CurrentDiversDataGridView.TabIndex = 7;
@@ -251,7 +252,7 @@
             this.ContestsDataGridView.Location = new System.Drawing.Point(12, 12);
             this.ContestsDataGridView.Name = "ContestsDataGridView";
             this.ContestsDataGridView.ReadOnly = true;
-            this.ContestsDataGridView.Size = new System.Drawing.Size(563, 179);
+            this.ContestsDataGridView.Size = new System.Drawing.Size(566, 179);
             this.ContestsDataGridView.TabIndex = 40;
             this.ContestsDataGridView.TabStop = false;
             this.ContestsDataGridView.SelectionChanged += new System.EventHandler(this.ContestsDataGridView_SelectionChanged);
@@ -364,11 +365,30 @@
             // 
             this.ErrorProvider.ContainerControl = this;
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToOrderColumns = true;
+            this.dataGridView1.AllowUserToResizeColumns = false;
+            this.dataGridView1.AllowUserToResizeRows = false;
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(1096, 21);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersWidth = 30;
+            this.dataGridView1.Size = new System.Drawing.Size(0, 81);
+            this.dataGridView1.TabIndex = 7;
+            this.dataGridView1.TabStop = false;
+            // 
             // StartContest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1060, 463);
+            this.ClientSize = new System.Drawing.Size(1063, 463);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.ContestsDataGridHiddenLabel);
             this.Controls.Add(this.DiversHiddenLabel);
             this.Controls.Add(this.JudgesHiddenLabel);
@@ -396,6 +416,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.GlobalDiversDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ContestsDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -432,5 +453,6 @@
         private System.Windows.Forms.ToolTip DiversToolTip;
         private System.Windows.Forms.ToolTip ViewResultToolTip;
         private System.Windows.Forms.ErrorProvider ErrorProvider;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }
