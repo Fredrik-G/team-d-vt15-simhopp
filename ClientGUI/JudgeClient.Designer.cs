@@ -73,7 +73,7 @@
             this.connectToolStripMenuItem,
             this.disconnectToolStripMenuItem});
             this.FileToolStripMenuItem.Name = "FileToolStripMenuItem";
-            this.FileToolStripMenuItem.ShortcutKeyDisplayString = "xzdaxs";
+            this.FileToolStripMenuItem.ShortcutKeyDisplayString = "";
             this.FileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.FileToolStripMenuItem.Text = "File";
             // 
@@ -88,7 +88,7 @@
             // disconnectToolStripMenuItem
             // 
             this.disconnectToolStripMenuItem.Name = "disconnectToolStripMenuItem";
-            this.disconnectToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.D1)));
+            this.disconnectToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.D2)));
             this.disconnectToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.disconnectToolStripMenuItem.Text = "Disconnect";
             this.disconnectToolStripMenuItem.Click += new System.EventHandler(this.disconnectToolStripMenuItem1_Click);
