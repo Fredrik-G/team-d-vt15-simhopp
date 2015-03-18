@@ -426,12 +426,25 @@ namespace Simhopp.Model
         /// Creates a list with the current result (including name,nationality and points).
         /// </summary>
         /// <returns>Returns list of current result</returns>
-        private List<string> CreateResultList()
+        private List<string> CreateResultStringList()
         {
             var resultList = new List<string>();
             for (var i = participantsList.Count - 1; i >= 0; i--)
             {
                 resultList.Add(participantsList[i].GetDiverInfo());
+            }
+            return resultList;
+        }
+        /// <summary>
+        /// Creates a list with the current result (including name,nationality and points).
+        /// </summary>
+        /// <returns>Returns list of current result</returns>
+        private List<Participant> CreateResultParticipantList()
+        {
+            var resultList = new List<Participant>();
+            for (var i = participantsList.Count - 1; i >= 0; i--)
+            {
+                resultList.Add(participantsList[i]);
             }
             return resultList;
         }
@@ -451,13 +464,26 @@ namespace Simhopp.Model
                     fileStream = null;
 
                     writer.WriteLine("<H2>" + this.Name + "\t" + this.Place + "</H2>");
+
+                    writer.WriteLine("<H3>Participants</H3>");
                     writer.WriteLine("<ol>");
-                    var resultList = CreateResultList();
-                    foreach (var line in resultList)
+
+                    // var resultList = CreateResultStringList();
+                    var resultList = CreateResultParticipantList();
+                    
+                    foreach (var participant in resultList)
                     {
-                        writer.WriteLine("<li>" + line + "</li>");
+                        writer.WriteLine("<li>" + participant.DiverName + "\t" + participant.GetDiverNationality() + "</li>");
                     }
                     writer.WriteLine("</ol>");
+
+                    writer.WriteLine("<H3>Judges</H3>");
+                    writer.WriteLine("<ul>");                  
+                    foreach (var judge in judgeList)
+                    {
+                        writer.WriteLine("<li>" + judge.Name + "\t" + judge.Nationality + "</li>");
+                    }
+                    writer.WriteLine("</ul>");
                 }
             }
             finally
