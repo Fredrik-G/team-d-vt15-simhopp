@@ -1064,11 +1064,11 @@ namespace Simhopp.Model
                 SQLiteDataReader readerGetDivers = commandGetDivers.ExecuteReader();
                 while (readerGetDivers.Read())
                 {
-                    
-                    Diver d = new Diver(Convert.ToInt32(readerGetDivers["ID"]), Convert.ToString(readerGetDivers["Name"]), Convert.ToString(readerGetDivers["SSN"]), Convert.ToString(readerGetDivers["Nationality"]));
+
+                    Diver d = new Diver(Convert.ToInt32(readerGetDivers["ID"]), Convert.ToString(readerGetDivers["Name"]), Convert.ToString(readerGetDivers["Nationality"]), Convert.ToString(readerGetDivers["SSN"]));
                     Participant p = new Participant(d);
                     //Get participant jumpResults
-                    string sqlGetJumpResult = "SELECT DISTINCT Trick.Name, Trick.Difficulty, Evaluation.Point, Jump.TotalPoint" +
+                    string sqlGetJumpResult = "SELECT Trick.Name, Trick.Difficulty, Evaluation.Point, Jump.TotalPoint" +
                                               " FROM Trick, Evaluation, Jump" +
                                               " WHERE Jump.Contest = '" + contest.Id + "'" +
                                               " AND Jump.Diver = '" + d.Id + "'" +
