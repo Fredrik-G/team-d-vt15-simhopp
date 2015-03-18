@@ -10,6 +10,7 @@ namespace Simhopp.Model
     {
         #region Variables
         private string trickName;
+        private double trickDifficulty;
         private double[] judgePoints;
         private double sumJudgePoints;
         #endregion
@@ -24,6 +25,18 @@ namespace Simhopp.Model
             set
             {
                 this.trickName = value;
+            }
+        }
+
+        public double TrickDifficulty
+        {
+            get
+            {
+                return this.trickDifficulty;
+            }
+            set
+            {
+                this.trickDifficulty = value;
             }
         }
         public double SumJudgePoints
@@ -48,6 +61,7 @@ namespace Simhopp.Model
         public JumpResult()
         {
             trickName = "";
+            trickDifficulty = 0;
             judgePoints = new double[7]; 
             for (var i = 0; i < judgePoints.Length; i++)
             {
@@ -61,6 +75,7 @@ namespace Simhopp.Model
         /// Calculates the result with the CalculateResult method.
         /// </summary>
         /// <param name="trickName"></param>
+        /// <param name="trickDifficulty"></param>
         /// <param name="j0"></param>
         /// <param name="j1"></param>
         /// <param name="j2"></param>
@@ -68,9 +83,10 @@ namespace Simhopp.Model
         /// <param name="j4"></param>
         /// <param name="j5"></param>
         /// <param name="j6"></param>
-        public JumpResult(string trickName, double j0, double j1, double j2, double j3, double j4, double j5, double j6)
+        public JumpResult(string trickName, double trickDifficulty, double j0, double j1, double j2, double j3, double j4, double j5, double j6)
         {
             this.trickName = trickName;
+            this.trickDifficulty = trickDifficulty;
             judgePoints = new[] { j0, j1, j2, j3, j4, j5, j6 }; 
             CalculateResult();
         }

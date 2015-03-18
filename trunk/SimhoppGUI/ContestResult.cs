@@ -29,6 +29,10 @@ namespace SimhoppGUI
         private void ContestResult_Load(object sender, EventArgs e)
         {
             //resultsDataGridView.DataSource = //BindingList 
+            foreach (var participant in contest.GetParticipants())
+            {
+                participant.UpdateTotalPoints();
+            }
             UpdateResultList();
             convertJudgeList();
             resultDataGridView.DefaultCellStyle.Format = "0.00##";

@@ -78,6 +78,18 @@ namespace Simhopp.Model
         }
 
         /// <summary>
+        /// A function that sets a trick for a certain jump
+        /// </summary>
+        /// <param name="jumpNo"></param>
+        /// <param name="name"></param>
+        public void SetTrick(int jumpNo, string name, double trickDifficulty)
+        {
+            jumpResults[jumpNo].TrickName = name;
+            jumpResults[jumpNo].TrickDifficulty = trickDifficulty;
+        }
+
+
+        /// <summary>
         /// Sets the current divers id.
         /// </summary>
         /// <param name="id"></param>
@@ -177,9 +189,20 @@ namespace Simhopp.Model
             }
         }
 
+
         /// <summary>
         /// Updates the total point for every jump result.
-        /// TODO: nu får ju alla jump samma difficulity, borde man inte kunna ha olika?
+        /// </summary>
+        public void UpdateTotalPoints()
+        {
+            foreach (var jumpResult in jumpResults.Where(x => x.SumJudgePoints >= 0.0))
+            {
+                totalPoints += jumpResult.SumJudgePoints * jumpResult.TrickDifficulty;
+            }
+        }
+
+        /// <summary>
+        /// Updates the total point for every jump result.
         /// </summary>
         /// <param name="jumpDifficulty"></param>
         public void UpdateTotalPoints(double jumpDifficulty)
