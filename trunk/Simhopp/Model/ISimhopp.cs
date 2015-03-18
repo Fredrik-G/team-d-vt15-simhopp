@@ -40,6 +40,8 @@ namespace Simhopp.Model
         string GetJudgeHash(string ssn);
         string GetJudgeSalt(string ssn);
 
+        int GetTrickIdByName(string trickName);
+
         #endregion
 
         #region Add methods

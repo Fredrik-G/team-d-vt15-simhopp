@@ -25,6 +25,7 @@ namespace SimhoppGUI
         private DelegateGetTrickDifficultyFromTrickHashTable eventGetTrickDifficultyFromTrickHashTable;
         private DelegateSaveContestToDatabase eventSaveContestToDatabase;
         private DelegateGetContestFromDatabase eventGetContestFromDatabase;
+        private DelegateGetTrickIdByName eventGetTrickIdByName;
 
         private readonly int contestId;
         private readonly Contest contest;
@@ -74,7 +75,8 @@ namespace SimhoppGUI
             DelegateGetIPForServer eventGetIPForServer,
             DelegateGetTrickDifficultyFromTrickHashTable eventGetTrickDifficultyFromTrickHashTable,
             DelegateSaveContestToDatabase eventSaveContestToDatabase,
-            DelegateGetContestFromDatabase eventGetContestFromDatabase)
+            DelegateGetContestFromDatabase eventGetContestFromDatabase,
+            DelegateGetTrickIdByName eventGetTrickIdByName)
         {
             InitializeComponent();
 
@@ -88,6 +90,7 @@ namespace SimhoppGUI
             this.eventGetIPForServer = eventGetIPForServer;
             this.eventGetTrickDifficultyFromTrickHashTable = eventGetTrickDifficultyFromTrickHashTable;
             this.eventSaveContestToDatabase = eventSaveContestToDatabase;
+            this.eventGetTrickIdByName = eventGetTrickIdByName;
 
             this.contestId = contestId;
             this.contest = eventGetContest(contestId);

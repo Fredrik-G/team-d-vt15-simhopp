@@ -40,8 +40,8 @@ namespace Simhopp
         /// </summary>
         public Simhopp()
         {
-            databaseController = new DatabaseController(@"C:\temp\Simhopp\Simhopp\simhoppTestDB.db");
-           // databaseController = new DatabaseController(@"m:\desktop\simhopptestdb.db");
+           // databaseController = new DatabaseController(@"C:\temp\Simhopp\Simhopp\simhoppTestDB.db");
+            databaseController = new DatabaseController(@"m:\desktop\simhopptestdb.db");
             databaseController.ConnectToDatabase();
         }
 
@@ -273,6 +273,16 @@ namespace Simhopp
         public double GetTrickDifficultyFromTrickHashTable(string trickName)
         {
             return trickList.GetDifficultyByName(trickName);
+        }
+
+        /// <summary>
+        /// Gets a tricks id by trick name.
+        /// </summary>
+        /// <param name="trickName"></param>
+        /// <returns></returns>
+        public int GetTrickIdByName(string trickName)
+        {
+            return trickList.GetIdByName(trickName);
         }
 
         #endregion
@@ -735,8 +745,6 @@ namespace Simhopp
             var selectedContest = contestList.SingleOrDefault(x => x.Id == contestId);
             return selectedContest.IsAllJudgePointSet(diverSsn, jumpNo);
         }
-
-
 
         #region IDisposable methods
 
