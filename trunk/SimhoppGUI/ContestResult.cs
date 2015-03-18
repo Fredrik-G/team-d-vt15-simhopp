@@ -34,7 +34,7 @@ namespace SimhoppGUI
                 participant.UpdateTotalPoints();
             }
             UpdateResultList();
-            convertJudgeList();
+            ConvertJudgeList();
             resultDataGridView.DefaultCellStyle.Format = "0.00##";
             
             resultDataGridView.DataSource = liveResultList;
@@ -63,7 +63,7 @@ namespace SimhoppGUI
             }
         }
 
-        private void convertJudgeList()
+        private void ConvertJudgeList()
         {
             foreach (var judge in contest.GetJudgesList())
             {
@@ -74,6 +74,11 @@ namespace SimhoppGUI
         private void closeButton_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void htmlExportButton_Click(object sender, EventArgs e)
+        {
+            contest.CreateHtmlResultFile();
         }
     }
 }
