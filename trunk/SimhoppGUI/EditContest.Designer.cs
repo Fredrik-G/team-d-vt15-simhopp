@@ -48,9 +48,9 @@
             // 
             // EditViewContestEditChangesBtn
             // 
-            this.EditViewContestEditChangesBtn.Location = new System.Drawing.Point(86, 219);
+            this.EditViewContestEditChangesBtn.Location = new System.Drawing.Point(102, 240);
             this.EditViewContestEditChangesBtn.Name = "EditViewContestEditChangesBtn";
-            this.EditViewContestEditChangesBtn.Size = new System.Drawing.Size(113, 27);
+            this.EditViewContestEditChangesBtn.Size = new System.Drawing.Size(75, 23);
             this.EditViewContestEditChangesBtn.TabIndex = 18;
             this.EditViewContestEditChangesBtn.Text = "Update changes";
             this.EditViewContestEditChangesBtn.UseVisualStyleBackColor = true;
@@ -58,34 +58,36 @@
             // 
             // EditViewContestEditEndtDateTp
             // 
-            this.EditViewContestEditEndtDateTp.Location = new System.Drawing.Point(128, 184);
+            this.EditViewContestEditEndtDateTp.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.EditViewContestEditEndtDateTp.Location = new System.Drawing.Point(102, 197);
             this.EditViewContestEditEndtDateTp.Name = "EditViewContestEditEndtDateTp";
-            this.EditViewContestEditEndtDateTp.Size = new System.Drawing.Size(200, 20);
+            this.EditViewContestEditEndtDateTp.Size = new System.Drawing.Size(119, 20);
             this.EditViewContestEditEndtDateTp.TabIndex = 17;
             this.EditViewContestEditEndtDateTp.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.EditContest_KeyPress);
             // 
             // EditViewContestEditStartDateTp
             // 
-            this.EditViewContestEditStartDateTp.Location = new System.Drawing.Point(128, 126);
+            this.EditViewContestEditStartDateTp.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.EditViewContestEditStartDateTp.Location = new System.Drawing.Point(102, 145);
             this.EditViewContestEditStartDateTp.Name = "EditViewContestEditStartDateTp";
-            this.EditViewContestEditStartDateTp.Size = new System.Drawing.Size(200, 20);
+            this.EditViewContestEditStartDateTp.Size = new System.Drawing.Size(119, 20);
             this.EditViewContestEditStartDateTp.TabIndex = 16;
             this.EditViewContestEditStartDateTp.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.EditContest_KeyPress);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(14, 190);
+            this.label1.Location = new System.Drawing.Point(24, 203);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(73, 13);
+            this.label1.Size = new System.Drawing.Size(52, 13);
             this.label1.TabIndex = 15;
-            this.label1.Text = "Edit End Date";
+            this.label1.Text = "End Date";
             // 
             // EditViewContestEditContestPlaceTb
             // 
-            this.EditViewContestEditContestPlaceTb.Location = new System.Drawing.Point(128, 71);
+            this.EditViewContestEditContestPlaceTb.Location = new System.Drawing.Point(102, 85);
             this.EditViewContestEditContestPlaceTb.Name = "EditViewContestEditContestPlaceTb";
-            this.EditViewContestEditContestPlaceTb.Size = new System.Drawing.Size(200, 20);
+            this.EditViewContestEditContestPlaceTb.Size = new System.Drawing.Size(172, 20);
             this.EditViewContestEditContestPlaceTb.TabIndex = 14;
             this.toolTipEditViewContest.SetToolTip(this.EditViewContestEditContestPlaceTb, "\"Stockholm\", \"Boulogne-Billancourt\"");
             this.EditViewContestEditContestPlaceTb.Click += new System.EventHandler(this.EditViewContestEditContestPlaceTb_Click);
@@ -93,9 +95,9 @@
             // 
             // EditViewContestEditContestNameTb
             // 
-            this.EditViewContestEditContestNameTb.Location = new System.Drawing.Point(128, 13);
+            this.EditViewContestEditContestNameTb.Location = new System.Drawing.Point(102, 23);
             this.EditViewContestEditContestNameTb.Name = "EditViewContestEditContestNameTb";
-            this.EditViewContestEditContestNameTb.Size = new System.Drawing.Size(200, 20);
+            this.EditViewContestEditContestNameTb.Size = new System.Drawing.Size(172, 20);
             this.EditViewContestEditContestNameTb.TabIndex = 13;
             this.toolTipEditViewContest.SetToolTip(this.EditViewContestEditContestNameTb, "\"Jerusalem-VM\", \"He\'Man\", \"Asp.Net\"");
             this.EditViewContestEditContestNameTb.Click += new System.EventHandler(this.EditViewContestEditContestNameTb_Click);
@@ -104,35 +106,35 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(14, 132);
+            this.label2.Location = new System.Drawing.Point(21, 151);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(76, 13);
+            this.label2.Size = new System.Drawing.Size(55, 13);
             this.label2.TabIndex = 12;
-            this.label2.Text = "Edit Start Date";
+            this.label2.Text = "Start Date";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(14, 74);
+            this.label3.Location = new System.Drawing.Point(21, 88);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(55, 13);
+            this.label3.Size = new System.Drawing.Size(34, 13);
             this.label3.TabIndex = 11;
-            this.label3.Text = "Edit Place";
+            this.label3.Text = "Place";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(14, 16);
+            this.label4.Location = new System.Drawing.Point(21, 23);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(95, 13);
+            this.label4.Size = new System.Drawing.Size(74, 13);
             this.label4.TabIndex = 10;
-            this.label4.Text = "Edit Contest Name";
+            this.label4.Text = "Contest Name";
             // 
             // EditViewContestCloseBtn
             // 
-            this.EditViewContestCloseBtn.Location = new System.Drawing.Point(223, 219);
+            this.EditViewContestCloseBtn.Location = new System.Drawing.Point(205, 240);
             this.EditViewContestCloseBtn.Name = "EditViewContestCloseBtn";
-            this.EditViewContestCloseBtn.Size = new System.Drawing.Size(113, 27);
+            this.EditViewContestCloseBtn.Size = new System.Drawing.Size(75, 23);
             this.EditViewContestCloseBtn.TabIndex = 20;
             this.EditViewContestCloseBtn.Text = "Close";
             this.EditViewContestCloseBtn.UseVisualStyleBackColor = true;
@@ -150,7 +152,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(375, 255);
+            this.ClientSize = new System.Drawing.Size(297, 287);
             this.Controls.Add(this.EditViewContestEditContestNameTb);
             this.Controls.Add(this.EditViewContestEditEndtDateTp);
             this.Controls.Add(this.EditViewContestEditChangesBtn);

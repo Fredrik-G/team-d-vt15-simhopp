@@ -41,10 +41,9 @@
             // 
             // StartScreenNewContesttBtn
             // 
-            this.StartScreenNewContesttBtn.Location = new System.Drawing.Point(30, 52);
-            this.StartScreenNewContesttBtn.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.StartScreenNewContesttBtn.Location = new System.Drawing.Point(15, 27);
             this.StartScreenNewContesttBtn.Name = "StartScreenNewContesttBtn";
-            this.StartScreenNewContesttBtn.Size = new System.Drawing.Size(144, 127);
+            this.StartScreenNewContesttBtn.Size = new System.Drawing.Size(72, 66);
             this.StartScreenNewContesttBtn.TabIndex = 0;
             this.StartScreenNewContesttBtn.Text = "New Contest";
             this.NewContestToolTip.SetToolTip(this.StartScreenNewContesttBtn, "Ctrl+N");
@@ -53,22 +52,20 @@
             // 
             // StartScreenStartContestBtn
             // 
-            this.StartScreenStartContestBtn.Location = new System.Drawing.Point(264, 52);
-            this.StartScreenStartContestBtn.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.StartScreenStartContestBtn.Location = new System.Drawing.Point(132, 27);
             this.StartScreenStartContestBtn.Name = "StartScreenStartContestBtn";
-            this.StartScreenStartContestBtn.Size = new System.Drawing.Size(144, 127);
+            this.StartScreenStartContestBtn.Size = new System.Drawing.Size(72, 66);
             this.StartScreenStartContestBtn.TabIndex = 1;
-            this.StartScreenStartContestBtn.Text = "Start Contest";
+            this.StartScreenStartContestBtn.Text = "Administrate Contest";
             this.StartContestToolTip.SetToolTip(this.StartScreenStartContestBtn, "Ctrl+S");
             this.StartScreenStartContestBtn.UseVisualStyleBackColor = true;
             this.StartScreenStartContestBtn.Click += new System.EventHandler(this.StartScreenStartContestBtn_Click);
             // 
             // StartScreenAddDiverContestBtn
             // 
-            this.StartScreenAddDiverContestBtn.Location = new System.Drawing.Point(496, 52);
-            this.StartScreenAddDiverContestBtn.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.StartScreenAddDiverContestBtn.Location = new System.Drawing.Point(248, 27);
             this.StartScreenAddDiverContestBtn.Name = "StartScreenAddDiverContestBtn";
-            this.StartScreenAddDiverContestBtn.Size = new System.Drawing.Size(144, 127);
+            this.StartScreenAddDiverContestBtn.Size = new System.Drawing.Size(72, 66);
             this.StartScreenAddDiverContestBtn.TabIndex = 3;
             this.StartScreenAddDiverContestBtn.Text = "Add/Edit Diver";
             this.AddDiverToolTip.SetToolTip(this.StartScreenAddDiverContestBtn, "Ctrl+D");
@@ -77,30 +74,28 @@
             // 
             // StartScreenAddJudgeBtn
             // 
-            this.StartScreenAddJudgeBtn.Location = new System.Drawing.Point(730, 52);
-            this.StartScreenAddJudgeBtn.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.StartScreenAddJudgeBtn.Location = new System.Drawing.Point(365, 27);
             this.StartScreenAddJudgeBtn.Name = "StartScreenAddJudgeBtn";
-            this.StartScreenAddJudgeBtn.Size = new System.Drawing.Size(144, 127);
+            this.StartScreenAddJudgeBtn.Size = new System.Drawing.Size(72, 66);
             this.StartScreenAddJudgeBtn.TabIndex = 4;
-            this.StartScreenAddJudgeBtn.Text = "Add/View Judge";
+            this.StartScreenAddJudgeBtn.Text = "Add/Edit Judge";
             this.AddDiverToolTip.SetToolTip(this.StartScreenAddJudgeBtn, "Ctrl+J");
             this.StartScreenAddJudgeBtn.UseVisualStyleBackColor = true;
             this.StartScreenAddJudgeBtn.Click += new System.EventHandler(this.StartScreenAddJudgeBtn_Click);
             // 
             // StartScreen
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(930, 298);
+            this.ClientSize = new System.Drawing.Size(465, 155);
             this.Controls.Add(this.StartScreenAddJudgeBtn);
             this.Controls.Add(this.StartScreenAddDiverContestBtn);
             this.Controls.Add(this.StartScreenStartContestBtn);
             this.Controls.Add(this.StartScreenNewContesttBtn);
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "StartScreen";
-            this.Text = "StartScreen";
+            this.Text = "Simhopp";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.StartScreen_FormClosing);
             this.Load += new System.EventHandler(this.StartScreen_Load);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.StartScreen_KeyUp);
