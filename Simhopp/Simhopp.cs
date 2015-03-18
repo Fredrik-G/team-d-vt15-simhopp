@@ -67,6 +67,11 @@ namespace Simhopp
             return contestList.SingleOrDefault(x => x.Id == id);
         }
 
+        public Contest GetContestFromDatabase(Contest contest)
+        {
+            return databaseController.GetContest(contest);
+        }
+
         /// <summary>
         /// Returns judges list.
         /// </summary>
@@ -370,10 +375,6 @@ namespace Simhopp
             {
                 MsgBox.CreateErrorBox(argumentNullException.ToString(), MethodBase.GetCurrentMethod().ToString());
             }
-            catch (Exception exception)
-            {
-                MsgBox.CreateErrorBox(exception.ToString(), MethodBase.GetCurrentMethod().ToString());
-            }
         }
 
         /// <summary>
@@ -396,10 +397,6 @@ namespace Simhopp
             catch (ArgumentNullException argumentNullException)
             {
                 MsgBox.CreateErrorBox(argumentNullException.ToString(), MethodBase.GetCurrentMethod().ToString());
-            }
-            catch (Exception exception)
-            {
-                MsgBox.CreateErrorBox(exception.ToString(), MethodBase.GetCurrentMethod().ToString());
             }
         }
 
