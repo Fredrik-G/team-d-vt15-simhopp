@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ContestResult));
             this.resultDataGridView = new System.Windows.Forms.DataGridView();
             this.resultLabel = new System.Windows.Forms.Label();
             this.judgesDataGridView = new System.Windows.Forms.DataGridView();
@@ -41,26 +42,33 @@
             this.placeNameLabel = new System.Windows.Forms.Label();
             this.closeButton = new System.Windows.Forms.Button();
             this.htmlExportButton = new System.Windows.Forms.Button();
+            this.ShowHtmlButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.resultDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.judgesDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // resultDataGridView
             // 
+            this.resultDataGridView.AllowUserToAddRows = false;
+            this.resultDataGridView.AllowUserToDeleteRows = false;
+            this.resultDataGridView.AllowUserToResizeColumns = false;
+            this.resultDataGridView.AllowUserToResizeRows = false;
             this.resultDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.resultDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.resultDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.resultDataGridView.Location = new System.Drawing.Point(223, 109);
+            this.resultDataGridView.Location = new System.Drawing.Point(323, 109);
             this.resultDataGridView.Name = "resultDataGridView";
-            this.resultDataGridView.Size = new System.Drawing.Size(278, 258);
+            this.resultDataGridView.ReadOnly = true;
+            this.resultDataGridView.RowHeadersWidth = 30;
+            this.resultDataGridView.Size = new System.Drawing.Size(283, 260);
             this.resultDataGridView.TabIndex = 0;
             // 
             // resultLabel
             // 
             this.resultLabel.AutoSize = true;
-            this.resultLabel.Location = new System.Drawing.Point(220, 93);
+            this.resultLabel.Location = new System.Drawing.Point(320, 93);
             this.resultLabel.Name = "resultLabel";
             this.resultLabel.Size = new System.Drawing.Size(42, 13);
             this.resultLabel.TabIndex = 1;
@@ -68,6 +76,10 @@
             // 
             // judgesDataGridView
             // 
+            this.judgesDataGridView.AllowUserToAddRows = false;
+            this.judgesDataGridView.AllowUserToDeleteRows = false;
+            this.judgesDataGridView.AllowUserToResizeColumns = false;
+            this.judgesDataGridView.AllowUserToResizeRows = false;
             this.judgesDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -75,7 +87,9 @@
             this.judgesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.judgesDataGridView.Location = new System.Drawing.Point(17, 109);
             this.judgesDataGridView.Name = "judgesDataGridView";
-            this.judgesDataGridView.Size = new System.Drawing.Size(178, 258);
+            this.judgesDataGridView.ReadOnly = true;
+            this.judgesDataGridView.RowHeadersWidth = 30;
+            this.judgesDataGridView.Size = new System.Drawing.Size(283, 260);
             this.judgesDataGridView.TabIndex = 2;
             // 
             // judgesLabel
@@ -144,7 +158,7 @@
             // placeNameLabel
             // 
             this.placeNameLabel.AutoSize = true;
-            this.placeNameLabel.Location = new System.Drawing.Point(73, 36);
+            this.placeNameLabel.Location = new System.Drawing.Point(70, 37);
             this.placeNameLabel.Name = "placeNameLabel";
             this.placeNameLabel.Size = new System.Drawing.Size(61, 13);
             this.placeNameLabel.TabIndex = 10;
@@ -152,17 +166,17 @@
             // 
             // closeButton
             // 
-            this.closeButton.Location = new System.Drawing.Point(430, 373);
+            this.closeButton.Location = new System.Drawing.Point(531, 375);
             this.closeButton.Name = "closeButton";
             this.closeButton.Size = new System.Drawing.Size(75, 23);
-            this.closeButton.TabIndex = 11;
+            this.closeButton.TabIndex = 2;
             this.closeButton.Text = "Close";
             this.closeButton.UseVisualStyleBackColor = true;
             this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
             // 
             // htmlExportButton
             // 
-            this.htmlExportButton.Location = new System.Drawing.Point(330, 374);
+            this.htmlExportButton.Location = new System.Drawing.Point(431, 376);
             this.htmlExportButton.Name = "htmlExportButton";
             this.htmlExportButton.Size = new System.Drawing.Size(94, 23);
             this.htmlExportButton.TabIndex = 12;
@@ -170,11 +184,23 @@
             this.htmlExportButton.UseVisualStyleBackColor = true;
             this.htmlExportButton.Click += new System.EventHandler(this.htmlExportButton_Click);
             // 
+            // ShowHtmlButton
+            // 
+            this.ShowHtmlButton.Location = new System.Drawing.Point(431, 376);
+            this.ShowHtmlButton.Name = "ShowHtmlButton";
+            this.ShowHtmlButton.Size = new System.Drawing.Size(94, 23);
+            this.ShowHtmlButton.TabIndex = 1;
+            this.ShowHtmlButton.Text = "Show HTML";
+            this.ShowHtmlButton.UseVisualStyleBackColor = true;
+            this.ShowHtmlButton.Visible = false;
+            this.ShowHtmlButton.Click += new System.EventHandler(this.ShowHtmlButton_Click);
+            // 
             // ContestResult
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(513, 403);
+            this.ClientSize = new System.Drawing.Size(618, 405);
+            this.Controls.Add(this.ShowHtmlButton);
             this.Controls.Add(this.htmlExportButton);
             this.Controls.Add(this.closeButton);
             this.Controls.Add(this.placeNameLabel);
@@ -188,8 +214,11 @@
             this.Controls.Add(this.judgesDataGridView);
             this.Controls.Add(this.resultLabel);
             this.Controls.Add(this.resultDataGridView);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "ContestResult";
-            this.Text = "ContestResult";
+            this.Text = "Contest Result";
             this.Load += new System.EventHandler(this.ContestResult_Load);
             ((System.ComponentModel.ISupportInitialize)(this.resultDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.judgesDataGridView)).EndInit();
@@ -213,5 +242,6 @@
         private System.Windows.Forms.Label placeNameLabel;
         private System.Windows.Forms.Button closeButton;
         private System.Windows.Forms.Button htmlExportButton;
+        private System.Windows.Forms.Button ShowHtmlButton;
     }
 }

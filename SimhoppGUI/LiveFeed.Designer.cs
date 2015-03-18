@@ -75,10 +75,10 @@
             // TrickPictureBox
             // 
             this.TrickPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("TrickPictureBox.Image")));
-            this.TrickPictureBox.Location = new System.Drawing.Point(16, 15);
+            this.TrickPictureBox.Location = new System.Drawing.Point(13, 13);
             this.TrickPictureBox.Margin = new System.Windows.Forms.Padding(4);
             this.TrickPictureBox.Name = "TrickPictureBox";
-            this.TrickPictureBox.Size = new System.Drawing.Size(132, 207);
+            this.TrickPictureBox.Size = new System.Drawing.Size(199, 179);
             this.TrickPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.TrickPictureBox.TabIndex = 0;
             this.TrickPictureBox.TabStop = false;
@@ -107,7 +107,7 @@
             // TrickLabel
             // 
             this.TrickLabel.AutoSize = true;
-            this.TrickLabel.Location = new System.Drawing.Point(4, 28);
+            this.TrickLabel.Location = new System.Drawing.Point(4, 29);
             this.TrickLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.TrickLabel.Name = "TrickLabel";
             this.TrickLabel.Size = new System.Drawing.Size(41, 16);
@@ -117,7 +117,7 @@
             // DifficultyLabel
             // 
             this.DifficultyLabel.AutoSize = true;
-            this.DifficultyLabel.Location = new System.Drawing.Point(4, 44);
+            this.DifficultyLabel.Location = new System.Drawing.Point(4, 46);
             this.DifficultyLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.DifficultyLabel.Name = "DifficultyLabel";
             this.DifficultyLabel.Size = new System.Drawing.Size(60, 16);
@@ -128,7 +128,7 @@
             // 
             this.DifficultyValueLabel.AutoSize = true;
             this.DifficultyValueLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DifficultyValueLabel.Location = new System.Drawing.Point(72, 44);
+            this.DifficultyValueLabel.Location = new System.Drawing.Point(72, 46);
             this.DifficultyValueLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.DifficultyValueLabel.Name = "DifficultyValueLabel";
             this.DifficultyValueLabel.Size = new System.Drawing.Size(25, 16);
@@ -139,7 +139,7 @@
             // 
             this.TrickNameLabel.AutoSize = true;
             this.TrickNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TrickNameLabel.Location = new System.Drawing.Point(72, 28);
+            this.TrickNameLabel.Location = new System.Drawing.Point(72, 29);
             this.TrickNameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.TrickNameLabel.Name = "TrickNameLabel";
             this.TrickNameLabel.Size = new System.Drawing.Size(31, 16);
@@ -150,7 +150,7 @@
             // 
             this.PointsLabel.AutoSize = true;
             this.PointsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PointsLabel.Location = new System.Drawing.Point(4, 64);
+            this.PointsLabel.Location = new System.Drawing.Point(4, 63);
             this.PointsLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.PointsLabel.Name = "PointsLabel";
             this.PointsLabel.Size = new System.Drawing.Size(48, 16);
@@ -161,7 +161,7 @@
             // 
             this.PointsValueLabel.AutoSize = true;
             this.PointsValueLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PointsValueLabel.Location = new System.Drawing.Point(72, 64);
+            this.PointsValueLabel.Location = new System.Drawing.Point(72, 63);
             this.PointsValueLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.PointsValueLabel.Name = "PointsValueLabel";
             this.PointsValueLabel.Size = new System.Drawing.Size(25, 16);
@@ -182,7 +182,7 @@
             // Judge2Label
             // 
             this.Judge2Label.AutoSize = true;
-            this.Judge2Label.Location = new System.Drawing.Point(84, 54);
+            this.Judge2Label.Location = new System.Drawing.Point(121, 54);
             this.Judge2Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Judge2Label.Name = "Judge2Label";
             this.Judge2Label.Size = new System.Drawing.Size(56, 16);
@@ -218,7 +218,7 @@
             0,
             0,
             65536});
-            this.judge2Point.Location = new System.Drawing.Point(86, 21);
+            this.judge2Point.Location = new System.Drawing.Point(124, 21);
             this.judge2Point.Maximum = new decimal(new int[] {
             10,
             0,
@@ -238,7 +238,7 @@
             0,
             0,
             65536});
-            this.judge3Point.Location = new System.Drawing.Point(159, 21);
+            this.judge3Point.Location = new System.Drawing.Point(235, 21);
             this.judge3Point.Maximum = new decimal(new int[] {
             10,
             0,
@@ -258,7 +258,7 @@
             0,
             0,
             65536});
-            this.judge4Point.Location = new System.Drawing.Point(232, 21);
+            this.judge4Point.Location = new System.Drawing.Point(346, 21);
             this.judge4Point.Maximum = new decimal(new int[] {
             10,
             0,
@@ -278,7 +278,7 @@
             0,
             0,
             65536});
-            this.judge5Point.Location = new System.Drawing.Point(305, 21);
+            this.judge5Point.Location = new System.Drawing.Point(457, 21);
             this.judge5Point.Maximum = new decimal(new int[] {
             10,
             0,
@@ -298,7 +298,7 @@
             0,
             0,
             65536});
-            this.judge6Point.Location = new System.Drawing.Point(378, 21);
+            this.judge6Point.Location = new System.Drawing.Point(568, 21);
             this.judge6Point.Maximum = new decimal(new int[] {
             10,
             0,
@@ -318,7 +318,7 @@
             0,
             0,
             65536});
-            this.judge7Point.Location = new System.Drawing.Point(451, 21);
+            this.judge7Point.Location = new System.Drawing.Point(679, 21);
             this.judge7Point.Maximum = new decimal(new int[] {
             10,
             0,
@@ -333,7 +333,7 @@
             // Judge3Label
             // 
             this.Judge3Label.AutoSize = true;
-            this.Judge3Label.Location = new System.Drawing.Point(156, 54);
+            this.Judge3Label.Location = new System.Drawing.Point(232, 54);
             this.Judge3Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Judge3Label.Name = "Judge3Label";
             this.Judge3Label.Size = new System.Drawing.Size(56, 16);
@@ -344,7 +344,7 @@
             // Judge4Label
             // 
             this.Judge4Label.AutoSize = true;
-            this.Judge4Label.Location = new System.Drawing.Point(229, 54);
+            this.Judge4Label.Location = new System.Drawing.Point(343, 54);
             this.Judge4Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Judge4Label.Name = "Judge4Label";
             this.Judge4Label.Size = new System.Drawing.Size(56, 16);
@@ -355,7 +355,7 @@
             // Judge5Label
             // 
             this.Judge5Label.AutoSize = true;
-            this.Judge5Label.Location = new System.Drawing.Point(302, 54);
+            this.Judge5Label.Location = new System.Drawing.Point(454, 54);
             this.Judge5Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Judge5Label.Name = "Judge5Label";
             this.Judge5Label.Size = new System.Drawing.Size(56, 16);
@@ -366,7 +366,7 @@
             // Judge6Label
             // 
             this.Judge6Label.AutoSize = true;
-            this.Judge6Label.Location = new System.Drawing.Point(375, 54);
+            this.Judge6Label.Location = new System.Drawing.Point(565, 54);
             this.Judge6Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Judge6Label.Name = "Judge6Label";
             this.Judge6Label.Size = new System.Drawing.Size(56, 16);
@@ -377,7 +377,7 @@
             // Judge7Label
             // 
             this.Judge7Label.AutoSize = true;
-            this.Judge7Label.Location = new System.Drawing.Point(448, 54);
+            this.Judge7Label.Location = new System.Drawing.Point(676, 54);
             this.Judge7Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Judge7Label.Name = "Judge7Label";
             this.Judge7Label.Size = new System.Drawing.Size(56, 16);
@@ -392,14 +392,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ResultDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.ResultDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ResultDataGridView.Location = new System.Drawing.Point(455, 15);
+            this.ResultDataGridView.Location = new System.Drawing.Point(470, 15);
             this.ResultDataGridView.Name = "ResultDataGridView";
-            this.ResultDataGridView.Size = new System.Drawing.Size(309, 189);
+            this.ResultDataGridView.Size = new System.Drawing.Size(318, 177);
             this.ResultDataGridView.TabIndex = 29;
             // 
             // CommitBtn
             // 
-            this.CommitBtn.Location = new System.Drawing.Point(518, 331);
+            this.CommitBtn.Location = new System.Drawing.Point(542, 330);
             this.CommitBtn.Name = "CommitBtn";
             this.CommitBtn.Size = new System.Drawing.Size(120, 33);
             this.CommitBtn.TabIndex = 30;
@@ -424,32 +424,34 @@
             this.JudgePointsPanel.Controls.Add(this.Judge4Label);
             this.JudgePointsPanel.Controls.Add(this.Judge6Label);
             this.JudgePointsPanel.Controls.Add(this.Judge5Label);
-            this.JudgePointsPanel.Location = new System.Drawing.Point(12, 240);
+            this.JudgePointsPanel.Location = new System.Drawing.Point(12, 239);
             this.JudgePointsPanel.Name = "JudgePointsPanel";
-            this.JudgePointsPanel.Size = new System.Drawing.Size(533, 85);
+            this.JudgePointsPanel.Size = new System.Drawing.Size(776, 85);
             this.JudgePointsPanel.TabIndex = 31;
             // 
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.NameLabel);
+            this.panel1.Controls.Add(this.IPNameLabel);
             this.panel1.Controls.Add(this.NameTextLabel);
+            this.panel1.Controls.Add(this.IPValueLabel);
             this.panel1.Controls.Add(this.PointsValueLabel);
             this.panel1.Controls.Add(this.PointsLabel);
             this.panel1.Controls.Add(this.TrickLabel);
             this.panel1.Controls.Add(this.DifficultyValueLabel);
             this.panel1.Controls.Add(this.DifficultyLabel);
             this.panel1.Controls.Add(this.TrickNameLabel);
-            this.panel1.Location = new System.Drawing.Point(172, 15);
+            this.panel1.Location = new System.Drawing.Point(219, 15);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(248, 97);
+            this.panel1.Size = new System.Drawing.Size(245, 177);
             this.panel1.TabIndex = 32;
             // 
             // IPValueLabel
             // 
             this.IPValueLabel.AutoSize = true;
             this.IPValueLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.IPValueLabel.Location = new System.Drawing.Point(616, 226);
+            this.IPValueLabel.Location = new System.Drawing.Point(72, 136);
             this.IPValueLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.IPValueLabel.Name = "IPValueLabel";
             this.IPValueLabel.Size = new System.Drawing.Size(101, 16);
@@ -459,7 +461,7 @@
             // IPNameLabel
             // 
             this.IPNameLabel.AutoSize = true;
-            this.IPNameLabel.Location = new System.Drawing.Point(552, 226);
+            this.IPNameLabel.Location = new System.Drawing.Point(4, 136);
             this.IPNameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.IPNameLabel.Name = "IPNameLabel";
             this.IPNameLabel.Size = new System.Drawing.Size(66, 16);
@@ -468,7 +470,7 @@
             // 
             // CloseBtn
             // 
-            this.CloseBtn.Location = new System.Drawing.Point(644, 331);
+            this.CloseBtn.Location = new System.Drawing.Point(668, 330);
             this.CloseBtn.Name = "CloseBtn";
             this.CloseBtn.Size = new System.Drawing.Size(120, 33);
             this.CloseBtn.TabIndex = 45;
@@ -480,16 +482,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(776, 370);
+            this.ClientSize = new System.Drawing.Size(802, 370);
             this.Controls.Add(this.CloseBtn);
-            this.Controls.Add(this.IPNameLabel);
-            this.Controls.Add(this.IPValueLabel);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.JudgePointsPanel);
             this.Controls.Add(this.CommitBtn);
             this.Controls.Add(this.ResultDataGridView);
             this.Controls.Add(this.TrickPictureBox);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -511,7 +512,6 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

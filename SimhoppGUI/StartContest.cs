@@ -128,8 +128,8 @@ namespace SimhoppGUI
 
                 if (ContestsDataGridView.Rows.Count > 0)
                 {
-                  ContestsDataGridView.CurrentCell = ContestsDataGridView.Rows[0].Cells["Name"];  
-                }               
+                    ContestsDataGridView.CurrentCell = ContestsDataGridView.Rows[0].Cells["Name"];
+                }
             }
             if (eventGetJudgesList != null)
             {
@@ -204,6 +204,17 @@ namespace SimhoppGUI
                     return;
                 }
                 var contestRow = contestCell.OwningRow;
+
+                if (IsContestFinished())
+                {
+                    StartContestBtn.Enabled = false;
+                    viewResultButton.Enabled = true;
+                }
+                else
+                {
+                    StartContestBtn.Enabled = true;
+                    viewResultButton.Enabled = false;
+                }
 
                 if (JudgesDiversTabControl.SelectedTab == JudgeTabPage)
                 {
@@ -556,7 +567,7 @@ namespace SimhoppGUI
             if (!AreJudgesSet())
             {
                 MsgBox.CreateInfoBox("Select at least three judges.");
-                return; 
+                return;
             }
 
             var selectedContest = ContestsDataGridView.SelectedCells.Cast<DataGridViewCell>().FirstOrDefault();
@@ -579,7 +590,8 @@ namespace SimhoppGUI
             {
                 if (liveFeed.ShowDialog(this) == DialogResult.OK)
                 {
-
+                    ShowFinishedContestState();
+                    ContestsDataGridView_SelectionChanged(sender, e);
                 }
             }
         }
@@ -599,6 +611,10 @@ namespace SimhoppGUI
         {
             if (ModifierKeys != Keys.Control)
             {
+                if (keyData == Keys.Escape)
+                {
+                    Close();
+                }
                 return base.ProcessCmdKey(ref msg, keyData);
             }
 
@@ -609,6 +625,7 @@ namespace SimhoppGUI
             StartContestToolTip.Show("Ctrl+S", StartContestBtn);
             EditContestToolTip.Show("Ctrl+E", EditContestBtn);
             ViewResultToolTip.Show("Ctrl+R", viewResultButton);
+            CloseToolTip.Show("Escape", CloseBtn);
             //Man ska bara behöva en tooltip, men jag fick inte det att fungera..
 
             PerformClick(keyData);
@@ -662,6 +679,7 @@ namespace SimhoppGUI
             StartContestToolTip.RemoveAll();
             EditContestToolTip.RemoveAll();
             ViewResultToolTip.RemoveAll();
+            CloseToolTip.RemoveAll();
         }
         /// <summary>
         /// Checks if enter or backspace was pressed.
@@ -810,6 +828,13 @@ namespace SimhoppGUI
             return eventGetJudgesInContest(Convert.ToInt16(contestRow.Cells["Id"].Value)).Count >= 3;
         }
 
+        private bool IsContestFinished()
+        {
+            var selectedContest = ContestsDataGridView.SelectedCells.Cast<DataGridViewCell>().FirstOrDefault();
+            var contestRow = selectedContest.OwningRow;
+
+            return Convert.ToBoolean(contestRow.Cells["IsFinished"].Value);
+        }
         private void ShowFinishedContestState()
         {
             // foreach (DataGridViewRow row in ContestsDataGridView.Rows.Cast<DataGridViewRow>().Where(row => row.Cells["isFinished"].Value.Equals("true")))

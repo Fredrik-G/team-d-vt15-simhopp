@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddEditDiver));
             this.AddDiverNameLabel = new System.Windows.Forms.Label();
             this.AddDiverSSNLabel = new System.Windows.Forms.Label();
             this.AddDiverNationalityLabel = new System.Windows.Forms.Label();
@@ -387,6 +388,7 @@
             this.Controls.Add(this.weirddatagridfix);
             this.Controls.Add(this.DiverDataGridView);
             this.Controls.Add(this.tabControlAddEdit);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AddEditDiver";
