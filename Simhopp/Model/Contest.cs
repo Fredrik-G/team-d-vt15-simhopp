@@ -406,7 +406,7 @@ namespace Simhopp.Model
                     participant.SetJudgePoint(jumpNo, i, random.Next(0, 11));
                     participant.CalculatePoints();
                 }
-                participant.UpdateTotalPoints(trickList.GetDifficultyByName("Forward Double Somersault"));
+              //  participant.UpdateTotalPoints(trickList.GetDifficultyByName("Forward Double Somersault"));
                 PrintLiveResults(jumpNo);
             }
         }

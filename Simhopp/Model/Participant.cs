@@ -205,12 +205,10 @@ namespace Simhopp.Model
         /// Updates the total point for every jump result.
         /// </summary>
         /// <param name="jumpDifficulty"></param>
-        public void UpdateTotalPoints(double jumpDifficulty)
+        /// <param name="jumpNo"></param>
+        public void UpdateTotalPoints(double jumpDifficulty, int jumpNo)
         {
-            foreach (var jumpResult in jumpResults.Where(x => x.SumJudgePoints >= 0.0))
-            {
-                totalPoints += jumpResult.SumJudgePoints * jumpDifficulty;
-            }
+            totalPoints += jumpResults[jumpNo].SumJudgePoints*jumpDifficulty;
         }
 
         /// <summary>

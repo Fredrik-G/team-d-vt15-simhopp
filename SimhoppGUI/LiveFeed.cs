@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
@@ -222,6 +224,17 @@ namespace SimhoppGUI
             DiverName = contest.GetParticipant(participantNo).GetDiverName();
             DiverTrickName = contest.GetParticipant(participantNo).GetJumpResults()[jumpNo].TrickName;
             DiverTrickDifficulty = eventGetTrickDifficultyFromTrickHashTable(DiverTrickName).ToString();
+
+
+            const string filePath = @"M:\Desktop\år2\SystemProgramvaruutveckling\divingpictures_small\";
+            if (File.Exists(filePath + eventGetTrickIdByName(DiverTrickName) + ".jpg"))
+            {
+                TrickPictureBox.Image = Image.FromFile(filePath + eventGetTrickIdByName(DiverTrickName) + ".jpg");
+            }
+            else
+            {
+                MsgBox.CreateInfoBox("File not found");
+            }
         }
 
         #region Point methods
@@ -369,7 +382,7 @@ namespace SimhoppGUI
         private void CalculateAndUpdatePoints()
         {
             contest.GetParticipant(participantNo).CalculatePoints();
-            contest.GetParticipant(participantNo).UpdateTotalPoints(eventGetTrickDifficultyFromTrickHashTable(DiverTrickName));
+            contest.GetParticipant(participantNo).UpdateTotalPoints(eventGetTrickDifficultyFromTrickHashTable(DiverTrickName), jumpNo);
             DiverPoints = contest.GetParticipant(participantNo).TotalPoints.ToString();
         }
 
