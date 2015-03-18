@@ -40,8 +40,8 @@ namespace Simhopp
         /// </summary>
         public Simhopp()
         {
-           // databaseController = new DatabaseController(@"C:\temp\Simhopp\Simhopp\simhoppTestDB.db");
-            databaseController = new DatabaseController(@"m:\desktop\simhopptestdb.db");
+           databaseController = new DatabaseController(@"C:\temp\Simhopp\Simhopp\simhoppTestDB.db");
+          //  databaseController = new DatabaseController(@"m:\desktop\simhopptestdb.db");
             databaseController.ConnectToDatabase();
         }
 

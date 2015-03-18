@@ -556,6 +556,15 @@ namespace Simhopp.Model
         }
         #endregion
 
+        public void ClearJudgeList()
+        {
+            judgeList.Clear();
+        }
+
+        public void ClearParticipantsList()
+        {
+            participantsList.Clear();
+        }
         public bool IsAllJudgePointSet(string diverSsn, int jumpNo)
         {
             var selectedParticipant = participantsList.SingleOrDefault(x => x.GetDiverSSN() == diverSsn);

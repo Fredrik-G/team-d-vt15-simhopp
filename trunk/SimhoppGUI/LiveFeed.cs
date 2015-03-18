@@ -224,9 +224,9 @@ namespace SimhoppGUI
             DiverName = contest.GetParticipant(participantNo).GetDiverName();
             DiverTrickName = contest.GetParticipant(participantNo).GetJumpResults()[jumpNo].TrickName;
             DiverTrickDifficulty = eventGetTrickDifficultyFromTrickHashTable(DiverTrickName).ToString();
+            DiverPoints = contest.GetParticipant(participantNo).TotalPoints.ToString();
 
-
-            const string filePath = @"M:\Desktop\år2\SystemProgramvaruutveckling\divingpictures_small\";
+            const string filePath = @"C:\temp\Simhopp\divingpictures_small\";
             if (File.Exists(filePath + eventGetTrickIdByName(DiverTrickName) + ".jpg"))
             {
                 TrickPictureBox.Image = Image.FromFile(filePath + eventGetTrickIdByName(DiverTrickName) + ".jpg");
@@ -262,14 +262,7 @@ namespace SimhoppGUI
             }
             eventSaveContestToDatabase(contest);
             MsgBox.CreateInfoBox("Contest is finished");
-            //using (new DimIt())
-            /*using (var contestResult = new ContestResult(eventGetContestFromDatabase, eventGetContest(contest.Id)))
-            {
-                if (contestResult.ShowDialog(this) == DialogResult.OK)
-                {
-
-                }
-            }*/
+        //    Invoke((MethodInvoker) delegate { CommitBtn.Enabled = false; });
         }
 
         /// <summary>
@@ -364,7 +357,7 @@ namespace SimhoppGUI
             }
             else
             {
-                MsgBox.CreateErrorBox("not set", "ajdå");
+                MsgBox.CreateInfoBox("Not all judges have commited their points.");
             }
         }
 
@@ -388,6 +381,14 @@ namespace SimhoppGUI
 
         private void CloseBtn_Click(object sender, EventArgs e)
         {
+            if (contest.IsFinished)
+            {
+                DialogResult = DialogResult.OK;
+            }
+            else
+            {
+                DialogResult = DialogResult.Cancel;
+            }
             Close();
         }
     }

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StartContest));
             this.JudgesDiversTabControl = new System.Windows.Forms.TabControl();
             this.JudgeTabPage = new System.Windows.Forms.TabPage();
             this.RemoveJudgeBtn = new System.Windows.Forms.Button();
@@ -60,6 +61,7 @@
             this.ErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.CurrentJudgesLabel = new System.Windows.Forms.Label();
+            this.CloseToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.JudgesDiversTabControl.SuspendLayout();
             this.JudgeTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GlobalJudgesDataGridView)).BeginInit();
@@ -316,7 +318,7 @@
             this.CloseBtn.Size = new System.Drawing.Size(75, 23);
             this.CloseBtn.TabIndex = 44;
             this.CloseBtn.Text = "Close";
-            this.EditContestToolTip.SetToolTip(this.CloseBtn, "Ctrl+E");
+            this.CloseToolTip.SetToolTip(this.CloseBtn, "Escape");
             this.CloseBtn.UseVisualStyleBackColor = true;
             this.CloseBtn.Click += new System.EventHandler(this.CloseBtn_Click);
             // 
@@ -414,6 +416,7 @@
             this.Controls.Add(this.CurrentJudgesLabel);
             this.Controls.Add(this.ContestsDataGridView);
             this.Controls.Add(this.JudgesDiversTabControl);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "StartContest";
@@ -468,5 +471,6 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button CloseBtn;
         private System.Windows.Forms.Label CurrentJudgesLabel;
+        private System.Windows.Forms.ToolTip CloseToolTip;
     }
 }

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewContest));
             this.label1 = new System.Windows.Forms.Label();
             this.newContestNameTB = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -42,8 +43,10 @@
             this.toolTipNewContest = new System.Windows.Forms.ToolTip(this.components);
             this.NameErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.CityErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.DateErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.NameErrorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CityErrorProvider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DateErrorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -155,6 +158,10 @@
             // 
             this.CityErrorProvider.ContainerControl = this;
             // 
+            // DateErrorProvider
+            // 
+            this.DateErrorProvider.ContainerControl = this;
+            // 
             // NewContest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -170,12 +177,14 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.newContestNameTB);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "NewContest";
             this.Text = "New Contest";
             ((System.ComponentModel.ISupportInitialize)(this.NameErrorProvider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CityErrorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DateErrorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -196,5 +205,6 @@
         private System.Windows.Forms.ToolTip toolTipNewContest;
         private System.Windows.Forms.ErrorProvider NameErrorProvider;
         private System.Windows.Forms.ErrorProvider CityErrorProvider;
+        private System.Windows.Forms.ErrorProvider DateErrorProvider;
     }
 }

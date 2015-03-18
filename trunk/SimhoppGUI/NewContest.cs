@@ -50,7 +50,7 @@ namespace SimhoppGUI
         private void newContestCreateBtn_Click(object sender, EventArgs e)
         {
             //Måste anropa checkinput här utanför if för att båda check-anropen ska göras. (eller?)
-            var correctDate = CheckInput.CheckCorrectStartDate(NameErrorProvider, NewContestStartDateDTP, NewContestEndDateDTP);
+            var correctDate = CheckInput.CheckCorrectStartDate(DateErrorProvider, NewContestStartDateDTP, NewContestEndDateDTP);
             var correctInput = CheckInput.CheckCorrectContestInput(NameErrorProvider, CityErrorProvider, newContestNameTB, newContestCityTB);
 
             if (correctDate && correctInput)

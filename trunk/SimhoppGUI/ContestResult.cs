@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Runtime.Remoting.Channels;
 using System.Text;
@@ -23,6 +25,8 @@ namespace SimhoppGUI
         {
             InitializeComponent();
             this.contest = contest;
+            contest.ClearJudgeList();
+            contest.ClearParticipantsList();
             this.contest = eventGetContestFromDatabase(contest);
         }
 
@@ -79,6 +83,21 @@ namespace SimhoppGUI
         private void htmlExportButton_Click(object sender, EventArgs e)
         {
             contest.CreateHtmlResultFile();
+
+            ShowHtmlButton.Visible = true;
+            htmlExportButton.Visible = false;
+        }
+
+        private void ShowHtmlButton_Click(object sender, EventArgs e)
+        {
+            if (File.Exists(contest.Name + " Result.htm"))
+            {
+                Process.Start(contest.Name + " Result.htm");
+            }
+            else
+            {
+                MessageBox.Show("File not found");
+            }
         }
     }
 }

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StartScreen));
             this.StartScreenNewContesttBtn = new System.Windows.Forms.Button();
             this.StartScreenStartContestBtn = new System.Windows.Forms.Button();
             this.StartScreenAddDiverContestBtn = new System.Windows.Forms.Button();
@@ -92,6 +93,7 @@
             this.Controls.Add(this.StartScreenAddDiverContestBtn);
             this.Controls.Add(this.StartScreenStartContestBtn);
             this.Controls.Add(this.StartScreenNewContesttBtn);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "StartScreen";
