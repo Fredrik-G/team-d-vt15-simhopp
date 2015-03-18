@@ -59,6 +59,7 @@
             this.ViewResultToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.ErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.CloseBtn = new System.Windows.Forms.Button();
             this.JudgesDiversTabControl.SuspendLayout();
             this.JudgeTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GlobalJudgesDataGridView)).BeginInit();
@@ -297,7 +298,7 @@
             // 
             // EditContestBtn
             // 
-            this.EditContestBtn.Location = new System.Drawing.Point(588, 166);
+            this.EditContestBtn.Location = new System.Drawing.Point(584, 139);
             this.EditContestBtn.Name = "EditContestBtn";
             this.EditContestBtn.Size = new System.Drawing.Size(75, 23);
             this.EditContestBtn.TabIndex = 7;
@@ -308,7 +309,7 @@
             // 
             // StartContestBtn
             // 
-            this.StartContestBtn.Location = new System.Drawing.Point(588, 108);
+            this.StartContestBtn.Location = new System.Drawing.Point(584, 81);
             this.StartContestBtn.Name = "StartContestBtn";
             this.StartContestBtn.Size = new System.Drawing.Size(75, 23);
             this.StartContestBtn.TabIndex = 5;
@@ -319,7 +320,7 @@
             // 
             // viewResultButton
             // 
-            this.viewResultButton.Location = new System.Drawing.Point(588, 137);
+            this.viewResultButton.Location = new System.Drawing.Point(584, 110);
             this.viewResultButton.Name = "viewResultButton";
             this.viewResultButton.Size = new System.Drawing.Size(75, 23);
             this.viewResultButton.TabIndex = 6;
@@ -383,11 +384,23 @@
             this.dataGridView1.TabIndex = 7;
             this.dataGridView1.TabStop = false;
             // 
+            // CloseBtn
+            // 
+            this.CloseBtn.Location = new System.Drawing.Point(584, 167);
+            this.CloseBtn.Name = "CloseBtn";
+            this.CloseBtn.Size = new System.Drawing.Size(75, 23);
+            this.CloseBtn.TabIndex = 44;
+            this.CloseBtn.Text = "Close";
+            this.EditContestToolTip.SetToolTip(this.CloseBtn, "Ctrl+E");
+            this.CloseBtn.UseVisualStyleBackColor = true;
+            this.CloseBtn.Click += new System.EventHandler(this.CloseBtn_Click);
+            // 
             // StartContest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1063, 463);
+            this.Controls.Add(this.CloseBtn);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.ContestsDataGridHiddenLabel);
             this.Controls.Add(this.DiversHiddenLabel);
@@ -454,5 +467,6 @@
         private System.Windows.Forms.ToolTip ViewResultToolTip;
         private System.Windows.Forms.ErrorProvider ErrorProvider;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button CloseBtn;
     }
 }

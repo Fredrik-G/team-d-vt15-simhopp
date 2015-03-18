@@ -57,6 +57,8 @@
             this.JudgePointsPanel = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.IPValueLabel = new System.Windows.Forms.Label();
+            this.IPNameLabel = new System.Windows.Forms.Label();
+            this.CloseBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.TrickPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.judge1Point)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.judge2Point)).BeginInit();
@@ -390,14 +392,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ResultDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.ResultDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ResultDataGridView.Location = new System.Drawing.Point(490, 15);
+            this.ResultDataGridView.Location = new System.Drawing.Point(455, 15);
             this.ResultDataGridView.Name = "ResultDataGridView";
-            this.ResultDataGridView.Size = new System.Drawing.Size(240, 150);
+            this.ResultDataGridView.Size = new System.Drawing.Size(309, 189);
             this.ResultDataGridView.TabIndex = 29;
             // 
             // CommitBtn
             // 
-            this.CommitBtn.Location = new System.Drawing.Point(551, 286);
+            this.CommitBtn.Location = new System.Drawing.Point(518, 331);
             this.CommitBtn.Name = "CommitBtn";
             this.CommitBtn.Size = new System.Drawing.Size(120, 33);
             this.CommitBtn.TabIndex = 30;
@@ -447,18 +449,40 @@
             // 
             this.IPValueLabel.AutoSize = true;
             this.IPValueLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.IPValueLabel.Location = new System.Drawing.Point(615, 186);
+            this.IPValueLabel.Location = new System.Drawing.Point(616, 226);
             this.IPValueLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.IPValueLabel.Name = "IPValueLabel";
             this.IPValueLabel.Size = new System.Drawing.Size(101, 16);
             this.IPValueLabel.TabIndex = 29;
             this.IPValueLabel.Text = "255.255.255.255";
             // 
+            // IPNameLabel
+            // 
+            this.IPNameLabel.AutoSize = true;
+            this.IPNameLabel.Location = new System.Drawing.Point(552, 226);
+            this.IPNameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.IPNameLabel.Name = "IPNameLabel";
+            this.IPNameLabel.Size = new System.Drawing.Size(66, 16);
+            this.IPNameLabel.TabIndex = 33;
+            this.IPNameLabel.Text = "Server IP:";
+            // 
+            // CloseBtn
+            // 
+            this.CloseBtn.Location = new System.Drawing.Point(644, 331);
+            this.CloseBtn.Name = "CloseBtn";
+            this.CloseBtn.Size = new System.Drawing.Size(120, 33);
+            this.CloseBtn.TabIndex = 45;
+            this.CloseBtn.Text = "Close";
+            this.CloseBtn.UseVisualStyleBackColor = true;
+            this.CloseBtn.Click += new System.EventHandler(this.CloseBtn_Click);
+            // 
             // LiveFeed
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(776, 349);
+            this.ClientSize = new System.Drawing.Size(776, 370);
+            this.Controls.Add(this.CloseBtn);
+            this.Controls.Add(this.IPNameLabel);
             this.Controls.Add(this.IPValueLabel);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.JudgePointsPanel);
@@ -521,5 +545,7 @@
         private System.Windows.Forms.Panel JudgePointsPanel;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label IPValueLabel;
+        private System.Windows.Forms.Label IPNameLabel;
+        private System.Windows.Forms.Button CloseBtn;
     }
 }

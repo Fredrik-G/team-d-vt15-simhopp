@@ -155,7 +155,8 @@ namespace SimhoppGUI
                 EventSetDiverMessage,
                 EventGetIPForServer,
                 EventGetTrickDifficultyFromTrickHashTable,
-                EventSaveContestToDatabase
+                EventSaveContestToDatabase,
+                EventGetContestFromDatabase
                 ))
             {
                 if (startContest.ShowDialog(this) == DialogResult.OK)
@@ -302,6 +303,7 @@ namespace SimhoppGUI
         public event DelegateGetJudgesInContest EventGetJudgesInContest = null;
         public event DelegateGetDiversInContest EventGetDiversInContest = null;
         public event DelegateGetTrickList EventGetTrickList = null;
+        public event DelegateGetContestFromDatabase EventGetContestFromDatabase = null;
 
         public event DelegateGetJudgeHash EventGetJudgeHash = null;
         public event DelegateGetJudgeSalt EventGetJudgeSalt = null;
