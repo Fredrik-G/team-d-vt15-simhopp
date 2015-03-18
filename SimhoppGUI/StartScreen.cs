@@ -156,7 +156,8 @@ namespace SimhoppGUI
                 EventGetIPForServer,
                 EventGetTrickDifficultyFromTrickHashTable,
                 EventSaveContestToDatabase,
-                EventGetContestFromDatabase
+                EventGetContestFromDatabase,
+                EventGetTrickIdByName
                 ))
             {
                 if (startContest.ShowDialog(this) == DialogResult.OK)
@@ -310,6 +311,7 @@ namespace SimhoppGUI
         public event DelegateConnectToServer EventConnectToServer = null;
         public event DelegateGetTrickFromParticipant EventGetTrickFromParticipant = null;
         public event DelegateGetTrickDifficultyFromTrickHashTable EventGetTrickDifficultyFromTrickHashTable = null;
+        public event DelegateGetTrickIdByName EventGetTrickIdByName = null;
 
         #endregion
 

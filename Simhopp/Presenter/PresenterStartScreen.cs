@@ -62,7 +62,7 @@ namespace Simhopp.Presenter
             this.View.EventGetTrickFromParticipant += GetTrickFromParticipant;
             this.View.EventSetJudgePoint += SetJudgePoint;
             this.View.EventGetTrickDifficultyFromTrickHashTable += GetTrickDifficultyFromTrickHashTable;
-
+            this.View.EventGetTrickIdByName += GetTrickIdByName;
         }
 
         #region Getters
@@ -119,6 +119,11 @@ namespace Simhopp.Presenter
         public double GetTrickDifficultyFromTrickHashTable(string trickName)
         {
             return this.Model.GetTrickDifficultyFromTrickHashTable(trickName);
+        }
+
+        public int GetTrickIdByName(string trickName)
+        {
+            return this.Model.GetTrickIdByName(trickName);
         }
 
         #endregion
