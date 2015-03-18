@@ -312,7 +312,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox JudgeClientChosenContestTb;
-        public System.Windows.Forms.TextBox JudgeSSNTB;
+        private System.Windows.Forms.TextBox JudgeSSNTB;
         private System.Windows.Forms.ToolStripMenuItem disconnectToolStripMenuItem;
     }
 }
