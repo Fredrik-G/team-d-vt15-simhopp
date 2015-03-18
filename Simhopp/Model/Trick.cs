@@ -6,6 +6,8 @@
     public class Trick
     {
         #region Data
+
+        private int id;
         private string name;
         private double difficulty;
         #endregion
@@ -14,8 +16,9 @@
         /// <summary>
         /// Default Constructor
         /// </summary>
-        public Trick() 
+        public Trick()
         {
+            this.id = -1;
             this.name = "";
             this.difficulty = 0.0;
         }
@@ -29,9 +32,32 @@
             this.name = name;
             this.difficulty = difficulty;
         }
+
+        /// <summary>
+        /// Creating an object with varibles 'id', 'name' and 'difficulty'
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="difficulty"></param>
+        public Trick(int id, string name, double difficulty)
+        {
+            this.id = id;
+            this.name = name;
+            this.difficulty = difficulty;
+        }
         #endregion
 
         #region Properties
+
+        /// <summary>
+        /// Getter/Setter for id value.
+        /// </summary>
+        public int Id
+        {
+            get { return Id; }
+            set { this.Id = value; }
+        }
+
         /// <summary>
         /// Getter/Setter for name value.
         /// </summary>
@@ -60,6 +86,8 @@
                 this.difficulty = value;
             }
         }
+
+
         #endregion
     }
 }
