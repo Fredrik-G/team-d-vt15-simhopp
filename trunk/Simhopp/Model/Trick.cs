@@ -54,8 +54,8 @@
         /// </summary>
         public int Id
         {
-            get { return Id; }
-            set { this.Id = value; }
+            get { return id; }
+            set { this.id = value; }
         }
 
         /// <summary>

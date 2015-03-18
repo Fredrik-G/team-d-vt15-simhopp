@@ -98,7 +98,8 @@ namespace Simhopp.Model
         public void ReadFromDatabase(DatabaseController database)
         {
             trickList2.Clear();
-            trickList2 = database.GetTrickListFromDatabase();
+            trickList2 = database.GetTrickListFromDatabaseWithId();
+            //trickList2 = database.GetTrickListFromDatabase();
         }
 
         /// <summary>
@@ -118,7 +119,16 @@ namespace Simhopp.Model
                 Console.WriteLine("Trick " + trickName + " not found\n" + e.Message);
                 return 0.0;
             }
+        }
 
+        /// <summary>
+        /// Returns trick id by trick name.
+        /// </summary>
+        /// <param name="trickName"></param>
+        /// <returns>Trick id</returns>
+        public int GetIdByName(string trickName)
+        {
+            return trickList2.SingleOrDefault(x => x.Name == trickName).Id;
         }
 
         /// <summary>
