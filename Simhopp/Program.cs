@@ -14,7 +14,7 @@ namespace Simhopp
     {
         private static void FillDatabase()
         {
-            var database = new DatabaseController(@"M:/Desktop/simhoppTestDB.db");
+            var database = new DatabaseController(@"C:/temp/Simhopp/Simhopp/simhoppTestDB.db");
             database.ConnectToDatabase();
 
             database.ClearDatabase("Judge");
