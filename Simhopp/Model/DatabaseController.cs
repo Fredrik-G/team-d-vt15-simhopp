@@ -1068,7 +1068,7 @@ namespace Simhopp.Model
                     Diver d = new Diver(Convert.ToInt32(readerGetDivers["ID"]), Convert.ToString(readerGetDivers["Name"]), Convert.ToString(readerGetDivers["SSN"]), Convert.ToString(readerGetDivers["Nationality"]));
                     Participant p = new Participant(d);
                     //Get participant jumpResults
-                    string sqlGetJumpResult = "SELECT DISTINCT Trick.Name, Evaluation.Point, Jump.TotalPoint" +
+                    string sqlGetJumpResult = "SELECT DISTINCT Trick.Name, Trick.Difficulty, Evaluation.Point, Jump.TotalPoint" +
                                               " FROM Trick, Evaluation, Jump" +
                                               " WHERE Jump.Contest = '" + contest.Id + "'" +
                                               " AND Jump.Diver = '" + d.Id + "'" +
@@ -1081,9 +1081,9 @@ namespace Simhopp.Model
                     int judgeNumber = 0;
                     while (readerGetJumpResult.Read() && JumpNumber < 3)
                     {
-                        if (judgeNumber == (numberOfJudges - 1))
+                        if (judgeNumber == (numberOfJudges))
                         {
-                            p.SetTrick(JumpNumber, Convert.ToString(readerGetJumpResult["Name"]));
+                            p.SetTrick(JumpNumber, Convert.ToString(readerGetJumpResult["Name"]), Convert.ToDouble(readerGetJumpResult["Difficulty"]));
                             judgeNumber = 0;
                             JumpNumber++;
                         }
