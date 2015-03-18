@@ -40,6 +40,7 @@
             this.placeLabel = new System.Windows.Forms.Label();
             this.placeNameLabel = new System.Windows.Forms.Label();
             this.closeButton = new System.Windows.Forms.Button();
+            this.htmlExportButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.resultDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.judgesDataGridView)).BeginInit();
             this.SuspendLayout();
@@ -159,11 +160,22 @@
             this.closeButton.UseVisualStyleBackColor = true;
             this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
             // 
+            // htmlExportButton
+            // 
+            this.htmlExportButton.Location = new System.Drawing.Point(330, 374);
+            this.htmlExportButton.Name = "htmlExportButton";
+            this.htmlExportButton.Size = new System.Drawing.Size(94, 23);
+            this.htmlExportButton.TabIndex = 12;
+            this.htmlExportButton.Text = "Export as HTML";
+            this.htmlExportButton.UseVisualStyleBackColor = true;
+            this.htmlExportButton.Click += new System.EventHandler(this.htmlExportButton_Click);
+            // 
             // ContestResult
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(513, 403);
+            this.Controls.Add(this.htmlExportButton);
             this.Controls.Add(this.closeButton);
             this.Controls.Add(this.placeNameLabel);
             this.Controls.Add(this.placeLabel);
@@ -200,5 +212,6 @@
         private System.Windows.Forms.Label placeLabel;
         private System.Windows.Forms.Label placeNameLabel;
         private System.Windows.Forms.Button closeButton;
+        private System.Windows.Forms.Button htmlExportButton;
     }
 }
