@@ -1249,6 +1249,11 @@ namespace Simhopp.Model
             #endregion
         }
 
+
+        /// <summary>
+        /// Returns a tricklist.
+        /// </summary>
+        /// <returns>BindingList for tricks.</returns>
         public BindingList<Trick> GetTrickListFromDatabase()
         {
             log.Debug("Function " + MethodBase.GetCurrentMethod().Name + " used. ");
@@ -1267,6 +1272,63 @@ namespace Simhopp.Model
                 {
                     
                     Trick t = new Trick(Convert.ToString(reader["Name"]), Convert.ToDouble(reader["Difficulty"]));
+                    trickList.Add(t);
+                }
+                return trickList;
+            }
+            #region Exceptions
+
+            catch (SQLiteException sqliteEx)
+            {
+                MsgBox.CreateErrorBox("Could not get Tricks from database.\n" + sqliteEx, MethodBase.GetCurrentMethod().Name);
+            }
+
+            catch (FormatException formatEx)
+            {
+                MsgBox.CreateErrorBox("Could not get Tricks from database.\n" + formatEx.GetType() + "\n" + formatEx, MethodBase.GetCurrentMethod().Name);
+            }
+
+            catch (InvalidCastException invalidCastEx)
+            {
+                MsgBox.CreateErrorBox("Could not get Tricks from database.\n" + invalidCastEx.GetType() + "\n" + invalidCastEx, MethodBase.GetCurrentMethod().Name);
+            }
+
+            catch (OverflowException overflowEx)
+            {
+                MsgBox.CreateErrorBox("Could not get Tricks from database.\n" + overflowEx.GetType() + "\n" + overflowEx, MethodBase.GetCurrentMethod().Name);
+            }
+
+            catch (Exception e)
+            {
+                MsgBox.CreateErrorBox("Could not get Tricks from database.\n" + e, MethodBase.GetCurrentMethod().Name);
+            }
+            #endregion
+            return null;
+        }
+
+
+        /// <summary>
+        /// Returns a tricklist with id variable.
+        /// </summary>
+        /// <returns>BindingList for tricks.</returns>
+        public BindingList<Trick> GetTrickListFromDatabaseWithId()
+        {
+            log.Debug("Function " + MethodBase.GetCurrentMethod().Name + " used. ");
+
+            if (dbConnection == null)
+            {
+                NoConnectionErrorMessage();
+            }
+            try
+            {
+                BindingList<Trick> trickList = new BindingList<Trick>();
+                string sql = "SELECT * FROM Trick";
+                SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
+                SQLiteDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+
+                    Trick t = new Trick(Convert.ToInt32(reader["Id"]), Convert.ToString(reader["Name"]), Convert.ToDouble(reader["Difficulty"]));
                     trickList.Add(t);
                 }
                 return trickList;
