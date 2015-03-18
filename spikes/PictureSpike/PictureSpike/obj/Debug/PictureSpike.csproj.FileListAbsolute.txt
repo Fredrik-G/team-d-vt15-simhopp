@@ -1,0 +1,9 @@
+M:\Desktop\år2\SystemProgramvaruutveckling\spikes\PictureSpike\PictureSpike\bin\Debug\PictureSpike.exe.config
+M:\Desktop\år2\SystemProgramvaruutveckling\spikes\PictureSpike\PictureSpike\bin\Debug\PictureSpike.exe
+M:\Desktop\år2\SystemProgramvaruutveckling\spikes\PictureSpike\PictureSpike\bin\Debug\PictureSpike.pdb
+M:\Desktop\år2\SystemProgramvaruutveckling\spikes\PictureSpike\PictureSpike\obj\Debug\PictureSpike.csprojResolveAssemblyReference.cache
+M:\Desktop\år2\SystemProgramvaruutveckling\spikes\PictureSpike\PictureSpike\obj\Debug\PictureSpike.Form1.resources
+M:\Desktop\år2\SystemProgramvaruutveckling\spikes\PictureSpike\PictureSpike\obj\Debug\PictureSpike.Properties.Resources.resources
+M:\Desktop\år2\SystemProgramvaruutveckling\spikes\PictureSpike\PictureSpike\obj\Debug\PictureSpike.csproj.GenerateResource.Cache
+M:\Desktop\år2\SystemProgramvaruutveckling\spikes\PictureSpike\PictureSpike\obj\Debug\PictureSpike.exe
+M:\Desktop\år2\SystemProgramvaruutveckling\spikes\PictureSpike\PictureSpike\obj\Debug\PictureSpike.pdb
