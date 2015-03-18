@@ -68,7 +68,7 @@ namespace ClientGUI
             this.UserSSNTB.Name = "UserSSNTB";
             this.UserSSNTB.Size = new System.Drawing.Size(125, 20);
             this.UserSSNTB.TabIndex = 2;
-            this.UserSSNTB.Text = "111-22-1566";
+            this.UserSSNTB.Click += new System.EventHandler(this.UserSSNTB_Click);
             this.UserSSNTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckEnterOrEscape);
             // 
             // PasswordTB
@@ -78,8 +78,8 @@ namespace ClientGUI
             this.PasswordTB.PasswordChar = '*';
             this.PasswordTB.Size = new System.Drawing.Size(119, 20);
             this.PasswordTB.TabIndex = 3;
-            this.PasswordTB.Text = "password";
             this.PasswordTB.UseSystemPasswordChar = true;
+            this.PasswordTB.Click += new System.EventHandler(this.PasswordTB_Click);
             this.PasswordTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckEnterOrEscape);
             // 
             // LoginBtn
@@ -122,6 +122,7 @@ namespace ClientGUI
             this.IPConnectionTB.Size = new System.Drawing.Size(125, 20);
             this.IPConnectionTB.TabIndex = 7;
             this.IPConnectionTB.Text = "127.0.0.1";
+            this.IPConnectionTB.Click += new System.EventHandler(this.IPConnectionTB_Click);
             this.IPConnectionTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckEnterOrEscape);
             // 
             // Login

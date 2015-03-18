@@ -113,5 +113,27 @@ namespace ClientGUI
 
         #endregion
 
+        #region Click textboxes
+
+        private void UserSSNTB_Click(object sender, EventArgs e)
+        {
+            UserSSNTB.SelectionStart = 0;
+            UserSSNTB.SelectionLength = UserSSNTB.Text.Length;
+        }
+
+        private void PasswordTB_Click(object sender, EventArgs e)
+        {
+            PasswordTB.SelectionStart = 0;
+            PasswordTB.SelectionLength = PasswordTB.Text.Length;
+        }
+
+        private void IPConnectionTB_Click(object sender, EventArgs e)
+        {
+            IPConnectionTB.SelectionStart = 0;
+            IPConnectionTB.SelectionLength = IPConnectionTB.Text.Length;
+        }
+
+        #endregion
+
     }
 }

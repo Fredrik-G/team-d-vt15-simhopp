@@ -553,6 +553,12 @@ namespace SimhoppGUI
                 return;
             }
 
+            if (!AreJudgesSet())
+            {
+                MsgBox.CreateInfoBox("Select at least three judges.");
+                return; 
+            }
+
             var selectedContest = ContestsDataGridView.SelectedCells.Cast<DataGridViewCell>().FirstOrDefault();
             var contestRow = selectedContest.OwningRow;
 
@@ -767,7 +773,7 @@ namespace SimhoppGUI
 
             if (contestCell == null)
             {
-                throw new NullReferenceException("cell is null");
+                throw new NullReferenceException("No contest is selected");
             }
 
             foreach (DataGridViewRow row in CurrentDiversDataGridView.Rows)
@@ -785,6 +791,23 @@ namespace SimhoppGUI
                 }
             }
             return true;
+        }
+
+        /// <summary>
+        /// Checks if atleast three judges has been added to the selected contest.
+        /// </summary>
+        /// <returns></returns>
+        private bool AreJudgesSet()
+        {
+            var contestCell = ContestsDataGridView.SelectedCells.Cast<DataGridViewCell>().FirstOrDefault();
+
+            if (contestCell == null)
+            {
+                throw new NullReferenceException("No contest is selected");
+            }
+
+            var contestRow = contestCell.OwningRow;
+            return eventGetJudgesInContest(Convert.ToInt16(contestRow.Cells["Id"].Value)).Count >= 3;
         }
 
         private void ShowFinishedContestState()
