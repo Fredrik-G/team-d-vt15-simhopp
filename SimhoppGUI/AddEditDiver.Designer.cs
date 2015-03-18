@@ -106,7 +106,7 @@
             // 
             this.AddDiverNameTb.Location = new System.Drawing.Point(98, 10);
             this.AddDiverNameTb.Name = "AddDiverNameTb";
-            this.AddDiverNameTb.Size = new System.Drawing.Size(148, 20);
+            this.AddDiverNameTb.Size = new System.Drawing.Size(157, 20);
             this.AddDiverNameTb.TabIndex = 6;
             this.InputToolTip.SetToolTip(this.AddDiverNameTb, "Allowed characters: \"A-Z \',.-\"");
             this.AddDiverNameTb.Click += new System.EventHandler(this.AddDiverNameTb_Click);
@@ -116,7 +116,7 @@
             // 
             this.AddDiverNationaltyTb.Location = new System.Drawing.Point(98, 36);
             this.AddDiverNationaltyTb.Name = "AddDiverNationaltyTb";
-            this.AddDiverNationaltyTb.Size = new System.Drawing.Size(148, 20);
+            this.AddDiverNationaltyTb.Size = new System.Drawing.Size(157, 20);
             this.AddDiverNationaltyTb.TabIndex = 7;
             this.InputToolTip.SetToolTip(this.AddDiverNationaltyTb, "Allowed characters: \"A-Z ,-\"");
             this.AddDiverNationaltyTb.Click += new System.EventHandler(this.AddDiverNationaltyTb_Click);
@@ -126,7 +126,7 @@
             // 
             this.AddDiverSSNTb.Location = new System.Drawing.Point(98, 62);
             this.AddDiverSSNTb.Name = "AddDiverSSNTb";
-            this.AddDiverSSNTb.Size = new System.Drawing.Size(148, 20);
+            this.AddDiverSSNTb.Size = new System.Drawing.Size(157, 20);
             this.AddDiverSSNTb.TabIndex = 8;
             this.InputToolTip.SetToolTip(this.AddDiverSSNTb, "Allowed characters: \"1-9 -\". Swedish: yyyymmdd-xxxx. Rest: xxx-yy-zzzz");
             this.AddDiverSSNTb.Click += new System.EventHandler(this.AddDiverSSNTb_Click);
@@ -134,7 +134,7 @@
             // 
             // AddDiverButton
             // 
-            this.AddDiverButton.Location = new System.Drawing.Point(98, 127);
+            this.AddDiverButton.Location = new System.Drawing.Point(180, 101);
             this.AddDiverButton.Name = "AddDiverButton";
             this.AddDiverButton.Size = new System.Drawing.Size(75, 23);
             this.AddDiverButton.TabIndex = 10;
@@ -146,7 +146,7 @@
             // 
             this.UpdateDiverSSNTb.Location = new System.Drawing.Point(98, 62);
             this.UpdateDiverSSNTb.Name = "UpdateDiverSSNTb";
-            this.UpdateDiverSSNTb.Size = new System.Drawing.Size(148, 20);
+            this.UpdateDiverSSNTb.Size = new System.Drawing.Size(157, 20);
             this.UpdateDiverSSNTb.TabIndex = 17;
             this.InputToolTip.SetToolTip(this.UpdateDiverSSNTb, "Allowed characters: \"1-9 -\". Swedish: yyyymmdd-xxxx. Rest: xxx-yy-zzzz");
             this.UpdateDiverSSNTb.Click += new System.EventHandler(this.UpdateDiverSSNTb_Click);
@@ -156,7 +156,7 @@
             // 
             this.UpdateDiverNationalityTb.Location = new System.Drawing.Point(98, 36);
             this.UpdateDiverNationalityTb.Name = "UpdateDiverNationalityTb";
-            this.UpdateDiverNationalityTb.Size = new System.Drawing.Size(148, 20);
+            this.UpdateDiverNationalityTb.Size = new System.Drawing.Size(157, 20);
             this.UpdateDiverNationalityTb.TabIndex = 16;
             this.InputToolTip.SetToolTip(this.UpdateDiverNationalityTb, "Allowed characters: \"A-Z ,-\"");
             this.UpdateDiverNationalityTb.Click += new System.EventHandler(this.UpdateDiverNationalityTb_Click);
@@ -166,7 +166,7 @@
             // 
             this.UpdateDiverNameTb.Location = new System.Drawing.Point(98, 10);
             this.UpdateDiverNameTb.Name = "UpdateDiverNameTb";
-            this.UpdateDiverNameTb.Size = new System.Drawing.Size(148, 20);
+            this.UpdateDiverNameTb.Size = new System.Drawing.Size(157, 20);
             this.UpdateDiverNameTb.TabIndex = 15;
             this.InputToolTip.SetToolTip(this.UpdateDiverNameTb, "Allowed characters: \"A-Z \',.-\"");
             this.UpdateDiverNameTb.Click += new System.EventHandler(this.UpdateDiverNameTb_Click);
@@ -204,7 +204,7 @@
             // 
             // UpdateDiverButton
             // 
-            this.UpdateDiverButton.Location = new System.Drawing.Point(17, 127);
+            this.UpdateDiverButton.Location = new System.Drawing.Point(98, 101);
             this.UpdateDiverButton.Name = "UpdateDiverButton";
             this.UpdateDiverButton.Size = new System.Drawing.Size(75, 23);
             this.UpdateDiverButton.TabIndex = 18;
@@ -214,7 +214,7 @@
             // 
             // AddDiverCloseBtn
             // 
-            this.AddDiverCloseBtn.Location = new System.Drawing.Point(271, 127);
+            this.AddDiverCloseBtn.Location = new System.Drawing.Point(268, 101);
             this.AddDiverCloseBtn.Name = "AddDiverCloseBtn";
             this.AddDiverCloseBtn.Size = new System.Drawing.Size(75, 23);
             this.AddDiverCloseBtn.TabIndex = 11;
@@ -229,7 +229,7 @@
             this.tabControlAddEdit.Location = new System.Drawing.Point(6, 261);
             this.tabControlAddEdit.Name = "tabControlAddEdit";
             this.tabControlAddEdit.SelectedIndex = 0;
-            this.tabControlAddEdit.Size = new System.Drawing.Size(360, 217);
+            this.tabControlAddEdit.Size = new System.Drawing.Size(360, 168);
             this.tabControlAddEdit.TabIndex = 21;
             this.tabControlAddEdit.SelectedIndexChanged += new System.EventHandler(this.tabControlAddEdit_SelectedIndexChanged);
             // 
@@ -247,14 +247,14 @@
             this.tabPageEditDiver.Location = new System.Drawing.Point(4, 22);
             this.tabPageEditDiver.Name = "tabPageEditDiver";
             this.tabPageEditDiver.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageEditDiver.Size = new System.Drawing.Size(352, 191);
+            this.tabPageEditDiver.Size = new System.Drawing.Size(352, 142);
             this.tabPageEditDiver.TabIndex = 1;
             this.tabPageEditDiver.Text = "Edit Diver";
             this.tabPageEditDiver.UseVisualStyleBackColor = true;
             // 
             // UpdateDiverRemoveBtn
             // 
-            this.UpdateDiverRemoveBtn.Location = new System.Drawing.Point(98, 127);
+            this.UpdateDiverRemoveBtn.Location = new System.Drawing.Point(180, 101);
             this.UpdateDiverRemoveBtn.Name = "UpdateDiverRemoveBtn";
             this.UpdateDiverRemoveBtn.Size = new System.Drawing.Size(75, 23);
             this.UpdateDiverRemoveBtn.TabIndex = 19;
@@ -264,7 +264,7 @@
             // 
             // UpdateDiverClosebtn
             // 
-            this.UpdateDiverClosebtn.Location = new System.Drawing.Point(271, 127);
+            this.UpdateDiverClosebtn.Location = new System.Drawing.Point(268, 101);
             this.UpdateDiverClosebtn.Name = "UpdateDiverClosebtn";
             this.UpdateDiverClosebtn.Size = new System.Drawing.Size(75, 23);
             this.UpdateDiverClosebtn.TabIndex = 23;
@@ -285,7 +285,7 @@
             this.tabPageAddDiver.Location = new System.Drawing.Point(4, 22);
             this.tabPageAddDiver.Name = "tabPageAddDiver";
             this.tabPageAddDiver.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAddDiver.Size = new System.Drawing.Size(352, 191);
+            this.tabPageAddDiver.Size = new System.Drawing.Size(352, 142);
             this.tabPageAddDiver.TabIndex = 0;
             this.tabPageAddDiver.Text = "Add Diver";
             this.tabPageAddDiver.UseVisualStyleBackColor = true;
@@ -307,7 +307,7 @@
             this.DiverDataGridView.Name = "DiverDataGridView";
             this.DiverDataGridView.ReadOnly = true;
             this.DiverDataGridView.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.DiverDataGridView.Size = new System.Drawing.Size(360, 245);
+            this.DiverDataGridView.Size = new System.Drawing.Size(362, 241);
             this.DiverDataGridView.TabIndex = 22;
             this.DiverDataGridView.TabStop = false;
             this.DiverDataGridView.SelectionChanged += new System.EventHandler(this.DiversDataGridView_SelectionChanged);
@@ -380,7 +380,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(376, 480);
+            this.ClientSize = new System.Drawing.Size(378, 432);
             this.Controls.Add(this.DiverDataGridHiddenLabel);
             this.Controls.Add(this.AddDiverHiddenLabel);
             this.Controls.Add(this.EditDiverHiddenLabel);
