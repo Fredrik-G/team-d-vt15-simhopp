@@ -457,33 +457,58 @@ namespace Simhopp.Model
             FileStream fileStream = null;
             try
             {
-                fileStream = new FileStream("result.htm", FileMode.Create);
+                fileStream = new FileStream(this.Name + " Result.htm", FileMode.Create);
 
                 using (var writer = new StreamWriter(fileStream, Encoding.UTF8))
                 {
                     fileStream = null;
 
-                    writer.WriteLine("<H2>" + this.Name + "\t" + this.Place + "</H2>");
+                    writer.WriteLine("<HTML>");
+                    writer.WriteLine("<HEAD>");
+                    writer.WriteLine("<title>" + this.Name + "</title>");
+                    writer.WriteLine("</HEAD>");
+                    writer.WriteLine("<BODY>");
+                    writer.WriteLine("<H2>" + this.Name + " - \t" + this.Place + "</H2>");
+                    writer.WriteLine("<H4>Date: " + this.startDate + " - \t" + this.EndDate + "</H4>");
 
                     writer.WriteLine("<H3>Participants</H3>");
-                    writer.WriteLine("<ol>");
-
-                    // var resultList = CreateResultStringList();
-                    var resultList = CreateResultParticipantList();
                     
-                    foreach (var participant in resultList)
+
+                    SortParticipants(ref participantsList, true);
+                    
+                    var placement = 1;
+                    writer.WriteLine("<style>" +
+                                     "table, th, td {" +
+                                     "border: 1px solid black;" +
+                                     "border-collapse: collapse;" +
+                                     "}" +
+                                     "th, td {" +
+                                     "padding: 5px;" +
+                                     "text-align: left;    " +
+                                     "}" +
+                                     "</style>");
+
+                    writer.WriteLine("<table border = \"1px\">");
+                    writer.WriteLine("<tr><th width = \"50px\" text-align = \"left\">Place:</th><th width = \"200px\" text-align = \"left\">Name:</th><th width = \"100px\" text-align = \"left\">Nation:</th><th width = \"50px\" text-align = \"left\">Points:</th></tr>");
+                    foreach (var participant in participantsList)
                     {
-                        writer.WriteLine("<li>" + participant.DiverName + "\t" + participant.GetDiverNationality() + "</li>");
+                        writer.WriteLine("<tr><td>" + placement + ".</td><td>" + participant.DiverName + "</td><td>" + participant.GetDiverNationality() + "</td><td>" + participant.TotalPoints + "</td></tr>");
+                        placement++;
                     }
-                    writer.WriteLine("</ol>");
+                    writer.WriteLine("</table>");
+
 
                     writer.WriteLine("<H3>Judges</H3>");
-                    writer.WriteLine("<ul>");                  
+                    writer.WriteLine("<table border = \"1px\">");
+                    writer.WriteLine("<tr><th width = \"200px\" text-align = \"left\">Name</th><th width = \"100px\" text-align = \"left\">Nation:</th>");
                     foreach (var judge in judgeList)
                     {
-                        writer.WriteLine("<li>" + judge.Name + "\t" + judge.Nationality + "</li>");
+                        writer.WriteLine("<tr><td>" + judge.Name + ".</td><td>" + judge.Nationality + "</td></tr>");
                     }
-                    writer.WriteLine("</ul>");
+                    writer.WriteLine("</table>");
+                    writer.WriteLine("</BODY>");
+                    writer.WriteLine("</HTML>");
+                    
                 }
             }
             finally
