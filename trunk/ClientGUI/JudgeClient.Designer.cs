@@ -278,7 +278,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "JudgeClient";
-            this.Text = "Form1";
+            this.Text = "Judge Client";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.JudgeClient_KeyDown);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
