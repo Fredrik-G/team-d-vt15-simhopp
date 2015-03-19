@@ -41,6 +41,17 @@ namespace SimhoppGUI
         private DelegateGetContestFromDatabase eventGetContestFromDatabase;
         private DelegateGetTrickIdByName eventGetTrickIdByName;
 
+        private DelegateCreateContest eventCreateContest;
+
+        private DelegateAddDiverToList eventAddDiverToList;
+        private DelegateRemoveDiverFromList eventRemoveDiverFromList;
+        private DelegateUpdateDiver eventUpdateDiver;
+
+        private DelegateAddJudgeToList eventAddJudgeToList;
+        private DelegateRemoveJudgeFromList eventRemoveJudgeFromList;
+        private DelegateUpdateJudge eventUpdateJudge;
+
+
         DataGridViewComboBoxColumn trick1ComboBoxColumn = new DataGridViewComboBoxColumn();
         DataGridViewComboBoxColumn trick2ComboBoxColumn = new DataGridViewComboBoxColumn();
         DataGridViewComboBoxColumn trick3ComboBoxColumn = new DataGridViewComboBoxColumn();
@@ -75,7 +86,14 @@ namespace SimhoppGUI
                 DelegateGetTrickDifficultyFromTrickHashTable eventGetTrickDifficultyFromTrickHashTable,
                 DelegateSaveContestToDatabase eventSaveContestToDatabase,
                 DelegateGetContestFromDatabase eventGetContestFromDatabase,
-                DelegateGetTrickIdByName eventGetTrickIdByName
+                DelegateGetTrickIdByName eventGetTrickIdByName,
+                DelegateCreateContest eventCreateContest,
+                DelegateAddDiverToList eventAddDiverToList,
+                DelegateRemoveDiverFromList eventRemoveDiverFromList,
+                DelegateUpdateDiver eventUpdateDiver,
+                DelegateAddJudgeToList eventAddJudgeToList,
+                DelegateRemoveJudgeFromList eventRemoveJudgeFromList,
+                DelegateUpdateJudge eventUpdateJudge
             )
         {
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -106,6 +124,13 @@ namespace SimhoppGUI
             this.eventSaveContestToDatabase = eventSaveContestToDatabase;
             this.eventGetContestFromDatabase = eventGetContestFromDatabase;
             this.eventGetTrickIdByName = eventGetTrickIdByName;
+            this.eventCreateContest = eventCreateContest;
+            this.eventAddDiverToList = eventAddDiverToList;
+            this.eventRemoveDiverFromList = eventRemoveDiverFromList;
+            this.eventUpdateDiver = eventUpdateDiver;
+            this.eventAddJudgeToList = eventAddJudgeToList;
+            this.eventRemoveJudgeFromList = eventRemoveJudgeFromList;
+            this.eventUpdateJudge = eventUpdateJudge;
         }
         #endregion
 
@@ -609,7 +634,7 @@ namespace SimhoppGUI
         /// <returns></returns>
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            if (ModifierKeys != Keys.Control)
+            if (ModifierKeys != Keys.Control && ModifierKeys != Keys.Shift)
             {
                 if (keyData == Keys.Escape)
                 {
@@ -621,6 +646,10 @@ namespace SimhoppGUI
             ContestsDataGridToolTip.Show("Ctrl+1", ContestsDataGridHiddenLabel);
             JudgesToolTip.Show("Ctrl+2", JudgesHiddenLabel);
             DiversToolTip.Show("Ctrl+3", DiversHiddenLabel);
+
+            NewContestToolTip.Show("Shift+1", NewContesttBtn);
+            AddEditDiverToolTip.Show("Shift+2", AddEditDiverBtn);
+            AddEditJudgeToolTip.Show("Shift+3", AddEditJudgeBtn);
 
             StartContestToolTip.Show("Ctrl+S", StartContestBtn);
             EditContestToolTip.Show("Ctrl+E", EditContestBtn);
@@ -651,6 +680,7 @@ namespace SimhoppGUI
                 case (Keys.Control | Keys.R):
                     viewResultButton.PerformClick();
                     break;
+
                 case (Keys.Control | Keys.D1):
                     ContestsDataGridView.Focus();
                     break;
@@ -661,6 +691,16 @@ namespace SimhoppGUI
                 case (Keys.Control | Keys.D3):
                     JudgesDiversTabControl.SelectTab(DiverTabPage);
                     GlobalDiversDataGridView.Focus();
+                    break;
+
+                case (Keys.Shift | Keys.D1):
+                    NewContesttBtn.PerformClick();
+                    break;
+                case (Keys.Shift | Keys.D2):
+                    AddEditDiverBtn.PerformClick();
+                    break;
+                case (Keys.Shift | Keys.D3):
+                    AddEditJudgeBtn.PerformClick();
                     break;
             }
 
@@ -676,10 +716,15 @@ namespace SimhoppGUI
             ContestsDataGridToolTip.RemoveAll();
             JudgesToolTip.RemoveAll();
             DiversToolTip.RemoveAll();
+
             StartContestToolTip.RemoveAll();
             EditContestToolTip.RemoveAll();
             ViewResultToolTip.RemoveAll();
             CloseToolTip.RemoveAll();
+
+            NewContestToolTip.RemoveAll();
+            AddEditDiverToolTip.RemoveAll();
+            AddEditJudgeToolTip.RemoveAll();
         }
         /// <summary>
         /// Checks if enter or backspace was pressed.
@@ -920,6 +965,87 @@ namespace SimhoppGUI
         private void CloseBtn_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+
+
+
+
+        private void StartScreenNewContesttBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //Dims the background form and makes it non-interactive.
+                using (new DimIt())
+                using (var newContest = new NewContest())
+                {
+                    if (newContest.ShowDialog(this) == DialogResult.OK)
+                    {
+                        newContest.Show();
+                    }
+                    if (eventCreateContest == null)
+                    {
+                        return;
+                    }
+                    //Creates a new contest with the input from newContest-form. 
+                    if (newContest.DialogResult == DialogResult.OK)
+                    {
+                        var startDate = StartScreen.CreateDateString(newContest.NewContestStartDateDTP);
+                        var endDate = StartScreen.CreateDateString(newContest.NewContestEndDateDTP);
+
+                        eventCreateContest(newContest.City, newContest.ContestName, startDate, endDate);
+                        log.Info("Created new contest(" + newContest.City + ", " +
+                            newContest.ContestName + ", " + startDate + ", " + endDate + ").");
+                    }
+                }
+            }
+
+            catch (ArgumentNullException nullException)
+            {
+                MsgBox.CreateErrorBox(nullException.ToString(), MethodBase.GetCurrentMethod().Name);
+                log.Warn("Null exception when creating a new contest", nullException);
+            }
+            //Occurs if contest data is invalid.
+            catch (InvalidOperationException invalidOperationException)
+            {
+                MsgBox.CreateErrorBox(invalidOperationException.ToString(), MethodBase.GetCurrentMethod().Name);
+                log.Warn("Invalid operation when creating a new contest", invalidOperationException);
+            }
+            catch (Exception exception)
+            {
+                MsgBox.CreateErrorBox(exception.ToString(), MethodBase.GetCurrentMethod().Name);
+                log.Warn("Exception when creating a new contest", exception);
+            }
+        }
+
+        private void StartScreenAddDiverContestBtn_Click(object sender, EventArgs e)
+        {
+            //Dims the background form and makes it non-interactive.
+            using (new DimIt())
+            using (var addDiver = new AddEditDiver(eventAddDiverToList,
+                            eventRemoveDiverFromList,
+                            eventGetDiversList,
+                            eventUpdateDiver))
+            {
+                if (addDiver.ShowDialog(this) == DialogResult.OK)
+                {
+                }
+            }
+        }
+
+        private void StartScreenAddJudgeBtn_Click(object sender, EventArgs e)
+        {
+            //Dims the background form and makes it non-interactive.
+            using (new DimIt())
+            using (var addjudge = new AddEditJudge(eventAddJudgeToList,
+                             eventRemoveJudgeFromList,
+                             eventGetJudgesList,
+                             eventUpdateJudge))
+            {
+                if (addjudge.ShowDialog(this) == DialogResult.OK)
+                {
+                }
+            }
         }
 
     }
