@@ -62,6 +62,12 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.CurrentJudgesLabel = new System.Windows.Forms.Label();
             this.CloseToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.AddEditJudgeBtn = new System.Windows.Forms.Button();
+            this.AddEditDiverBtn = new System.Windows.Forms.Button();
+            this.NewContesttBtn = new System.Windows.Forms.Button();
+            this.NewContestToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.AddEditDiverToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.AddEditJudgeToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.JudgesDiversTabControl.SuspendLayout();
             this.JudgeTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GlobalJudgesDataGridView)).BeginInit();
@@ -397,11 +403,48 @@
             this.CurrentJudgesLabel.TabIndex = 6;
             this.CurrentJudgesLabel.Text = "Current Judges";
             // 
+            // AddEditJudgeBtn
+            // 
+            this.AddEditJudgeBtn.Location = new System.Drawing.Point(849, 64);
+            this.AddEditJudgeBtn.Name = "AddEditJudgeBtn";
+            this.AddEditJudgeBtn.Size = new System.Drawing.Size(72, 66);
+            this.AddEditJudgeBtn.TabIndex = 47;
+            this.AddEditJudgeBtn.Text = "Add/Edit Judge";
+            this.AddEditDiverToolTip.SetToolTip(this.AddEditJudgeBtn, "Shift+3");
+            this.AddEditJudgeBtn.UseVisualStyleBackColor = true;
+            this.AddEditJudgeBtn.Click += new System.EventHandler(this.StartScreenAddJudgeBtn_Click);
+            // 
+            // AddEditDiverBtn
+            // 
+            this.AddEditDiverBtn.Location = new System.Drawing.Point(761, 64);
+            this.AddEditDiverBtn.Name = "AddEditDiverBtn";
+            this.AddEditDiverBtn.Size = new System.Drawing.Size(72, 66);
+            this.AddEditDiverBtn.TabIndex = 46;
+            this.AddEditDiverBtn.Text = "Add/Edit Diver";
+            this.NewContestToolTip.SetToolTip(this.AddEditDiverBtn, " ");
+            this.AddEditDiverToolTip.SetToolTip(this.AddEditDiverBtn, "Shift+2");
+            this.AddEditDiverBtn.UseVisualStyleBackColor = true;
+            this.AddEditDiverBtn.Click += new System.EventHandler(this.StartScreenAddDiverContestBtn_Click);
+            // 
+            // NewContesttBtn
+            // 
+            this.NewContesttBtn.Location = new System.Drawing.Point(673, 64);
+            this.NewContesttBtn.Name = "NewContesttBtn";
+            this.NewContesttBtn.Size = new System.Drawing.Size(72, 66);
+            this.NewContesttBtn.TabIndex = 45;
+            this.NewContesttBtn.Text = "New Contest";
+            this.NewContestToolTip.SetToolTip(this.NewContesttBtn, "Shift+1");
+            this.NewContesttBtn.UseVisualStyleBackColor = true;
+            this.NewContesttBtn.Click += new System.EventHandler(this.StartScreenNewContesttBtn_Click);
+            // 
             // StartContest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(977, 463);
+            this.Controls.Add(this.AddEditJudgeBtn);
+            this.Controls.Add(this.AddEditDiverBtn);
+            this.Controls.Add(this.NewContesttBtn);
             this.Controls.Add(this.CloseBtn);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.ContestsDataGridHiddenLabel);
@@ -420,7 +463,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "StartContest";
-            this.Text = "StartContest";
+            this.Text = "Simhopp";
             this.Load += new System.EventHandler(this.StartContest_Load);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.StartContest_KeyUp);
             this.JudgesDiversTabControl.ResumeLayout(false);
@@ -472,5 +515,11 @@
         private System.Windows.Forms.Button CloseBtn;
         private System.Windows.Forms.Label CurrentJudgesLabel;
         private System.Windows.Forms.ToolTip CloseToolTip;
+        private System.Windows.Forms.Button AddEditJudgeBtn;
+        private System.Windows.Forms.Button AddEditDiverBtn;
+        private System.Windows.Forms.Button NewContesttBtn;
+        private System.Windows.Forms.ToolTip NewContestToolTip;
+        private System.Windows.Forms.ToolTip AddEditDiverToolTip;
+        private System.Windows.Forms.ToolTip AddEditJudgeToolTip;
     }
 }

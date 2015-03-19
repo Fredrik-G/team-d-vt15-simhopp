@@ -65,73 +65,8 @@ namespace SimhoppGUI
 
             //enables keyboard usage.
             KeyPreview = true;
-        }
 
-        #endregion
-
-        #region Button clicks
-
-        /// <summary>
-        /// Creates a NewContest-form and attemps to create a new contest with the input from NewContest.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void StartScreenNewContesttBtn_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                //Dims the background form and makes it non-interactive.
-                using (new DimIt())
-                using (var newContest = new NewContest())
-                {
-                    if (newContest.ShowDialog(this) == DialogResult.OK)
-                    {
-                        newContest.Show();
-                    }
-                    if (EventCreateContest == null)
-                    {
-                        return;
-                    }
-                    //Creates a new contest with the input from newContest-form. 
-                    if (newContest.DialogResult == DialogResult.OK)
-                    {
-                        var startDate = CreateDateString(newContest.NewContestStartDateDTP);
-                        var endDate = CreateDateString(newContest.NewContestEndDateDTP);
-
-                        EventCreateContest(newContest.City, newContest.ContestName, startDate, endDate);
-                        log.Info("Created new contest(" + newContest.City + ", " +
-                            newContest.ContestName + ", " + startDate + ", " + endDate + ").");
-                    }
-                }
-            }
-
-            catch (ArgumentNullException nullException)
-            {
-                MsgBox.CreateErrorBox(nullException.ToString(), MethodBase.GetCurrentMethod().Name);
-                log.Warn("Null exception when creating a new contest", nullException);
-            }
-            //Occurs if contest data is invalid.
-            catch (InvalidOperationException invalidOperationException)
-            {
-                MsgBox.CreateErrorBox(invalidOperationException.ToString(), MethodBase.GetCurrentMethod().Name);
-                log.Warn("Invalid operation when creating a new contest", invalidOperationException);
-            }
-            catch (Exception exception)
-            {
-                MsgBox.CreateErrorBox(exception.ToString(), MethodBase.GetCurrentMethod().Name);
-                log.Warn("Exception when creating a new contest", exception);
-            }
-        }
-
-        /// <summary>
-        /// Creates a StartContest-form.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void StartScreenStartContestBtn_Click(object sender, EventArgs e)
-        {
-            //Dims the background form and makes it non-interactive.
-            using (new DimIt())
+            // Creates a StartContest-form.
             using (var startContest = new StartContest(
                 EventGetContestsList,
                 EventGetContest,
@@ -157,47 +92,163 @@ namespace SimhoppGUI
                 EventGetTrickDifficultyFromTrickHashTable,
                 EventSaveContestToDatabase,
                 EventGetContestFromDatabase,
-                EventGetTrickIdByName
+                EventGetTrickIdByName,
+                EventCreateContest,
+                EventAddDiverToList,
+                EventRemoveDiverFromList,
+                EventUpdateDiver,
+                EventAddJudgeToList,
+                EventRemoveJudgeFromList,
+                EventUpdateJudge
                 ))
             {
-                if (startContest.ShowDialog(this) == DialogResult.OK)
+                startContest.ShowDialog();
+                if (startContest.DialogResult == DialogResult.OK || startContest.DialogResult == DialogResult.Cancel)
                 {
-                    startContest.Show();
+                    Close();
                 }
             }
+
         }
 
-        private void StartScreenAddDiverContestBtn_Click(object sender, EventArgs e)
-        {
-            //Dims the background form and makes it non-interactive.
-            using (new DimIt())
-            using (var addDiver = new AddEditDiver(EventAddDiverToList,
-                            EventRemoveDiverFromList,
-                            EventGetDiversList,
-                            EventUpdateDiver))
-            {
-                if (addDiver.ShowDialog(this) == DialogResult.OK)
-                {
-                    addDiver.Show();
-                }
-            }
-        }
+        #endregion
 
-        private void StartScreenAddJudgeBtn_Click(object sender, EventArgs e)
-        {
-            //Dims the background form and makes it non-interactive.
-            using (new DimIt())
-            using (var addjudge = new AddEditJudge(EventAddJudgeToList,
-                             EventRemoveJudgeFromList,
-                             EventGetJudgesList,
-                             EventUpdateJudge))
-            {
-                if (addjudge.ShowDialog(this) == DialogResult.OK)
-                {
-                    addjudge.Show();
-                }
-            }
-        }
+        //#region Button clicks
+
+        ///// <summary>
+        ///// Creates a NewContest-form and attemps to create a new contest with the input from NewContest.
+        ///// </summary>
+        ///// <param name="sender"></param>
+        ///// <param name="e"></param>
+        //private void StartScreenNewContesttBtn_Click(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        //Dims the background form and makes it non-interactive.
+        //        using (new DimIt())
+        //        using (var newContest = new NewContest())
+        //        {
+        //            if (newContest.ShowDialog(this) == DialogResult.OK)
+        //            {
+        //                newContest.Show();
+        //            }
+        //            if (EventCreateContest == null)
+        //            {
+        //                return;
+        //            }
+        //            //Creates a new contest with the input from newContest-form. 
+        //            if (newContest.DialogResult == DialogResult.OK)
+        //            {
+        //                var startDate = CreateDateString(newContest.NewContestStartDateDTP);
+        //                var endDate = CreateDateString(newContest.NewContestEndDateDTP);
+
+        //                EventCreateContest(newContest.City, newContest.ContestName, startDate, endDate);
+        //                log.Info("Created new contest(" + newContest.City + ", " +
+        //                    newContest.ContestName + ", " + startDate + ", " + endDate + ").");
+        //            }
+        //        }
+        //    }
+
+        //    catch (ArgumentNullException nullException)
+        //    {
+        //        MsgBox.CreateErrorBox(nullException.ToString(), MethodBase.GetCurrentMethod().Name);
+        //        log.Warn("Null exception when creating a new contest", nullException);
+        //    }
+        //    //Occurs if contest data is invalid.
+        //    catch (InvalidOperationException invalidOperationException)
+        //    {
+        //        MsgBox.CreateErrorBox(invalidOperationException.ToString(), MethodBase.GetCurrentMethod().Name);
+        //        log.Warn("Invalid operation when creating a new contest", invalidOperationException);
+        //    }
+        //    catch (Exception exception)
+        //    {
+        //        MsgBox.CreateErrorBox(exception.ToString(), MethodBase.GetCurrentMethod().Name);
+        //        log.Warn("Exception when creating a new contest", exception);
+        //    }
+        //}
+
+        ///// <summary>
+        ///// Creates a StartContest-form.
+        ///// </summary>
+        ///// <param name="sender"></param>
+        ///// <param name="e"></param>
+        //private void StartScreenStartContestBtn_Click(object sender, EventArgs e)
+        //{
+        //    //Dims the background form and makes it non-interactive.
+        //    using (new DimIt())
+        //    using (var startContest = new StartContest(
+        //        EventGetContestsList,
+        //        EventGetContest,
+        //        EventGetJudgesList,
+        //        EventGetDiversList,
+        //        EventGetJudgesInContest,
+        //        EventGetDiversInContest,
+        //        EventAddJudgeToContest,
+        //        EventAddDiverToContest,
+        //        EventRemoveJudgeFromContest,
+        //        EventRemoveDiverFromContest,
+        //        EventUpdateContest,
+        //        EventGetTrickList,
+        //        EventGetFirstClientObjectData,
+        //        EventHandleMessage,
+        //        EventSendDataToClient,
+        //        EventAddTrickToParticipant,
+        //        EventGetTrickFromParticipant,
+        //        EventStartServer,
+        //        EventSetJudgePoint,
+        //        EventSetDiverMessage,
+        //        EventGetIPForServer,
+        //        EventGetTrickDifficultyFromTrickHashTable,
+        //        EventSaveContestToDatabase,
+        //        EventGetContestFromDatabase,
+        //        EventGetTrickIdByName,
+        //        EventCreateContest, 
+        //        EventAddDiverToList,
+        //        EventRemoveDiverFromList,
+        //        EventUpdateDiver,
+        //        EventAddJudgeToList,
+        //        EventRemoveJudgeFromList,
+        //        EventUpdateJudge
+        //        ))
+        //    {
+        //        if (startContest.ShowDialog(this) == DialogResult.OK)
+        //        {
+        //            startContest.Show();
+        //        }
+        //    }
+        //}
+
+        //private void StartScreenAddDiverContestBtn_Click(object sender, EventArgs e)
+        //{
+        //    //Dims the background form and makes it non-interactive.
+        //    using (new DimIt())
+        //    using (var addDiver = new AddEditDiver(EventAddDiverToList,
+        //                    EventRemoveDiverFromList,
+        //                    EventGetDiversList,
+        //                    EventUpdateDiver))
+        //    {
+        //        if (addDiver.ShowDialog(this) == DialogResult.OK)
+        //        {
+        //            addDiver.Show();
+        //        }
+        //    }
+        //}
+
+        //private void StartScreenAddJudgeBtn_Click(object sender, EventArgs e)
+        //{
+        //    //Dims the background form and makes it non-interactive.
+        //    using (new DimIt())
+        //    using (var addjudge = new AddEditJudge(EventAddJudgeToList,
+        //                     EventRemoveJudgeFromList,
+        //                     EventGetJudgesList,
+        //                     EventUpdateJudge))
+        //    {
+        //        if (addjudge.ShowDialog(this) == DialogResult.OK)
+        //        {
+        //            addjudge.Show();
+        //        }
+        //    }
+        //}
 
 
         /// <summary>
@@ -210,72 +261,72 @@ namespace SimhoppGUI
             log.Info("Simhopp application closing down");
         }
 
-        #endregion
+        //#endregion
 
-        #region Keyboard events
-        /// <summary>
-        /// Occurs when a key is pressed.
-        /// Shows tooltip if controll is pressed.
-        /// </summary>
-        /// <param name="msg"></param>
-        /// <param name="keyData"></param>
-        /// <returns></returns>
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        {
-            if (ModifierKeys != Keys.Control)
-            {
-                return base.ProcessCmdKey(ref msg, keyData);
-            }
+        //#region Keyboard events
+        ///// <summary>
+        ///// Occurs when a key is pressed.
+        ///// Shows tooltip if controll is pressed.
+        ///// </summary>
+        ///// <param name="msg"></param>
+        ///// <param name="keyData"></param>
+        ///// <returns></returns>
+        //protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        //{
+        //    if (ModifierKeys != Keys.Control)
+        //    {
+        //        return base.ProcessCmdKey(ref msg, keyData);
+        //    }
 
-            NewContestToolTip.Show("Ctrl+1", StartScreenNewContesttBtn);
-            StartContestToolTip.Show("Ctrl+2", StartScreenStartContestBtn);
-            AddDiverToolTip.Show("Ctrl+3", StartScreenAddDiverContestBtn);
-            AddJudgeToolTip.Show("Ctrl+4", StartScreenAddJudgeBtn);
-            //Man ska bara behöva en tooltip, men jag fick inte det att fungera..
+        //    NewContestToolTip.Show("Ctrl+1", StartScreenNewContesttBtn);
+        //    StartContestToolTip.Show("Ctrl+2", StartScreenStartContestBtn);
+        //    AddDiverToolTip.Show("Ctrl+3", StartScreenAddDiverContestBtn);
+        //    AddJudgeToolTip.Show("Ctrl+4", StartScreenAddJudgeBtn);
+        //    //Man ska bara behöva en tooltip, men jag fick inte det att fungera..
 
-            PerformClick(keyData);
+        //    PerformClick(keyData);
 
-            return base.ProcessCmdKey(ref msg, keyData);
-        }
+        //    return base.ProcessCmdKey(ref msg, keyData);
+        //}
 
-        /// <summary>
-        /// Performs a click on corresponding button based on keyboard shortkeys.
-        /// </summary>
-        /// <param name="keyData"></param>
-        private void PerformClick(Keys keyData)
-        {
-            switch (keyData)
-            {
-                case (Keys.Control | Keys.D1):
-                    StartScreenNewContesttBtn.PerformClick();
-                    break;
-                case (Keys.Control | Keys.D2):
-                    StartScreenStartContestBtn.PerformClick();
-                    break;
-                case (Keys.Control | Keys.D3):
-                    StartScreenAddDiverContestBtn.PerformClick();
-                    break;
-                case (Keys.Control | Keys.D4):
-                    StartScreenAddJudgeBtn.PerformClick();
-                    break;
-            }
-        }
+        ///// <summary>
+        ///// Performs a click on corresponding button based on keyboard shortkeys.
+        ///// </summary>
+        ///// <param name="keyData"></param>
+        //private void PerformClick(Keys keyData)
+        //{
+        //    switch (keyData)
+        //    {
+        //        case (Keys.Control | Keys.D1):
+        //            StartScreenNewContesttBtn.PerformClick();
+        //            break;
+        //        case (Keys.Control | Keys.D2):
+        //            StartScreenStartContestBtn.PerformClick();
+        //            break;
+        //        case (Keys.Control | Keys.D3):
+        //            StartScreenAddDiverContestBtn.PerformClick();
+        //            break;
+        //        case (Keys.Control | Keys.D4):
+        //            StartScreenAddJudgeBtn.PerformClick();
+        //            break;
+        //    }
+        //}
 
-        /// <summary>
-        /// Occurs when a button is released.
-        /// Hides shortcut tooltips.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void StartScreen_KeyUp(object sender, KeyEventArgs e)
-        {
-            NewContestToolTip.RemoveAll();
-            StartContestToolTip.RemoveAll();
-            AddJudgeToolTip.RemoveAll();
-            AddDiverToolTip.RemoveAll();
-        }
+        ///// <summary>
+        ///// Occurs when a button is released.
+        ///// Hides shortcut tooltips.
+        ///// </summary>
+        ///// <param name="sender"></param>
+        ///// <param name="e"></param>
+        //private void StartScreen_KeyUp(object sender, KeyEventArgs e)
+        //{
+        //    NewContestToolTip.RemoveAll();
+        //    StartContestToolTip.RemoveAll();
+        //    AddJudgeToolTip.RemoveAll();
+        //    AddDiverToolTip.RemoveAll();
+        //}
 
-        #endregion
+        //#endregion
 
 
         #region ISimhopp Methods

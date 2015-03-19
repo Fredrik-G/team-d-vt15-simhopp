@@ -49,7 +49,6 @@
             this.StartScreenNewContesttBtn.Text = "New Contest";
             this.NewContestToolTip.SetToolTip(this.StartScreenNewContesttBtn, "Ctrl+N");
             this.StartScreenNewContesttBtn.UseVisualStyleBackColor = true;
-            this.StartScreenNewContesttBtn.Click += new System.EventHandler(this.StartScreenNewContesttBtn_Click);
             // 
             // StartScreenStartContestBtn
             // 
@@ -60,7 +59,6 @@
             this.StartScreenStartContestBtn.Text = "Administrate Contest";
             this.StartContestToolTip.SetToolTip(this.StartScreenStartContestBtn, "Ctrl+S");
             this.StartScreenStartContestBtn.UseVisualStyleBackColor = true;
-            this.StartScreenStartContestBtn.Click += new System.EventHandler(this.StartScreenStartContestBtn_Click);
             // 
             // StartScreenAddDiverContestBtn
             // 
@@ -71,7 +69,6 @@
             this.StartScreenAddDiverContestBtn.Text = "Add/Edit Diver";
             this.AddDiverToolTip.SetToolTip(this.StartScreenAddDiverContestBtn, "Ctrl+D");
             this.StartScreenAddDiverContestBtn.UseVisualStyleBackColor = true;
-            this.StartScreenAddDiverContestBtn.Click += new System.EventHandler(this.StartScreenAddDiverContestBtn_Click);
             // 
             // StartScreenAddJudgeBtn
             // 
@@ -82,7 +79,6 @@
             this.StartScreenAddJudgeBtn.Text = "Add/Edit Judge";
             this.AddDiverToolTip.SetToolTip(this.StartScreenAddJudgeBtn, "Ctrl+J");
             this.StartScreenAddJudgeBtn.UseVisualStyleBackColor = true;
-            this.StartScreenAddJudgeBtn.Click += new System.EventHandler(this.StartScreenAddJudgeBtn_Click);
             // 
             // StartScreen
             // 
@@ -100,7 +96,6 @@
             this.Text = "Simhopp";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.StartScreen_FormClosing);
             this.Load += new System.EventHandler(this.StartScreen_Load);
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.StartScreen_KeyUp);
             this.ResumeLayout(false);
 
         }
