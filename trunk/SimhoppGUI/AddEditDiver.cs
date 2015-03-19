@@ -254,24 +254,6 @@ namespace SimhoppGUI
         }
 
         /// <summary>
-        /// Checks if enter was pressed and call event to add diver.
-        /// Also checks if escape was pressed and closes this form.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void AddCheckEnterOrEscape(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char)13)
-            {
-                AddDiverButton_Click(null, null);
-            }
-            else if (e.KeyChar == (char)27)
-            {
-                Close();
-            }
-        }
-
-        /// <summary>
         /// Checks if enter was pressed and call event to update diver.
         /// Also checks if escape was pressed and closes this form.
         /// </summary>
@@ -305,6 +287,15 @@ namespace SimhoppGUI
         {
             if (ModifierKeys != Keys.Control)
             {
+                if (tabControlAddEdit.SelectedTab == tabPageEditDiver)
+                {
+                    UpdateCheckEnterOrEscape(keyData);
+                }
+                else if (tabControlAddEdit.SelectedTab == tabPageAddDiver)
+                {
+                    AddCheckEnterOrEscape(keyData);
+                }
+
                 return base.ProcessCmdKey(ref msg, keyData);
             }
 
@@ -352,23 +343,6 @@ namespace SimhoppGUI
             DiversDataGridToolTip.RemoveAll();
             EditDiverToolTip.RemoveAll();
             AddDiverToolTip.RemoveAll();
-        }
-
-        /// <summary>
-        /// Occurs when a key is pressed.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void AddEditDiver_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (tabControlAddEdit.SelectedTab == tabPageEditDiver)
-            {
-                UpdateCheckEnterOrEscape(e.KeyData);
-            }
-            else if (tabControlAddEdit.SelectedTab == tabPageAddDiver)
-            {
-                AddCheckEnterOrEscape(e.KeyData);
-            }
         }
 
         /// <summary>

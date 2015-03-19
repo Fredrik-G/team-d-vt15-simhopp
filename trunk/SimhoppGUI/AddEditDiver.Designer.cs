@@ -111,7 +111,6 @@
             this.AddDiverNameTb.TabIndex = 6;
             this.InputToolTip.SetToolTip(this.AddDiverNameTb, "Allowed characters: \"A-Z \',.-\"");
             this.AddDiverNameTb.Click += new System.EventHandler(this.AddDiverNameTb_Click);
-            this.AddDiverNameTb.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AddCheckEnterOrEscape);
             // 
             // AddDiverNationaltyTb
             // 
@@ -121,7 +120,6 @@
             this.AddDiverNationaltyTb.TabIndex = 7;
             this.InputToolTip.SetToolTip(this.AddDiverNationaltyTb, "Allowed characters: \"A-Z ,-\"");
             this.AddDiverNationaltyTb.Click += new System.EventHandler(this.AddDiverNationaltyTb_Click);
-            this.AddDiverNationaltyTb.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AddCheckEnterOrEscape);
             // 
             // AddDiverSSNTb
             // 
@@ -131,7 +129,6 @@
             this.AddDiverSSNTb.TabIndex = 8;
             this.InputToolTip.SetToolTip(this.AddDiverSSNTb, "Allowed characters: \"1-9 -\". Swedish: yyyymmdd-xxxx. Rest: xxx-yy-zzzz");
             this.AddDiverSSNTb.Click += new System.EventHandler(this.AddDiverSSNTb_Click);
-            this.AddDiverSSNTb.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AddCheckEnterOrEscape);
             // 
             // AddDiverButton
             // 
@@ -394,7 +391,6 @@
             this.Name = "AddEditDiver";
             this.Text = "Add/Edit Diver";
             this.Load += new System.EventHandler(this.AddEditDiver_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AddEditDiver_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.AddEditDiver_KeyUp);
             this.tabControlAddEdit.ResumeLayout(false);
             this.tabPageEditDiver.ResumeLayout(false);

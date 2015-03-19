@@ -412,7 +412,6 @@
             this.Name = "AddEditJudge";
             this.Text = "Add/Edit Judge";
             this.Load += new System.EventHandler(this.AddEditJudge_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AddEditJudge_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.AddEditJudge_KeyUp);
             this.tabControlAddEdit.ResumeLayout(false);
             this.tabPageEditJudge.ResumeLayout(false);
