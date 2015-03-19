@@ -273,6 +273,15 @@ namespace SimhoppGUI
         {
             if (ModifierKeys != Keys.Control)
             {
+                if (tabControlAddEdit.SelectedTab == tabPageEditJudge)
+                {
+                    UpdateCheckEnterOrEscape(keyData);
+                }
+                else if (tabControlAddEdit.SelectedTab == tabPageAddJudge)
+                {
+                    AddCheckEnterOrEscape(keyData);
+                }
+
                 return base.ProcessCmdKey(ref msg, keyData);
             }
 
@@ -320,23 +329,6 @@ namespace SimhoppGUI
             JudgesDataGridToolTip.RemoveAll();
             EditJudgeToolTip.RemoveAll();
             AddJudgeToolTip.RemoveAll();
-        }
-
-        /// <summary>
-        /// Occurs when a key is pressed.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void AddEditJudge_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (tabControlAddEdit.SelectedTab == tabPageEditJudge)
-            {
-                UpdateCheckEnterOrEscape(e.KeyData);
-            }
-            else if (tabControlAddEdit.SelectedTab == tabPageAddJudge)
-            {
-                AddCheckEnterOrEscape(e.KeyData);
-            }
         }
 
         /// <summary>
