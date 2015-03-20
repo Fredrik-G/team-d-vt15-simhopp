@@ -32,6 +32,9 @@ namespace SimhoppGUI
 
         private void ContestResult_Load(object sender, EventArgs e)
         {
+            //Enables keyboard usage.
+            KeyPreview = true;
+
             //resultsDataGridView.DataSource = //BindingList 
             foreach (var participant in contest.GetParticipants())
             {
@@ -97,6 +100,20 @@ namespace SimhoppGUI
             else
             {
                 MessageBox.Show("File not found");
+            }
+        }
+
+        /// <summary>
+        /// Occurs when a key is pressed.
+        /// Closes the form is escape was clicked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ContestResult_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Escape)
+            {
+                Close();
             }
         }
     }

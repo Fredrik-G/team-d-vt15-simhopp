@@ -56,8 +56,8 @@
             this.CommitBtn = new System.Windows.Forms.Button();
             this.JudgePointsPanel = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.IPValueLabel = new System.Windows.Forms.Label();
             this.IPNameLabel = new System.Windows.Forms.Label();
+            this.IPValueLabel = new System.Windows.Forms.Label();
             this.CloseBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.TrickPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.judge1Point)).BeginInit();
@@ -447,6 +447,16 @@
             this.panel1.Size = new System.Drawing.Size(245, 177);
             this.panel1.TabIndex = 32;
             // 
+            // IPNameLabel
+            // 
+            this.IPNameLabel.AutoSize = true;
+            this.IPNameLabel.Location = new System.Drawing.Point(4, 136);
+            this.IPNameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.IPNameLabel.Name = "IPNameLabel";
+            this.IPNameLabel.Size = new System.Drawing.Size(66, 16);
+            this.IPNameLabel.TabIndex = 33;
+            this.IPNameLabel.Text = "Server IP:";
+            // 
             // IPValueLabel
             // 
             this.IPValueLabel.AutoSize = true;
@@ -457,16 +467,6 @@
             this.IPValueLabel.Size = new System.Drawing.Size(101, 16);
             this.IPValueLabel.TabIndex = 29;
             this.IPValueLabel.Text = "255.255.255.255";
-            // 
-            // IPNameLabel
-            // 
-            this.IPNameLabel.AutoSize = true;
-            this.IPNameLabel.Location = new System.Drawing.Point(4, 136);
-            this.IPNameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.IPNameLabel.Name = "IPNameLabel";
-            this.IPNameLabel.Size = new System.Drawing.Size(66, 16);
-            this.IPNameLabel.TabIndex = 33;
-            this.IPNameLabel.Text = "Server IP:";
             // 
             // CloseBtn
             // 
@@ -498,6 +498,7 @@
             this.Text = "LiveFeed";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LiveFeed_FormClosing);
             this.Load += new System.EventHandler(this.LiveFeed_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LiveFeed_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.TrickPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.judge1Point)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.judge2Point)).EndInit();
