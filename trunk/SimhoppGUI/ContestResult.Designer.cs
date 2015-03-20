@@ -220,6 +220,7 @@
             this.Name = "ContestResult";
             this.Text = "Contest Result";
             this.Load += new System.EventHandler(this.ContestResult_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ContestResult_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.resultDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.judgesDataGridView)).EndInit();
             this.ResumeLayout(false);

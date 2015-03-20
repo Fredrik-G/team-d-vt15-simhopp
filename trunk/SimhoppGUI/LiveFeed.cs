@@ -109,6 +109,9 @@ namespace SimhoppGUI
         /// <param name="e"></param>
         private void LiveFeed_Load(object sender, EventArgs e)
         {
+            //Enables keyboard usage.
+            KeyPreview = true;
+
             UpdateDiverInformation();
             UpdateLiveResultList();
             ResultDataGridView.DefaultCellStyle.Format = "0.00##";
@@ -390,6 +393,20 @@ namespace SimhoppGUI
                 DialogResult = DialogResult.Cancel;
             }
             Close();
+        }
+
+        /// <summary>
+        /// Occurs when a key is pressed.
+        /// Clicks the commit button.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void LiveFeed_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                CommitBtn_Click(sender, e);
+            }
         }
     }
 }
